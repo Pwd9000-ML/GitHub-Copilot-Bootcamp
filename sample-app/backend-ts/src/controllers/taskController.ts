@@ -66,8 +66,10 @@ export const createTask = (req: AuthRequest, res: Response) => {
       return res.status(400).json({ error: 'Title is required' });
     }
 
+    // NOTE: Using timestamp for ID is not production-ready
+    // TODO for bootcamp: Replace with crypto.randomUUID() or a proper ID generator
     const task: Task = {
-      id: Date.now().toString(),
+      id: `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       userId,
       title,
       description,

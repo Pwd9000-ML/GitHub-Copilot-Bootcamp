@@ -27,8 +27,10 @@ export const register = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create user
+    // NOTE: Using timestamp for ID is not production-ready
+    // TODO for bootcamp: Replace with crypto.randomUUID() or a proper ID generator
     const user: User = {
-      id: Date.now().toString(),
+      id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       email,
       password: hashedPassword,
       name,
