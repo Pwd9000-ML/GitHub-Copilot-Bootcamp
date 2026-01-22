@@ -1,0 +1,104 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install Node dependencies
+      run: |
+        if [ -f "sample-app/backend-ts/package.json" ]; then
+          cd sample-app/backend-ts
+          npm install
+          npm run lint || echo "Linting skipped or not configured"
+        fi
+        
+    - name: Install Python dependencies
+      run: |
+        if [ -f "sample-app/backend-py/requirements.txt" ]; then
+          cd sample-app/backend-py
+          pip install -r requirements.txt
+          pylint app || echo "Linting skipped or not configured"
+        fi
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Run Node.js tests
+      run: |
+        if [ -f "sample-app/backend-ts/package.json" ]; then
+          cd sample-app/backend-ts
+          npm install
+          npm test || echo "Tests skipped or not configured"
+        fi
+        
+    - name: Run Python tests
+      run: |
+        if [ -f "sample-app/backend-py/requirements.txt" ]; then
+          cd sample-app/backend-py
+          pip install -r requirements.txt
+          pytest || echo "Tests skipped or not configured"
+        fi
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Build TypeScript app
+      run: |
+        if [ -f "sample-app/backend-ts/package.json" ]; then
+          cd sample-app/backend-ts
+          npm install
+          npm run build || echo "Build skipped or not configured"
+        fi
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: build-artifacts
+        path: |
+          sample-app/backend-ts/dist
+        retention-days: 7

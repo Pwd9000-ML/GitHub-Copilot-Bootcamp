@@ -1,0 +1,89 @@
+name: Week 1 Lab Submission
+description: Submit your Week 1 lab work
+title: "[Week 1 Lab] Your Name"
+labels: ["week-1", "lab", "bootcamp"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Week 1 Lab: Getting Started & Scaffold Projects
+        Submit your completed Week 1 lab work here.
+        
+  - type: input
+    id: name
+    attributes:
+      label: Your Name
+      description: Full name
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: completion
+    attributes:
+      label: Completion Checklist
+      description: Mark completed items
+      options:
+        - label: Installed and configured GitHub Copilot
+          required: true
+        - label: Completed prompt katas
+          required: true
+        - label: Scaffolded a new project
+          required: true
+        - label: Generated boilerplate code
+          required: true
+        - label: Created configuration files
+          required: true
+        - label: Generated documentation
+          required: true
+          
+  - type: textarea
+    id: project-description
+    attributes:
+      label: Project Description
+      description: Describe what you built
+      placeholder: "I created a..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: copilot-effectiveness
+    attributes:
+      label: Copilot Effectiveness
+      description: Rate and describe how effective Copilot was
+      placeholder: "Copilot helped me by..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: prompts-used
+    attributes:
+      label: Example Prompts
+      description: Share 2-3 effective prompts you used
+      placeholder: "1. Create a TypeScript interface for..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: challenges
+    attributes:
+      label: Challenges & Solutions
+      description: What challenges did you face and how did you solve them?
+    validations:
+      required: false
+      
+  - type: textarea
+    id: lessons-learned
+    attributes:
+      label: Key Lessons Learned
+      description: What are your main takeaways from Week 1?
+    validations:
+      required: true
+      
+  - type: input
+    id: pr-link
+    attributes:
+      label: Pull Request Link
+      description: Link to your PR with the lab work
+      placeholder: "https://github.com/..."
+    validations:
+      required: true

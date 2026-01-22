@@ -1,0 +1,127 @@
+name: Week 4 Lab Submission
+description: Submit your Week 4 lab work
+title: "[Week 4 Lab] Your Name - Legacy Code Refactoring"
+labels: ["week-4", "lab", "bootcamp", "refactoring"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Week 4 Lab: Refactoring Legacy Code
+        Submit your completed Week 4 lab work here. This is your final project!
+        
+  - type: input
+    id: name
+    attributes:
+      label: Your Name
+      description: Full name
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: completion
+    attributes:
+      label: Completion Checklist
+      description: Mark completed items
+      options:
+        - label: Analyzed legacy code
+          required: true
+        - label: Added tests for current behavior
+          required: true
+        - label: Refactored code
+          required: true
+        - label: All tests passing
+          required: true
+        - label: Code quality improved
+          required: true
+        - label: Documentation updated
+          required: true
+          
+  - type: textarea
+    id: initial-assessment
+    attributes:
+      label: Initial Assessment
+      description: What issues did you find in the legacy code?
+      placeholder: "The code had the following issues..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: refactoring-strategy
+    attributes:
+      label: Refactoring Strategy
+      description: What was your approach to refactoring?
+      placeholder: "I approached the refactoring by..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: improvements-made
+    attributes:
+      label: Improvements Made
+      description: List specific improvements
+      placeholder: "1. Extracted functions...\n2. Renamed variables..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: metrics-comparison
+    attributes:
+      label: Before/After Metrics
+      description: Compare metrics (LOC, complexity, coverage, etc.)
+      placeholder: |
+        Before:
+        - Lines of Code: 500
+        - Cyclomatic Complexity: 25
+        - Test Coverage: 0%
+        
+        After:
+        - Lines of Code: 350
+        - Cyclomatic Complexity: 8
+        - Test Coverage: 85%
+    validations:
+      required: true
+      
+  - type: textarea
+    id: copilot-refactoring
+    attributes:
+      label: Using Copilot for Refactoring
+      description: How did Copilot assist in the refactoring process?
+      placeholder: "Copilot helped me by..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: challenges
+    attributes:
+      label: Challenges Encountered
+      description: What was difficult about refactoring this code?
+      placeholder: "The biggest challenge was..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: lessons-learned
+    attributes:
+      label: Lessons Learned
+      description: Key takeaways from this exercise
+      placeholder: "I learned that..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: bootcamp-reflection
+    attributes:
+      label: Overall Bootcamp Reflection
+      description: Reflect on your entire 4-week journey
+      placeholder: "Over the 4 weeks, I..."
+    validations:
+      required: true
+      
+  - type: input
+    id: pr-link
+    attributes:
+      label: Pull Request Link
+      description: Link to your PR with the lab work
+      placeholder: "https://github.com/..."
+    validations:
+      required: true

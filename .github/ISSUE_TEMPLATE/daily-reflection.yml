@@ -1,0 +1,99 @@
+name: Daily Reflection
+description: Share your daily learning and reflections
+title: "[Reflection] Day X - Your Name"
+labels: ["reflection", "bootcamp"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Daily Reflection
+        Take a moment to reflect on your learning today. Share insights, challenges, and wins!
+        
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: Today's date
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: week
+    attributes:
+      label: Week
+      description: Which week are you in?
+      options:
+        - Week 1
+        - Week 2
+        - Week 3
+        - Week 4
+    validations:
+      required: true
+      
+  - type: textarea
+    id: learned
+    attributes:
+      label: What did you learn today?
+      description: Share key takeaways and insights
+      placeholder: "Today I learned..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: copilot-usage
+    attributes:
+      label: How did you use GitHub Copilot?
+      description: Describe specific ways Copilot helped you today
+      placeholder: "I used Copilot to..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: challenges
+    attributes:
+      label: Challenges faced
+      description: What difficulties did you encounter?
+      placeholder: "I struggled with..."
+    validations:
+      required: false
+      
+  - type: textarea
+    id: solutions
+    attributes:
+      label: How did you overcome them?
+      description: Share your problem-solving approach
+      placeholder: "I solved it by..."
+    validations:
+      required: false
+      
+  - type: textarea
+    id: wins
+    attributes:
+      label: Wins and accomplishments
+      description: Celebrate your successes!
+      placeholder: "I'm proud that..."
+    validations:
+      required: false
+      
+  - type: textarea
+    id: next-steps
+    attributes:
+      label: Tomorrow's goals
+      description: What do you plan to work on next?
+      placeholder: "Tomorrow I will..."
+    validations:
+      required: false
+      
+  - type: dropdown
+    id: satisfaction
+    attributes:
+      label: How satisfied are you with today's progress?
+      options:
+        - "5 - Very satisfied"
+        - "4 - Satisfied"
+        - "3 - Neutral"
+        - "2 - Unsatisfied"
+        - "1 - Very unsatisfied"
+    validations:
+      required: true

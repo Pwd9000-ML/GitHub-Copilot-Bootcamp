@@ -1,0 +1,108 @@
+name: Week 3 Lab Submission
+description: Submit your Week 3 lab work
+title: "[Week 3 Lab] Your Name"
+labels: ["week-3", "lab", "bootcamp"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Week 3 Lab: DevOps & Testing
+        Submit your completed Week 3 lab work here.
+        
+  - type: input
+    id: name
+    attributes:
+      label: Your Name
+      description: Full name
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: completion
+    attributes:
+      label: Completion Checklist
+      description: Mark completed items
+      options:
+        - label: Implemented TDD workflow
+          required: true
+        - label: Achieved >80% test coverage
+          required: true
+        - label: Created CI/CD pipeline
+          required: true
+        - label: Configured quality gates
+          required: true
+        - label: All tests passing
+          required: true
+        - label: Pipeline successfully runs
+          required: true
+          
+  - type: textarea
+    id: testing-approach
+    attributes:
+      label: Testing Approach
+      description: Describe your testing strategy
+      placeholder: "I implemented tests for..."
+    validations:
+      required: true
+      
+  - type: input
+    id: test-coverage
+    attributes:
+      label: Test Coverage Percentage
+      description: What's your test coverage?
+      placeholder: "85%"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: cicd-pipeline
+    attributes:
+      label: CI/CD Pipeline
+      description: Describe your pipeline setup
+      placeholder: "My pipeline includes..."
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: pipeline-components
+    attributes:
+      label: Pipeline Components
+      description: What's included in your pipeline?
+      options:
+        - label: Build stage
+          required: true
+        - label: Test stage
+          required: true
+        - label: Lint stage
+          required: true
+        - label: Security scanning
+          required: true
+        - label: Deploy stage (optional)
+          required: false
+          
+  - type: textarea
+    id: copilot-testing
+    attributes:
+      label: Using Copilot for Testing
+      description: How did Copilot help with test generation?
+      placeholder: "Copilot helped me write tests for..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: dora-metrics
+    attributes:
+      label: DORA Metrics
+      description: Share any metrics you tracked
+      placeholder: "Deployment frequency: ..."
+    validations:
+      required: false
+      
+  - type: input
+    id: pr-link
+    attributes:
+      label: Pull Request Link
+      description: Link to your PR with the lab work
+      placeholder: "https://github.com/..."
+    validations:
+      required: true

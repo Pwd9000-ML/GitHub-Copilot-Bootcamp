@@ -1,0 +1,101 @@
+name: Week 2 Lab Submission
+description: Submit your Week 2 lab work
+title: "[Week 2 Lab] Your Name"
+labels: ["week-2", "lab", "bootcamp"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Week 2 Lab: Features, Documentation & Security
+        Submit your completed Week 2 lab work here.
+        
+  - type: input
+    id: name
+    attributes:
+      label: Your Name
+      description: Full name
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: completion
+    attributes:
+      label: Completion Checklist
+      description: Mark completed items
+      options:
+        - label: Implemented new feature(s)
+          required: true
+        - label: Generated comprehensive documentation
+          required: true
+        - label: Implemented input validation
+          required: true
+        - label: Added security measures
+          required: true
+        - label: Passed security scans
+          required: true
+        - label: Written security tests
+          required: true
+          
+  - type: textarea
+    id: features-implemented
+    attributes:
+      label: Features Implemented
+      description: Describe the features you built
+      placeholder: "I implemented..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: security-measures
+    attributes:
+      label: Security Measures
+      description: What security practices did you implement?
+      placeholder: "I implemented the following security measures..."
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: security-checklist
+    attributes:
+      label: Security Checklist
+      description: Verify security implementation
+      options:
+        - label: Input validation implemented
+          required: true
+        - label: SQL injection prevention
+          required: true
+        - label: XSS prevention
+          required: true
+        - label: Sensitive data secured
+          required: true
+        - label: Dependencies scanned
+          required: true
+        - label: CodeQL alerts reviewed
+          required: true
+          
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation Generated
+      description: Describe the documentation you created
+      placeholder: "I generated documentation for..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: copilot-security
+    attributes:
+      label: Using Copilot for Security
+      description: How did Copilot help with security-aware development?
+      placeholder: "Copilot helped me identify..."
+    validations:
+      required: true
+      
+  - type: input
+    id: pr-link
+    attributes:
+      label: Pull Request Link
+      description: Link to your PR with the lab work
+      placeholder: "https://github.com/..."
+    validations:
+      required: true
