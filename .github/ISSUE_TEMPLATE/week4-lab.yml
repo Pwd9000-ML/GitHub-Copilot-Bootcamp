@@ -1,0 +1,206 @@
+name: Week 4 Lab - Refactoring, Quality, and Ethics
+description: Hands-on Copilot lab for Week 4 covering legacy code refactoring, quality standards, and ethical AI practices
+title: "Week 4 Lab: Refactoring & Ethics - <name>"
+labels: ["lab", "week-4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Goal
+        Master techniques for refactoring legacy code, enforcing quality standards, and understanding ethical considerations when using AI-assisted development tools.
+
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Tasks
+      options:
+        - label: Read `Workshops/Week4/1-Refactoring-Large-Codebases.md`
+        - label: Read `Workshops/Week4/2-Quality-Refinements-and-Standards.md`
+        - label: Read `Workshops/Week4/3-Ethical-and-Security-Considerations.md`
+        - label: Complete the hands-on lab in `Workshops/Week4/4-Week4-Lab.md`
+        - label: Review prompt examples in `Workshops/Week4/5-Week4-Prompts.md`
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: refactoring_topics
+    attributes:
+      label: Which refactoring techniques did you practice?
+      options:
+        - label: Legacy code analysis and documentation
+        - label: Characterisation test generation (before refactoring)
+        - label: Extract method/function refactoring
+        - label: Rename for clarity (variables, functions, classes)
+        - label: Modernise syntax (var→const/let, async/await, etc.)
+        - label: Remove code duplication
+        - label: Simplify nested conditionals
+        - label: Performance optimisation
+
+  - type: checkboxes
+    id: quality_topics
+    attributes:
+      label: Which quality standards topics did you practice?
+      options:
+        - label: Creating/using instruction files for standards
+        - label: Generating standards-compliant code
+        - label: ESLint/linting configuration
+        - label: Pre-commit hook setup
+        - label: Automated code review prompts
+        - label: Documentation generation (JSDoc, README)
+        - label: SOLID principles analysis
+
+  - type: checkboxes
+    id: security_topics
+    attributes:
+      label: Which security/ethics topics did you explore?
+      options:
+        - label: Identifying security vulnerabilities in generated code
+        - label: SQL injection prevention
+        - label: Removing hardcoded secrets
+        - label: Input validation and sanitisation
+        - label: IP/licensing considerations
+        - label: Bias detection in code
+        - label: Responsible AI practices
+
+  - type: textarea
+    id: refactoring_example
+    attributes:
+      label: Refactoring example (before and after)
+      description: Show a before/after example of code you refactored with Copilot's help
+      placeholder: |
+        BEFORE:
+        function calc(o) {
+          var t = 0;
+          for (var i = 0; i < o.length; i++) { t = t + o[i].p * o[i].q; }
+          return t;
+        }
+
+        AFTER:
+        function calculateTotal(items) {
+          return items.reduce((total, item) => total + item.price * item.quantity, 0);
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: security_finding
+    attributes:
+      label: Security issue you identified or fixed
+      description: Describe a security vulnerability you found or fixed during the lab
+      placeholder: |
+        Issue: SQL injection in getUser function
+        Fix: Changed string concatenation to parameterised query
+        Prompt used: "Refactor this function to prevent SQL injection..."
+
+  - type: dropdown
+    id: security_awareness
+    attributes:
+      label: Did this week increase your awareness of AI-generated code security risks?
+      options:
+        - "Yes - significantly more aware now"
+        - "Yes - somewhat more aware"
+        - "Already was aware of these risks"
+        - "Not particularly"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ethics_understanding
+    attributes:
+      label: How would you rate your understanding of ethical AI coding practices?
+      options:
+        - "Strong - understand IP, bias, and responsible use well"
+        - "Good - grasp the key concepts"
+        - "Basic - understand some concerns"
+        - "Limited - need more exploration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: best_prompt
+    attributes:
+      label: Best prompt you used (paste it here)
+      description: Share a refactoring, quality, or security prompt that worked well
+      placeholder: |
+        Example: "Perform a security audit on this code checking for injection vulnerabilities, hardcoded secrets, and input validation gaps. Provide severity ratings and remediation steps."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: time_impact
+    attributes:
+      label: Time impact for refactoring tasks
+      options:
+        - "Much faster - Copilot accelerated refactoring significantly"
+        - "Somewhat faster - helpful for repetitive changes"
+        - "About the same"
+        - "Slower - needed to verify suggestions carefully"
+    validations:
+      required: true
+
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked well?
+      placeholder: "Which refactoring or quality tasks did Copilot handle particularly well?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: challenges
+    attributes:
+      label: What was challenging?
+      placeholder: "Where did Copilot's suggestions introduce issues or require careful review?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: would_trust
+    attributes:
+      label: After this week, how much do you trust AI-generated code?
+      options:
+        - "Trust with verification - always review but confident in the process"
+        - "Trust for routine tasks - careful review for complex/security code"
+        - "Cautious - useful but requires significant validation"
+        - "Sceptical - prefer to write critical code manually"
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy_thoughts
+    attributes:
+      label: Organisational policy thoughts (optional)
+      description: Do you think your organisation should have specific guidelines for AI-assisted coding? What would you include?
+      placeholder: |
+        - Mandatory security review for AI-generated code
+        - Documentation requirements
+        - Approved use cases...
+
+  - type: textarea
+    id: collaboration
+    attributes:
+      label: Collaboration experience (optional)
+      description: If you did the pair refactoring exercise, how did collaboration work with Copilot?
+      placeholder: "Describe your pair programming experience with Copilot..."
+
+  - type: textarea
+    id: pr_link
+    attributes:
+      label: PR link (if applicable)
+      placeholder: "Paste the PR URL here"
+
+  - type: textarea
+    id: key_takeaways
+    attributes:
+      label: Key takeaways from the 4-week program
+      description: What are the most important things you've learned across all 4 weeks?
+    validations:
+      required: true
+
+  - type: textarea
+    id: future_application
+    attributes:
+      label: How will you use Copilot going forward?
+      description: What practices will you adopt in your daily development work?
+    validations:
+      required: true

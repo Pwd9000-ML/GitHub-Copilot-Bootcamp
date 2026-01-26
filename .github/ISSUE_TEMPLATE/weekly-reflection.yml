@@ -1,0 +1,63 @@
+name: Weekly Reflection (Copilot)
+description: Capture Copilot usage, time impact, and learnings.
+title: "Weekly Reflection: <date> - <name>"
+labels: ["reflection", "copilot"]
+body:
+  - type: dropdown
+    id: week
+    attributes:
+      label: Week
+      options: ["Week 1", "Week 2", "Week 3", "Week 4"]
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: usage
+    attributes:
+      label: Where did you use Copilot this week?
+      options:
+        - label: Feature development
+        - label: Bug fix
+        - label: Unit tests
+        - label: Documentation
+        - label: Refactoring
+        - label: DevOps / CI-CD
+        - label: Debugging
+        - label: Code review / explanation
+
+  - type: input
+    id: time_impact
+    attributes:
+      label: Time impact (estimate)
+      description: e.g., "+45 min saved", "-15 min spent", "neutral"
+    validations:
+      required: true
+
+  - type: textarea
+    id: prompts
+    attributes:
+      label: Prompts you used (best 1 - 3)
+      description: Paste the prompts that worked best.
+    validations:
+      required: true
+
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked?
+      placeholder: "What Copilot did well / what pattern helped."
+    validations:
+      required: true
+
+  - type: textarea
+    id: pain
+    attributes:
+      label: What didn't work / pain points?
+      placeholder: "Where it went wrong, ambiguity, wrong assumptions, etc."
+    validations:
+      required: true
+
+  - type: textarea
+    id: next
+    attributes:
+      label: What will you try differently next time?

@@ -1,0 +1,129 @@
+name: Week 2 Lab - Advanced Development & Prompt Engineering
+description: Hands-on Copilot lab for Week 2 covering prompt engineering, documentation generation, and custom instructions
+title: "Week 2 Lab: Advanced Development - <name>"
+labels: ["lab", "week-2"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Goal
+        Master prompt engineering techniques and learn to customize GitHub Copilot for your specific workflows.
+
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Tasks
+      options:
+        - label: Read `Workshops/Week2/1-Prompt-Engineering-Best-Practices.md`
+        - label: Read `Workshops/Week2/2-Advanced-Developer-Workflow.md`
+        - label: Complete the hands-on lab in `Workshops/Week2/3-Week2-Lab.md`
+        - label: Review prompt examples in `Workshops/Week2/4-Week2-Prompts.md`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: craft_framework
+    attributes:
+      label: Did you apply the CRAFT framework when writing prompts?
+      description: "Context, Role, Action, Format, Tone"
+      options:
+        - "Yes - it significantly improved my results"
+        - "Yes - it helped somewhat"
+        - "Partially - still getting used to it"
+        - "No - didn't have the opportunity"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: topics_covered
+    attributes:
+      label: Which topics did you practice?
+      options:
+        - label: Template generation prompts
+        - label: Scaffolding a project structure
+        - label: Documentation generation (JSDoc, README)
+        - label: Refining Copilot suggestions iteratively
+        - label: Setting up custom instructions (.github/copilot-instructions.md)
+        - label: Creating reusable prompt templates
+        - label: Security-focused prompts
+        - label: SQL query generation
+
+  - type: textarea
+    id: best_prompt
+    attributes:
+      label: Best prompt you used (paste it here)
+      description: Share a prompt that worked particularly well for you
+      placeholder: |
+        Example: "Generate a JavaScript function template to add a new book with fields like title, author, and genre. Include validation to prevent duplicates and return a result object with success status."
+    validations:
+      required: true
+
+  - type: textarea
+    id: documentation_example
+    attributes:
+      label: Documentation you generated
+      description: Paste an example of documentation Copilot generated for you (JSDoc, README section, etc.)
+      placeholder: |
+        /**
+         * Example JSDoc that Copilot generated...
+         */
+
+  - type: textarea
+    id: refinement_example
+    attributes:
+      label: Refinement example
+      description: Describe how you refined a Copilot suggestion to make it better
+      placeholder: |
+        Initial suggestion: ...
+        My refinement prompt: ...
+        Improved result: ...
+
+  - type: dropdown
+    id: time_impact
+    attributes:
+      label: Time impact compared to without Copilot
+      options:
+        - "Saved significant time (30+ minutes)"
+        - "Saved some time (10-30 minutes)"
+        - "About the same"
+        - "Took longer (learning curve)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked well?
+      placeholder: "Which techniques or prompts gave you the best results?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: challenges
+    attributes:
+      label: What was challenging?
+      placeholder: "What didn't work as expected? Where did you need to iterate?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: custom_instructions
+    attributes:
+      label: Custom instructions created (optional)
+      description: If you created a copilot-instructions.md file, paste its contents or key sections
+      placeholder: |
+        # Copilot Instructions
+        - Use TypeScript for all new files
+        - Follow our naming conventions...
+
+  - type: textarea
+    id: pr_link
+    attributes:
+      label: PR link (if applicable)
+      placeholder: "Paste the PR URL here"
+
+  - type: textarea
+    id: next_steps
+    attributes:
+      label: What will you apply in your daily work?
+      description: Which techniques from Week 2 will you start using regularly?
