@@ -10,8 +10,9 @@ A collection of practical prompts to help you get started with GitHub Copilot's 
 2. [Ask Mode - Code Explanations](#2-ask-mode---code-explanations)
 3. [Edit Mode - Code Modifications](#3-edit-mode---code-modifications)
 4. [Agent Mode - Multi-File Changes](#4-agent-mode---multi-file-changes)
-5. [Debugging Assistance](#5-debugging-assistance)
-6. [Documentation Generation](#6-documentation-generation)
+5. [Plan Mode - Implementation Planning](#5-plan-mode---implementation-planning)
+6. [Debugging Assistance](#6-debugging-assistance)
+7. [Documentation Generation](#7-documentation-generation)
 
 ---
 
@@ -110,9 +111,9 @@ Is there a more modern JavaScript syntax for this code?
 
 ## 3. Edit Mode - Code Modifications
 
-**Technique:** Select code and use Copilot Chat with Edit mode to make targeted changes without rewriting everything.
+**Technique:** Select Edit from the agents dropdown in Copilot Chat, add files to your working set, and prompt Copilot to make controlled edits.
 
-**When to use:** When refactoring, fixing bugs, or making specific improvements to existing code.
+**When to use:** When you want granular control over which files Copilot can edit, making quick specific updates to a defined set of files.
 
 ### Example Prompts
 
@@ -158,22 +159,22 @@ Correct the logic in this conditional statement
 Fix the memory leak in this event listener
 ```
 
-> **Tip:** Be specific about what you want changed. Select the relevant code before using Edit mode.
+> **Tip:** Add relevant files to your working set before submitting your prompt. Review and Accept or Discard edits for each file.
 
 ---
 
 ## 4. Agent Mode - Multi-File Changes
 
-**Technique:** Use `@workspace` or let Copilot Agent make changes across multiple files for larger features.
+**Technique:** Select Agent from the agents dropdown in Copilot Chat and describe your task. Copilot autonomously determines which files to change, suggests terminal commands, and iterates to complete the task.
 
-**When to use:** When implementing features that span multiple files or need coordinated changes.
+**When to use:** When you have a complex task involving multiple steps, iterations, and error handling, and want Copilot to determine the necessary steps autonomously.
 
 ### Example Prompts
 
 #### Feature Implementation
 
 ```text
-@workspace Create a new user profile component with:
+Create a new user profile component with:
 - ProfileCard component in components folder
 - User interface in types folder
 - Styling in styles folder
@@ -181,7 +182,7 @@ Fix the memory leak in this event listener
 ```
 
 ```text
-@workspace Add form validation across the login form:
+Add form validation across the login form:
 - Client-side validation in the component
 - Validation utilities in utils folder
 - Error message constants in constants file
@@ -190,17 +191,49 @@ Fix the memory leak in this event listener
 #### Code Organization
 
 ```text
-@workspace Reorganize the authentication code:
+Reorganize the authentication code:
 - Move auth functions to auth/index.ts
 - Create types in auth/types.ts
 - Update all imports across the project
 ```
 
-> **Tip:** Use `@workspace` to give Copilot context about your entire project structure.
+> **Tip:** In Agent mode, Copilot autonomously determines which files need changes. Confirm or reject suggested terminal commands as Copilot iterates to complete your task.
 
 ---
 
-## 5. Debugging Assistance
+## 5. Plan Mode - Implementation Planning
+
+**Technique:** Select Plan from the agents dropdown in Copilot Chat and describe a task. Copilot researches your codebase, creates a detailed implementation plan, and waits for your approval before making changes.
+
+**When to use:** When you want to think through a task before executing, ensure all requirements are considered, or need a plan for team review.
+
+### Example Prompts
+
+#### New Feature Planning
+
+```text
+Create a simple to-do web app with HTML, CSS, and JS files
+```
+
+```text
+Plan adding user authentication to this Express application
+```
+
+#### Refactoring Planning
+
+```text
+Plan how to migrate this codebase from JavaScript to TypeScript
+```
+
+```text
+Outline the steps to refactor this monolithic function into smaller modules
+```
+
+> **Tip:** After reviewing the plan, click "Start Implementation" to hand off to Agent mode, or "Open in Editor" to save the plan as Markdown for later.
+
+---
+
+## 6. Debugging Assistance
 
 **Technique:** Ask Copilot to help identify and fix bugs in your code.
 
@@ -254,7 +287,7 @@ What edge cases should I test for this validation function?
 
 ---
 
-## 6. Documentation Generation
+## 7. Documentation Generation
 
 **Technique:** Ask Copilot to generate documentation for your code.
 
@@ -314,7 +347,7 @@ Explain what this code block does for future maintainers
 2. **Iterate:** If a suggestion isn't quite right, refine your prompt and try again
 3. **Learn Patterns:** Pay attention to how Copilot interprets different prompt styles
 4. **Verify Output:** Always review and test Copilot's suggestions before accepting them
-5. **Combine Modes:** Use Ask mode to understand, Edit mode to refine, and inline for quick completions
+5. **Combine Modes:** Use Ask to understand, Plan to strategize, Edit for controlled changes, and Agent for autonomous tasks
 6. **Be Specific:** The more context you provide, the better the suggestions
 
 ---
@@ -323,10 +356,5 @@ Explain what this code block does for future maintainers
 
 After mastering these basic prompting techniques:
 - Move on to Week 2 for advanced prompt engineering with the CRAFT framework
-- Learn how to create custom instructions for project-specific patterns
+- Learn how to create custom instructions for project specific patterns
 - Explore how to refine and iterate on Copilot's suggestions systematically
-
-For more examples and advanced techniques, see:
-- [Week 2 Prompt Examples](../Week2/4-Week2-Prompts.md)
-- [Week 3 DevOps & Testing Prompts](../Week3/4-Week3-Prompts.md)
-- [Week 4 Refactoring & Quality Prompts](../Week4/5-Week4-Prompts.md)

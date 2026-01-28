@@ -14,7 +14,7 @@ This training program is structured as a progressive learning journey, taking pa
 
 ### Week 1: Introduction and Developer Workflow Essentials
 
-**Duration:** 2-2.5 hours (4 focused segments)
+**Duration:** 2-2.5 hours
 
 **Objective:** Establish a foundational understanding of GitHub Copilot and introduce core workflows for developers.
 
@@ -27,7 +27,7 @@ This training program is structured as a progressive learning journey, taking pa
 
 **Content:** [1-Understanding-GitHub-Copilot.md](Workshops/Week1/1-Understanding-GitHub-Copilot.md)
 
-#### 2. Setup and Configuration (30 minutes - LIVE Demo/Recording)
+#### 2. Setup and Configuration (30 minutes)
 
 - Installation and setup in multiple IDEs (VS Code - Demo)
 - Configuring authentication and preferences

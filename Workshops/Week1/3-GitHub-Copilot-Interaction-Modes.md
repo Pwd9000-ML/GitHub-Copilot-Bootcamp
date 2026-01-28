@@ -4,6 +4,20 @@ GitHub Copilot offers four distinct interaction modes designed for different sta
 
 ---
 
+## Contents
+
+- [Quick Comparison](#quick-comparison)
+- [Detailed Breakdown](#detailed-breakdown)
+  - [1. Ask Mode (Chat)](#1-ask-mode-chat)
+  - [2. Edit Mode (Inline)](#2-edit-mode-inline)
+  - [3. Agent Mode (Autonomous Developer)](#3-agent-mode-autonomous-developer)
+  - [4. Plan Mode (Architect)](#4-plan-mode-architect)
+- [Custom Agents (Extensions)](#custom-agents-extensions)
+- [Summary](#summary)
+- [Next Steps](#next-steps)
+
+---
+
 ## Quick Comparison
 
 | Mode | Best For | Key Capability | Example Use Case |
@@ -106,3 +120,8 @@ Choose your mode based on your current task:
 - **Need targeted changes?** → Use **Edit Mode**
 - **Need autonomous help?** → Use **Agent Mode**
 - **Need a roadmap?** → Use **Plan Mode**
+
+## Next Steps
+
+- **Week 1 Session 4:** In the next session, we'll complete an interactive [hands-on lab](4-week1-lab.md) to apply GitHub Copilot in real-world scenarios
+
