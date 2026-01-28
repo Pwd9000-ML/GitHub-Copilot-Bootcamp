@@ -15,7 +15,7 @@
 
 GitHub Copilot offers intelligent code completion and AI-powered assistance across a range of popular IDEs. While Copilot is available in many environments, the depth of integration and feature set can vary significantly.
 
-> **Note:** Feature availability may vary based on your Copilot subscription plan (Free, Pro, Business, or Enterprise) and IDE version. Always check the [official GitHub Copilot documentation](https://docs.github.com/en/copilot) for the latest information.
+> **Note:** Feature availability may vary based on your Copilot subscription plan (Free, Pro, Business, or Enterprise) and IDE version. Always check the [official GitHub Copilot documentation](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) for the latest information.
 
 ---
 

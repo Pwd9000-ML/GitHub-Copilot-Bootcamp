@@ -1,15 +1,26 @@
 # GitHub Copilot Setup and Configuration Guide
 
-**Duration:** 1 hour  
+**Duration:** 30 minutes
 **Format:** LIVE Demo/Recording  
 **Objective:** Get GitHub Copilot installed, configured, and ready to use in your preferred development environment.
+
+---
+
+## Contents
+
+- [Part 1: Getting GitHub Copilot Access](#part-1-getting-github-copilot-access)
+- [Part 2: IDE-Specific Setup](#part-2-ide-specific-setup)
+- [Part 3: Configuration and Customisation](#part-3-configuration-and-customisation)
+- [Part 4: Basic Commands and Workflows](#part-4-basic-commands-and-workflows)
+- [Part 5: Troubleshooting](#part-5-troubleshooting)
+- [Part 6: Best Practices for Setup](#part-6-best-practices-for-setup)
 
 ---
 
 ## Prerequisites
 
 - Active GitHub account
-- GitHub Copilot subscription (Pro, Business, or Enterprise plan)
+- GitHub Copilot subscription/license (Pro, Business, or Enterprise plan)
 - IDE installed on your machine
 
 ---
@@ -18,7 +29,8 @@
 
 ### Step 1: Verify Your Subscription
 
-1. Visit [github.com/copilot](https://github.com/copilot)
+1. Visit [https://github.com/](https://github.com/)  
+   **Note:** If you're part of an enterprise organization, your GitHub URL may differ. Check with your GitHub representative or Champion for details.
 2. Check your subscription status under **Settings → Billing and Plans**
 3. Ensure your plan includes GitHub Copilot access
 
@@ -30,7 +42,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 ## Part 2: IDE-Specific Setup
 
-### Visual Studio Code (Recommended for Beginners)
+### Visual Studio Code (Recommended)
 
 #### Installation
 
@@ -45,41 +57,50 @@ The installation process varies by IDE. Follow the relevant section below for yo
 1. After restart, you'll see a **"Sign in to use GitHub Copilot"** notification
 2. Click **"Sign in with GitHub"**
 3. Authorize the extension in your browser
-4. Return to VS Code—you're ready to use Copilot!
+4. Return to VS Code, you're ready to use Copilot!
 
 #### Basic Commands
 
-| Action | Keyboard Shortcut |
-|--------|------------------|
-| **Trigger Copilot Chat** | `Ctrl+L` (Windows/Linux) or `Cmd+L` (Mac) |
-| **Open Chat in Sidebar** | `Ctrl+Shift+L` (Windows/Linux) or `Cmd+Shift+L` (Mac) |
-| **Inline Suggestions** | Start typing—suggestions appear automatically |
-| **Accept Suggestion** | `Tab` or `Enter` |
-| **Dismiss Suggestion** | `Esc` |
-| **Next Suggestion** | `Alt+]` (Windows/Linux) or `Option+]` (Mac) |
-| **Previous Suggestion** | `Alt+[` (Windows/Linux) or `Option+[` (Mac) |
-| **Open Copilot Edits** | `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Shift+I` (Mac) |
+**Keyboard Shortcuts for macOS**
 
-#### UI Overview
+| Action | Shortcut | Command Name |
+|--------|----------|--------------|
+| Accept an inline suggestion | `Tab` | `editor.action.inlineSuggest.commit` |
+| Dismiss an inline suggestion | `Esc` | `editor.action.inlineSuggest.hide` |
+| Show next inline suggestion | `Option (⌥)+]` | `editor.action.inlineSuggest.showNext` |
+| Show previous inline suggestion | `Option (⌥)+[` | `editor.action.inlineSuggest.showPrevious` |
+| Trigger inline suggestion | `Option (⌥)+\` | `editor.action.inlineSuggest.trigger` |
+| Open GitHub Copilot (additional suggestions in separate pane) | `Ctrl+Return` | `github.copilot.generate` |
+| Toggle GitHub Copilot on/off | No default shortcut | `github.copilot.toggleCopilot` |
 
-```
-┌─────────────────────────────────────────────┐
-│  VS Code Interface with Copilot             │
-├──────────────┬──────────────────────────────┤
-│   Sidebar    │                              │
-│   - Copilot  │    Editor                    │
-│     Chat     │    (Your Code)               │
-│   - More...  │                              │
-├──────────────┼──────────────────────────────┤
-│              │  Terminal / Output           │
-└──────────────┴──────────────────────────────┘
-```
+**Keyboard Shortcuts for Windows**
 
-**Copilot Chat Sidebar:**
-- Type questions about your code
-- Ask for explanations, refactoring, or generation
-- Use `@workspace` to reference your entire project
-- Use `@github` for GitHub-specific commands
+| Action | Shortcut | Command Name |
+|--------|----------|--------------|
+| Accept an inline suggestion | `Tab` | `editor.action.inlineSuggest.commit` |
+| Dismiss an inline suggestion | `Esc` | `editor.action.inlineSuggest.hide` |
+| Show next inline suggestion | `Alt+]` | `editor.action.inlineSuggest.showNext` |
+| Show previous inline suggestion | `Alt+[` | `editor.action.inlineSuggest.showPrevious` |
+| Trigger inline suggestion | `Alt+\` | `editor.action.inlineSuggest.trigger` |
+| Open GitHub Copilot (additional suggestions in separate pane) | `Ctrl+Enter` | `github.copilot.generate` |
+| Toggle GitHub Copilot on/off | No default shortcut | `github.copilot.toggleCopilot` |
+
+**Keyboard Shortcuts for Linux**
+
+| Action | Shortcut | Command Name |
+|--------|----------|--------------|
+| Accept an inline suggestion | `Tab` | `editor.action.inlineSuggest.commit` |
+| Dismiss an inline suggestion | `Esc` | `editor.action.inlineSuggest.hide` |
+| Show next inline suggestion | `Alt+]` | `editor.action.inlineSuggest.showNext` |
+| Show previous inline suggestion | `Alt+[` | `editor.action.inlineSuggest.showPrevious` |
+| Trigger inline suggestion | `Alt+\` | `editor.action.inlineSuggest.trigger` |
+| Open GitHub Copilot (additional suggestions in separate pane) | `Ctrl+Enter` | `github.copilot.generate` |
+| Toggle GitHub Copilot on/off | No default shortcut | `github.copilot.toggleCopilot` |
+
+> **Note:** Keyboard shortcuts may vary depending on your VS Code version and any customisations you've made. To verify the current shortcuts in your installation:
+> 1. Press `Ctrl+K Ctrl+S` (Windows/Linux) or `Cmd+K Cmd+S` (Mac) to open the Keyboard Shortcuts editor
+> 2. Search for "Copilot" to see all GitHub Copilot commands and their assigned shortcuts
+> 3. Official documentation: [GitHub Copilot Keyboard Shortcuts](https://docs.github.com/en/copilot/reference/keyboard-shortcuts)
 
 ---
 
@@ -87,27 +108,39 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Installation
 
+**Option 1: Via Visual Studio Installer (Recommended)**
 1. **Open Visual Studio Installer**
 2. **Click "Modify"** on your Visual Studio installation
-3. **Go to Individual Components**
+3. **Go to Individual Components** tab
 4. **Search for "GitHub Copilot"**
 5. **Check the box** and click **Modify**
 6. **Restart Visual Studio**
 
+**Option 2: Via Extensions Menu**
+1. **Open Visual Studio**
+2. **Go to Extensions → Manage Extensions**
+3. **Search for "GitHub Copilot"**
+4. **Download and install** the extension
+5. **Restart Visual Studio**
+
 #### Sign In
 
-1. Go to **Tools → Options → GitHub → Copilot**
-2. **Sign in with GitHub** account
-3. Authorize the connection in your browser
+1. After installation, a prompt will appear to sign in
+2. Click **Add an Account** and select **GitHub**
+3. Complete authentication in your browser
+4. Return to Visual Studio
 
 #### Basic Commands
 
-| Action | Keyboard Shortcut |
-|--------|------------------|
-| **Open Copilot Chat** | `Alt+/` |
-| **Inline Suggestions** | `Ctrl+Alt+\` to toggle, `Tab` to accept |
-| **Refactor with Copilot** | Right-click code → **Copilot** → **Refactor** |
-| **Explain Code** | Right-click code → **Copilot** → **Explain** |
+| Action | Shortcut | Command name |
+|--------|----------|--------------|
+| Show next inline suggestion | Alt+. | Edit.NextSuggestion |
+| Show previous inline suggestion | Alt+, | Edit.PreviousSuggestion |
+
+> **Note:** Keyboard shortcuts may vary by Visual Studio version. To verify shortcuts:
+> 1. Go to **Tools → Options → Environment → Keyboard**
+> 2. Search for "Copilot" to see all available commands
+> 3. Official documentation: [GitHub Copilot in Visual Studio](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=visualstudio)
 
 ---
 
@@ -132,140 +165,152 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 | Action | Keyboard Shortcut |
 |--------|------------------|
-| **Open Copilot Chat** | `Ctrl+\` (Windows/Linux) or `Cmd+\` (Mac) |
-| **Show Inline Suggestions** | `Alt+\` (Windows/Linux) or `Option+\` (Mac) |
-| **Accept Suggestion** | `Tab` |
-| **Dismiss Suggestion** | `Esc` |
+| **Accept an inline suggestion** | `Tab` |
+| **Dismiss an inline suggestion** | `Esc` |
+| **Show next inline suggestion** | `Alt+]` (Windows/Linux) or `Option (⌥)+]` (Mac) |
+| **Show previous inline suggestion** | `Alt+[` (Windows/Linux) or `Option (⌥)+[` (Mac) |
+| **Trigger inline suggestion** | `Alt+\` (Windows/Linux) or `Option (⌥)+\` (Mac) |
+| **Open GitHub Copilot (additional suggestions in separate pane)** | `Alt+Enter` (Windows/Linux) or `Option (⌥)+Return` (Mac) |
+
+> **Note:** Keyboard shortcuts may vary by JetBrains IDE version. To verify shortcuts:
+> 1. Go to **Settings → Keymap** and search for "Copilot"
+> 2. Official documentation: [GitHub Copilot Keyboard Shortcuts for JetBrains](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=jetbrains)
 
 ---
 
 ### Xcode (macOS)
 
+#### Prerequisites
+
+- Xcode version 8.0 or above
+- macOS Monterey (12.0) or above
+
 #### Installation
 
-1. **Open Xcode**
-2. **Go to Xcode → Settings → Accounts**
-3. **Add your GitHub account** if not already added
-4. **Download the Copilot plugin** from the Mac App Store or GitHub
-5. **Restart Xcode**
+1. **Download the extension** from the [GitHub Copilot for Xcode repository](https://github.com/github/CopilotForXcode/releases/latest)
+2. **Install the .dmg file** - a background item will be added to start the extension when Xcode launches
+3. **Open the GitHub Copilot for Xcode application** from the Applications folder
+4. **Follow the on-screen instructions** for setting up the extension
+
+#### Granting Required Permissions
+
+1. **Accessibility permission** - you will be prompted when you first start the extension
+2. **Xcode Source Editor Extension permission** (manual setup required):
+   - Open the **GitHub Copilot for Xcode** application
+   - Click **Extension Permission**
+   - Enable **GitHub Copilot** and click **Done**
+3. **Restart Xcode** — you will see a new "GitHub Copilot" item in the **Editor** menu
 
 #### Sign In
 
-1. Go to **Xcode → Settings → Extensions**
-2. **Sign in with GitHub**
-3. Authorize the connection
+1. Open the **GitHub Copilot for Xcode** application
+2. Click **Login to GitHub** and follow the prompts to authorize
 
-#### Basic Usage
+#### Basic Commands
 
-- **Inline Suggestions** appear as you type
-- **Press Tab** to accept
-- **Press Esc** to dismiss
+| Action | Keyboard Shortcut |
+|--------|------------------|
+| Accept the first line of a suggestion | `Tab` |
+| View full suggestion | Hold `Option` |
+| Accept full suggestion | `Option + Tab` |
+
+> **Note:** Official documentation: [GitHub Copilot for Xcode](hhttps://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=xcode)
 
 ---
 
 ### Neovim / Vim
 
-#### Installation (Github Copilot Plugin)
+#### Prerequisites
 
-Using **vim-plug**:
+- Vim version 9.0.0185 or newer / Neovim version 0.6 or above
+- Node.js version 18 or above
+
+#### Installation (Using Built-in Plugin Manager - Recommended)
+
+**For Neovim on macOS/Linux:**
+```bash
+git clone https://github.com/github/copilot.vim \
+  ~/.config/nvim/pack/github/start/copilot.vim
+```
+
+**For Neovim on Windows (PowerShell):**
+```powershell
+git clone https://github.com/github/copilot.vim.git `
+  $HOME/AppData/Local/nvim/pack/github/start/copilot.vim
+```
+
+**For Vim on macOS/Linux:**
+```bash
+git clone https://github.com/github/copilot.vim \
+  ~/.vim/pack/github/start/copilot.vim
+```
+
+**For Vim on Windows (PowerShell):**
+```powershell
+git clone https://github.com/github/copilot.vim.git `
+  $HOME/vimfiles/pack/github/start/copilot.vim
+```
+
+**Alternative:** You can also use a plugin manager like **vim-plug** or **lazy.nvim**:
 ```vim
 Plug 'github/copilot.vim'
 ```
 
-Then run `:PlugInstall`
-
 #### Sign In
 
-1. Open Neovim/Vim
+1. Start Vim/Neovim
 2. Run `:Copilot setup`
-3. Follow the authentication flow
-4. Generate a GitHub device code and authorize
+3. Follow the authentication flow in your browser
+4. Run `:Copilot enable` to enable the extension
 
-#### Basic Commands
+#### Basic Usage
 
-| Action | Command |
-|--------|---------|
-| **Trigger Inline Suggestion** | Start typing in Insert mode |
-| **Accept Suggestion** | `Tab` (or configured keybinding) |
-| **Dismiss Suggestion** | `Escape` |
-| **Next Suggestion** | `Alt+]` |
-| **Previous Suggestion** | `Alt+[` |
+Suggestions are displayed inline and can be accepted by pressing `Tab`. For detailed keybindings and customization options, run `:help copilot` within Vim/Neovim.
+
+> **Note:** Keyboard shortcuts can be rebound to your preferences. See the [Neovim Map documentation](https://neovim.io/doc/user/map.html) and the [copilot.vim repository](https://github.com/github/copilot.vim) for more information.
 
 ---
 
-## Part 3: Configuration and Customization
+## Part 3: Configuration and Customisation
 
 ### Enable/Disable Copilot Globally or Per File
 
 #### VS Code
 
-1. **Disable for all files:** Click the Copilot icon in the status bar and select **Disable Globally**
-2. **Disable for a language:** Right-click the status bar → **Disable for [Language]**
-3. **Re-enable:** Click Copilot icon → **Enable**
+1. **Enable/Disable Completions:** Click the arrow next to the Copilot icon in the title bar → **Configure Inline Suggestions** → Select **Enable Completions** or **Disable Completions**
+2. **Via Settings:** Go to **File → Preferences → Settings**, navigate to **Extensions → Copilot**, then check/uncheck **Inline Suggest: Enable**
+3. **Disable for specific languages:** In Settings, under "Enable or disable Copilot for specified languages," click **Edit in settings.json** and configure:
+   ```json
+   "github.copilot.enable": {
+       "*": true,
+       "yaml": false,
+       "plaintext": false
+   }
+   ```
+4. **Trigger inline suggestion:** Press `Alt+\` (Windows/Linux) or `Option+\` (Mac)
 
 #### Visual Studio
 
-1. **Tools → Options → GitHub → Copilot**
-2. Toggle **Enable GitHub Copilot** on/off
+1. **Click the GitHub Copilot icon** in the bottom panel (status bar) of the Visual Studio window
+2. When disabling, you'll be prompted to choose:
+   - **Disable Globally** - turns off Copilot for all files
+   - **Disable for [Language]** - turns off Copilot only for the current file's language
+3. The icon shows a diagonal line through it when disabled
 
 ### Set Your Preferred Model
 
 If your subscription provides multiple model options:
 
 **VS Code:**
-1. Open **Copilot Chat**
-2. Look for **Model selector** (top of chat panel)
-3. Choose your preferred model (GPT-4, GPT-3.5-turbo, etc.)
+1. Open **Copilot Chat** (`Ctrl+Alt+I`)
+2. Use the **model picker** in the chat input field
+3. Select from available models (varies by subscription — see [Supported AI models](https://docs.github.com/en/copilot/using-github-copilot/ai-models/supported-ai-models-in-copilot))
 
-### Configure Keyboard Shortcuts
-
-**VS Code:**
-1. **File → Preferences → Keyboard Shortcuts** (`Ctrl+K Ctrl+S`)
-2. Search for "Copilot"
-3. Click the pencil icon next to any command to customize
-4. Enter your preferred key combination
+> **Note:** Different models have different premium request multipliers, which can affect your monthly usage allowance. Copilot Business users may need their organization to enable model switching.
 
 ---
 
-## Part 4: Common UI Elements and Tips
-
-### Copilot Chat Interface
-
-```
-┌─ Copilot Chat ────────────────────┐
-│ @workspace  [Model Selector ▼]   │
-├───────────────────────────────────┤
-│ Previous conversations...         │
-│                                   │
-│ Assistant: How can I help?       │
-│ [Type your question...]           │
-│                                   │
-│ You: Explain this function        │
-│ Assistant: This function...       │
-├───────────────────────────────────┤
-│ [Message input field...]          │
-│ [Send button] [Attach file]       │
-└───────────────────────────────────┘
-```
-
-### Inline Suggestion Indicators
-
-When Copilot suggests code inline:
-- **Gray, dimmed text** = Suggested completion
-- **Tab to accept** or keep typing to dismiss
-- **Use arrow keys** to cycle through suggestions
-
-### Status Indicators
-
-| Indicator | Meaning |
-|-----------|---------|
-| ✓ Green Copilot icon | Copilot is active and ready |
-| ✗ Red/Disabled | Copilot is disabled for this file/language |
-| ⟳ Spinning | Copilot is processing your request |
-
----
-
-## Part 5: Basic Commands and Workflows
+## Part 4: Basic Commands and Workflows
 
 ### Getting Started: Your First Copilot Chat
 
@@ -301,7 +346,9 @@ When Copilot suggests code inline:
 
 ---
 
-## Part 6: Troubleshooting
+## Part 5: Troubleshooting
+
+> **Tip:** If GitHub Copilot stops working, first check [GitHub's Status page](https://githubstatus.com/) for any active incidents.
 
 ### Copilot Extension Won't Install
 
@@ -309,23 +356,25 @@ When Copilot suggests code inline:
 - Verify you're using the latest IDE version
 - Check internet connection
 - Try uninstalling and reinstalling the extension
+- Update your GitHub Copilot extension. Older clients cannot communicate with Copilot servers
 - Check IDE compatibility in the [IDE Support Guide](../../FAQ/IDE-support.md)
 
 ### No Suggestions Appearing
 
 **Solution:**
-- Verify Copilot is enabled (check status icon)
-- Wait briefly—Copilot needs context
-- Try opening Copilot Chat directly
+- Verify Copilot is enabled (check status icon, a diagonal line means disabled)
+- Check if the file is excluded by content exclusion settings (hover over the icon to see)
+- Wait briefly. Copilot needs context and can sometimes take a while to load
 - Ensure you're signed in to GitHub
+- Update to the latest extension version
 
-### Authentication Errors
+### Authentication Errors (VS Code)
 
 **Solution:**
-1. Sign out: Open command palette → "Copilot: Sign Out"
-2. Sign back in: Open command palette → "Copilot: Sign In"
-3. Complete GitHub authentication in browser
-4. Return to IDE and verify green status icon
+1. Click the **Accounts icon** in the bottom left corner of VS Code
+2. Hover over your GitHub username and click **Sign out**
+3. Press `F1` to open the command palette, then select **Developer: Reload Window**
+4. After VS Code reloads, sign back in to your GitHub account
 
 ### Slow or No Responses
 
@@ -333,46 +382,22 @@ When Copilot suggests code inline:
 - Check internet connectivity
 - Reduce file size if editing very large files
 - Try a different model if available
-- Review GitHub Copilot status page for service issues
+- Check [GitHub Status page](https://githubstatus.com/) for service issues
+- Review firewall/proxy settings if in a corporate environment
 
 ---
 
-## Part 7: Best Practices for Setup
+## Part 6: Best Practices for Setup
 
-1. **Start with VS Code** if you're new—it has the most complete Copilot integration
+1. **Start with VS Code** if you're new, it has the most complete Copilot integration
 2. **Keep your IDE updated** to ensure compatibility with latest Copilot features
-3. **Use keyboard shortcuts** to speed up workflow—refer back to this guide as needed
-4. **Disable Copilot for sensitive files** if working with proprietary or security-critical code
-5. **Customize your shortcuts** to match your existing workflow
+3. **Use keyboard shortcuts** to speed up workflow, refer back to this guide as needed
+4. **Disable Copilot for sensitive files** if working with proprietary or security critical code
+5. **Customise your shortcuts** to match your existing workflow
 
 ---
 
 ## Next Steps
 
-- Complete the [GitHub Copilot Interaction Modes](3-GitHub-Copilot-Interaction-Modes.md) guide to learn how to use different modes effectively
-- Start the [Week 1 Hands-On Lab](4-week1-lab.md) to apply what you've learned
-- Refer to [IDE Support Guide](../../FAQ/IDE-support.md) for detailed information on your specific IDE
+- **Week 1 Session 3:** In the next session ['GitHub Copilot Interaction Modes'](3-GitHub-Copilot-Interaction-Modes.md), we will learn how to use different modes of GitHub Copilot available in VS Code, when and how to use them effectively
 
----
-
-## Quick Reference Card
-
-**VS Code Essentials:**
-- Open Chat: `Ctrl+L`
-- Sidebar Chat: `Ctrl+Shift+L`
-- Inline Edit: `Ctrl+Shift+I`
-- Accept Suggestion: `Tab`
-- Next Suggestion: `Alt+]`
-
-**JetBrains Essentials:**
-- Open Chat: `Ctrl+\`
-- Show Suggestions: `Alt+\`
-- Accept: `Tab`
-
-**Visual Studio Essentials:**
-- Open Chat: `Alt+/`
-- Toggle Suggestions: `Ctrl+Alt+\`
-
----
-
-**Still need help?** Refer to the [IDE Support Guide](../../FAQ/IDE-support.md) or check the [GitHub Copilot Documentation](https://docs.github.com/en/copilot).
