@@ -1,0 +1,147 @@
+name: Week 1 Lab - Getting Started with Copilot
+description: Hands-on Copilot lab for Week 1 covering setup, interaction modes, and basic workflows
+title: "Week 1 Lab: Getting Started with Copilot - <name>"
+labels: ["lab", "week-1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Goal
+        Learn how to use GitHub Copilot to assist in coding tasks across different interaction modes.
+
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Tasks
+      options:
+        - label: Read `Workshops/Week1/1-Understanding-GitHub-Copilot.md`
+        - label: Follow setup guide in `Workshops/Week1/2-Setup-and-Configuration.md`
+        - label: Read `Workshops/Week1/3-GitHub-Copilot-Interaction-Modes.md`
+        - label: Complete the hands-on lab in `Workshops/Week1/4-week1-lab.md`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: setup_completed
+    attributes:
+      label: Copilot setup status
+      description: Were you able to install and configure Copilot successfully?
+      options:
+        - "Yes - fully set up and working"
+        - "Partially - some features not working"
+        - "Had issues - needed help"
+        - "Already had it set up previously"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ide_used
+    attributes:
+      label: Which IDE did you use?
+      options:
+        - VS Code
+        - Visual Studio
+        - JetBrains (IntelliJ, PyCharm, etc.)
+        - GitHub Codespaces
+        - Xcode
+        - Neovim/Vim
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: modes_practiced
+    attributes:
+      label: Which Copilot interaction modes did you practice?
+      options:
+        - label: Inline suggestions (code completions as you type)
+        - label: Ask Mode (Copilot Chat for questions/explanations)
+        - label: Edit Mode (targeted code modifications)
+        - label: Agent Mode (autonomous multi-file changes)
+        - label: Plan Mode (generating implementation plans)
+
+  - type: checkboxes
+    id: activities
+    attributes:
+      label: What activities did you complete in the lab?
+      options:
+        - label: Used Codespace to run VS Code in browser
+        - label: Generated code using inline suggestions
+        - label: Asked Copilot to explain code
+        - label: Used Copilot to debug or fix issues
+        - label: Had Copilot summarize changes
+        - label: Used Copilot for PR review
+
+  - type: textarea
+    id: prompt_log
+    attributes:
+      label: Best prompt you used (paste it here)
+      description: Share a prompt or comment that worked particularly well
+      placeholder: |
+        Example: "// Function to validate email address format and return true if valid"
+    validations:
+      required: true
+
+  - type: textarea
+    id: code_example
+    attributes:
+      label: Code Copilot generated for you
+      description: Paste an example of code that Copilot generated well
+      placeholder: |
+        function validateEmail(email) {
+          // Copilot generated this...
+        }
+
+  - type: dropdown
+    id: time_impact
+    attributes:
+      label: Time impact compared to coding without Copilot
+      options:
+        - "Much faster - saved significant time"
+        - "Somewhat faster - saved some time"
+        - "About the same"
+        - "Slower - still learning how to use it effectively"
+    validations:
+      required: true
+
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked well?
+      placeholder: "What did Copilot do well? Which mode was most helpful?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: challenges
+    attributes:
+      label: What was challenging?
+      placeholder: "What didn't work as expected? Any setup issues or confusing moments?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: How confident do you feel using Copilot after Week 1?
+      options:
+        - "Very confident - ready to use it daily"
+        - "Fairly confident - understand the basics"
+        - "Somewhat confident - need more practice"
+        - "Not very confident - still figuring it out"
+    validations:
+      required: true
+
+  - type: textarea
+    id: pr_link
+    attributes:
+      label: PR link (if applicable)
+      placeholder: "Paste the PR URL here"
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: Questions for next week
+      description: Any questions or topics you'd like to explore further?
+      placeholder: "What would you like to learn more about?"
+
