@@ -341,6 +341,16 @@ Explain what this code block does for future maintainers
 
 ---
 
+## Week 1 Feedback
+
+Please complete the following reflections after completing Week 1 activities:
+
+- [Submit Week 1 Lab Reflection](../../issues/new?template=week1-lab.yml)
+- [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
+
+---
+
 ## Next Steps
 
-After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in [Week2 sessions](../Week2/README.md) to further enhance your productivity with GitHub Copilot.
+After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in Week 2 to further enhance your productivity with GitHub Copilot.
+**[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-Best-Practices.md)**
