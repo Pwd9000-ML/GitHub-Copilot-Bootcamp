@@ -1,20 +1,33 @@
 # Week 4 Prompts: Refactoring, Quality, and Security
 
-A comprehensive collection of prompts for Week 4 topics covering legacy code refactoring, quality standards enforcement, and ethical/security considerations.
+## Session Overview
+
+**Purpose:** Reference guide for refactoring, quality, and security prompts  
+**Format:** Example prompts with explanations and tips  
+**Objective:** Provide prompts for legacy code refactoring, quality standards enforcement, and ethical/security considerations.
 
 ---
 
-## Quick Navigation
+## Contents
 
-- [Refactoring Prompts](#refactoring-prompts)
-- [Quality Standards Prompts](#quality-standards-prompts)
-- [Security Audit Prompts](#security-audit-prompts)
-- [Ethical AI Prompts](#ethical-ai-prompts)
-- [Code Review Prompts](#code-review-prompts)
+- [1. Refactoring Prompts](#1-refactoring-prompts)
+- [2. Quality Standards Prompts](#2-quality-standards-prompts)
+- [3. Security Audit Prompts](#3-security-audit-prompts)
+- [4. Ethical AI Prompts](#4-ethical-ai-prompts)
+- [5. Code Review Prompts](#5-code-review-prompts)
+- [6. Combination Prompts](#6-combination-prompts)
 
 ---
 
-## Refactoring Prompts
+## 1. Refactoring Prompts
+
+Refactoring prompts help analyse, understand, and improve legacy code through incremental changes.
+
+- Analyse legacy code to identify code smells and technical debt
+- Generate characterisation tests to capture current behaviour
+- Extract methods and rename for clarity
+- Modernise syntax to current language standards
+- Remove duplication and simplify conditionals
 
 ### Legacy Code Analysis
 
@@ -75,7 +88,7 @@ Improve variable and function names in this code:
 ```text
 Modernise this [JavaScript/Python/Java] code to current standards:
 - Replace deprecated patterns
-- Use modern language features ([ES2022/Python 3.11/Java 17])
+- Use modern language features from the current stable version of the language (for example, features from ES2022, Python 3.11, Java 17, or newer, as appropriate)
 - Apply destructuring where beneficial
 - Use appropriate iteration methods (map, filter, reduce)
 - Maintain identical functionality
@@ -112,7 +125,15 @@ Target: Maximum 2 levels
 
 ---
 
-## Quality Standards Prompts
+## 2. Quality Standards Prompts
+
+Quality standards prompts help enforce coding standards, generate documentation, and analyse code metrics.
+
+- Generate coding standards documents for your project
+- Check code compliance against defined standards
+- Create linting and pre-commit hook configurations
+- Generate comprehensive module documentation
+- Analyse code quality metrics against targets
 
 ### Generate Coding Standards
 
@@ -200,7 +221,15 @@ Flag any metrics exceeding targets with specific recommendations.
 
 ---
 
-## Security Audit Prompts
+## 3. Security Audit Prompts
+
+Security audit prompts help identify vulnerabilities and ensure secure coding practices.
+
+- Perform comprehensive security reviews of code
+- Detect and prevent SQL injection vulnerabilities
+- Scan for exposed secrets and credentials
+- Generate input validation for APIs and functions
+- Create security test cases and dependency checks
 
 ### Comprehensive Security Review
 
@@ -309,7 +338,15 @@ Requirements:
 
 ---
 
-## Ethical AI Prompts
+## 4. Ethical AI Prompts
+
+Ethical AI prompts help ensure responsible and inclusive AI-assisted development.
+
+- Detect potential bias in code and algorithms
+- Generate inclusive code for diverse users
+- Document AI-assisted code appropriately
+- Create responsible AI development checklists
+- Ensure accessibility and cultural neutrality
 
 ### Bias Detection in Code
 
@@ -361,7 +398,15 @@ Generate a checklist for responsible AI-assisted development:
 
 ---
 
-## Code Review Prompts
+## 5. Code Review Prompts
+
+Code review prompts help perform thorough reviews following best practices and principles.
+
+- Conduct senior developer-level code reviews
+- Analyse code against SOLID principles
+- Review against Clean Code principles
+- Generate pull request review templates
+- Provide specific feedback with line references
 
 ### Senior Developer Review
 
@@ -433,7 +478,14 @@ Feedback: [Specific comments with line refs]
 
 ---
 
-## Combination Prompts
+## 6. Combination Prompts
+
+Combination prompts bring together multiple techniques for comprehensive workflows.
+
+- Plan complete refactoring workflows with multiple phases
+- Create quality gates for CI/CD pipelines
+- Combine testing, security, and modernisation steps
+- Build comprehensive code improvement strategies
 
 ### Full Refactoring Workflow
 
@@ -449,7 +501,7 @@ Phase 2 - Secure
 - Fix injection vulnerabilities
 - Add input validation
 
-Phase 3 - Modernise  
+Phase 3 - Modernise
 - Update syntax to modern standards
 - Apply SOLID principles
 - Improve naming
@@ -479,19 +531,6 @@ Include GitHub Actions workflow YAML.
 
 ---
 
-## Prompt Engineering Tips for Week 4
-
-| Technique | Example |
-|-----------|---------|
-| **Be specific about standards** | "Follow PEP 8 style guide" |
-| **Provide context** | "This is a financial application requiring strict security" |
-| **Request explanations** | "Explain why each change improves security" |
-| **Ask for alternatives** | "Provide 2-3 approaches to fixing this issue" |
-| **Specify output format** | "Return as a markdown table with severity ratings" |
-| **Include constraints** | "Must maintain backward compatibility" |
-
----
-
 ## Quick Reference Commands
 
 ```text
@@ -515,3 +554,23 @@ Include GitHub Actions workflow YAML.
 ```
 
 ---
+
+## Week 4 Feedback
+
+Please complete the following reflections after completing Week 4 activities:
+
+- [Submit Week 4 Lab Reflection](../../issues/new?template=week4-lab.yml)
+- [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
+
+---
+
+## Next Steps
+
+Congratulations on completing the GitHub Copilot Training Program! You have now mastered foundational concepts, prompt engineering, DevOps automation, testing, refactoring, and ethical AI practices.
+
+**Continue your learning:**
+- Apply these techniques to your daily development workflow
+- Share your knowledge with your team
+- Explore the additional resources in the main README
+
+**[← Back to Main README](../../README.md)**

@@ -1,6 +1,6 @@
 name: Week 4 Lab - Refactoring, Quality, and Ethics
 description: Hands-on Copilot lab for Week 4 covering legacy code refactoring, quality standards, and ethical AI practices
-title: "Week 4 Lab: Refactoring & Ethics - <name>"
+title: "Week 4 Lab: Refactoring & Ethics - <Your Name>"
 labels: ["lab", "week-4"]
 body:
   - type: markdown

@@ -1,6 +1,6 @@
 name: Weekly Reflection (Copilot)
 description: Capture Copilot usage, time impact, and learnings.
-title: "Weekly Reflection: <date> - <name>"
+title: "Weekly Reflection: <Date> - <Your Name>"
 labels: ["reflection", "copilot"]
 body:
   - type: dropdown

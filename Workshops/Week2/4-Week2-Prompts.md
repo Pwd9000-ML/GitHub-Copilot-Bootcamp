@@ -1,27 +1,34 @@
 # GitHub Copilot Prompt Engineering Guide
 
-A comprehensive guide to different prompting techniques for GitHub Copilot, with practical examples using a Book Inventory Management System.
+## Session Overview
+
+**Purpose:** Reference guide for prompt engineering techniques  
+**Format:** Example prompts with explanations and tips  
+**Objective:** Provide practical prompting techniques using a Book Inventory Management System as context.
 
 ---
 
-## Table of Contents
+## Contents
 
-1. [Template Generation](#1-template-generation)
-2. [Project Scaffolding](#2-project-scaffolding)
-3. [Custom Scaffolding](#3-custom-scaffolding)
-4. [Code Generation](#4-code-generation)
-5. [Code Explanation](#5-code-explanation)
-6. [Debugging & Research](#6-debugging--research)
-7. [Unit Test Generation](#7-unit-test-generation)
-8. [SQL Query Generation](#8-sql-query-generation)
+- [1. Template Generation](#1-template-generation)
+- [2. Project Scaffolding](#2-project-scaffolding)
+- [3. Custom Scaffolding](#3-custom-scaffolding)
+- [4. Code Generation](#4-code-generation)
+- [5. Code Explanation](#5-code-explanation)
+- [6. Debugging & Research](#6-debugging--research)
+- [7. Unit Test Generation](#7-unit-test-generation)
+- [8. SQL Query Generation](#8-sql-query-generation)
 
 ---
 
 ## 1. Template Generation
 
-**Technique:** Ask Copilot to generate reusable function templates with clearly defined parameters and structure.
+Template generation creates reusable function templates with clearly defined parameters and structure.
 
-**When to use:** When you need boilerplate code that follows a consistent pattern and can be customised later.
+- Generate boilerplate code that follows consistent patterns
+- Define fields and parameters upfront for customisation
+- Build reusable components that can be adapted later
+- Start with basic requirements, then iterate with refinements
 
 ### Example Prompts
 
@@ -61,9 +68,12 @@ Modify the searchBooks function to include filtering by author as well.
 
 ## 2. Project Scaffolding
 
-**Technique:** Use Copilot to create project structures, folder hierarchies, and initial configuration files.
+Project scaffolding creates project structures, folder hierarchies, and initial configuration files.
 
-**When to use:** When starting a new project and need to establish a standard directory layout.
+- Create standard directory layouts for new projects
+- Generate initial configuration files (package.json, README)
+- Establish consistent folder naming conventions
+- Set up entry points and basic project organisation
 
 ### Example Prompts
 
@@ -103,9 +113,12 @@ Add subfolders models, controllers, and views inside the src folder for better m
 
 ## 3. Custom Scaffolding
 
-**Technique:** Generate specific files with predefined content tailored to your architecture patterns.
+Custom scaffolding generates specific files with predefined content tailored to your architecture patterns.
 
-**When to use:** When you need files that follow specific design patterns (MVC, etc.) with appropriate structure.
+- Create files following specific design patterns (MVC, etc.)
+- Generate model, controller, and view layer files
+- Include appropriate structure for each layer
+- Specify file paths and purposes for contextually appropriate code
 
 ### Example Prompts
 
@@ -139,9 +152,12 @@ Update the package.json file to include Jest for testing and add start and test 
 
 ## 4. Code Generation
 
-**Technique:** Request specific functionality with clear requirements about behaviour and constraints.
+Code generation requests specific functionality with clear requirements about behaviour and constraints.
 
-**When to use:** When implementing business logic, data operations, or specific algorithms.
+- Implement business logic and data operations
+- Specify constraints like preventing duplicates
+- Define target environment (Node.js, browser)
+- Handle data persistence and storage operations
 
 ### Example Prompts
 
@@ -162,11 +178,7 @@ Generate a function to search for books by title or genre in an array.
 #### Data Persistence
 
 ```text
-Write a function to save the book inventory to a JSON file using Node.js.
-```
-
-```text
-Generate a function to save and retrieve book data from local storage for a browser-based application.
+In a Node.js environment, write a function to save the book inventory to a JSON file on disk.
 ```
 
 > **Tip:** Specify constraints (e.g., "prevent duplicates") and the target environment (Node.js, browser) for accurate code.
@@ -175,9 +187,12 @@ Generate a function to save and retrieve book data from local storage for a brow
 
 ## 5. Code Explanation
 
-**Technique:** Ask Copilot to explain existing code logic, identify patterns, and suggest improvements.
+Code explanation helps you understand existing code logic, identify patterns, and discover improvements.
 
-**When to use:** When reviewing unfamiliar code, onboarding, or seeking optimisation opportunities.
+- Get explanations of unfamiliar code during onboarding
+- Understand specific functions and their logic
+- Identify optimisation opportunities
+- Review code patterns and edge case handling
 
 ### Example Prompts
 
@@ -211,9 +226,12 @@ Identify any potential edge cases in the searchBooks function and how they could
 
 ## 6. Debugging & Research
 
-**Technique:** Use Copilot to identify bugs, debug issues, and research alternative approaches.
+Debugging and research helps identify bugs, troubleshoot issues, and explore alternative approaches.
 
-**When to use:** When troubleshooting errors, exploring solutions, or evaluating different implementation strategies.
+- Identify and fix bugs in existing code
+- Explore alternative implementation strategies
+- Research different error-handling approaches
+- Describe expected vs actual behaviour for better diagnostics
 
 ### Example Prompts
 
@@ -243,9 +261,12 @@ Can you suggest a more efficient algorithm for searching through a large book in
 
 ## 7. Unit Test Generation
 
-**Technique:** Generate comprehensive test suites covering happy paths, edge cases, and error scenarios.
+Unit test generation creates comprehensive test suites covering happy paths, edge cases, and errors.
 
-**When to use:** When implementing TDD, increasing code coverage, or validating refactored code.
+- Generate tests for TDD implementation
+- Increase code coverage for existing functions
+- Validate refactored code behaviour
+- Specify testing framework and scenarios to cover
 
 ### Example Prompts
 
@@ -275,9 +296,12 @@ Generate additional test cases for edge scenarios, like searching with an empty 
 
 ## 8. SQL Query Generation
 
-**Technique:** Generate SQL queries by describing the data operation in natural language.
+SQL query generation creates database queries by describing data operations in natural language.
 
-**When to use:** When writing database queries for CRUD operations, reports, or data analysis.
+- Generate SELECT, UPDATE, DELETE statements
+- Create queries with JOINs and aggregate functions
+- Build complex queries with subqueries and grouping
+- Include table names, column names, and conditions for accuracy
 
 ### Example Prompts
 
@@ -345,24 +369,17 @@ Write a SQL query to get the top 5 highest-paid employees ordered by salary in d
 
 ---
 
-## Quick Reference: Prompting Best Practices
+## Week 2 Feedback
 
-| Technique | Key Principle | Example Trigger Words |
-|-----------|--------------|----------------------|
-| **Template Generation** | Define structure & fields | "template", "reusable", "with fields" |
-| **Scaffolding** | Specify folder/file hierarchy | "create structure", "scaffold", "folders for" |
-| **Code Generation** | State behaviour & constraints | "write a function", "prevent", "handle" |
-| **Code Explanation** | Reference specific code | "explain", "describe how", "logic used" |
-| **Debugging** | Describe expected vs actual | "debug", "fix issue", "not working" |
-| **Test Generation** | Specify framework & scenarios | "unit tests using Jest", "test cases for" |
-| **SQL Generation** | Name tables & conditions | "SQL query", "join", "where", "group by" |
+Please complete the following reflections after completing Week 2 activities:
+
+- [Submit Week 2 Lab Reflection](../../issues/new?template=week2-lab.yml)
+- [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
 ---
 
-## Additional Tips
+## Next Steps
 
-1. **Be Specific:** Include language, framework, and context in your prompts
-2. **Iterate:** Start simple, then refine with follow-up prompts
-3. **Provide Context:** Reference existing code or file locations when relevant
-4. **Specify Constraints:** Mention edge cases, error handling, or performance requirements
-5. **Use Examples:** When possible, show the expected input/output format
+After mastering prompt engineering and advanced workflows in Week 2, we will explore DevOps automation and testing strategies in Week 3 to streamline software delivery.
+
+**[← Back to Main README](../../README.md)** | **[Continue to Week 3 →](../Week3/1-DevOps-Automation.md)**

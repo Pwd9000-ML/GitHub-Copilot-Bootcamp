@@ -1,4 +1,4 @@
-# Week 1 - Getting Started with GitHub hands on Lab
+# Week 1 - Getting Started with GitHub Copilot Hands-On Lab
 
 Please follow the instructions below to complete the hands-on lab for Week 1.
 

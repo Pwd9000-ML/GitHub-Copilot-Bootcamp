@@ -1,6 +1,6 @@
 name: Week 2 Lab - Advanced Development & Prompt Engineering
 description: Hands-on Copilot lab for Week 2 covering prompt engineering, documentation generation, and custom instructions
-title: "Week 2 Lab: Advanced Development - <name>"
+title: "Week 2 Lab: Advanced Development - <Your Name>"
 labels: ["lab", "week-2"]
 body:
   - type: markdown

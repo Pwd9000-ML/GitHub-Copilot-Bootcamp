@@ -1,26 +1,33 @@
 # GitHub Copilot Prompt Examples - Week 1
 
-A collection of practical prompts to help you get started with GitHub Copilot's different interaction modes and basic workflows.
+## Session Overview
+
+**Purpose:** Reference guide for practical prompts  
+**Format:** Example prompts with explanations and tips  
+**Objective:** Help developers get started with GitHub Copilot's different interaction modes and basic workflows.
 
 ---
 
-## Table of Contents
+## Contents
 
-1. [Inline Code Completions](#1-inline-code-completions)
-2. [Ask Mode - Code Explanations](#2-ask-mode---code-explanations)
-3. [Edit Mode - Code Modifications](#3-edit-mode---code-modifications)
-4. [Agent Mode - Multi-File Changes](#4-agent-mode---multi-file-changes)
-5. [Plan Mode - Implementation Planning](#5-plan-mode---implementation-planning)
-6. [Debugging Assistance](#6-debugging-assistance)
-7. [Documentation Generation](#7-documentation-generation)
+- [1. Inline Code Completions](#1-inline-code-completions)
+- [2. Ask Mode - Code Explanations](#2-ask-mode---code-explanations)
+- [3. Edit Mode - Code Modifications](#3-edit-mode---code-modifications)
+- [4. Agent Mode - Multi-File Changes](#4-agent-mode---multi-file-changes)
+- [5. Plan Mode - Implementation Planning](#5-plan-mode---implementation-planning)
+- [6. Debugging Assistance](#6-debugging-assistance)
+- [7. Documentation Generation](#7-documentation-generation)
 
 ---
 
 ## 1. Inline Code Completions
 
-**Technique:** Write descriptive comments or function signatures, then let Copilot suggest the implementation as you type.
+Inline code completions provide real-time suggestions as you type, helping you write code faster.
 
-**When to use:** During active coding when you need quick suggestions for common patterns or boilerplate code.
+- Write descriptive comments or function signatures to guide Copilot
+- Let Copilot suggest implementations for common patterns
+- Use during active coding for quick boilerplate generation
+- Accept suggestions with Tab key or reject with Escape
 
 ### Example Prompts
 
@@ -57,9 +64,12 @@ Expected: Copilot suggests try-catch block with fetch call and error handling.
 
 ## 2. Ask Mode - Code Explanations
 
-**Technique:** Use Copilot Chat to ask questions about code, understand functionality, or learn new concepts.
+Ask mode allows you to have conversational interactions with Copilot to understand code and concepts.
 
-**When to use:** When you need to understand existing code, learn about libraries, or explore best practices.
+- Use Copilot Chat to ask questions about code
+- Get explanations of functionality and libraries
+- Learn best practices and modern patterns
+- Explore unfamiliar codebases with guided assistance
 
 ### Example Prompts
 
@@ -111,9 +121,12 @@ Is there a more modern JavaScript syntax for this code?
 
 ## 3. Edit Mode - Code Modifications
 
-**Technique:** Select Edit from the agents dropdown in Copilot Chat, add files to your working set, and prompt Copilot to make controlled edits.
+Edit mode enables controlled modifications to specific files in your working set.
 
-**When to use:** When you want granular control over which files Copilot can edit, making quick specific updates to a defined set of files.
+- Select Edit from the agents dropdown in Copilot Chat
+- Add files to your working set before prompting
+- Make targeted changes to a defined set of files
+- Review and accept or discard individual edits
 
 ### Example Prompts
 
@@ -165,9 +178,13 @@ Fix the memory leak in this event listener
 
 ## 4. Agent Mode - Multi-File Changes
 
-**Technique:** Select Agent from the agents dropdown in Copilot Chat and describe your task. Copilot autonomously determines which files to change, suggests terminal commands, and iterates to complete the task.
+Agent mode allows Copilot to autonomously determine and execute multi-step tasks.
 
-**When to use:** When you have a complex task involving multiple steps, iterations, and error handling, and want Copilot to determine the necessary steps autonomously.
+- Select Agent from the agents dropdown in Copilot Chat
+- Describe your task and let Copilot determine the steps
+- Copilot autonomously identifies files to change
+- Suggests terminal commands and iterates to complete tasks
+- Confirm or reject suggested actions as Copilot works
 
 ### Example Prompts
 
@@ -203,9 +220,13 @@ Reorganize the authentication code:
 
 ## 5. Plan Mode - Implementation Planning
 
-**Technique:** Select Plan from the agents dropdown in Copilot Chat and describe a task. Copilot researches your codebase, creates a detailed implementation plan, and waits for your approval before making changes.
+Plan mode helps you think through tasks before executing by creating detailed implementation plans.
 
-**When to use:** When you want to think through a task before executing, ensure all requirements are considered, or need a plan for team review.
+- Select Plan from the agents dropdown in Copilot Chat
+- Copilot researches your codebase to understand context
+- Creates a detailed implementation plan for review
+- Waits for your approval before making any changes
+- Useful for team review and ensuring all requirements are considered
 
 ### Example Prompts
 
@@ -235,9 +256,13 @@ Outline the steps to refactor this monolithic function into smaller modules
 
 ## 6. Debugging Assistance
 
-**Technique:** Ask Copilot to help identify and fix bugs in your code.
+Debugging assistance helps you identify, understand, and fix issues in your code.
 
-**When to use:** When you encounter errors, unexpected behavior, or need to trace through logic.
+- Ask Copilot to help identify bugs and errors
+- Get explanations for unexpected behaviour
+- Trace through logic to find issues
+- Add debugging statements and test cases
+- Include error messages for better diagnostics
 
 ### Example Prompts
 
@@ -289,9 +314,13 @@ What edge cases should I test for this validation function?
 
 ## 7. Documentation Generation
 
-**Technique:** Ask Copilot to generate documentation for your code.
+Documentation generation helps you create clear, professional documentation for your code.
 
-**When to use:** When you need to document functions, APIs, or add README content.
+- Generate JSDoc comments for functions
+- Create API documentation for endpoints
+- Write README content for projects
+- Add inline comments explaining complex logic
+- Produce usage examples for utilities
 
 ### Example Prompts
 
@@ -354,3 +383,4 @@ Please complete the following reflections after completing Week 1 activities:
 
 After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in Week 2 to further enhance your productivity with GitHub Copilot.
 **[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-Best-Practices.md)**
+

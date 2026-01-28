@@ -1,6 +1,6 @@
 name: Week 3 Lab - DevOps and Testing with Copilot
 description: Hands-on Copilot lab for Week 3 covering CI/CD automation, infrastructure as code, and test generation
-title: "Week 3 Lab: DevOps & Testing - <name>"
+title: "Week 3 Lab: DevOps & Testing - <Your Name>"
 labels: ["lab", "week-3"]
 body:
   - type: markdown

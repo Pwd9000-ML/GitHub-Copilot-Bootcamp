@@ -1,24 +1,31 @@
 # GitHub Copilot Prompt Examples - Week 3: DevOps & Testing
 
-A comprehensive guide to prompting techniques for CI/CD pipelines, Infrastructure as Code (IaC), test generation, and DevOps automation.
+## Session Overview
+
+**Purpose:** Reference guide for DevOps and testing prompts  
+**Format:** Example prompts with explanations and tips  
+**Objective:** Provide prompting techniques for CI/CD pipelines, Infrastructure as Code (IaC), test generation, and DevOps automation.
 
 ---
 
-## Table of Contents
+## Contents
 
-1. [CI/CD Pipeline Generation](#1-cicd-pipeline-generation)
-2. [Infrastructure as Code (IaC)](#2-infrastructure-as-code-iac)
-3. [Test Generation](#3-test-generation)
-4. [Validation and Security Scanning](#4-validation-and-security-scanning)
-5. [Test Optimization](#5-test-optimization)
+- [1. CI/CD Pipeline Generation](#1-cicd-pipeline-generation)
+- [2. Infrastructure as Code (IaC)](#2-infrastructure-as-code-iac)
+- [3. Test Generation](#3-test-generation)
+- [4. Validation and Security Scanning](#4-validation-and-security-scanning)
+- [5. Test Optimisation](#5-test-optimisation)
 
 ---
 
 ## 1. CI/CD Pipeline Generation
 
-**Technique:** Use structured prompts with specific requirements for pipeline steps, triggers, and job dependencies.
+CI/CD pipeline generation creates automated workflows for build, test, and deployment processes.
 
-**When to use:** When creating or extending CI/CD workflows for build, test, and deployment automation.
+- Use structured prompts with specific requirements for pipeline steps
+- Define triggers, job dependencies, and artifacts
+- Create multi-stage pipelines with deployment environments
+- Include validation jobs and parallel execution strategies
 
 ### Example Prompts
 
@@ -70,13 +77,17 @@ Create a GitLab CI pipeline for a Python application that:
 
 ## 2. Infrastructure as Code (IaC)
 
-**Technique:** Specify infrastructure requirements with security best practices, environment configuration, and resource optimization.
+Infrastructure as Code prompts create Docker configurations, Kubernetes manifests, and cloud templates.
 
-**When to use:** When creating Docker configurations, Kubernetes manifests, or Terraform/CloudFormation templates.
+- Specify infrastructure requirements with security best practices
+- Include environment configuration and resource optimisation
+- Create multi-stage Docker builds for production
+- Generate Kubernetes manifests with health checks and autoscaling
+- Build Terraform/CloudFormation templates with proper security groups
 
 ### Example Prompts
 
-#### Optimized Dockerfile
+#### Optimised Dockerfile
 
 ```text
 Create a production Dockerfile for a Node.js Express application that:
@@ -138,9 +149,13 @@ Generate a Helm values file for production deployment with:
 
 ## 3. Test Generation
 
-**Technique:** Specify test framework, coverage requirements, and edge cases to generate comprehensive test suites.
+Test generation creates comprehensive test suites with proper coverage and edge case handling.
 
-**When to use:** When creating unit tests, integration tests, or improving test coverage for existing code.
+- Specify test framework and coverage requirements
+- Include edge cases and boundary conditions
+- Generate unit tests, integration tests, and parameterised tests
+- Use proper mocking for external dependencies
+- Test async functions and error scenarios
 
 ### Example Prompts
 
@@ -202,9 +217,13 @@ Write Jest tests for this async fetchUserData function that:
 
 ## 4. Validation and Security Scanning
 
-**Technique:** Create pre-deployment validation scripts and security scanning steps to catch issues early.
+Validation and security scanning creates pre-deployment checks to catch issues early in the pipeline.
 
-**When to use:** In CI/CD pipelines before deployment, or as pre-commit hooks.
+- Create validation scripts for environment variables and connections
+- Integrate security scanning tools (npm audit, Trivy, CodeQL)
+- Add configuration linting for YAML, Dockerfile, and Terraform
+- Implement secret detection in CI pipelines
+- Fail builds early when issues are detected
 
 ### Example Prompts
 
@@ -254,11 +273,15 @@ Add secret scanning to my CI pipeline using:
 
 ---
 
-## 5. Test Optimization
+## 5. Test Optimisation
 
-**Technique:** Refactor and optimize existing tests for better maintainability, performance, and coverage.
+Test optimisation refactors and improves existing tests for better maintainability and performance.
 
-**When to use:** When tests are slow, repetitive, or difficult to maintain.
+- Convert tests between frameworks (Selenium to Cypress)
+- Extract common setup into reusable utilities
+- Create test fixtures and reusable test data
+- Enable parallel test execution for faster feedback
+- Identify and fix slow test operations
 
 ### Example Prompts
 
@@ -319,77 +342,17 @@ Optimize these integration tests that are taking too long:
 
 ---
 
-## Quick Reference: DevOps & Testing Prompts
+## Week 3 Feedback
 
-| Task | Key Elements to Include | Example Keywords |
-|------|------------------------|------------------|
-| **CI Pipeline** | Triggers, jobs, dependencies, artifacts | "on push", "needs", "upload artifact", "cache" |
-| **Dockerfile** | Multi-stage, security, optimization | "multi-stage", "non-root", "alpine", "health check" |
-| **Kubernetes** | Replicas, health checks, resources, HPA | "replicas: 3", "readinessProbe", "limits", "autoscale" |
-| **Unit Tests** | Framework, coverage, mocking, edge cases | "Jest", "90% coverage", "mock", "edge cases" |
-| **Validation** | Checks, exit codes, error handling | "validate", "exit code", "fail if", "lint" |
-| **Test Conversion** | Source/target framework, best practices | "convert from X to Y", "best practices", "syntax" |
+Please complete the following reflections after completing Week 3 activities:
 
----
-
-## Best Practices for Week 3
-
-### CI/CD Best Practices
-1. **Fail Fast:** Put validation jobs first in the pipeline
-2. **Cache Dependencies:** Cache npm/pip/maven dependencies to speed up builds
-3. **Parallel Jobs:** Run independent jobs in parallel to reduce total time
-4. **Environment Secrets:** Never hardcode secrets; use GitHub Secrets or vault solutions
-5. **Incremental Builds:** Only build/test what changed when possible
-
-### IaC Best Practices
-1. **Multi-Stage Builds:** Use for smaller, more secure Docker images
-2. **Health Checks:** Always include readiness and liveness probes
-3. **Resource Limits:** Set memory and CPU limits to prevent resource exhaustion
-4. **Non-Root Users:** Run containers as non-root for security
-5. **Configuration as Code:** Store all infrastructure configuration in version control
-
-### Testing Best Practices
-1. **Test Pyramid:** Many unit tests, fewer integration tests, minimal E2E tests
-2. **Fast Tests:** Keep unit tests fast (<100ms each) for quick feedback
-3. **Isolated Tests:** Each test should be independent and not rely on others
-4. **Clear Names:** Use descriptive test names that explain what is being tested
-5. **Meaningful Assertions:** Test behavior, not implementation details
-
----
-
-## Common Pitfalls to Avoid
-
-### CI/CD
-- ❌ **Don't:** Run all tests sequentially when they could be parallel
-- ✅ **Do:** Organize tests into parallel jobs based on test type or module
-
-- ❌ **Don't:** Use latest tag for Docker images in production
-- ✅ **Do:** Pin specific versions for reproducible builds
-
-### IaC
-- ❌ **Don't:** Copy-paste configurations without understanding them
-- ✅ **Do:** Ask Copilot to explain generated configs before using them
-
-- ❌ **Don't:** Forget health checks and resource limits
-- ✅ **Do:** Always include liveness/readiness probes and set resource constraints
-
-### Testing
-- ❌ **Don't:** Accept generated tests without verifying they actually test the right behavior
-- ✅ **Do:** Run generated tests and verify they catch real bugs
-
-- ❌ **Don't:** Mock everything, including the code under test
-- ✅ **Do:** Only mock external dependencies and test the actual code logic
+- [Submit Week 3 Lab Reflection](../../issues/new?template=week3-lab.yml)
+- [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
 ---
 
 ## Next Steps
 
-After mastering DevOps and Testing with Copilot:
-- Apply these patterns to your real projects
-- Experiment with different CI/CD platforms (GitHub Actions, GitLab CI, Jenkins)
-- Explore advanced Kubernetes patterns (service mesh, operators)
-- Move on to Week 4 for refactoring, quality standards, and ethical AI practices
+After mastering DevOps automation and testing with Copilot in Week 3, we will explore refactoring, quality standards, and ethical AI practices in Week 4.
 
-For related prompting techniques, see:
-- [Week 2 Prompt Engineering](../Week2/4-Week2-Prompts.md) - CRAFT framework and documentation
-- [Week 4 Refactoring Prompts](../Week4/5-Week4-Prompts.md) - Code quality and security
+**[← Back to Main README](../../README.md)** | **[Continue to Week 4 →](../Week4/1-Refactoring-Large-Codebases.md)**
