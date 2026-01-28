@@ -45,3 +45,9 @@ If the exercise isn't ready in 20 seconds, please check the [Actions](../../acti
 ---
 
 &copy; 2026 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+---
+
+## Next Steps
+
+- **Week 1 Prompt Examples:** After completing this interactive [hands-on lab](4-week1-lab.md), take a look at [Week 1 Prompt Examples](5-Week1-Prompts.md) to see how to craft effective prompts for GitHub Copilot.

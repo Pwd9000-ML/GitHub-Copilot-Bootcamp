@@ -341,20 +341,6 @@ Explain what this code block does for future maintainers
 
 ---
 
-## Best Practices for Week 1
-
-1. **Start Simple:** Begin with inline suggestions before moving to more complex interactions
-2. **Iterate:** If a suggestion isn't quite right, refine your prompt and try again
-3. **Learn Patterns:** Pay attention to how Copilot interprets different prompt styles
-4. **Verify Output:** Always review and test Copilot's suggestions before accepting them
-5. **Combine Modes:** Use Ask to understand, Plan to strategize, Edit for controlled changes, and Agent for autonomous tasks
-6. **Be Specific:** The more context you provide, the better the suggestions
-
----
-
 ## Next Steps
 
-After mastering these basic prompting techniques:
-- Move on to Week 2 for advanced prompt engineering with the CRAFT framework
-- Learn how to create custom instructions for project specific patterns
-- Explore how to refine and iterate on Copilot's suggestions systematically
+After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in [Week2 sessions](../Week2/README.md) to further enhance your productivity with GitHub Copilot.

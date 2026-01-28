@@ -2,6 +2,37 @@
 
 A comprehensive 4-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, DevOps automation, and ethical AI practices.
 
+## Table of Contents
+
+- [About This Training](#about-this-training)
+- [Curriculum](#curriculum)
+  - [Week 1: Introduction and Developer Workflow Essentials](#week-1-introduction-and-developer-workflow-essentials)
+    - [1. Understanding GitHub Copilot](#1-understanding-github-copilot-30-minutes)
+    - [2. Setup and Configuration](#2-setup-and-configuration-30-minutes)
+    - [3. GitHub Copilot Interaction Modes](#3-github-copilot-interaction-modes-15-minutes)
+    - [4. Developer Workflow Use Cases](#4-developer-workflow-use-cases-hands-on-lab---45-60-minutes)
+    - [Prompt Examples - Week 1](Workshops/Week1/5-Week1-Prompts.md)
+  - [Week 2: Advanced Development and Support Use Cases](#week-2-advanced-development-and-support-use-cases)
+    - [1. Prompt Engineering Best Practices](#1-prompt-engineering-best-practices-45-60-minutes)
+    - [2. Advanced Developer Workflow](#2-advanced-developer-workflow-30-45-minutes)
+    - [3. Hands-On Workshop](#3-hands-on-workshop-30-45-minutes)
+    - [Prompt Examples - Week 2](Workshops/Week2/4-Week2-Prompts.md)
+  - [Week 3: DevOps and Testing with Copilot](#week-3-devops-and-testing-with-copilot)
+    - [1. DevOps Automation](#1-devops-automation-30-45-minutes)
+    - [2. Testing and Quality Assurance](#2-testing-and-quality-assurance-30-45-minutes)
+    - [3. Hands-On Lab](#3-hands-on-lab-60-90-minutes)
+    - [Prompt Examples - Week 3](Workshops/Week3/4-Week3-Prompts.md)
+  - [Week 4: Refactoring, Optimisation, and Ethical Practices](#week-4-refactoring-optimisation-and-ethical-practices)
+    - [1. Refactoring Large Codebases](#1-refactoring-large-codebases-30-45-minutes)
+    - [2. Quality Refinements and Standards](#2-quality-refinements-and-standards-30-45-minutes)
+    - [3. Ethical and Security Considerations](#3-ethical-and-security-considerations-30-45-minutes)
+    - [4. Hands-On Lab: Collaborative Refactoring](#4-hands-on-lab-collaborative-refactoring-45-60-minutes)
+    - [Prompt Examples](Workshops/Week4/5-Week4-Prompts.md)
+- [Quick Summary](#quick-summary)
+- [Additional Resources](#additional-resources)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## About This Training
 
 This training program is structured as a progressive learning journey, taking participants from GitHub Copilot basics to advanced usage patterns. Each week builds on the previous, with hands-on labs and reflection exercises to reinforce learning.
@@ -206,19 +237,6 @@ This training program is structured as a progressive learning journey, taking pa
 
 - [Submit Week 4 Lab Reflection](../../issues/new?template=week4-lab.yml)
 - [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
-
----
-
-## Quick Summary
-
-| Week | Focus | Duration | Format | Sessions |
-|------|-------|----------|--------|----------|
-| **Week 1** | Foundations & Essentials | 2-2.5 hours | 2x sessions | Understanding → Setup → Modes → Lab |
-| **Week 2** | Advanced Development | 2 to 4 hours | 1 session | Best Practices → Workflow → Workshop |
-| **Week 3** | DevOps & Testing | 2 to 2.5 hours | 1 session | Automation → QA → Lab |
-| **Week 4** | Optimisation & Ethics | 2 to 2.5 hours | 1 session | Refactoring → Standards → Ethics → Lab |
-
-**Total Commitment:** 8-11.5 hours across 4 weeks
 
 ---
 
