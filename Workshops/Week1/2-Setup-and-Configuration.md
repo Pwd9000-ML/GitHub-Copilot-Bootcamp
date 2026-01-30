@@ -15,7 +15,7 @@
   - [JetBrains IDEs](#jetbrains-ides-intellij-idea-pycharm-webstorm-etc)
   - [Xcode (macOS)](#xcode-macos)
   - [Neovim / Vim](#neovim--vim)
-  - [Eclipse](#eclipse-for-sap-abap-development-adt)
+  - [Eclipse for SAP ABAP Development (ADT)](#eclipse-for-sap-abap-development-adt)
 - [Part 3: Configuration and Customisation](#part-3-configuration-and-customisation)
 - [Part 4: Basic Commands and Workflows](#part-4-basic-commands-and-workflows)
 - [Part 5: Troubleshooting](#part-5-troubleshooting)
@@ -401,7 +401,7 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 
 ---
 
-### Known Limitations specifically for ABAP Development with GitHub Copilot
+### Known Limitations for ABAP Development with GitHub Copilot
 
 Before relying on GitHub Copilot for ABAP development, be aware of these important limitations:
 
