@@ -221,7 +221,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 | View full suggestion | Hold `Option` |
 | Accept full suggestion | `Option + Tab` |
 
-> **Note:** Official documentation: [GitHub Copilot for Xcode](hhttps://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=xcode)
+> **Note:** Official documentation: [GitHub Copilot for Xcode](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=xcode)
 
 ---
 
