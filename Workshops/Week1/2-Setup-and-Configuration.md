@@ -402,8 +402,6 @@ GitHub Copilot's Agent Mode in Eclipse **does not support the `semanticfs` URI s
 - Workspace-level operations that depend on file system access may be limited
 - You may encounter errors related to unsupported URI schemes when using agent features
 
-> **Source:** [Eclipse Marketplace - GitHub Copilot User Reviews](https://marketplace.eclipse.org/content/github-copilot)
-
 #### 2. ABAP Language Support Quality
 
 GitHub Copilot's AI models are trained primarily on publicly available code repositories. Since ABAP is a **proprietary SAP language** with limited open-source code available:
@@ -420,8 +418,6 @@ Users have reported dependency conflicts during GitHub Copilot installation in E
 - Conflicts with **Mylyn WikiText UI** and **LSP4e** components may occur
 - "Cannot satisfy dependency" errors may prevent installation
 - **Solution:** Ensure your Eclipse installation is fully up-to-date and consider removing conflicting plugins if necessary
-
-> **Source:** [Eclipse Marketplace - GitHub Copilot Reviews](https://marketplace.eclipse.org/content/github-copilot)
 
 #### 4. Network and Certificate Issues
 
