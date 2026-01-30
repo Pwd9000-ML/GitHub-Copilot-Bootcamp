@@ -247,13 +247,13 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Known Limitations
 
-- **No Edit mode (Copilot Edits)** — Multi-file editing capabilities not available
-- **No Extensions support** — Cannot use MCP extensions or third-party integrations
-- **No Code referencing** — Cannot view public code matches for suggestions
-- **No Workspace indexing** — Local codebase indexing for improved context is not available
-- **No .NET or Java Upgrade Agents** — Automated migration assistance not supported
-- **macOS permission requirements** — Requires Accessibility and Files & Folders permissions; missing permissions can cause communication issues or block real-time suggestions
-- **External app architecture** — Runs as a separate application communicating with Xcode, which can occasionally cause synchronisation issues
+- **No Edit mode (Copilot Edits):** Multi-file editing capabilities not available
+- **No Extensions support:** Cannot use MCP extensions or third-party integrations
+- **No Code referencing:** Cannot view public code matches for suggestions
+- **No Workspace indexing:** Local codebase indexing for improved context is not available
+- **No .NET or Java Upgrade Agents:** Automated migration assistance not supported
+- **macOS permission requirements:** Requires Accessibility and Files & Folders permissions; missing permissions can cause communication issues or block real-time suggestions
+- **External app architecture:** Runs as a separate application communicating with Xcode, which can occasionally cause synchronisation issues
 
 > See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
@@ -312,17 +312,16 @@ Suggestions are displayed inline and can be accepted by pressing `Tab`. For deta
 
 #### Known Limitations
 
-- **Code completion only** — Only inline code suggestions are supported
-- **No Copilot Chat** — Interactive chat assistant not available
-- **No Agent mode** — Autonomous task execution not supported
-- **No Edit mode (Copilot Edits)** — Multi-file editing capabilities not available
-- **No Extensions or MCP support** — Cannot use third-party integrations
-- **No Code referencing** — Cannot view public code matches for suggestions
-- **No Custom instructions or Prompt files** — Cannot customise Copilot behaviour
-- **No Vision support** — Cannot process images or screenshots
-- **No Workspace indexing** — Local codebase indexing not available
-- **No Copilot code review** — Automated code review features not supported
-- **No Next edit suggestions** — Proactive suggestions for next edits not available
+The Copilot Neovim/Vim plugin focuses on inline code suggestions. Compared to richer IDE integrations, note these key limitations:
+
+- **Code completion only:** Only inline code suggestions are supported
+- **No Copilot Chat or Agent mode:** No interactive chat or autonomous task execution
+- **No Edit mode (Copilot Edits):** Multi-file editing capabilities are not available
+- **No Extensions or MCP support:** Cannot use third-party integrations
+- **No Code referencing:** Cannot view public code matches for suggestions
+- **No Custom instructions or Prompt files:** Cannot customise Copilot behaviour
+- **No Workspace indexing:** Local codebase indexing is not available
+- **No Copilot code review:** Automated code review features are not supported
 
 > **Source:** [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
@@ -442,12 +441,11 @@ ABAP development requires connection to an SAP backend system. GitHub Copilot:
 
 #### Best Practices for ABAP Developers Using Copilot
 
-1. **Use Copilot for boilerplate code** — Standard ABAP syntax, loops, SELECT statements, and common patterns
-2. **Provide detailed comments** — Help Copilot understand your intent with descriptive ABAP comments (`" comment`)
-3. **Verify all suggestions** — Always review generated ABAP code against SAP documentation and your system's data dictionary
-4. **Combine with SAP tools** — Use Copilot alongside SAP's built-in code templates, patterns, and ABAP documentation
-5. **Leverage for non-ABAP files** — Copilot works well for related files like JSON, XML, JavaScript (UI5/Fiori), and documentation
-
+1. **Use Copilot for boilerplate code:** Standard ABAP syntax, loops, SELECT statements, and common patterns
+2. **Provide detailed comments:** Help Copilot understand your intent with descriptive ABAP comments (`" comment`)
+3. **Verify all suggestions:** Always review generated ABAP code against SAP documentation and your system's data dictionary
+4. **Combine with SAP tools:** Use Copilot alongside SAP's built-in code templates, patterns, and ABAP documentation
+5. **Leverage for non-ABAP files:** Copilot works well for related files like JSON, XML, JavaScript (UI5/Fiori), and documentation
 #### Official References
 
 - [SAP Development Tools](https://tools.hana.ondemand.com/#abap) — Official ADT download and documentation
