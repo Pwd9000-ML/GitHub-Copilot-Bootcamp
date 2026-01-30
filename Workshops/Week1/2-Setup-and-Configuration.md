@@ -16,7 +16,6 @@
   - [Xcode (macOS)](#xcode-macos)
   - [Neovim / Vim](#neovim--vim)
   - [Eclipse for SAP ABAP Development (ADT)](#eclipse-for-sap-abap-development-adt)
-  - [Known Limitations for ABAP Development](#known-limitations-for-abap-development-with-github-copilot)
 - [Part 3: Configuration and Customisation](#part-3-configuration-and-customisation)
 - [Part 4: Basic Commands and Workflows](#part-4-basic-commands-and-workflows)
 - [Part 5: Troubleshooting](#part-5-troubleshooting)
@@ -388,6 +387,18 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 | **Dismiss Suggestion** | `Esc` |
 | **Open Copilot Chat** | Click Copilot icon in toolbar |
 
+#### Known Limitations
+
+- **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
+- **No Copilot code review:** Automated code review features not supported
+- **No Edit mode (Copilot Edits):** Multi-file editing capabilities not available
+- **No Extensions support:** Cannot use MCP extensions or third-party integrations
+- **No Prompt files:** Cannot use `.github/copilot-instructions.md` or similar prompt files
+- **Custom instructions in preview:** Repository and file-level custom instructions have limited support
+- **Installation dependency conflicts:** May encounter conflicts with Mylyn WikiText UI and LSP4e components
+
+> See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
+
 ---
 
 ### Known Limitations for ABAP Development with GitHub Copilot
@@ -442,11 +453,6 @@ ABAP development requires connection to an SAP backend system. GitHub Copilot:
 3. **Verify all suggestions:** Always review generated ABAP code against SAP documentation and your system's data dictionary
 4. **Combine with SAP tools:** Use Copilot alongside SAP's built-in code templates, patterns, and ABAP documentation
 5. **Leverage for non-ABAP files:** Copilot works well for related files like JSON, XML, JavaScript (UI5/Fiori), and documentation
-#### Official References
-
-- [SAP Development Tools](https://tools.hana.ondemand.com/#abap) — Official ADT download and documentation
-- [GitHub Copilot in Eclipse](https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings/installing-the-github-copilot-extension-in-your-environment) — Official installation guide
-- [Eclipse Marketplace - GitHub Copilot](https://marketplace.eclipse.org/content/github-copilot) — Extension page with user reviews and known issues
 
 ---
 
