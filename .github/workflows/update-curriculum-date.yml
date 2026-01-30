@@ -1,0 +1,38 @@
+name: Update Curriculum Date
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+      - main
+
+jobs:
+  update-date:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+      
+      - name: Update curriculum date in README
+        run: |
+          CURRENT_DATE=$(date +"%B %d, %Y")
+          sed -i "s/\*\*Curriculum updated:\*\* .*/\*\*Curriculum updated:\*\* $CURRENT_DATE/" README.md
+      
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update curriculum date [skip ci]"
+            git push
+          fi
