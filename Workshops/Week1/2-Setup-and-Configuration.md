@@ -149,6 +149,17 @@ The installation process varies by IDE. Follow the relevant section below for yo
 > 2. Search for "Copilot" to see all available commands
 > 3. Official documentation: [GitHub Copilot in Visual Studio](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=visualstudio)
 
+#### Known Limitations
+
+- **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
+- **No Custom chat modes:** Unable to define custom slash commands or chat behaviours
+- **No Workspace indexing:** Local codebase indexing for improved context is not available
+- **No Java Upgrade Agent:** Automated Java version migration assistance not supported
+- **Version requirements:** Some features require Visual Studio 2022 version 17.11 or later
+- **Admin opt-in for preview features:** Copilot Business/Enterprise users require administrator approval to access preview features like latest/preview AI models
+
+> See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
+
 ---
 
 ### JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.)
@@ -182,6 +193,17 @@ The installation process varies by IDE. Follow the relevant section below for yo
 > **Note:** Keyboard shortcuts may vary by JetBrains IDE version. To verify shortcuts:
 > 1. Go to **Settings → Keymap** and search for "Copilot"
 > 2. Official documentation: [GitHub Copilot Keyboard Shortcuts for JetBrains](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=jetbrains)
+
+#### Known Limitations
+
+- **No .NET Upgrade Agent:** Automated .NET version migration assistance not available
+- **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
+- **No Custom chat modes:** Unable to define custom slash commands or chat behaviours
+- **No Workspace indexing:** Local codebase indexing for improved context is not available
+- **No Java Upgrade Agent:** Automated Java version migration assistance not supported
+- **No Next edit suggestions:** Proactive suggestions for your next likely edit not available (VS Code and Xcode only)
+
+> See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
 ---
 
@@ -222,6 +244,18 @@ The installation process varies by IDE. Follow the relevant section below for yo
 | Accept full suggestion | `Option + Tab` |
 
 > **Note:** Official documentation: [GitHub Copilot for Xcode](https://docs.github.com/en/copilot/reference/keyboard-shortcuts?tool=xcode)
+
+#### Known Limitations
+
+- **No Edit mode (Copilot Edits)** — Multi-file editing capabilities not available
+- **No Extensions support** — Cannot use MCP extensions or third-party integrations
+- **No Code referencing** — Cannot view public code matches for suggestions
+- **No Workspace indexing** — Local codebase indexing for improved context is not available
+- **No .NET or Java Upgrade Agents** — Automated migration assistance not supported
+- **macOS permission requirements** — Requires Accessibility and Files & Folders permissions; missing permissions can cause communication issues or block real-time suggestions
+- **External app architecture** — Runs as a separate application communicating with Xcode, which can occasionally cause synchronisation issues
+
+> See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
 ---
 
@@ -275,6 +309,22 @@ Plug 'github/copilot.vim'
 Suggestions are displayed inline and can be accepted by pressing `Tab`. For detailed keybindings and customization options, run `:help copilot` within Vim/Neovim.
 
 > **Note:** Keyboard shortcuts can be rebound to your preferences. See the [Neovim Map documentation](https://neovim.io/doc/user/map.html) and the [copilot.vim repository](https://github.com/github/copilot.vim) for more information.
+
+#### Known Limitations
+
+- **Code completion only** — Only inline code suggestions are supported
+- **No Copilot Chat** — Interactive chat assistant not available
+- **No Agent mode** — Autonomous task execution not supported
+- **No Edit mode (Copilot Edits)** — Multi-file editing capabilities not available
+- **No Extensions or MCP support** — Cannot use third-party integrations
+- **No Code referencing** — Cannot view public code matches for suggestions
+- **No Custom instructions or Prompt files** — Cannot customise Copilot behaviour
+- **No Vision support** — Cannot process images or screenshots
+- **No Workspace indexing** — Local codebase indexing not available
+- **No Copilot code review** — Automated code review features not supported
+- **No Next edit suggestions** — Proactive suggestions for next edits not available
+
+> **Source:** [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
 ---
 
