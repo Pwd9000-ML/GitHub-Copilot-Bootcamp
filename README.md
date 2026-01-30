@@ -296,3 +296,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this tr
 ## License
 
 This project is licensed under the terms specified in the [LICENSE](LICENSE) file.
+
+---
+
+**Curriculum updated:** January 30, 2026
