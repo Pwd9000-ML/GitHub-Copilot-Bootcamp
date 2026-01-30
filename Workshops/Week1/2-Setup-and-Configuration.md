@@ -10,6 +10,13 @@
 
 - [Part 1: Getting GitHub Copilot Access](#part-1-getting-github-copilot-access)
 - [Part 2: IDE-Specific Setup](#part-2-ide-specific-setup)
+  - [Visual Studio Code](#visual-studio-code-recommended)
+  - [Visual Studio (Full IDE)](#visual-studio-full-ide)
+  - [JetBrains IDEs](#jetbrains-ides-intellij-idea-pycharm-webstorm-etc)
+  - [Xcode (macOS)](#xcode-macos)
+  - [Neovim / Vim](#neovim--vim)
+  - [Eclipse for SAP ABAP Development (ADT)](#eclipse-for-sap-abap-development-adt)
+  - [Known Limitations for ABAP Development](#known-limitations-for-abap-development-with-github-copilot)
 - [Part 3: Configuration and Customisation](#part-3-configuration-and-customisation)
 - [Part 4: Basic Commands and Workflows](#part-4-basic-commands-and-workflows)
 - [Part 5: Troubleshooting](#part-5-troubleshooting)
@@ -268,6 +275,134 @@ Plug 'github/copilot.vim'
 Suggestions are displayed inline and can be accepted by pressing `Tab`. For detailed keybindings and customization options, run `:help copilot` within Vim/Neovim.
 
 > **Note:** Keyboard shortcuts can be rebound to your preferences. See the [Neovim Map documentation](https://neovim.io/doc/user/map.html) and the [copilot.vim repository](https://github.com/github/copilot.vim) for more information.
+
+---
+
+### Eclipse for SAP ABAP Development (ADT)
+
+SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to develop ABAP applications. This section covers how to set up both ADT and GitHub Copilot in Eclipse.
+
+#### Prerequisites for ABAP Development
+
+| Requirement | Version/Details |
+|-------------|-----------------|
+| **Eclipse** | 2025-09 (4.37) or 2025-12 (4.38) |
+| **Java Runtime** | JRE 21 (64-Bit, LTS) |
+| **SAP GUI** | Windows 8.00+ or macOS Java 8.10+ |
+| **Operating System** | Windows 10+ or macOS 10.15+ |
+| **Visual C++ (Windows)** | Microsoft Visual C++ 2015-2022 Redistributable (x64) |
+
+> **Note:** GitHub Copilot for Eclipse requires Eclipse version 2024-03 or above. Since ADT requires Eclipse 2025-09+, you will meet the Copilot requirement automatically.
+
+#### Step 1: Install Eclipse
+
+1. Download **Eclipse IDE for Java Developers** (version 2025-12 recommended) from [eclipse.org/downloads](https://www.eclipse.org/downloads/)
+2. Extract and install Eclipse
+3. Launch Eclipse and select your workspace location
+
+#### Step 2: Install ABAP Development Tools (ADT)
+
+1. In Eclipse, go to **Help → Install New Software**
+2. Click **Add** to add a new repository
+3. Enter the following:
+   - **Name:** `SAP Development Tools`
+   - **Location:** `https://tools.hana.ondemand.com/latest`
+4. Select **ABAP Development Tools** from the list
+5. Click **Next** and accept the license agreement
+6. Complete installation and **restart Eclipse**
+
+> **Official Reference:** [SAP Development Tools Installation Guide](https://tools.hana.ondemand.com/#abap)
+
+#### Step 3: Install GitHub Copilot Extension
+
+1. Go to **Help → Eclipse Marketplace** (or **Help → Install New Software**)
+2. Search for **"GitHub Copilot"**
+3. Click **Install** and follow the prompts
+4. **Restart Eclipse** after installation
+
+> **Official Reference:** [GitHub Copilot Extension for Eclipse](https://marketplace.eclipse.org/content/github-copilot)
+
+#### Step 4: Sign In to GitHub Copilot
+
+1. Locate the **Copilot icon** in the bottom-right corner of Eclipse
+2. Click the icon and select **"Sign In to GitHub"**
+3. Click **"Copy Code and Open"** to copy your device code
+4. Paste the code in your browser and authorize the GitHub Copilot Plugin
+5. Return to Eclipse and click **OK** to complete setup
+
+#### Basic Commands in Eclipse
+
+| Action | Method |
+|--------|--------|
+| **Trigger Suggestions** | Start typing—suggestions appear inline |
+| **Accept Suggestion** | `Tab` |
+| **Dismiss Suggestion** | `Esc` |
+| **Open Copilot Chat** | Click Copilot icon in toolbar |
+
+---
+
+### Known Limitations for ABAP Development with GitHub Copilot
+
+Before relying on GitHub Copilot for ABAP development, be aware of these important limitations:
+
+#### 1. Agent Mode URI Scheme Limitation
+
+GitHub Copilot's Agent Mode in Eclipse **does not support the `semanticfs` URI scheme** used by ABAP Development Tools. This means:
+
+- Advanced agent-based features may not work correctly with ABAP files
+- Workspace-level operations that depend on file system access may be limited
+- You may encounter errors related to unsupported URI schemes when using agent features
+
+> **Source:** [Eclipse Marketplace - GitHub Copilot User Reviews](https://marketplace.eclipse.org/content/github-copilot)
+
+#### 2. ABAP Language Support Quality
+
+GitHub Copilot's AI models are trained primarily on publicly available code repositories. Since ABAP is a **proprietary SAP language** with limited open-source code available:
+
+- Suggestions may be **less accurate** compared to popular languages (Python, JavaScript, Java)
+- Complex SAP-specific patterns, BAPIs, and function modules may not be well-represented in training data
+- Code completions for standard ABAP constructs work, but domain-specific SAP modules may have inconsistent support
+- Custom SAP tables, data elements, and domains are unknown to Copilot
+
+#### 3. Eclipse Installation Dependencies
+
+Users have reported dependency conflicts during GitHub Copilot installation in Eclipse:
+
+- Conflicts with **Mylyn WikiText UI** and **LSP4e** components may occur
+- "Cannot satisfy dependency" errors may prevent installation
+- **Solution:** Ensure your Eclipse installation is fully up-to-date and consider removing conflicting plugins if necessary
+
+> **Source:** [Eclipse Marketplace - GitHub Copilot Reviews](https://marketplace.eclipse.org/content/github-copilot)
+
+#### 4. Network and Certificate Issues
+
+Organisations using corporate proxies may experience:
+
+- Certificate validation failures during sign-in
+- Language server connection issues
+- **Solution:** Configure the `NODE_EXTRA_CA_CERTS` environment variable to point to your organisation's CA certificates
+
+#### 5. SAP Backend Connectivity
+
+ABAP development requires connection to an SAP backend system. GitHub Copilot:
+
+- Cannot access your SAP system metadata directly
+- Has no visibility into your custom function modules, classes, or data dictionary objects
+- Cannot suggest code based on your specific SAP customisations or transport requests
+
+#### Best Practices for ABAP Developers Using Copilot
+
+1. **Use Copilot for boilerplate code** — Standard ABAP syntax, loops, SELECT statements, and common patterns
+2. **Provide detailed comments** — Help Copilot understand your intent with descriptive ABAP comments (`" comment`)
+3. **Verify all suggestions** — Always review generated ABAP code against SAP documentation and your system's data dictionary
+4. **Combine with SAP tools** — Use Copilot alongside SAP's built-in code templates, patterns, and ABAP documentation
+5. **Leverage for non-ABAP files** — Copilot works well for related files like JSON, XML, JavaScript (UI5/Fiori), and documentation
+
+#### Official References
+
+- [SAP Development Tools](https://tools.hana.ondemand.com/#abap) — Official ADT download and documentation
+- [GitHub Copilot in Eclipse](https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings/installing-the-github-copilot-extension-in-your-environment) — Official installation guide
+- [Eclipse Marketplace - GitHub Copilot](https://marketplace.eclipse.org/content/github-copilot) — Extension page with user reviews and known issues
 
 ---
 
