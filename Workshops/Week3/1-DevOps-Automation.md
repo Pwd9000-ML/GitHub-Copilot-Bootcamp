@@ -139,13 +139,13 @@ Add a step to notify the team on Slack when the build succeeds or fails.
         with:
           payload: |
             {
-              "text": "Build ${{ job.status }}: ${{ github.repository }}",
+              "text": "Build ${{ needs.build.result }}: ${{ github.repository }}",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Build Status:* ${{ job.status }}\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref_name }}\n*Commit:* ${{ github.sha }}"
+                    "text": "*Build Result:* ${{ needs.build.result }}\n*Staging Deploy Result:* ${{ needs['deploy-staging'].result }}\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref_name }}\n*Commit:* ${{ github.sha }}"
                   }
                 }
               ]
@@ -241,7 +241,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # Copy application source
 COPY . .
@@ -633,7 +633,7 @@ jobs:
 
       - name: Validate YAML files
         run: |
-          pip install yamllint
+          python3 -m pip install yamllint
           yamllint -d relaxed .
 
       - name: Lint Dockerfile

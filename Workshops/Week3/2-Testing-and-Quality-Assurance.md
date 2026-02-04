@@ -537,7 +537,7 @@ describe('add function', () => {
         [100, 200, 300],
         [-5, -3, -8],
         [1.5, 2.5, 4],
-    ])('add(%i, %i) returns %i', (a, b, expected) => {
+    ])('add(%p, %p) returns %p', (a, b, expected) => {
         expect(add(a, b)).toBe(expected);
     });
 
@@ -648,7 +648,7 @@ class TestCalculator:
         assert calculator.add(2, 3) == 5
 
     def test_division_by_zero(self, calculator):
-        with pytest.raises(ArithmeticException):
+        with pytest.raises(ZeroDivisionError):
             calculator.divide(10, 0)
 
     @pytest.mark.parametrize("a,b,expected", [
@@ -659,6 +659,8 @@ class TestCalculator:
     def test_addition_parametrized(self, calculator, a, b, expected):
         assert calculator.add(a, b) == expected
 ```
+
+Note: Java exception types do not map 1:1 to Python. For division by zero, Python raises `ZeroDivisionError`.
 
 ---
 

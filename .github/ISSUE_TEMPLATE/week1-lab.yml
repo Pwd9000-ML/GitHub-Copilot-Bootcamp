@@ -46,6 +46,7 @@ body:
         - GitHub Codespaces
         - Xcode
         - Neovim/Vim
+        - Eclipse
         - Other
     validations:
       required: true

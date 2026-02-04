@@ -26,10 +26,10 @@ Run through these **5 core questions** once per week during your team meeting:
 
 | # | Question | Response Format |
 |---|---|---|
-| **1** | Used GHCP since last standup? | Yes / No |
-| **2** | What did you use it for (top 1–2)? | Feature, Bug fix, Unit tests, Documentation, Refactor, DevOps-IaC, Learning, Other |
+| **1** | Used GitHub Copilot since last standup? | Yes / No |
+| **2** | What did you use it for (top 1-2)? | Feature, Bug fix, Unit tests, Documentation, Refactor, DevOps-IaC, Learning, Other |
 | **3** | Net time impact (quick estimate) | Minutes saved (+) or wasted (-) |
-| **4** | Helpfulness rating + confidence | 1–5 scale + High/Med/Low confidence |
+| **4** | Helpfulness rating + confidence | 1-5 scale + High/Med/Low confidence |
 | **5** | Top pain point category | Choose one + optional note |
 | **(6)** | *(Optional)* Rework needed? | None / Some / A lot |
 
@@ -38,7 +38,7 @@ Run through these **5 core questions** once per week during your team meeting:
 Rotate these **supplementary questions weekly**:
 
 - "Did you verify the suggestion with tests / docs / source?" (Yes/No)
-- "Did GHCP help you understand unfamiliar code faster?" (Yes/No + 1 line)
+- "Did GitHub Copilot help you understand unfamiliar code faster?" (Yes/No + 1 line)
 - "Any security/compliance concern triggered?" (Yes/No)
 ---
 
@@ -71,7 +71,7 @@ The template calculates an **Overall Health Score (0 to 100)** with four weighte
 
 | Component | Weight | Metric |
 |---|---|---|
-| **Adoption** | 30% | Percentage of team using GHCP |
+| **Adoption** | 30% | Percentage of team using GitHub Copilot |
 | **Time Impact** | 30% | Normalized net minutes per person per week (capped at plus or minus 60) |
 | **Sentiment** | 20% | Average helpfulness rating (1 to 5) |
 | **Rework Quality** | 20% | Penalty if "Some" or "A lot" rework is reported |
@@ -195,7 +195,7 @@ Configure these in the **Lists tab** dropdown:
 
 ## Related Resources
 
-- **[GHCP API Metrics](./GHCP-API-Metrics.md)** - System-level usage data from GitHub
+- **[GitHub Copilot API Metrics](./GHCP-API-Metrics.md)** - System-level usage data from GitHub
 - **[Adoption Measurement Cheatsheet](./GHCP-adoption-measurement-cheatsheet.md)** - Broader adoption KPIs
 - **[Spreadsheet Usage Guide](./spreadsheet-usage.md)** - Excel tips and advanced formulas
 

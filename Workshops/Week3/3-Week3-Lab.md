@@ -109,7 +109,7 @@ Create a production Dockerfile for a Node.js Express application that:
 
 **Key Points to Review:**
 - Multi-stage build benefits
-- Using `npm ci --only=production`
+- Using `npm ci --omit=dev`
 - Non-root user configuration
 - Health check configuration
 
