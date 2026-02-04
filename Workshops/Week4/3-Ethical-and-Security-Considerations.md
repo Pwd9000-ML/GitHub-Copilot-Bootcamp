@@ -28,28 +28,19 @@ GitHub Copilot was trained on publicly available code from GitHub repositories. 
 | Concern | Description | Mitigation |
 |---------|-------------|------------|
 | **License Attribution** | Generated code may resemble open-source code | Review for familiar patterns, add attribution where needed |
-| **Copyrighted Code** | Rare exact matches to training data possible | Use Copilot's duplicate detection filter |
-| **Company IP** | Your prompts and code may be used for training | Review data retention settings |
+| **Copyrighted Code** | Suggestions may match publicly available code | Configure whether suggestions matching public code are allowed, and review code references when they appear |
+| **Company IP** | Prompt and code handling depends on your plan and organisation settings | Follow your organisation policy, and review GitHub Copilot data and policy settings |
 | **Patent Concerns** | Generated algorithms might infringe patents | Review novel implementations carefully |
 
 ### Copilot Settings for IP Protection
 
-**Enabling Duplicate Detection:**
+**Suggestions matching public code and code referencing**
 
-In VS Code settings, enable:
-```json
-{
-  "github.copilot.advanced": {
-    "debug.filterLogCategories": [],
-    "listCount": 3
-  }
-}
-```
+GitHub Copilot can be configured to allow or block suggestions that match publicly available code. If suggestions matching public code are allowed, Copilot can also provide references to similar public code ("code referencing").
 
-GitHub Copilot for Business provides additional controls:
-- Disable suggestions matching public code
-- Block suggestions from specific repositories
-- Control data retention policies
+This is configured in either your personal settings or your organisation settings on GitHub.com.
+
+In Visual Studio Code you can also view code references for accepted suggestions via the "GitHub Copilot Log (Code References)" output.
 
 ### Best Practices for IP Safety
 
@@ -88,9 +79,11 @@ def get_user(username: str) -> Optional[User]:
 **Risky Pattern:**
 ```python
 # DANGEROUS: Copilot might suggest realistic-looking credentials
-API_KEY = "sk-1234567890abcdef"
-DATABASE_URL = "postgresql://admin:password123@localhost/db"
+API_KEY = "sk_example_do_not_use"
+DATABASE_URL = "postgresql://user:password@localhost:5432/dbname"
 ```
+
+Tip: Use clearly fake placeholders in examples to avoid triggering secret scanners or accidental reuse.
 
 **Secure Alternative:**
 ```python
@@ -311,7 +304,7 @@ def complex_algorithm():
 - Bypassing code review processes
 
 ## Required Practices
-1. Enable duplicate detection filters
+1. Configure whether suggestions matching public code are allowed, and use code referencing when it is available
 2. Review all AI suggestions before accepting
 3. Run security scans on AI-generated code
 4. Document significant AI-assisted implementations

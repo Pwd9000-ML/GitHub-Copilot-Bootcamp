@@ -106,7 +106,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 > **Note:** Keyboard shortcuts may vary depending on your VS Code version and any customisations you've made. To verify the current shortcuts in your installation:
 > 1. Press `Ctrl+K Ctrl+S` (Windows/Linux) or `Cmd+K Cmd+S` (Mac) to open the Keyboard Shortcuts editor
 > 2. Search for "Copilot" to see all GitHub Copilot commands and their assigned shortcuts
-> 3. Official documentation: [GitHub Copilot Keyboard Shortcuts](https://docs.github.com/en/copilot/reference/keyboard-shortcuts)
+> 3. Official documentation: [Keyboard shortcuts for GitHub Copilot in the IDE](https://docs.github.com/en/copilot/reference/keyboard-shortcuts-for-github-copilot-in-the-ide)
 
 ---
 
@@ -150,11 +150,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Known Limitations
 
-- **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
-- **No Custom chat modes:** Unable to define custom slash commands or chat behaviours
-- **No Workspace indexing:** Local codebase indexing for improved context is not available
-- **No Java Upgrade Agent:** Automated Java version migration assistance not supported
-- **Version requirements:** Some features require Visual Studio 2022 version 17.11 or later
+- **Feature availability varies by version/policy:** Check which Copilot features are available for your Visual Studio version and plan
 - **Admin opt-in for preview features:** Copilot Business/Enterprise users require administrator approval to access preview features like latest/preview AI models
 
 > See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
@@ -200,7 +196,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 - **No Custom chat modes:** Unable to define custom slash commands or chat behaviours
 - **No Workspace indexing:** Local codebase indexing for improved context is not available
 - **No Java Upgrade Agent:** Automated Java version migration assistance not supported
-- **No Next edit suggestions:** Proactive suggestions for your next likely edit not available (VS Code and Xcode only)
+- **Next edit suggestions:** Availability varies by IDE/version (check the feature matrix)
 
 > See [GitHub Copilot Feature Matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
 
@@ -210,8 +206,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Prerequisites
 
-- Xcode version 8.0 or above
-- macOS Monterey (12.0) or above
+- Supported Xcode/macOS versions vary (see Copilot for Xcode documentation)
 
 #### Installation
 
@@ -227,7 +222,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
    - Open the **GitHub Copilot for Xcode** application
    - Click **Extension Permission**
    - Enable **GitHub Copilot** and click **Done**
-3. **Restart Xcode** — you will see a new "GitHub Copilot" item in the **Editor** menu
+3. **Restart Xcode**. You will see a new "GitHub Copilot" item in the **Editor** menu
 
 #### Sign In
 
@@ -246,8 +241,9 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Known Limitations
 
-- **No Edit mode (Copilot Edits):** Multi-file editing capabilities not available
-- **No Extensions support:** Cannot use MCP extensions or third-party integrations
+- **No Edit mode:** Edit mode isn't available in Xcode. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
+- **Extensions:** Not supported
+- **MCP:** Supported (see feature matrix; availability may vary by version/policy)
 - **No Code referencing:** Cannot view public code matches for suggestions
 - **No Workspace indexing:** Local codebase indexing for improved context is not available
 - **No .NET or Java Upgrade Agents:** Automated migration assistance not supported
@@ -341,6 +337,7 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 | **Visual C++ (Windows)** | Microsoft Visual C++ 2015-2022 Redistributable (x64) |
 
 > **Note:** GitHub Copilot for Eclipse requires Eclipse version 2024-03 or above. Since ADT requires Eclipse 2025-09+, you will meet the Copilot requirement automatically.
+> **Note:** GitHub Copilot for Eclipse has minimum version requirements and feature availability can vary by Eclipse/Copilot plugin version and policy settings. Validate compatibility using the [Copilot feature matrix (Eclipse)](https://docs.github.com/en/copilot/reference/copilot-feature-matrix?tool=eclipse) and the Eclipse Marketplace listing.
 
 #### Step 1: Install Eclipse
 
@@ -382,7 +379,7 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 
 | Action | Method |
 |--------|--------|
-| **Trigger Suggestions** | Start typing—suggestions appear inline |
+| **Trigger Suggestions** | Start typing, suggestions appear inline |
 | **Accept Suggestion** | `Tab` |
 | **Dismiss Suggestion** | `Esc` |
 | **Open Copilot Chat** | Click Copilot icon in toolbar |
@@ -391,9 +388,10 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 
 - **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
 - **No Copilot code review:** Automated code review features not supported
-- **No Edit mode (Copilot Edits):** Multi-file editing capabilities not available
-- **No Extensions support:** Cannot use MCP extensions or third-party integrations
-- **No Prompt files:** Cannot use `.github/copilot-instructions.md` or similar prompt files
+- **No Edit mode:** Edit mode isn't available in Eclipse. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
+- **Extensions:** Not supported
+- **MCP:** Supported (see feature matrix; availability may vary by version/policy)
+- **No Prompt files:** Prompt files are not supported in Eclipse (see feature matrix). Note that `.github/copilot-instructions.md` is a repository custom instructions file (a different feature), and its support can vary by environment.
 - **Custom instructions in preview:** Repository and file-level custom instructions have limited support
 - **Installation dependency conflicts:** May encounter conflicts with Mylyn WikiText UI and LSP4e components
 
@@ -405,13 +403,12 @@ SAP ABAP developers use **ABAP Development Tools (ADT)** within Eclipse to devel
 
 Before relying on GitHub Copilot for ABAP development, be aware of these important limitations:
 
-#### 1. Agent Mode URI Scheme Limitation
+#### 1. Eclipse/ADT integration limitations (validate in your environment)
 
-GitHub Copilot's Agent Mode in Eclipse **does not support the `semanticfs` URI scheme** used by ABAP Development Tools. This means:
+ABAP Development Tools (ADT) uses Eclipse-specific mechanisms for accessing ABAP objects. Some Copilot features that operate by editing local files (for example, multi-file edits or agentic workflows) may behave differently depending on your Eclipse/ADT setup.
 
-- Advanced agent-based features may not work correctly with ABAP files
-- Workspace-level operations that depend on file system access may be limited
-- You may encounter errors related to unsupported URI schemes when using agent features
+- If you see unexpected behavior with ABAP objects, fall back to **Ask mode** and apply changes manually.
+- Use the [Copilot feature matrix (Eclipse)](https://docs.github.com/en/copilot/reference/copilot-feature-matrix?tool=eclipse) as the source of truth for what is supported.
 
 #### 2. ABAP Language Support Quality
 
@@ -487,11 +484,11 @@ ABAP development requires connection to an SAP backend system. GitHub Copilot:
 If your subscription provides multiple model options:
 
 **VS Code:**
-1. Open **Copilot Chat** (`Ctrl+Alt+I`)
-2. Use the **model picker** in the chat input field
+1. Open **Copilot Chat** (for example: open the chat view from the Copilot icon, or use **Quick chat** `Ctrl+Shift+Alt+L`)
+2. Use the **model picker** in the chat input field (if available for your plan/policy)
 3. Select from available models (varies by subscription — see [Supported AI models](https://docs.github.com/en/copilot/using-github-copilot/ai-models/supported-ai-models-in-copilot))
 
-> **Note:** Different models have different premium request multipliers, which can affect your monthly usage allowance. Copilot Business users may need their organization to enable model switching.
+> **Note:** Different models have different premium request multipliers, which can affect your monthly usage allowance. Copilot Business users may need their organisation to enable model switching.
 
 ---
 
@@ -502,7 +499,7 @@ If your subscription provides multiple model options:
 **Scenario:** Understanding a function in an existing file
 
 1. **Open a code file** and select a function you want to understand
-2. **Open Copilot Chat** (`Ctrl+L` in VS Code)
+2. **Open Copilot Chat** (for example: open the chat view from the Copilot icon, or use **Quick chat** `Ctrl+Shift+Alt+L` in VS Code)
 3. **Type:** `"Explain what this function does"`
 4. **Press Enter**
 5. Copilot provides an explanation

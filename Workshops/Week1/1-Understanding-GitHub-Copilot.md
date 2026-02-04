@@ -67,7 +67,7 @@ GitHub Copilot is powered by Large Language Models (LLMs), with a wide variety o
 4. **Comments and docstrings:** natural language descriptions you provide
 5. **Repository context:** when using features like Copilot Spaces
 
-**Important:** Copilot does not store or learn from your private code. Each suggestion is generated in real time based on the context you provide in that session. See [GitHub Copilot Trust Center](https://copilot.github.trust.page/) for more details.
+**Important:** Copilot generates suggestions based on the context you provide. Data handling, retention, and usage controls depend on your Copilot plan and settings. See the [GitHub Copilot Trust Center FAQ](https://copilot.github.trust.page/faq) for details.
 
 ### AI-Driven Capabilities
 
@@ -87,7 +87,7 @@ GitHub Copilot offers several interaction modes, each suited to different develo
 
 ### Language Support
 
-GitHub Copilot supports virtually all programming languages, with particularly strong performance in widely-used languages due to the volume of training data available.
+GitHub Copilot supports many programming languages, with particularly strong performance in widely used languages due to the volume of training data available.
 
 **Tier 1, Excellent Support:**
 
@@ -139,14 +139,14 @@ GitHub Copilot integrates with a wide range of IDEs and platforms:
 | **Visual Studio Code** | Full | Most complete feature set, first to receive new features |
 | **Visual Studio** | Full | Deep integration for .NET and C++ development |
 | **JetBrains IDEs** | Full | IntelliJ IDEA, PyCharm, WebStorm, Rider, and others |
-| **Eclipse** | Good | Chat and inline suggestions, Agent Mode in preview |
-| **Xcode** | Good | Inline suggestions, chat, Next Edit Suggestions |
-| **Neovim/Vim** | Good | Inline suggestions and chat |
+| **Eclipse** | Good | Chat and inline suggestions (feature availability varies by IDE/version. See feature matrix) |
+| **Xcode** | Good | Inline suggestions and chat (some features are preview/variable by version. See feature matrix) |
+| **Neovim/Vim** | Good | Inline suggestions (Copilot Chat is not supported) |
 | **GitHub.com** | Chat | Browser-based Copilot Chat for repositories |
 | **GitHub Mobile** | Chat | Ask questions about repositories on mobile |
 | **GitHub Copilot CLI** | CLI | Terminal-based Copilot assistance |
 
-**Feature availability varies by IDE.** For detailed feature comparison, refer to the [IDE Support Guide](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+**Feature availability varies by IDE and version.** For detailed comparisons, refer to the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
 ---
 

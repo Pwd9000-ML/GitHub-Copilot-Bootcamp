@@ -52,6 +52,8 @@ This training program is structured as a progressive learning journey, taking pa
 
 **Objective:** Establish a foundational understanding of GitHub Copilot and introduce core workflows for developers.
 
+> **Note:** Copilot features (Ask/Edit/Agent/Plan, shortcuts, and advanced capabilities) vary by IDE and version. Use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth.
+
 #### 1. Understanding GitHub Copilot (30 minutes)
 
 - Overview of its purpose, architecture, and AI-driven capabilities
@@ -110,7 +112,7 @@ This training program is structured as a progressive learning journey, taking pa
 
 ### Week 2: Advanced Development and Support Use Cases
 
-**Duration:** 2 to 4 hours (1 session)
+**Duration:** 2 to 4 hours
 
 **Objective:** Dive deeper into advanced use cases for developers and introduce Copilot as a support tool for maintaining high-quality standards.
 
@@ -122,7 +124,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 - Introduction to **prompt engineering**: crafting effective comments and instructions to guide Copilot
 - The CRAFT framework for structuring prompts
 - Writing effective prompts for code explanation and generation
-- Generating code aligned with organizational standards (Instruction files and style guides)
+- Generating code aligned with organisational standards (Instruction files and style guides)
 - Incorporating pre-emptive security recommendations
 - Practical prompt exercises with examples
 
@@ -299,4 +301,4 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 
 ---
 
-**Curriculum updated:** January 30, 2026
+**Curriculum updated:** February 04, 2026

@@ -2,6 +2,8 @@
 
 GitHub Copilot offers four distinct interaction modes designed for different stages of the development lifecycle: **Ask**, **Edit**, **Agent**, and **Plan**. Each mode serves a specific purpose and understanding when to use each one will help you get the most out of GitHub Copilot.
 
+> **Note:** Feature availability varies by IDE and version. For example, GitHub's feature overview notes that **Edit mode is only available in Visual Studio Code and JetBrains IDEs**, but you should use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth for your specific IDE/version.
+
 ---
 
 ## Contents
@@ -89,18 +91,19 @@ GitHub Copilot offers four distinct interaction modes designed for different sta
 
 ## Custom Agents (Extensions)
 
-In addition to the core modes, GitHub Copilot supports **Custom Agents** (also known as Extensions or MCP Servers) that provide specialized capabilities.
+In addition to the core modes, GitHub Copilot supports **custom agents** that provide specialised capabilities for Copilot coding agent.
 
 ### What are Custom Agents?
 
-Custom Agents allow repositories or organizations to define specialized AI assistants. Instead of a generic Copilot, you interact with an agent tailored to specific rules, documentation, or external services.
+Custom Agents allow repositories or organisations to define specialised AI assistants. Instead of a generic Copilot, you interact with an agent tailored to specific rules, documentation, or external services.
+GitHub describes custom agents as specialised versions of Copilot coding agent. You define them using Markdown files called **agent profiles**, which can specify prompts, tools, and MCP servers.
 
 ### How it works
 
-You can switch your chat context to a specific agent using the `@` syntax:
-- `@workspace` - Context-aware assistance for your current workspace
-- `@github` - GitHub-specific operations
-- Custom agents defined for your organization
+Depending on your IDE and configuration, you can scope your prompt using chat participants (type `@` in the prompt box to see what’s available). For example:
+- `@github` - GitHub-specific skills (available in Copilot Chat)
+- `@workspace` - Workspace-aware assistance (availability varies by IDE/version)
+- Organisation-specific custom agents (availability varies by IDE/version)
 
 ### Example
 
@@ -108,7 +111,12 @@ You can switch your chat context to a specific agent using the `@` syntax:
 |------------------|--------------|
 | Writes generic Python code | Writes Python code that strictly follows your company's style guide, uses your internal libraries, and ignores deprecated patterns |
 
-Custom agents can be configured via instruction files (like `.github/copilot-instructions.md`) in your repository to provide organization-specific guidance.
+> **Tip:** Don't conflate these configuration mechanisms:
+> - **Repository custom instructions** (for example `.github/copilot-instructions.md` and `.github/instructions/*.instructions.md`) provide repository and path-specific guidance.
+> - **Custom agents** are defined via agent profile files (for example `.github/agents/AGENT-NAME.md`).
+> - **MCP servers/tools** are integrations that an agent (or chat experience) can use, depending on environment support.
+>
+> References: [About custom agents](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents) and [Adding repository custom instructions](https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot).
 
 ---
 

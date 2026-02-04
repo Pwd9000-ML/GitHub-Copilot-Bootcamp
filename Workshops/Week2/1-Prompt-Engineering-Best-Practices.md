@@ -20,7 +20,7 @@ Prompt engineering is the practice of crafting clear, specific instructions that
 
 ## The CRAFT Framework for Effective Prompts
 
-Use this framework to structure your prompts for optimal results:
+Use this mnemonic to structure your prompts for optimal results:
 
 | Element | Description | Example |
 |---------|-------------|---------|
@@ -29,6 +29,8 @@ Use this framework to structure your prompts for optimal results:
 | **A**ction | What specific task should be performed? | *"...create a function that..."* |
 | **F**ormat | How should the output be structured? | *"...with JSDoc comments and error handling"* |
 | **T**one | Any style or standards to follow | *"...following our team's naming conventions"* |
+
+> **Note:** CRAFT is a helpful mnemonic for remembering key prompt elements, not an official GitHub term.
 
 ---
 
@@ -49,7 +51,8 @@ function validateEmail(email) {
 **Enhanced Example (with CRAFT):**
 ```javascript
 /**
- * Validates an email address against RFC 5322 standard.
+ * Performs basic validation of an email address format using common rules,
+ * without claiming full RFC 5322 or RFC 5321 compliance.
  * Returns true if valid, false otherwise.
  * Should handle edge cases like empty strings and null values.
  * @param {string} email - The email address to validate
@@ -175,7 +178,7 @@ Start broad, then narrow down:
 
 ---
 
-## Organizational Standards with Instruction Files
+## Organisational Standards with Instruction Files
 
 ### What are Copilot Instructions?
 
@@ -220,11 +223,19 @@ Create a file at `.github/copilot-instructions.md`:
 
 Create instructions for specific file types or directories:
 
-**For test files (`.github/instructions/tests.instructions.md`):**
-```markdown
-# Test File Instructions
+> **VS Code reference:** Instructions files support YAML frontmatter like `applyTo`, `name`, and `description`. See https://code.visualstudio.com/docs/copilot/customization/custom-instructions
 
+**For test files (`.github/instructions/tests.instructions.md`):**
+
+> **Note:** `applyTo` is a single glob pattern. If you need multiple patterns with different scopes, create multiple `.instructions.md` files.
+```markdown
+
+---
 applyTo: "**/*.test.js,**/*.spec.ts"
+description: "Guidelines for writing unit tests"
+---
+
+# Test File Instructions
 
 - Use Jest as the testing framework
 - Follow AAA pattern: Arrange, Act, Assert
@@ -232,6 +243,126 @@ applyTo: "**/*.test.js,**/*.spec.ts"
 - Mock external dependencies
 - Aim for 80% code coverage minimum
 ```
+
+### Prompt Files (Reusable Prompts)
+
+Create reusable prompt templates for common tasks in `.github/prompts/`. Prompt files support frontmatter with the following properties:
+
+> **VS Code reference:** Prompt file frontmatter uses `agent` and supports `tools`. See https://code.visualstudio.com/docs/copilot/customization/prompt-files
+
+| Property | Description | Values |
+|----------|-------------|--------|
+| `description` | A short description of the prompt | Free text |
+| `name` | The name of the prompt, used after typing `/` in chat (defaults to the file name) | Free text |
+| `argument-hint` | Optional hint text shown in the chat input field to guide users | Free text |
+| `agent` | The agent used for running the prompt: `ask`, `edit`, `agent`, or the name of a custom agent (defaults to the current agent) | `ask`, `edit`, `agent`, or custom agent name |
+| `model` | The language model used when running the prompt (defaults to the currently selected model in the model picker) | Model identifier (string) |
+| `tools` | A list of tool or tool set names available for this prompt. Can include built-in tools, tool sets, MCP tools, or extension-contributed tools. To include all tools from an MCP server, use `<server name>/*`. | Array of tool or tool-set names |
+
+> Learn more about tools in chat: https://code.visualstudio.com/docs/copilot/chat/chat-tools
+
+> **Tip:** If you specify tools in a prompt file, VS Code uses the priority order: prompt file tools → referenced custom agent tools → default tools for the selected agent.
+
+#### Example 1: Code Review (`.github/prompts/code-review.prompt.md`)
+
+Uses `agent` mode with tools for active repository analysis:
+
+```markdown
+---
+agent: 'agent'
+name: 'code-review'
+description: 'Language-agnostic code review with repository analysis and fix-oriented feedback'
+argument-hint: 'focus=<security|performance|readability>'
+model: '<model-id>'
+tools: ['codebase', 'githubRepo', 'search', 'usages', 'myMcpServer/*']
+---
+
+# Code Review
+
+Perform a comprehensive code review of the selected code:
+
+## Review Checklist
+- [ ] Logic correctness and edge case handling
+- [ ] Error handling and defensive programming
+- [ ] Code readability and naming conventions
+- [ ] Performance considerations
+- [ ] Adherence to SOLID principles
+
+## Output Format
+Provide feedback as:
+1. **Critical issues** - Must fix before merge
+2. **Suggestions** - Recommended improvements
+3. **Positive observations** - Good practices to maintain
+
+Include specific line references and concrete fix suggestions.
+```
+
+> **Note:** Replace `<model-id>` with a model available in your environment, and replace `myMcpServer` with the name of an installed MCP server (or remove that entry if you are not using MCP).
+
+#### Example 2: Security Review (`.github/prompts/security-review.prompt.md`)
+
+Uses `ask` mode for security-focused analysis and discussion:
+
+```markdown
+---
+agent: 'ask'
+name: 'security-review'
+description: 'OWASP-aligned security review identifying vulnerabilities and remediation steps'
+argument-hint: 'target=<auth|api|data|ui>'
+---
+
+# Security Review
+
+Analyse the selected code for security vulnerabilities following OWASP guidelines.
+
+## Check for:
+- **Injection flaws**: SQL, NoSQL, OS command, LDAP injection
+- **Broken authentication**: Weak credentials, session management issues
+- **Sensitive data exposure**: Hardcoded secrets, improper encryption
+- **XSS vulnerabilities**: Reflected, stored, and DOM-based XSS
+- **Insecure deserialisation**: Untrusted data deserialisation
+- **Components with known vulnerabilities**: Outdated dependencies
+
+## For each issue found:
+1. Describe the vulnerability and its severity (Critical/High/Medium/Low)
+2. Explain the potential impact
+3. Provide a secure code example as remediation
+
+Reference OWASP Top 10 categories where applicable.
+```
+
+#### Example 3: README Update (`.github/prompts/readme-update.prompt.md`)
+
+Uses `edit` mode for direct file modifications:
+
+```markdown
+---
+agent: 'edit'
+name: 'readme-update'
+description: 'Update README with current project structure and usage instructions'
+argument-hint: 'audience=<devs|ops|users>'
+---
+
+# README Update
+
+Update the README.md file to reflect the current state of the project.
+
+## Sections to include or update:
+1. **Project title and description** - Clear, concise overview
+2. **Installation** - Step-by-step setup instructions
+3. **Usage** - Code examples showing common use cases
+4. **API reference** - Document public functions/endpoints
+5. **Contributing** - Guidelines for contributors
+6. **License** - Current license information
+
+## Guidelines:
+- Keep language clear and beginner-friendly
+- Include working code examples
+- Update version numbers if applicable
+- Ensure all links are valid
+```
+
+Use prompt files for tasks your team performs frequently, such as code reviews, documentation generation, test creation, and refactoring patterns.
 
 ---
 
@@ -271,7 +402,8 @@ For any function handling user input:
 ```
 For authentication-related code:
 - Never store passwords in plain text
-- Use bcrypt or argon2 for password hashing
+- Use Argon2id for password hashing (recommended by OWASP)
+  - Alternatives: scrypt, or bcrypt with a high work factor for compatibility requirements
 - Implement rate limiting
 - Use secure session management
 ```

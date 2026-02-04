@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     
     steps:
       - name: Checkout repository
@@ -23,17 +24,15 @@ jobs:
       - name: Update curriculum date in README
         run: |
           CURRENT_DATE=$(date +"%B %d, %Y")
-          sed -i.bak "s/\*\*Curriculum updated:\*\* .*/\*\*Curriculum updated:\*\* $CURRENT_DATE/" README.md
-          rm README.md.bak
-      
-      - name: Commit and push if changed
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add README.md
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update curriculum date [skip ci]"
-            git push
-          fi
+          sed -i "s/\*\*Curriculum updated:\*\* .*/\*\*Curriculum updated:\*\* $CURRENT_DATE/" README.md
+
+      - name: Create pull request if changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: ${{ github.event.pull_request.base.ref }}
+          branch: chore/update-curriculum-date
+          branch-suffix: timestamp
+          delete-branch: true
+          commit-message: "chore: update curriculum date [skip ci]"
+          title: "chore: update curriculum date"
+          body: "Automated update of the Curriculum updated date in README.md."

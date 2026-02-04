@@ -121,6 +121,8 @@ Is there a more modern JavaScript syntax for this code?
 
 ## 3. Edit Mode - Code Modifications
 
+> **Note:** Edit mode is not available in every IDE. If you don’t see **Edit** in your Copilot Chat agents dropdown, check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+
 Edit mode enables controlled modifications to specific files in your working set.
 
 - Select Edit from the agents dropdown in Copilot Chat
@@ -178,6 +180,8 @@ Fix the memory leak in this event listener
 
 ## 4. Agent Mode - Multi-File Changes
 
+> **Note:** Agent mode availability varies by IDE/version and may depend on policy settings. If you don’t see **Agent** in your Copilot Chat agents dropdown, check the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+
 Agent mode allows Copilot to autonomously determine and execute multi-step tasks.
 
 - Select Agent from the agents dropdown in Copilot Chat
@@ -219,6 +223,8 @@ Reorganize the authentication code:
 ---
 
 ## 5. Plan Mode - Implementation Planning
+
+> **Note:** Plan mode is in public preview and subject to change. Availability varies by IDE/version. See the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
 Plan mode helps you think through tasks before executing by creating detailed implementation plans.
 

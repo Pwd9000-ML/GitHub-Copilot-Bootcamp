@@ -47,7 +47,7 @@ Generate a GitHub Actions workflow with:
 - A staging deployment job that runs only on main branch after tests pass
 - Uses environment: staging with required approval
 - Deploys to Azure App Service
-- Sends Slack notification on completion
+- Sends a Slack notification on completion that summarises the build and deploy results using `needs.<job_id>.result`
 ```
 
 #### Validation Job with Dependencies
@@ -59,6 +59,8 @@ Add a validation job to my GitHub Actions workflow that runs first and includes:
 - Dockerfile linting with hadolint
 - Secret detection with trufflehog
 The other jobs should depend on this validation passing.
+
+If needed, install yamllint in the job using `python3 -m pip install yamllint`.
 ```
 
 #### Platform-Specific Pipelines
@@ -94,6 +96,7 @@ Create a production Dockerfile for a Node.js Express application that:
 - Uses multi-stage build for smaller image size
 - Runs as non-root user for security
 - Only copies production dependencies
+- Installs dependencies with `npm ci --omit=dev`
 - Includes health check
 - Uses node:20-alpine as base
 - Application runs on port 3000
@@ -187,6 +190,7 @@ Generate parameterized tests for the validateEmail function using Jest's test.ea
 - Test valid email formats (standard, with +, with subdomains)
 - Test invalid formats (missing @, missing domain, special chars)
 - Use descriptive test names for each case
+- Use `%p` placeholders in the test name to handle non-integer inputs
 ```
 
 #### Integration Tests
@@ -324,13 +328,13 @@ Modify this Jest configuration to:
 - Run tests in parallel using maxWorkers
 - Split slow tests into separate files
 - Use test.concurrent for independent tests
-- Optimize test database setup
+- Optimise test database setup
 ```
 
 #### Improve Test Performance
 
 ```text
-Optimize these integration tests that are taking too long:
+Optimise these integration tests that are taking too long:
 [paste test code]
 - Identify slow operations
 - Use transaction rollback instead of database cleanup

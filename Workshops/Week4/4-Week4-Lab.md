@@ -54,8 +54,8 @@ var config = {
     tax: 0.20,
     discount: 0.1,
     threshold: 100,
-    api_key: "sk_live_1234567890abcdef",
-    db_connection: "mongodb://admin:password@localhost:27017"
+    api_key: "sk_example_do_not_use",
+    db_connection: "postgresql://example_user:example_password@localhost:5432/example_orders"
 };
 
 function process(o) {
@@ -157,7 +157,7 @@ Provide a prioritised remediation plan.
 - [ ] No input validation for individual items
 
 **Extension Option (Optional):**
-Generate a comprehensive test suite (characterization tests) for the legacy code before refactoring to ensure safe refactoring. Create `legacy-order-processor.test.js` with tests that pass with the current implementation.
+Generate a comprehensive test suite (characterisation tests) for the legacy code before refactoring to ensure safe refactoring. Create `legacy-order-processor.test.js` with tests that pass with the current implementation.
 
 ---
 
@@ -176,8 +176,8 @@ Prompt: Refactor this code to remove hardcoded secrets:
 
 Current code:
 var config = {
-    api_key: "sk_live_1234567890abcdef",
-    db_connection: "mongodb://admin:password@localhost:27017"
+  api_key: "sk_example_do_not_use",
+  db_connection: "postgresql://user:password@localhost:5432/orders"
 };
 ```
 
@@ -222,7 +222,7 @@ TAX_RATE=0.20
 DISCOUNT_RATE=0.10
 DISCOUNT_THRESHOLD=100
 PAYMENT_API_KEY=your_api_key_here
-DATABASE_URL=mongodb://localhost:27017/orders
+DATABASE_URL=postgresql://localhost:5432/orders
 ```
 
 ---
@@ -251,7 +251,7 @@ function getOrder(id) {
 - [ ] Has proper documentation
 
 **Extension Option (Optional):**
-If you have extra time, modernize the function syntax to ES2022+ standards using const/let, arrow functions, array methods (reduce, filter, map), destructuring, and async/await. Create `order-processor.mjs`.
+If you have extra time, modernise the function syntax to ES2022+ standards using const/let, arrow functions, array methods (reduce, filter, map), destructuring, and async/await. Create `order-processor.mjs`.
 
 ---
 
