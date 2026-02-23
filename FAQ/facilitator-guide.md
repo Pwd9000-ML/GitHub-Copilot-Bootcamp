@@ -37,12 +37,12 @@ Each week includes multiple learning components:
 
 | Week | Presentations | Lab | Total |
 |------|---------------|-----|-------|
-| 1 | 3 modules (~75 min) | 45-60 min | 2-2.5 hrs |
+| 1 | 3 modules (~90 min) | 45-60 min | 2-3 hrs |
 | 2 | 2 modules (75-105 min) | 30-45 min | 2-4 hrs |
 | 3 | 2 modules (60-90 min) | 60-90 min | 2-2.5 hrs |
-| 4 | 3 modules (90-135 min) | 45-60 min | 2-2.5 hrs |
+| 4 | 3 modules (90-135 min) | 90-120 min | 3-4.5 hrs |
 
-**Total commitment:** 8-11.5 hours across 4 weeks (excludes self-study)
+**Total commitment:** 9-14 hours across 4 weeks (excludes self-study)
 
 ---
 

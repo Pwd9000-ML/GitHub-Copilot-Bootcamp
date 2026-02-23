@@ -380,6 +380,6 @@ Please complete the following reflections after completing Week 2 activities:
 
 ## Next Steps
 
-After mastering prompt engineering and advanced workflows in Week 2, we will explore DevOps automation and testing strategies in Week 3 to streamline software delivery.
+After mastering prompt engineering and advanced workflows in Week 2, we will explore DevOps automation, testing strategies, and **GitHub Copilot CLI workflows** in Week 3 to streamline software delivery.
 
 **[← Back to Main README](../../README.md)** | **[Continue to Week 3 →](../Week3/1-DevOps-Automation.md)**

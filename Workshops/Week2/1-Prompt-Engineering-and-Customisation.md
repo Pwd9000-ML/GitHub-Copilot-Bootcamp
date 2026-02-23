@@ -1,8 +1,8 @@
-# Prompt Engineering Best Practices
+# Prompt Engineering and Customisation
 
 **Duration:** 45-60 minutes  
 **Format:** Presentation with interactive examples  
-**Objective:** Master the art of crafting effective prompts to guide GitHub Copilot for consistent, high-quality code generation.
+**Objective:** Master the art of crafting effective prompts and learn the three pillars of Copilot customisation (instruction files, prompt files, and custom agents) for consistent, high-quality code generation.
 
 ---
 
@@ -366,6 +366,169 @@ Use prompt files for tasks your team performs frequently, such as code reviews, 
 
 ---
 
+## Custom Agent Files (Specialised Personas)
+
+### What are Custom Agents?
+
+Custom agents let you configure Copilot to adopt different personas tailored to specific development roles and tasks. Each agent bundles its own **instructions**, **tools**, and optional **model** selection into a single reusable definition. Think of them as pre-configured specialists you can switch to with one click.
+
+> **VS Code reference:** Custom agents are available as of VS Code release 1.106 (previously known as custom chat modes). See https://code.visualstudio.com/docs/copilot/customization/custom-agents
+
+**Why use custom agents?**
+
+| Benefit | Example |
+|---------|---------|
+| **Role isolation** | A planning agent uses only read-only tools so it cannot accidentally edit code |
+| **Consistent behaviour** | A code-review agent always follows the same checklist |
+| **Tool scoping** | A security agent only has access to analysis tools, not deployment tools |
+| **Guided workflows** | Chain agents together with handoffs: Plan → Implement → Review |
+
+### Creating a Custom Agent
+
+Custom agent files use the `.agent.md` extension and are stored in:
+
+| Location | Scope |
+|----------|-------|
+| `.github/agents/` | Available to everyone working in the repository |
+| User profile folder | Available across all your workspaces (personal) |
+| `.github-private` repository | Organisation/enterprise-wide (all repos) |
+| `.claude/agents/` | Claude Code compatibility format |
+
+> **Tip:** Type `/agents` in the chat input to quickly open the **Configure Custom Agents** menu, or run `Chat: New Custom Agent` from the Command Palette (<kbd>Ctrl+Shift+P</kbd>).
+
+### Custom Agent File Structure
+
+Agent files are Markdown with optional YAML frontmatter:
+
+| Property | Description | Values |
+|----------|-------------|--------|
+| `name` | Agent name (defaults to filename if omitted) | Free text |
+| `description` | Brief description shown as placeholder text in chat | Free text (required on GitHub) |
+| `argument-hint` | Hint text shown in the chat input field | Free text |
+| `tools` | List of available tools (built-in, MCP, extension-contributed). Omit to allow all tools. | Array of tool/tool-set names |
+| `agents` | List of agents available as subagents. Use `*` for all, `[]` for none. | Array of agent names |
+| `model` | AI model to use. Can be a single string or prioritised array (first available is used). | Model identifier or array |
+| `target` | Restrict to a specific environment | `vscode` or `github-copilot` |
+| `user-invokable` | Show in agents dropdown (default: `true`). Set `false` for subagent-only agents. | Boolean |
+| `disable-model-invocation` | Prevent other agents from invoking this agent as a subagent (default: `false`) | Boolean |
+| `mcp-servers` | MCP server configurations (for org/enterprise agents on GitHub) | JSON |
+| `handoffs` | Suggested next actions to transition between agents | Array (see below) |
+
+> **VS Code reference:** See https://code.visualstudio.com/docs/copilot/customization/custom-agents for the full property reference.
+
+#### Handoff Properties
+
+| Property | Description |
+|----------|-------------|
+| `handoffs.label` | Display text on the handoff button |
+| `handoffs.agent` | Target agent to switch to |
+| `handoffs.prompt` | Prompt text to send to the target agent |
+| `handoffs.send` | Auto-submit the prompt (default: `false`) |
+| `handoffs.model` | Optional model override for the handoff, e.g. `GPT-5.2 (copilot)` |
+
+### Example 1: Code Review Agent (`.github/agents/code-reviewer.agent.md`)
+
+A review-only agent that cannot modify production code:
+
+```markdown
+---
+name: code-reviewer
+description: Reviews code for quality, security, and adherence to team standards
+tools: ['codebase', 'search', 'usages', 'githubRepo', 'fetch']
+---
+
+You are an expert code reviewer. Follow these guidelines:
+
+## Review Checklist
+- [ ] Logic correctness and edge case handling
+- [ ] Error handling and defensive programming
+- [ ] Code readability and naming conventions
+- [ ] Performance considerations
+- [ ] SOLID principles adherence
+- [ ] Security vulnerabilities (OWASP Top 10)
+
+## Output Format
+For each issue found, provide:
+1. **Severity**: Critical / High / Medium / Low
+2. **Location**: File and line reference
+3. **Issue**: Clear description of the problem
+4. **Fix**: Concrete code example showing the remediation
+
+Never modify production code directly — only suggest changes.
+```
+
+### Example 2: Test Specialist Agent (`.github/agents/test-specialist.agent.md`)
+
+Focuses on testing without touching production code. Omitting `tools` grants access to all available tools:
+
+```markdown
+---
+name: test-specialist
+description: Focuses on test coverage, quality, and testing best practices without modifying production code
+---
+
+You are a testing specialist focused on improving code quality through comprehensive testing. Your responsibilities:
+
+- Analyse existing tests and identify coverage gaps
+- Write unit tests, integration tests, and end-to-end tests following best practices
+- Review test quality and suggest improvements for maintainability
+- Ensure tests are isolated, deterministic, and well-documented
+- Focus only on test files and avoid modifying production code unless specifically requested
+
+Always include clear test descriptions and use appropriate testing patterns for the language and framework.
+```
+
+### Example 3: Planning Agent with Handoffs (`.github/agents/planner.agent.md`)
+
+A read-only agent that creates implementation plans and hands off to an implementation agent:
+
+```markdown
+---
+name: planner
+description: Creates detailed implementation plans and technical specifications
+tools: ['search', 'codebase', 'fetch', 'githubRepo']
+handoffs:
+  - label: Start Implementation
+    agent: implementation
+    prompt: Now implement the plan outlined above.
+    send: false
+---
+
+You are a technical planning specialist. Your responsibilities:
+
+- Analyse requirements and break them into actionable tasks
+- Create detailed technical specifications with architecture decisions
+- Generate implementation plans with clear steps, dependencies, and risks
+- Document API designs, data models, and system interactions
+
+Structure plans with clear headings, task breakdowns, acceptance criteria, and testing considerations.
+Do NOT modify any files — only produce documentation and plans.
+```
+
+> **Tip:** When the planner finishes, the **Start Implementation** handoff button appears. Clicking it switches to the `implementation` agent with the plan context carried forward.
+
+### Sharing Custom Agents Across Teams
+
+- **Workspace level:** Store `.agent.md` files in `.github/agents/` and commit them to the repository
+- **Organisation level:** Place agent files in the `agents/` directory of a `.github-private` repository. Enable discovery in VS Code with `github.copilot.chat.organizationCustomAgents.enabled: true`
+- **User level:** Create agents in your user profile for personal use across all workspaces
+
+> **GitHub reference:** See https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents for creating and managing custom agents.
+
+### The Three Pillars of Copilot Customisation
+
+Together, instruction files, prompt files, and custom agents form a complete customisation layer:
+
+| Layer | File Type | Location | Purpose |
+|-------|-----------|----------|---------|
+| **Instructions** | `.instructions.md` | `.github/instructions/` | Define project-wide conventions and standards |
+| **Prompts** | `.prompt.md` | `.github/prompts/` | Create reusable task templates |
+| **Custom Agents** | `.agent.md` | `.github/agents/` | Bundle instructions + tools into switchable personas |
+
+> **Note:** Instructions are always-on context, prompts are on-demand tasks you invoke with `/`, and agents are full persona switches with their own tool sets and behaviours.
+
+---
+
 ## Incorporating Security Recommendations
 
 ### Prompting for Secure Code
@@ -459,6 +622,22 @@ Practice SQL prompts with Copilot:
 | Aggregation | "Write a SQL query to calculate the average salary of employees in each department." |
 | Subquery | "Write a SQL query to find employees who earn more than the average salary in the company." |
 
+### Exercise 5: Custom Agent Creation
+
+Practice creating custom agents for your team:
+
+1. **Planning Agent:**
+   Create a `.github/agents/planner.agent.md` that only has read-only tools (`search`, `codebase`, `fetch`) and instructions to produce implementation plans without modifying code.
+
+2. **Test Writer Agent:**
+   Create a `.github/agents/test-writer.agent.md` with instructions to focus exclusively on writing tests, never modifying production code. Omit the `tools` property to grant access to all tools.
+
+3. **Agent with Handoffs:**
+   Extend your planning agent to include a handoff to an implementation agent. Test the workflow by starting in the planner, generating a plan, then clicking the handoff button.
+
+4. **Organisation Sharing:**
+   Discuss with your team which agents would benefit from being shared at the organisation level via a `.github-private` repository.
+
 ---
 
 ## Common Pitfalls to Avoid
@@ -470,6 +649,7 @@ Practice SQL prompts with Copilot:
 | **Ignoring output** | Accepting code without review | Always review and test generated code |
 | **Single attempt** | Settling for suboptimal results | Iterate and refine your prompts |
 | **No security mention** | Potentially vulnerable code | Always include security requirements |
+| **No custom agents** | Manually switching tools and context each time | Create agents for recurring roles (reviewer, planner, tester) |
 
 ---
 
@@ -478,15 +658,17 @@ Practice SQL prompts with Copilot:
 1. **Structure your prompts** using the CRAFT framework
 2. **Be specific** - detail beats brevity
 3. **Provide context** - help Copilot understand your project
-4. **Use instruction files** for team-wide consistency
-5. **Include security** from the start
-6. **Iterate** - refine prompts based on output
-7. **Review everything** - Copilot assists, you decide
+4. **Use instruction files** (`.instructions.md`) for team-wide consistency
+5. **Use prompt files** (`.prompt.md`) for reusable task templates
+6. **Use custom agents** (`.agent.md`) to bundle instructions + tools into switchable personas
+7. **Include security** from the start
+8. **Iterate** - refine prompts based on output
+9. **Review everything** - Copilot assists, you decide
 
 ---
 
 ## Next Steps
 
-- Proceed to [Advanced Developer Workflow](2-Advanced-Developer-Workflow.md) to learn about documentation generation and refining Copilot suggestions
+- Proceed to [Customisation in Practice](2-Customisation-in-Practice.md) to see how instruction files, prompt files, and custom agents improve documentation, refinement, and debugging workflows
 - Complete the [Week 2 Lab](3-Week2-Lab.md) to practice customising your Copilot experience
 - Review [Week 2 Prompts](4-Week2-Prompts.md) for additional prompt examples

@@ -143,16 +143,3 @@ Wait 10-15 minutes if you have made multiple authentication attempts. Check [Git
 ### GHE.com sign-in issues
 
 In VS Code settings, search for "Copilot", open settings.json under GitHub > Copilot: Advanced, and remove the line `"authProvider": "github-enterprise"` if present.
-
----
-
-## Further Help
-
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [GitHub Copilot Trust Center](https://copilot.github.trust.page/)
-- [GitHub Support Community](https://github.com/orgs/community/discussions)
-- [Official FAQ](https://github.com/features/copilot#faq)
-
----
-
-**Last updated:** January 2026

@@ -209,10 +209,10 @@ Add form validation across the login form:
 - Error message constants in constants file
 ```
 
-#### Code Organization
+#### Code Organisation
 
 ```text
-Reorganize the authentication code:
+Reorganise the authentication code:
 - Move auth functions to auth/index.ts
 - Create types in auth/types.ts
 - Update all imports across the project
@@ -224,7 +224,7 @@ Reorganize the authentication code:
 
 ## 5. Plan Mode - Implementation Planning
 
-> **Note:** Plan mode is in public preview and subject to change. Availability varies by IDE/version. See the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+> **Note:** Plan mode is not listed as a separate feature in the official [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix). It is available as an option within the Copilot Chat panel in VS Code and may be integrated into Agent mode workflows in other environments. Availability and behaviour may change as features evolve.
 
 Plan mode helps you think through tasks before executing by creating detailed implementation plans.
 
@@ -388,5 +388,5 @@ Please complete the following reflections after completing Week 1 activities:
 ## Next Steps
 
 After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in Week 2 to further enhance your productivity with GitHub Copilot.
-**[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-Best-Practices.md)**
+**[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-and-Customisation.md)**
 
