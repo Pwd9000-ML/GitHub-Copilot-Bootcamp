@@ -65,6 +65,31 @@ The other jobs should depend on this validation passing.
 If needed, install yamllint in the job using `python3 -m pip install yamllint`.
 ```
 
+#### Azure DevOps Pipeline for Node.js
+
+```text
+Create a complete Azure DevOps CI/CD pipeline for a Node.js project:
+1. Azure DevOps pipeline with build, test, security scan, and deploy stages
+2. Production Dockerfile with multi-stage build
+3. Kubernetes deployment with health checks and HPA
+Review all the files you've created and ensure they are consistent.
+```
+
+This prompt is an example of the [Delegate Pattern](1-DevOps-Automation.md#the-delegate-pattern) and produces three files that work together:
+
+| File | Purpose |
+|------|---------|
+| [`azure-pipelines.yml`](../../../azure-pipelines.yml) | Four-stage Azure DevOps pipeline: Build, Security Scan, Push, Deploy |
+| [`Dockerfile`](../../../Dockerfile) | Multi-stage Node.js 20 production image with health check |
+| [`k8s/deployment.yml`](../../../k8s/deployment.yml) | Kubernetes Deployment with liveness/readiness probes and resource limits |
+| [`k8s/service.yml`](../../../k8s/service.yml) | ClusterIP Service routing port 80 to container port 3000 |
+| [`k8s/hpa.yml`](../../../k8s/hpa.yml) | HorizontalPodAutoscaler scaling from 3 to 10 replicas on CPU and memory |
+
+Key consistency points across the generated files:
+- All resources use the `nodejs-app` name and `production` namespace
+- The container port `3000` is referenced in the Dockerfile `EXPOSE`, the Deployment `containerPort`, the Service `targetPort`, and the health check endpoints
+- The Deployment image (`myacr.azurecr.io/nodejs-app:latest`) is replaced at deploy time by the pipeline using the `$(Build.BuildId)` tag variable
+
 #### Platform-Specific Pipelines
 
 ```text
