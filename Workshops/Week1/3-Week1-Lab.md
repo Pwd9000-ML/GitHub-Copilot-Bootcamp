@@ -21,7 +21,7 @@ In this exercise, you will:
 
 ### How to start this exercise
 
-Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+Simply copy the exercise to your account, then give your favourite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
 
 [![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=getting-started-with-github-copilot&owner=%40me&name=skills-getting-started-with-github-copilot&description=Exercise:+Get+started+using+GitHub+Copilot&visibility=public)
 
@@ -30,7 +30,7 @@ Simply copy the exercise to your account, then give your favorite Octocat (Mona)
 
 When copying the exercise, we recommend the following settings:
 
-- For owner, choose your personal account or an organization to host the repository.
+- For owner, choose your personal account or an organisation to host the repository.
 
 - We recommend creating a public repository, since private repositories will use Actions minutes.
    
@@ -44,10 +44,11 @@ If the exercise isn't ready in 20 seconds, please check the [Actions](../../acti
 
 ---
 
-&copy; 2026 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Attribution: This lab is based on the GitHub Skills template **Getting started with GitHub Copilot**.
+Upstream source: https://github.com/skills/getting-started-with-github-copilot
 
 ---
 
 ## Next Steps
 
-- **Week 1 Prompt Examples:** After completing this interactive [hands-on lab](4-week1-lab.md), take a look at [Week 1 Prompt Examples](5-Week1-Prompts.md) to see how to craft effective prompts for GitHub Copilot.
+- **Week 1 Prompt Examples:** After completing this hands-on lab, take a look at [Week 1 Prompt Examples](4-Week1-Prompts.md) to see how to craft effective prompts for GitHub Copilot.

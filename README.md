@@ -1,5 +1,7 @@
 # GitHub Copilot Training Program
 
+**Last Updated:** 22/02/2026
+
 A comprehensive 4-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, DevOps automation, and ethical AI practices.
 
 ## Table of Contents
@@ -7,29 +9,28 @@ A comprehensive 4-week curriculum designed to help developers master GitHub Copi
 - [About This Training](#about-this-training)
 - [Curriculum](#curriculum)
   - [Week 1: Introduction and Developer Workflow Essentials](#week-1-introduction-and-developer-workflow-essentials)
-    - [1. Understanding GitHub Copilot](#1-understanding-github-copilot-30-minutes)
-    - [2. Setup and Configuration](#2-setup-and-configuration-30-minutes)
-    - [3. GitHub Copilot Interaction Modes](#3-github-copilot-interaction-modes-15-minutes)
-    - [4. Hands-On Lab: Getting Started with GitHub Copilot](#4-hands-on-lab-getting-started-with-github-copilot-45-60-minutes)
-    - [5. Week 1 Prompt Examples](#5-week-1-prompt-examples-reference-guide-self-study)
+    - [1. Understanding GitHub Copilot](#1-understanding-github-copilot-45-60-minutes)
+    - [2. Setup, Configuration, and Interaction Modes](#2-setup-configuration-and-interaction-modes-45-60-minutes)
+    - [3. Hands-On Lab: Getting Started with GitHub Copilot](#3-hands-on-lab-getting-started-with-github-copilot-45-60-minutes)
+    - [4. Week 1 Prompt Examples](#4-week-1-prompt-examples-reference-guide-self-study)
     - [Week 1 Feedback](#week-1-feedback)
   - [Week 2: Advanced Development and Support Use Cases](#week-2-advanced-development-and-support-use-cases)
-    - [1. Prompt Engineering Best Practices](#1-prompt-engineering-best-practices-45-60-minutes)
-    - [2. Advanced Developer Workflow](#2-advanced-developer-workflow-30-45-minutes)
+    - [1. Prompt Engineering and Customisation](#1-prompt-engineering-and-customisation-45-60-minutes)
+    - [2. Customisation in Practice](#2-customisation-in-practice-45-60-minutes)
     - [3. Hands-On Lab: Customise Your Copilot Experience](#3-hands-on-lab-customise-your-copilot-experience-30-45-minutes)
     - [4. Week 2 Prompt Examples](#4-week-2-prompt-examples-reference-guide-self-study)
     - [Week 2 Feedback](#week-2-feedback)
   - [Week 3: DevOps and Testing with Copilot](#week-3-devops-and-testing-with-copilot)
-    - [1. DevOps Automation](#1-devops-automation-30-45-minutes)
-    - [2. Testing and Quality Assurance](#2-testing-and-quality-assurance-30-45-minutes)
-    - [3. Hands-On Lab: DevOps and Testing](#3-hands-on-lab-devops-and-testing-60-90-minutes)
+    - [1. GitHub Copilot CLI for DevOps Automation](#1-github-copilot-cli-for-devops-automation-45-60-minutes)
+    - [2. Testing and Quality Assurance with Copilot CLI](#2-testing-and-quality-assurance-with-copilot-cli-45-60-minutes)
+    - [3. Hands-On Lab: Create Applications with the Copilot CLI](#3-hands-on-lab-create-applications-with-the-copilot-cli-60-90-minutes)
     - [4. Week 3 Prompt Examples](#4-week-3-prompt-examples-reference-guide-self-study)
     - [Week 3 Feedback](#week-3-feedback)
   - [Week 4: Refactoring, Optimisation, and Ethical Practices](#week-4-refactoring-optimisation-and-ethical-practices)
     - [1. Refactoring Large Codebases](#1-refactoring-large-codebases-30-45-minutes)
     - [2. Quality Refinements and Standards](#2-quality-refinements-and-standards-30-45-minutes)
     - [3. Ethical and Security Considerations](#3-ethical-and-security-considerations-30-45-minutes)
-    - [4. Hands-On Lab: Collaborative Refactoring](#4-hands-on-lab-collaborative-refactoring-45-60-minutes)
+    - [4. Hands-On Lab: Collaborative Refactoring](#4-hands-on-lab-collaborative-refactoring-90-120-minutes)
     - [5. Week 4 Prompt Examples](#5-week-4-prompt-examples-reference-guide-self-study)
     - [Week 4 Feedback](#week-4-feedback)
 - [Additional Resources](#additional-resources)
@@ -48,11 +49,13 @@ This training program is structured as a progressive learning journey, taking pa
 
 ### Week 1: Introduction and Developer Workflow Essentials
 
-**Duration:** 2-2.5 hours
+**Duration:** 2-3 hours
 
 **Objective:** Establish a foundational understanding of GitHub Copilot and introduce core workflows for developers.
 
-#### 1. Understanding GitHub Copilot (30 minutes)
+> **Note:** Copilot features (Ask/Edit/Agent/Plan, shortcuts, and advanced capabilities) vary by IDE and version. Use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth.
+
+#### 1. Understanding GitHub Copilot (45-60 minutes)
 
 - Overview of its purpose, architecture, and AI-driven capabilities
 - Supported languages, frameworks, and environments
@@ -61,35 +64,29 @@ This training program is structured as a progressive learning journey, taking pa
 
 **Content:** [1. Understanding GitHub Copilot](Workshops/Week1/1-Understanding-GitHub-Copilot.md)
 
-#### 2. Setup and Configuration (30 minutes)
+#### 2. Setup, Configuration, and Interaction Modes (45-60 minutes)
 
 - Installation and setup in multiple IDEs (VS Code - Demo)
 - Configuring authentication and preferences
 - Basic commands and UI navigation
+- Understanding the four core modes: Ask, Edit, Agent, and Plan
+- When and how to use each mode effectively
+- Custom Agents and Extensions overview
 - Troubleshooting common issues
 - Best practices for setup
 
-**Content:** [2. Setup and Configuration](Workshops/Week1/2-Setup-and-Configuration.md)
+**Content:** [2. Setup, Configuration, and Interaction Modes](Workshops/Week1/2-Setup-and-Configuration.md)
 
-#### 3. GitHub Copilot Interaction Modes (15 minutes)
-
-- Understanding the four core modes: Ask, Edit, Agent, and Plan
-- When and how to use each mode
-- Custom Agents and Extensions
-- Selecting the right mode for different tasks
-
-**Content:** [3. GitHub Copilot Interaction Modes](Workshops/Week1/3-GitHub-Copilot-Interaction-Modes.md)
-
-#### 4. Hands-On Lab: Getting Started with GitHub Copilot (45-60 minutes)
+#### 3. Hands-On Lab: Getting Started with GitHub Copilot (45-60 minutes)
 
 - Learn different ways to interact with Copilot to explain, write, debug, and develop code
 - Practical application by updating Mergington High School's extracurricular activities website
 - Guided exercises covering all interaction modes
 - Real-world problem-solving scenarios
 
-**Content:** [4. Hands-On Lab: Getting Started with GitHub Copilot](Workshops/Week1/4-week1-lab.md)
+**Content:** [3. Hands-On Lab: Getting Started with GitHub Copilot](Workshops/Week1/3-Week1-Lab.md)
 
-#### 5. Week 1 Prompt Examples (Reference Guide Self Study)
+#### 4. Week 1 Prompt Examples (Reference Guide Self Study)
 
 - Inline code completions and function suggestions
 - Ask mode for code explanations and learning
@@ -99,7 +96,7 @@ This training program is structured as a progressive learning journey, taking pa
 - Debugging assistance techniques
 - Documentation generation patterns
 
-**Content:** [5. Week 1 Prompt Examples](Workshops/Week1/5-Week1-Prompts.md)
+**Content:** [4. Week 1 Prompt Examples](Workshops/Week1/4-Week1-Prompts.md)
 
 #### Week 1 Feedback
 
@@ -110,40 +107,44 @@ This training program is structured as a progressive learning journey, taking pa
 
 ### Week 2: Advanced Development and Support Use Cases
 
-**Duration:** 2 to 4 hours (1 session)
+**Duration:** 2 to 4 hours
 
 **Objective:** Dive deeper into advanced use cases for developers and introduce Copilot as a support tool for maintaining high-quality standards.
 
 #### Reflection
 Before starting Week 2, please complete your Week 1 reflections if you haven't already: [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
-#### 1. Prompt Engineering Best Practices (45-60 minutes)
+#### 1. Prompt Engineering and Customisation (45-60 minutes)
 
 - Introduction to **prompt engineering**: crafting effective comments and instructions to guide Copilot
 - The CRAFT framework for structuring prompts
 - Writing effective prompts for code explanation and generation
-- Generating code aligned with organizational standards (Instruction files and style guides)
+- Generating code aligned with organisational standards using the three pillars of customisation:
+  - **Instruction files** (`.instructions.md`) for project-wide conventions
+  - **Prompt files** (`.prompt.md`) for reusable task templates
+  - **Custom agent files** (`.agent.md`) for specialised personas with scoped tools and handoffs
 - Incorporating pre-emptive security recommendations
-- Practical prompt exercises with examples
+- Practical prompt exercises with examples (including custom agent creation)
 
-**Content:** [1. Prompt Engineering Best Practices](Workshops/Week2/1-Prompt-Engineering-Best-Practices.md)
+**Content:** [1. Prompt Engineering and Customisation](Workshops/Week2/1-Prompt-Engineering-and-Customisation.md)
 
-#### 2. Advanced Developer Workflow (30-45 minutes)
+#### 2. Customisation in Practice (45-60 minutes)
 
+- Applying instruction files, prompt files, and custom agents to real developer workflows
 - Documentation generation with Copilot (JSDoc, README, API docs)
 - The Review-Refine-Iterate cycle for improving suggestions
 - Refining Copilot suggestions for scoped, maintainable code
 - Debugging with Copilot assistance
 - Progressive refinement techniques
 
-**Content:** [2. Advanced Developer Workflow](Workshops/Week2/2-Advanced-Developer-Workflow.md)
+**Content:** [2. Customisation in Practice](Workshops/Week2/2-Customisation-in-Practice.md)
 
 #### 3. Hands-On Lab: Customise Your Copilot Experience (30-45 minutes)
 
 - Set up repository-wide custom instructions
 - Create targeted custom instructions for specific file types
 - Build reusable prompt templates for common tasks
-- Configure custom agents for specialized workflows
+- Configure custom agents for specialised workflows
 - Practice customising your Copilot experience
 
 **Content:** [3. Hands-On Lab: Customise Your Copilot Experience](Workshops/Week2/3-Week2-Lab.md)
@@ -171,43 +172,51 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 
 **Duration:** 2 to 2.5 hours (1 session)
 
-**Objective:** Equip participants to use Copilot for DevOps automation and testing to streamline software delivery and improve code reliability.
+**Objective:** Equip participants to use Copilot — in the IDE and the CLI — for CI/CD automation and testing, with the Copilot CLI integrated into every topic rather than treated as a standalone tool.
 
 #### Reflection
 Before starting Week 3, please complete your Week 2 reflections if you haven't already: [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
-#### 1. DevOps Automation (30-45 minutes)
+#### 1. GitHub Copilot CLI for DevOps Automation (45-60 minutes)
 
-- CI/CD pipeline generation: automating setup and integration
-- Infrastructure and configuration as code (Docker, Kubernetes, Terraform)
-- Pre-review validation for deployment readiness
+- Copilot CLI quick start: installation (WinGet, Homebrew, npm), slash commands, and headless mode
+- Interactive vs programmatic modes and session management
+- CI/CD pipeline generation from the IDE and the CLI
+- Infrastructure as Code (Docker, Kubernetes, Terraform) with CLI generation
+- Incident response and log analysis from the terminal
+- Built-in agents (Explore, Task, Plan, Code-review) and context management
+- Pre-review validation for deployment readiness (including CLI-powered checks)
+- Effective DevOps prompting patterns, security permissions, and `/delegate` workflow
 
-**Content:** [1. DevOps Automation](Workshops/Week3/1-DevOps-Automation.md)
+**Content:** [1. GitHub Copilot CLI for DevOps Automation](Workshops/Week3/1-DevOps-Automation.md)
 
-#### 2. Testing and Quality Assurance (30-45 minutes)
+#### 2. Testing and Quality Assurance with Copilot CLI (45-60 minutes)
 
-- Unit test generation for new and existing code
-- Ensuring repeatable test coverage for templated projects
-- Test optimisation and conversion techniques
+- Unit test generation from the IDE and the CLI
+- Ensuring repeatable test coverage with CLI gap analysis
+- Test optimisation and parameterisation
+- Framework conversion (with full examples in Week 3 Prompts)
+- Quality assurance checklists and testing best practices
 
-**Content:** [2. Testing and Quality Assurance](Workshops/Week3/2-Testing-and-Quality-Assurance.md)
+**Content:** [2. Testing and Quality Assurance with Copilot CLI](Workshops/Week3/2-Testing-and-Quality-Assurance.md)
 
-#### 3. Hands-On Lab: DevOps and Testing (60-90 minutes)
+#### 3. Hands-On Lab: Create Applications with the Copilot CLI (60-90 minutes)
 
-- Create CI/CD pipelines using Copilot
-- Generate Docker and Kubernetes configurations
-- Build comprehensive test suites with coverage
-- Practice test framework conversion
+- Install and configure the standalone GitHub Copilot CLI
+- Use Copilot CLI to create GitHub issues from templates
+- Build a Node.js calculator application with iterative CLI guidance
+- Practice collaborative development with Copilot on the command line
+- Explore `/delegate` and `/share` commands
 
-**Content:** [3. Hands-On Lab: DevOps and Testing](Workshops/Week3/3-Week3-Lab.md)
+**Content:** [3. Hands-On Lab: Create Applications with the Copilot CLI](Workshops/Week3/3-Week3-Lab.md)
 
 #### 4. Week 3 Prompt Examples (Reference Guide Self Study)
 
-- CI/CD pipeline generation for GitHub Actions and GitLab CI
-- Infrastructure as Code (Docker, Kubernetes, Terraform)
-- Test generation with coverage requirements
+- CI/CD pipeline generation for GitHub Actions and GitLab CI (IDE and CLI)
+- Infrastructure as Code (Docker, Kubernetes, Terraform) with CLI generation
+- Test generation with coverage requirements and CLI gap analysis
 - Validation and security scanning prompts
-- Test optimisation and framework conversion
+- Test optimisation and framework conversion with CLI bulk operations
 
 **Content:** [4. Week 3 Prompt Examples](Workshops/Week3/4-Week3-Prompts.md)
 
@@ -220,7 +229,7 @@ Before starting Week 3, please complete your Week 2 reflections if you haven't a
 
 ### Week 4: Refactoring, Optimisation, and Ethical Practices
 
-**Duration:** 2 to 2.5 hours (1 session or 3 × 30-45 minutes)
+**Duration:** 3 to 4.5 hours (1 session or 3 × 30-45 minutes)
 
 **Objective:** Focus on enhancing code quality through refactoring, fostering ethical AI use, and reinforcing long-term Copilot adoption.
 
@@ -230,6 +239,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 #### 1. Refactoring Large Codebases (30-45 minutes)
 
 - Understanding and navigating legacy code
+- Using semantic search to map and explore large codebases
 - Incremental refactoring strategies (extract, rename, modernise)
 - Improving readability, maintainability, and performance
 - Prompting patterns for complex refactoring
@@ -254,7 +264,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 
 **Content:** [3. Ethical and Security Considerations](Workshops/Week4/3-Ethical-and-Security-Considerations.md)
 
-#### 4. Hands-On Lab: Collaborative Refactoring (45-60 minutes)
+#### 4. Hands-On Lab: Collaborative Refactoring (90-120 minutes)
 
 - Legacy code assessment and documentation
 - Incremental refactoring with test coverage
@@ -284,6 +294,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 ## Additional Resources
 
 - [IDE Support Guide](FAQ/IDE-support.md) - Detailed information on Copilot features per IDE
+- [Language Support](FAQ/language-support.md) - Language-specific limitations, best practices, and integration guidance
 - [Facilitator Guide](FAQ/facilitator-guide.md) - For trainers delivering this curriculum
 - [Participant Quickstart](FAQ/participant-quickstart.md) - Quick reference for participants
 
@@ -299,4 +310,3 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 
 ---
 
-**Curriculum updated:** January 30, 2026

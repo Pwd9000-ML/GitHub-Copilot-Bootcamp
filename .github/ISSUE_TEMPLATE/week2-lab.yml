@@ -14,8 +14,8 @@ body:
     attributes:
       label: Tasks
       options:
-        - label: Read `Workshops/Week2/1-Prompt-Engineering-Best-Practices.md`
-        - label: Read `Workshops/Week2/2-Advanced-Developer-Workflow.md`
+        - label: Read `Workshops/Week2/1-Prompt-Engineering-and-Customisation.md`
+        - label: Read `Workshops/Week2/2-Customisation-in-Practice.md`
         - label: Complete the hands-on lab in `Workshops/Week2/3-Week2-Lab.md`
         - label: Review prompt examples in `Workshops/Week2/4-Week2-Prompts.md`
     validations:

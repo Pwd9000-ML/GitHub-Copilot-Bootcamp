@@ -58,6 +58,86 @@ function processData(d, f, x) {
 - Code smells: unclear variable names, mutable state, imperative style
 - Suggestions: use descriptive names, modern array methods, TypeScript types
 
+#### Navigating Large Codebases with Semantic Search
+
+GitHub Copilot Agent mode includes a built-in `semantic_search` tool that searches your codebase by meaning rather than exact text matches. This is especially valuable when exploring unfamiliar or large codebases before making refactoring changes, as it understands intent and context rather than relying on keywords alone.
+
+**When to use `semantic_search`:**
+
+| Use Case | Example Query |
+|----------|---------------|
+| Find all usages of a concept | *"Find all places where database connections are opened directly"* |
+| Locate related patterns | *"Find functions that validate user input"* |
+| Impact analysis before renaming | *"Find everything related to order calculations"* |
+| Discover inconsistencies | *"Find all error handling patterns in this codebase"* |
+
+**Using `#codebase` in Agent Mode**
+
+In Copilot Chat (Ask or Agent mode), reference the entire workspace with `#codebase` to trigger semantic search across all files:
+
+**Prompt:**
+```text
+#codebase Find all places where error handling is missing or inconsistent.
+List each location with the file path and a brief description of the issue.
+```
+
+**Expected behaviour:**
+- Copilot searches semantically across all workspace files
+- Returns a ranked list of relevant code locations with context
+- Groups similar issues together for easier prioritisation
+
+**Impact Analysis Before Refactoring**
+
+Use semantic search to understand the full scope of a change before making it:
+
+**Prompt:**
+```text
+Before I refactor the 'processOrder' function, use semantic search to find:
+1. All direct callers of this function
+2. Any functions with similar logic that could be consolidated
+3. Tests that cover this function
+4. Any documentation or comments that reference it
+
+Provide a summary so I can plan the refactoring safely.
+```
+
+**Expected Analysis:**
+- Direct callers identified across multiple files
+- Related functions that share logic highlighted for potential consolidation
+- Test coverage gaps identified
+- Documentation that will need updating listed
+
+**Enabling Semantic Search in Prompt Files**
+
+You can explicitly include `semantic_search` in a prompt file to create a reusable refactoring discovery workflow:
+
+**`.github/prompts/refactor-discovery.prompt.md`:**
+```markdown
+---
+agent: 'agent'
+name: 'refactor-discovery'
+description: 'Discover refactoring opportunities using semantic codebase analysis'
+tools: ['semantic_search', 'read_file']
+---
+
+# Refactoring Discovery
+
+Search the codebase for the following common refactoring opportunities and provide
+a prioritised list of findings:
+
+1. Functions with more than three parameters that could use object destructuring
+2. Direct database or API calls outside of dedicated service or repository layers
+3. Hardcoded configuration values that should use environment variables
+4. Duplicated logic that could be extracted into shared utilities
+
+For each finding, include the file path, function name, and a brief explanation
+of why it needs refactoring.
+```
+
+> **Note:** Replace `read_file` or add additional tools as needed for your specific workflow. See [VS Code prompt file tools](https://code.visualstudio.com/docs/copilot/chat/chat-tools) for the full list of available built-in tools.
+
+---
+
 #### Identifying Code Smells
 
 **Prompt:**
@@ -119,7 +199,7 @@ function calc(a, b, c) {
     let x = a * b;
     let y = x + c;
     let z = y * 0.2;
-    return y - z;
+    return y + z;
 }
 ```
 
@@ -133,20 +213,20 @@ Refactor this function with:
 
 **Refactored Output:**
 ```javascript
-const TAX_RATE = 0.2;
+const VAT_RATE = 0.2;
 
 /**
- * Calculates the net price after applying tax discount.
+ * Calculates the total price including VAT.
  * @param {number} quantity - Number of items
  * @param {number} unitPrice - Price per item
  * @param {number} shipping - Shipping cost
- * @returns {number} Final price after tax discount
+ * @returns {number} Final price including VAT
  */
-function calculateNetPrice(quantity, unitPrice, shipping) {
+function calculateTotalPriceIncludingVat(quantity, unitPrice, shipping) {
     const subtotal = quantity * unitPrice;
     const totalBeforeTax = subtotal + shipping;
-    const taxDiscount = totalBeforeTax * TAX_RATE;
-    return totalBeforeTax - taxDiscount;
+    const vatAmount = totalBeforeTax * VAT_RATE;
+    return totalBeforeTax + vatAmount;
 }
 ```
 
@@ -580,11 +660,12 @@ Modernise this [language] code to use current best practices:
 ## Key Takeaways
 
 1. **Understand before refactoring** - Use Copilot to explain complex code first
-2. **Refactor incrementally** - Small, testable changes are safer than big rewrites
-3. **Maintain tests** - Generate tests before refactoring to ensure behaviour is preserved
-4. **Document decisions** - Have Copilot generate comments explaining why code was changed
-5. **Review suggestions critically** - Copilot suggestions may not always be optimal for your context
-6. **Measure improvements** - Use metrics to verify refactoring actually improved the code
+2. **Use semantic search to map the codebase** - Run `semantic_search` in Agent mode (or use `#codebase`) to find all related code before making changes
+3. **Refactor incrementally** - Small, testable changes are safer than big rewrites
+4. **Maintain tests** - Generate tests before refactoring to ensure behaviour is preserved
+5. **Document decisions** - Have Copilot generate comments explaining why code was changed
+6. **Review suggestions critically** - Copilot suggestions may not always be optimal for your context
+7. **Measure improvements** - Use metrics to verify refactoring actually improved the code
 
 ---
 

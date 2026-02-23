@@ -121,6 +121,8 @@ Is there a more modern JavaScript syntax for this code?
 
 ## 3. Edit Mode - Code Modifications
 
+> **Note:** Edit mode is not available in every IDE. If you don’t see **Edit** in your Copilot Chat agents dropdown, check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+
 Edit mode enables controlled modifications to specific files in your working set.
 
 - Select Edit from the agents dropdown in Copilot Chat
@@ -178,6 +180,8 @@ Fix the memory leak in this event listener
 
 ## 4. Agent Mode - Multi-File Changes
 
+> **Note:** Agent mode availability varies by IDE/version and may depend on policy settings. If you don’t see **Agent** in your Copilot Chat agents dropdown, check the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+
 Agent mode allows Copilot to autonomously determine and execute multi-step tasks.
 
 - Select Agent from the agents dropdown in Copilot Chat
@@ -205,10 +209,10 @@ Add form validation across the login form:
 - Error message constants in constants file
 ```
 
-#### Code Organization
+#### Code Organisation
 
 ```text
-Reorganize the authentication code:
+Reorganise the authentication code:
 - Move auth functions to auth/index.ts
 - Create types in auth/types.ts
 - Update all imports across the project
@@ -219,6 +223,8 @@ Reorganize the authentication code:
 ---
 
 ## 5. Plan Mode - Implementation Planning
+
+> **Note:** Plan mode is not listed as a separate feature in the official [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix). It is available as an option within the Copilot Chat panel in VS Code and may be integrated into Agent mode workflows in other environments. Availability and behaviour may change as features evolve.
 
 Plan mode helps you think through tasks before executing by creating detailed implementation plans.
 
@@ -382,5 +388,5 @@ Please complete the following reflections after completing Week 1 activities:
 ## Next Steps
 
 After mastering these basic prompting techniques and workflows in Week 1, we will explore more advanced strategies in Week 2 to further enhance your productivity with GitHub Copilot.
-**[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-Best-Practices.md)**
+**[← Back to Main README](../../README.md)** | **[Continue to Week 2 →](../Week2/1-Prompt-Engineering-and-Customisation.md)**
 

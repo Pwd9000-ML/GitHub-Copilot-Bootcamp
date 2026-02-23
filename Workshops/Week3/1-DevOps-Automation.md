@@ -1,20 +1,119 @@
-# DevOps Automation with GitHub Copilot
+# GitHub Copilot CLI for DevOps Automation
 
-**Duration:** 30-45 minutes  
+**Duration:** 45-60 minutes  
 **Format:** Presentation with interactive demonstrations  
-**Objective:** Learn to leverage GitHub Copilot for automating CI/CD pipelines, generating Infrastructure as Code, and ensuring deployment readiness.
+**Objective:** Learn to leverage the standalone GitHub Copilot CLI, alongside the IDE, for automating CI/CD pipelines, generating Infrastructure as Code, and validating deployments.
 
 ---
 
 ## Session Overview
 
-DevOps automation is one of Copilot's strongest use cases. The repetitive nature of pipeline configurations, infrastructure definitions, and validation scripts makes them ideal for AI-assisted generation.
+DevOps automation is one of Copilot's strongest use cases. The repetitive nature of pipeline configurations, infrastructure definitions, and validation scripts makes them ideal for AI-assisted generation. In this session you will use both the **VS Code Chat** experience and the standalone **Copilot CLI** side by side, learning when each tool fits best.
 
 **What you'll learn:**
-- Generate CI/CD pipelines for various platforms
-- Create Infrastructure as Code (IaC) configurations
+- Install Copilot CLI (WinGet, Homebrew, npm) and understand interactive vs programmatic modes
+- Use built-in agents, session management, context management, and security permissions
+- Generate CI/CD pipelines for various platforms, from the IDE and the CLI
+- Create Infrastructure as Code (IaC) configurations (Docker, Kubernetes, Terraform)
+- Perform incident response and log analysis from the terminal
 - Build pre-deployment validation scripts
-- Apply DevOps best practices through effective prompting
+- Use headless mode to embed Copilot in scripts and pipelines
+- Delegate generated work to pull requests with `/delegate`
+
+---
+
+## Copilot CLI Quick Start
+
+The standalone Copilot CLI brings agentic AI to your terminal, where DevOps work already happens. Instead of covering the CLI in isolation, we use it throughout every topic below alongside the VS Code Chat experience.
+
+> **Note:** The standalone GitHub Copilot CLI replaces the retired `gh copilot` extension. It is a separate application, not a GitHub CLI extension. See [GitHub Copilot CLI documentation](https://docs.github.com/en/copilot/github-copilot-in-the-cli) for details.
+
+**Prerequisites:** An active GitHub Copilot subscription (Pro, Pro+, Business, or Enterprise). Node.js 22+ is required for the npm installation method.
+
+```bash
+# Option 1: Windows (WinGet)
+winget install GitHub.Copilot
+
+# Option 2: macOS/Linux (Homebrew)
+brew install copilot-cli
+
+# Option 3: npm (macOS, Linux, or Windows, requires Node.js 22+)
+npm install -g @github/copilot
+
+# Verify installation
+copilot --version
+
+# Authenticate with GitHub
+copilot /login
+```
+
+### Interactive vs Programmatic Modes
+
+Copilot CLI supports two main usage patterns:
+
+- **Interactive mode:** Launch `copilot` with no arguments to open a conversational session. Use slash commands to navigate context, delegate tasks, and manage agents.
+- **Programmatic (headless) mode:** Pass a prompt directly with flags for non-interactive use in scripts, Makefiles, pre-commit hooks, and CI pipeline steps. Example: `copilot --allow-all-tools -p "your prompt"`.
+
+### Key Slash Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/delegate` | Create a PR with generated changes |
+| `/agent` | Use built-in or custom agents (e.g. `Explore`, `Task`, `Plan`, `Code-review`) |
+| `/mcp` | Manage MCP servers (GitHub repos, issues, PRs) |
+| `/share` | Export session as Markdown |
+| `/cwd` | Change working directory |
+| `/add-dir` | Add directory to context |
+| `/model` | Switch AI model |
+| `/terminal-setup` | Configure terminal integration |
+| `/usage` | Show current token usage |
+| `/context` | Display loaded context and files |
+| `/compact` | Compress session context (auto-triggers at 95% token limit) |
+
+### Session Management
+
+Resume or continue previous sessions to maintain context across terminal restarts:
+
+```bash
+# Continue the most recent session
+copilot --continue
+
+# Resume a specific past session by selecting from history
+copilot --resume
+```
+
+### Built-in Agents
+
+Call built-in agents via the `/agent` command for specialised workflows:
+
+| Agent | Purpose |
+|-------|---------|
+| `Explore` | Open-ended research and exploration |
+| `Task` | Execute a specific, well-defined task |
+| `Plan` | Break a goal into steps and produce an implementation plan |
+| `Code-review` | Review code for bugs, style issues, and improvements |
+
+```bash
+copilot
+> /agent Code-review Review all Terraform files in ./infrastructure for security issues and best practices
+```
+
+### Security Permissions
+
+By default, Copilot CLI asks before executing any tool. Use granular `--allow-tool` flags to pre-approve specific tools in headless or CI scenarios:
+
+```bash
+# Allow only kubectl and helm commands
+copilot --allow-tool 'shell(kubectl)' --allow-tool 'shell(helm)' -p "Check the health of all pods in the staging namespace"
+
+# Allow all tools (use with caution, appropriate for trusted CI environments)
+copilot --allow-all-tools -p "your prompt"
+
+# Allow specific URL access
+copilot --allow-url 'https://api.github.com/*' -p "Fetch the latest release for my repo"
+```
+
+> **Tip:** In production CI pipelines, prefer granular `--allow-tool` flags over `--allow-all-tools` to follow the principle of least privilege.
 
 ---
 
@@ -139,13 +238,13 @@ Add a step to notify the team on Slack when the build succeeds or fails.
         with:
           payload: |
             {
-              "text": "Build ${{ job.status }}: ${{ github.repository }}",
+              "text": "Build ${{ needs.build.result }}: ${{ github.repository }}",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Build Status:* ${{ job.status }}\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref_name }}\n*Commit:* ${{ github.sha }}"
+                    "text": "*Build Result:* ${{ needs.build.result }}\n*Staging Deploy Result:* ${{ needs['deploy-staging'].result }}\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref_name }}\n*Commit:* ${{ github.sha }}"
                   }
                 }
               ]
@@ -157,6 +256,29 @@ Add a step to notify the team on Slack when the build succeeds or fails.
 ---
 
 ### Platform-Specific Pipeline Prompts
+
+#### Terminal (Copilot CLI)
+
+Generate pipelines directly from the terminal, no IDE required:
+
+**Interactive mode:**
+```bash
+copilot
+> Create a GitHub Actions workflow for a Node.js 20 app that builds, tests with coverage, lints, and deploys to Azure App Service on main branch. Include caching and matrix strategy for Node 18 and 20.
+```
+
+**Headless mode (scriptable):**
+```bash
+# Generate and save directly
+copilot --allow-all-tools -p "Create a GitHub Actions workflow for a Node.js app with build, test, linting, and deployment to staging on main" > .github/workflows/ci.yml
+
+# Generate and create a PR in one flow
+copilot
+> Create a GitHub Actions CI/CD pipeline for this repo with build, test, and deploy stages
+> /delegate
+```
+
+The `/delegate` command is particularly powerful for DevOps. It creates a pull request with all the generated files, adds a description, and submits it for review.
 
 #### Azure DevOps
 
@@ -229,32 +351,7 @@ Copilot understands major IaC tools and cloud provider APIs:
 Create a Dockerfile for a Node.js application running on port 3000.
 ```
 
-**Expected Output:**
-```dockerfile
-# Use official Node.js runtime as base image
-FROM node:20-alpine
-
-# Set working directory
-WORKDIR /app
-
-# Copy package files first for better caching
-COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy application source
-COPY . .
-
-# Expose port
-EXPOSE 3000
-
-# Set non-root user for security
-USER node
-
-# Start the application
-CMD ["node", "src/index.js"]
-```
+Copilot generates a production-ready Dockerfile using `node:20-alpine` as the base image, with `npm ci --omit=dev` for efficient dependency installation, a non-root `USER node` directive for security, and an `EXPOSE 3000` port declaration.
 
 #### Multi-Stage Dockerfile
 
@@ -263,37 +360,7 @@ CMD ["node", "src/index.js"]
 Create a multi-stage Dockerfile for a React application with nginx serving the production build.
 ```
 
-**Expected Output:**
-```dockerfile
-# Build stage
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci
-
-COPY . .
-RUN npm run build
-
-# Production stage
-FROM nginx:alpine
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Copy built assets from builder stage
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
-
-CMD ["nginx", "-g", "daemon off;"]
-```
+Copilot produces a two-stage build: a `node:20-alpine` builder stage that installs dependencies and runs `npm run build`, followed by an `nginx:alpine` production stage that copies the built assets, adds a health check, and serves on port 80.
 
 ---
 
@@ -304,47 +371,7 @@ CMD ["nginx", "-g", "daemon off;"]
 Create a docker-compose.yml file for a Node.js app with MongoDB and Redis for development.
 ```
 
-**Expected Output:**
-```yaml
-version: '3.8'
-
-services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=development
-      - MONGODB_URI=mongodb://mongo:27017/myapp
-      - REDIS_URL=redis://redis:6379
-    volumes:
-      - .:/app
-      - /app/node_modules
-    depends_on:
-      - mongo
-      - redis
-    restart: unless-stopped
-
-  mongo:
-    image: mongo:7
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=myapp
-
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-volumes:
-  mongo_data:
-  redis_data:
-```
+Copilot generates a complete Compose file with three services (app, mongo, redis), volume mounts for live reloading and data persistence, environment variable wiring between containers, and port mappings for local development.
 
 ---
 
@@ -357,67 +384,7 @@ volumes:
 Generate a Kubernetes deployment YAML file for a Node.js app with 3 replicas, resource limits, and health checks.
 ```
 
-**Expected Output:**
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nodejs-app
-  labels:
-    app: nodejs-app
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nodejs-app
-  template:
-    metadata:
-      labels:
-        app: nodejs-app
-    spec:
-      containers:
-        - name: nodejs-app
-          image: myregistry/nodejs-app:latest
-          ports:
-            - containerPort: 3000
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 3000
-            initialDelaySeconds: 5
-            periodSeconds: 5
-          env:
-            - name: NODE_ENV
-              value: "production"
-            - name: PORT
-              value: "3000"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nodejs-app-service
-spec:
-  selector:
-    app: nodejs-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
-  type: ClusterIP
-```
+Copilot outputs a Deployment manifest with 3 replicas, CPU/memory resource requests and limits, liveness and readiness probes on `/health` and `/ready` endpoints, environment variables, and a companion ClusterIP Service on port 80 targeting container port 3000.
 
 ---
 
@@ -428,95 +395,87 @@ spec:
 Generate a Terraform configuration to provision an AWS EC2 instance with a security group allowing HTTP and SSH access.
 ```
 
-**Expected Output:**
-```hcl
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
+Copilot generates a complete Terraform configuration including provider setup, input variables for region and instance type, a security group with HTTP/SSH ingress rules, an EC2 instance referencing the latest Amazon Linux 2 AMI via a data source, and an output for the public IP.
 
-provider "aws" {
-  region = var.aws_region
-}
+> **Tip:** For full code examples of each IaC prompt above, see the [Week 3 Prompts](4-Week3-Prompts.md) reference guide.
 
-variable "aws_region" {
-  description = "AWS region"
-  default     = "eu-west-2"
-}
+---
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  default     = "t3.micro"
-}
+### Generating IaC from the CLI
 
-# Security Group
-resource "aws_security_group" "app_sg" {
-  name        = "app-security-group"
-  description = "Allow HTTP and SSH traffic"
+The CLI excels at IaC because you can work directly in the directory where configs live:
 
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+```bash
+# Navigate to your infrastructure directory
+copilot
+> /cwd ./infrastructure
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Restrict in production
-  }
+# Generate Docker, K8s, and Terraform in context
+> Create a production Dockerfile for the Node.js app in the parent directory. Use multi-stage build, non-root user, and health checks.
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+# Add multiple directories for cross-referencing
+> /add-dir ./k8s
+> /add-dir ./terraform
+> Review all infrastructure configs and ensure consistency between Docker, Kubernetes, and Terraform resource definitions.
+```
 
-  tags = {
-    Name = "app-security-group"
-  }
-}
+**Headless IaC generation:**
+```bash
+# Generate a Dockerfile
+copilot --allow-all-tools -p "Create a production multi-stage Dockerfile for a Node.js Express app on port 3000 with security best practices" > Dockerfile
 
-# EC2 Instance
-resource "aws_instance" "app_server" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = var.instance_type
+# Generate Kubernetes manifests
+copilot --allow-all-tools -p "Create K8s deployment, service, and HPA for a Node.js app with 3 replicas, health checks, and resource limits" > k8s/deployment.yml
 
-  vpc_security_group_ids = [aws_security_group.app_sg.id]
-
-  tags = {
-    Name = "app-server"
-  }
-}
-
-# Get latest Amazon Linux 2 AMI
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
-}
-
-output "instance_public_ip" {
-  value = aws_instance.app_server.public_ip
-}
+# Generate and submit as a PR
+copilot
+> Generate Terraform configuration for an AWS VPC with public/private subnets, ALB, and ECS Fargate cluster
+> /delegate
 ```
 
 ---
 
-## 3. Pre-Review Validation for Deployment
+## 3. Incident Response and Log Analysis
+
+The CLI is particularly powerful for incident response, where speed matters and you are already working in the terminal.
+
+### Analysing Logs from the Terminal
+
+```bash
+# Pipe logs directly into Copilot for analysis, using least privilege as no tools are required for this task
+copilot -p "Analyse these Kubernetes pod logs and identify the root cause of the crash loop" < /tmp/pod-logs.txt
+
+# Interactive incident investigation
+copilot
+> /add-dir ./logs
+> Analyse the error patterns in these application logs. Identify the most frequent errors, their likely root causes, and suggest fixes in priority order.
+```
+
+### Correlating Across Services
+
+```bash
+copilot
+> /add-dir ./logs/api
+> /add-dir ./logs/worker
+> /add-dir ./logs/gateway
+> Correlate errors across these three services. Identify the timeline of failures and determine which service triggered the cascade.
+```
+
+### Quick Diagnostics
+
+```bash
+# Check cluster health and diagnose issues
+copilot --allow-tool 'shell(kubectl)' -p "List all pods in CrashLoopBackOff state across all namespaces, then fetch their logs and suggest fixes"
+
+# Headless monitoring check
+copilot --allow-tool 'shell(curl)' -p "Check the health endpoints for these services: api:3000/health, web:8080/health, worker:5000/health. Report any that are down."
+```
+
+> **Tip:** During incidents, use `copilot --continue` to maintain context across multiple terminal sessions as you investigate.
+
+---
+
+## 4. Pre-Review Validation for Deployment
 
 ### Why Validation Matters
 
@@ -528,133 +487,50 @@ Pre-deployment validation catches issues early:
 
 ### Validation Script Generation
 
-#### YAML Validation
+Use Copilot to generate validation scripts that catch issues before deployment. Each prompt below produces a ready-to-run script or workflow.
 
-**Prompt:**
-```text
-Write a shell script to validate all YAML files in a directory and report any syntax errors.
-```
+| Prompt | What Copilot Generates |
+|--------|------------------------|
+| _Write a shell script to validate all YAML files in a directory and report any syntax errors._ | A Bash script that recursively finds `.yaml`/`.yml` files, validates each with `python3 -c "import yaml; yaml.safe_load(...)"`, and exits with the error count. |
+| _Create a script that verifies all required environment variables are set before deployment._ | A Bash script that loops over a `REQUIRED_VARS` array, reports missing variables, and exits non-zero if any are absent. |
+| _Add validation steps to a GitHub Actions workflow that check YAML syntax, Dockerfile best practices, and security vulnerabilities._ | A `validate` job with steps for `yamllint`, `hadolint`, `trufflehog`, `npm audit`, and `kubectl --dry-run` on Kubernetes manifests. |
 
-**Expected Output:**
-```bash
-#!/bin/bash
-
-# YAML Validation Script
-# Validates all YAML files in the specified directory
-
-set -e
-
-DIRECTORY="${1:-.}"
-ERRORS=0
-
-echo "Validating YAML files in: $DIRECTORY"
-echo "=================================="
-
-# Find all YAML files
-for file in $(find "$DIRECTORY" -name "*.yaml" -o -name "*.yml"); do
-    echo -n "Checking $file... "
-    
-    if python3 -c "import yaml; yaml.safe_load(open('$file'))" 2>/dev/null; then
-        echo "✓ Valid"
-    else
-        echo "✗ Invalid"
-        python3 -c "import yaml; yaml.safe_load(open('$file'))" 2>&1 || true
-        ERRORS=$((ERRORS + 1))
-    fi
-done
-
-echo "=================================="
-echo "Validation complete. Errors found: $ERRORS"
-
-exit $ERRORS
-```
-
-#### Environment Variable Check
-
-**Prompt:**
-```text
-Create a script that verifies all required environment variables are set before deployment.
-```
-
-**Expected Output:**
-```bash
-#!/bin/bash
-
-# Environment Variable Validation Script
-
-REQUIRED_VARS=(
-    "DATABASE_URL"
-    "API_KEY"
-    "NODE_ENV"
-    "PORT"
-)
-
-MISSING=0
-
-echo "Checking required environment variables..."
-echo "=========================================="
-
-for var in "${REQUIRED_VARS[@]}"; do
-    if [ -z "${!var}" ]; then
-        echo "✗ Missing: $var"
-        MISSING=$((MISSING + 1))
-    else
-        echo "✓ Set: $var"
-    fi
-done
-
-echo "=========================================="
-
-if [ $MISSING -gt 0 ]; then
-    echo "Error: $MISSING required variable(s) not set"
-    exit 1
-else
-    echo "All required variables are set"
-    exit 0
-fi
-```
+> **Tip:** Full code outputs for all three prompts are available in the [Week 3 Prompt Examples](4-Week3-Prompts.md#4-validation-and-security-scanning) reference guide.
 
 ---
 
-### CI Pipeline Validation Steps
+### Validating from the CLI
 
-**Prompt:**
-```text
-Add validation steps to a GitHub Actions workflow that check YAML syntax, Dockerfile best practices, and security vulnerabilities.
+Validate configurations from the terminal before committing:
+
+```bash
+# Interactive validation review
+copilot
+> /add-dir .github/workflows
+> /add-dir k8s
+> /add-dir .
+> Validate all YAML files in these directories. Check for syntax errors, security issues, and missing best practices. Report findings as a checklist.
+
+# Headless validation in a pre-commit hook or CI step
+copilot --allow-all-tools -p "Check all Dockerfiles in this repo for security issues: hardcoded secrets, running as root, using latest tags, missing health checks"
 ```
 
-**Expected Output:**
+**Using CLI in a CI Pipeline (GitHub Actions):**
 ```yaml
 jobs:
-  validate:
+  ai-review:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Validate YAML files
+      
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      
+      - name: AI-Powered Config Review
         run: |
-          pip install yamllint
-          yamllint -d relaxed .
-
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
-
-      - name: Check for secrets in code
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          extra_args: --only-verified
-
-      - name: Security audit - npm
-        run: npm audit --audit-level=high
-
-      - name: Validate Kubernetes manifests
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          ./kubectl apply --dry-run=client -f k8s/ -R
+          copilot --allow-all-tools -p "Review the Kubernetes manifests in k8s/ for security best practices and report any issues"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ---
@@ -692,22 +568,56 @@ Generate [resource] with security best practices:
 - Network policies applied
 ```
 
+### The Delegate Pattern
+
+Use `/delegate` to go from idea to pull request in one session:
+
+```bash
+copilot
+> Create a complete CI/CD pipeline for this Node.js project:
+> 1. GitHub Actions workflow with build, test, security scan, and deploy stages
+> 2. Production Dockerfile with multi-stage build
+> 3. Kubernetes deployment with health checks and HPA
+> Review all the files you've created and ensure they are consistent.
+> /delegate
+```
+
+This creates a PR with all generated files, a descriptive title, and a summary body, ready for team review.
+
+### The Monorepo Context Pattern
+
+Use `/add-dir` and `/cwd` to work across services in a monorepo:
+
+```bash
+copilot
+> /add-dir ./services/api
+> /add-dir ./services/web
+> /add-dir ./infrastructure
+> Create a GitHub Actions workflow that builds and tests both the api and web services in parallel, then deploys them together
+```
+
 ---
 
 ## Key Takeaways
 
 1. **Build incrementally** - Start with basic pipelines and add complexity step by step
 2. **Be specific** - Include ports, versions, and environment details in prompts
-3. **Include security** - Always ask for security best practices
+3. **Include security** - Always ask for security best practices and use granular `--allow-tool` flags
 4. **Validate early** - Add validation steps to catch issues before deployment
 5. **Use platform conventions** - Let Copilot leverage its knowledge of CI/CD best practices
 6. **Review generated code** - Always verify configurations before applying them
+7. **Use CLI for terminal workflows** - Copilot CLI brings AI directly to where DevOps work happens
+8. **Automate with headless mode** - Embed `copilot --allow-all-tools -p` in scripts and CI steps
+9. **Delegate to PRs** - Use `/delegate` to go from generation to pull request in one flow
+10. **Leverage built-in agents** - Use `Explore`, `Task`, `Plan`, and `Code-review` for specialised workflows
+11. **Manage context** - Use `/usage`, `/context`, and `/compact` to stay within token limits
+12. **Resume sessions** - Use `--continue` and `--resume` to maintain context across terminal restarts
 
 ---
 
 ## Next Steps
 
-- Proceed to [Testing and Quality Assurance](2-Testing-and-Quality-Assurance.md) for test automation techniques
+- Proceed to [Testing and Quality Assurance with Copilot CLI](2-Testing-and-Quality-Assurance.md) for test automation techniques
 - Complete the [Week 3 Lab](3-Week3-Lab.md) for hands-on practice
 - Review [Week 3 Prompts](4-Week3-Prompts.md) for additional DevOps prompt examples
 

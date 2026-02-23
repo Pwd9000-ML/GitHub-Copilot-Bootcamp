@@ -16,9 +16,8 @@ body:
       options:
         - label: Read `Workshops/Week1/1-Understanding-GitHub-Copilot.md`
         - label: Follow setup guide in `Workshops/Week1/2-Setup-and-Configuration.md`
-        - label: Read `Workshops/Week1/3-GitHub-Copilot-Interaction-Modes.md`
-        - label: Complete the hands-on lab in `Workshops/Week1/4-week1-lab.md`
-        - label: Review prompt examples in `Workshops/Week1/5-Week1-Prompts.md`
+        - label: Complete the hands-on lab in `Workshops/Week1/3-Week1-Lab.md`
+        - label: Review prompt examples in `Workshops/Week1/4-Week1-Prompts.md`
     validations:
       required: true
 
@@ -46,6 +45,7 @@ body:
         - GitHub Codespaces
         - Xcode
         - Neovim/Vim
+        - Eclipse
         - Other
     validations:
       required: true

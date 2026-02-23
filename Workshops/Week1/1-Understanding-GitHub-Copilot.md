@@ -2,7 +2,7 @@
 
 ## Session Overview
 
-**Duration:** 30 minutes  
+**Duration:** 45-60 minutes  
 **Format:** Presentation with discussion points  
 **Objective:** Establish a foundational understanding of what GitHub Copilot is, how it works, and where it fits into modern development workflows.
 
@@ -67,7 +67,7 @@ GitHub Copilot is powered by Large Language Models (LLMs), with a wide variety o
 4. **Comments and docstrings:** natural language descriptions you provide
 5. **Repository context:** when using features like Copilot Spaces
 
-**Important:** Copilot does not store or learn from your private code. Each suggestion is generated in real time based on the context you provide in that session. See [GitHub Copilot Trust Center](https://copilot.github.trust.page/) for more details.
+**Important:** Copilot generates suggestions based on the context you provide. Data handling, retention, and usage controls depend on your Copilot plan and settings. See the [GitHub Copilot Trust Center FAQ](https://copilot.github.trust.page/faq) for details.
 
 ### AI-Driven Capabilities
 
@@ -76,9 +76,10 @@ GitHub Copilot offers several interaction modes, each suited to different develo
 | Mode | Description | Best For |
 |------|-------------|----------|
 | **Inline Suggestions** | Real-time code completions as you type | Writing new code, boilerplate, repetitive patterns |
-| **Copilot Chat** | Conversational interface for questions and explanations | Learning, debugging, exploring options |
-| **Copilot Edits** | Apply changes across multiple files from a single prompt | Refactoring, bulk modifications |
+| **Ask Mode** | Conversational interface for questions and explanations | Learning, debugging, exploring options |
+| **Edit Mode** | Apply changes across multiple files from a single prompt | Refactoring, bulk modifications |
 | **Agent Mode** | Autonomous code generation with terminal access | Complex tasks, scaffolding, multi-step operations |
+| **Plan Mode** | Creates a step-by-step implementation plan before generating code | Complex implementations, architecture planning |
 | **Next Edit Suggestions** | Predicts where you will edit next and suggests completions | Iterative editing, code reviews |
 
 ---
@@ -87,7 +88,7 @@ GitHub Copilot offers several interaction modes, each suited to different develo
 
 ### Language Support
 
-GitHub Copilot supports virtually all programming languages, with particularly strong performance in widely-used languages due to the volume of training data available.
+GitHub Copilot supports many programming languages, with particularly strong performance in widely used languages due to the volume of training data available.
 
 **Tier 1, Excellent Support:**
 
@@ -139,14 +140,14 @@ GitHub Copilot integrates with a wide range of IDEs and platforms:
 | **Visual Studio Code** | Full | Most complete feature set, first to receive new features |
 | **Visual Studio** | Full | Deep integration for .NET and C++ development |
 | **JetBrains IDEs** | Full | IntelliJ IDEA, PyCharm, WebStorm, Rider, and others |
-| **Eclipse** | Good | Chat and inline suggestions, Agent Mode in preview |
-| **Xcode** | Good | Inline suggestions, chat, Next Edit Suggestions |
-| **Neovim/Vim** | Good | Inline suggestions and chat |
+| **Eclipse** | Good | Supports Copilot integration for editing and chat. Specific feature availability varies by version. See Copilot feature matrix. |
+| **Xcode** | Good | Supports Copilot integration for code suggestions. Specific feature availability varies by version. See Copilot feature matrix. |
+| **Neovim/Vim** | Basic | Inline code completions only (Chat, Agent mode, and Edit mode are not supported) |
 | **GitHub.com** | Chat | Browser-based Copilot Chat for repositories |
 | **GitHub Mobile** | Chat | Ask questions about repositories on mobile |
 | **GitHub Copilot CLI** | CLI | Terminal-based Copilot assistance |
 
-**Feature availability varies by IDE.** For detailed feature comparison, refer to the [IDE Support Guide](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+**Feature availability varies by IDE and version.** For detailed comparisons, refer to the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
 ---
 
@@ -320,12 +321,3 @@ Copilot analyses the code under test and generates comprehensive test cases.
 ## Next Steps
 
 - **Week 1 Session 2:** In the next session ['GitHub Copilot Setup and Configuration Guide'](2-Setup-and-Configuration.md), we will install and configure the GitHub Copilot extensions in your IDE, explore the basic features, and prepare for the more advanced topics covered in subsequent sessions.
-
----
-
-## Additional Resources
-
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [GitHub Copilot Features Overview](https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features)
-- [IDE Support Guide](../../FAQ/IDE-support.md)
-- [GitHub Copilot Trust Centre](https://copilot.github.trust.page/)

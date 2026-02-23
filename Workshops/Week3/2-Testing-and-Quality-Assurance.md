@@ -1,20 +1,29 @@
-# Testing and Quality Assurance with GitHub Copilot
+# Testing and Quality Assurance with Copilot CLI
 
-**Duration:** 30-45 minutes  
+**Duration:** 45-60 minutes  
 **Format:** Presentation with hands-on examples  
-**Objective:** Master test generation, coverage improvement, and test optimisation techniques using GitHub Copilot.
+**Objective:** Master test generation, coverage improvement, and test optimisation techniques using the GitHub Copilot CLI and VS Code Chat.
 
 ---
 
 ## Session Overview
 
-Testing is a critical part of software development where Copilot excels. From generating unit tests by analysing source code to converting tests between frameworks, Copilot can significantly accelerate your testing workflow.
+Testing is a critical part of software development where Copilot excels. From generating unit tests by analysing source code to converting tests between frameworks, Copilot can significantly accelerate your testing workflow. In this session you will use both VS Code Chat and the standalone Copilot CLI, because tests are written in the editor but *run* in the terminal.
 
 **What you'll learn:**
-- Generate comprehensive unit tests for new and existing code
+- Generate comprehensive unit tests, from the IDE and the CLI
 - Ensure consistent test coverage across projects
 - Optimise tests with parameterisation and data-driven approaches
 - Convert tests between different frameworks
+- Run, debug, and iterate on tests using Copilot CLI headless mode
+
+---
+
+## CLI Across Every Testing Topic
+
+Rather than treating the CLI as a separate topic, each section below shows how to accomplish testing tasks from both the IDE and the terminal. Look for the **“From the CLI”** sub-sections throughout.
+
+> **Quick reference:** Install with `npm install -g @github/copilot` (Node.js 22+). Run interactively with `copilot` or headlessly with `copilot --allow-all-tools -p "prompt"`. See [Copilot CLI Quick Start](1-DevOps-Automation.md#copilot-cli-quick-start) for full setup details.
 
 ---
 
@@ -311,6 +320,38 @@ describe('fetchUserData', () => {
 
 ---
 
+### From the CLI
+
+Generate and iterate on tests without leaving the terminal:
+
+**Interactive test generation:**
+```bash
+copilot
+> /add-dir ./src
+> /add-dir ./tests
+> Analyse the source code in src/ and generate Jest unit tests for all functions
+> that don't have corresponding tests. Include edge cases and error scenarios.
+```
+
+**Headless test generation:**
+```bash
+# Generate tests for a specific file
+copilot --allow-all-tools -p "Read src/utils/calculator.js and generate comprehensive Jest tests with >90% branch coverage" > tests/calculator.test.js
+```
+
+**Run, analyse, and iterate:**
+```bash
+copilot
+> Run the test suite with npm test
+> Analyse the failures and fix the source code or tests as appropriate
+> Run the tests again to verify the fixes
+> /delegate
+```
+
+> **Tip:** Copilot CLI can execute commands directly in your terminal, so it can run your test suite, read the output, and iterate on fixes, all in one conversation.
+
+---
+
 ## 2. Ensuring Repeatable Test Coverage
 
 ### Test Coverage Goals
@@ -501,6 +542,24 @@ describe('{{ROUTE_NAME}} route', () => {
 
 ---
 
+### From the CLI
+
+Fill coverage gaps directly from the terminal:
+
+```bash
+# Run coverage and generate missing tests in one pass
+copilot --allow-all-tools -p "Run 'npm test -- --coverage' and generate tests for any uncovered branches"
+
+# Interactive coverage gap analysis
+copilot
+> /add-dir ./src
+> /add-dir ./tests
+> Run the test suite with coverage. Identify functions with <80% branch coverage and generate additional tests to fill the gaps.
+> /delegate
+```
+
+---
+
 ## 3. Test Optimisation and Conversion
 
 ### Parameterised Testing
@@ -537,7 +596,7 @@ describe('add function', () => {
         [100, 200, 300],
         [-5, -3, -8],
         [1.5, 2.5, 4],
-    ])('add(%i, %i) returns %i', (a, b, expected) => {
+    ])('add(%p, %p) returns %p', (a, b, expected) => {
         expect(add(a, b)).toBe(expected);
     });
 
@@ -614,80 +673,28 @@ describe('Login', () => {
 
 ---
 
-#### JUnit to pytest
-
-**Prompt:**
-```text
-Convert these JUnit tests to pytest with appropriate fixtures and assertions:
-
-@Test
-public void testAddition() {
-    Calculator calc = new Calculator();
-    assertEquals(5, calc.add(2, 3));
-}
-
-@Test
-public void testDivisionByZero() {
-    Calculator calc = new Calculator();
-    assertThrows(ArithmeticException.class, () -> calc.divide(10, 0));
-}
-```
-
-**pytest Output:**
-```python
-import pytest
-from calculator import Calculator
-
-@pytest.fixture
-def calculator():
-    """Fixture to create a Calculator instance."""
-    return Calculator()
-
-class TestCalculator:
-    def test_addition(self, calculator):
-        assert calculator.add(2, 3) == 5
-
-    def test_division_by_zero(self, calculator):
-        with pytest.raises(ArithmeticException):
-            calculator.divide(10, 0)
-
-    @pytest.mark.parametrize("a,b,expected", [
-        (2, 3, 5),
-        (0, 0, 0),
-        (-1, 1, 0),
-    ])
-    def test_addition_parametrized(self, calculator, a, b, expected):
-        assert calculator.add(a, b) == expected
-```
+> **Tip:** For additional framework conversion examples (JUnit to pytest, Mocha to Jest), see the [Week 3 Prompts](4-Week3-Prompts.md#5-test-optimisation) reference guide.
 
 ---
 
-#### Mocha to Jest
+### From the CLI
 
-**Prompt:**
-```text
-Convert this Mocha/Chai test suite to Jest:
+Use Copilot CLI for bulk test operations across your project, ideal for large-scale refactoring:
 
-const { expect } = require('chai');
+```bash
+# Convert all test files from one framework to another in one pass
+copilot
+> /add-dir ./tests
+> Convert all Mocha/Chai test files in the tests/ directory to Jest syntax. Maintain the same test coverage and structure. Update imports, assertions, and lifecycle hooks.
+> /delegate
 
-describe('Array', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when value is not present', function() {
-            expect([1, 2, 3].indexOf(4)).to.equal(-1);
-        });
-    });
-});
-```
+# Identify and fix flaky tests
+copilot
+> /add-dir ./tests
+> Run the test suite 3 times and identify any tests that produce inconsistent results. Fix the flaky tests by adding proper waits, mocks, or test isolation.
 
-**Jest Output:**
-```javascript
-describe('Array', () => {
-    describe('#indexOf()', () => {
-        test('should return -1 when value is not present', () => {
-            expect([1, 2, 3].indexOf(4)).toBe(-1);
-        });
-    });
-});
+# Bulk parameterisation
+copilot --allow-all-tools -p "Refactor all Jest test files in tests/ to use test.each for any test group with 3+ similar test cases"
 ```
 
 ---
@@ -729,6 +736,9 @@ Before merging test code, verify:
 4. **Use parameterisation** - Convert repetitive tests to data-driven tests
 5. **Maintain framework knowledge** - Copilot knows testing framework conventions
 6. **Review generated tests** - Ensure they actually test the right things
+7. **Use CLI for test workflows** - Generate, run, and fix tests without leaving the terminal
+8. **Automate with headless mode** - Embed test generation in CI pipelines with `copilot --allow-all-tools -p`
+9. **Iterate with the CLI** - Let Copilot run tests, read failures, and fix them in a single conversation
 
 ---
 

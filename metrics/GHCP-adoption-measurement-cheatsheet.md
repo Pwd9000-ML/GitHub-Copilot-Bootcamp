@@ -59,13 +59,13 @@ These metrics typically show measurable improvement *before* DORA metrics shift,
 
 | Metric | Definition | Source | Example Baseline | Target / Hypothesis |
 |--------|------------|--------|-------------------|-------------------|
-| **PR Cycle Time** | Time from PR opened to merged (median) | GitHub | 2.5 days | −15–30% reduction |
+| **PR Cycle Time** | Time from PR opened to merged (median) | GitHub | 2.5 days | -15% to -30% reduction |
 | **Review Wait Time** | Time from PR opened to first review comment | GitHub | 18 hours | −20% reduction |
-| **Coding Time Proxy** | Time from first commit to PR opened | GitHub | 1.8 days | −10–25% reduction |
-| **PR Size** | Lines of code changed per PR (median) | GitHub | 450 LOC | −10–20% reduction (optional) |
+| **Coding Time Proxy** | Time from first commit to PR opened | GitHub | 1.8 days | -10% to -25% reduction |
+| **PR Size** | Lines of code changed per PR (median) | GitHub | 450 LOC | -10% to -20% reduction (optional) |
 | **Rework Rate** | Percentage of PRs requiring follow-up fixes within 7 days | GitHub | 12% | Maintain or improve (no increase) |
 
-**Why these matter:** Faster PR cycles and shorter review times often signal that developers are delivering smaller, more focused changes—a hallmark of productive, confident teams.
+**Why these matter:** Faster PR cycles and shorter review times often signal that developers are delivering smaller, more focused changes - a hallmark of productive, confident teams.
 
 ---
 
@@ -116,7 +116,7 @@ To claim impact from Copilot, you must first prove that developers are actually 
 
 ## 8. Developer Experience Outcomes (DX)
 
-Keep this lightweight—a quick pulse check to understand developer sentiment and perceived impact. Use this as part of sprint retrospectives or brief weekly surveys.
+Keep this lightweight - a quick pulse check to understand developer sentiment and perceived impact. Use this as part of sprint retrospectives or brief weekly surveys.
 
 | Metric | Definition | Source | Example Baseline | Target |
 |--------|------------|--------|-------------------|--------|
@@ -130,7 +130,7 @@ Keep this lightweight—a quick pulse check to understand developer sentiment an
 
 ## 9. Fictional Baseline Set (Starter Reference Numbers)
 
-Use this complete mock baseline as a starting point if you need to establish targets immediately. Adapt these to your organization's actual baseline data.
+Use this complete mock baseline as a starting point if you need to establish targets immediately. Adapt these to your organisation's actual baseline data.
 
 ### Delivery Performance
 - **Deployment Frequency:** 2 deployments per week
@@ -178,20 +178,20 @@ Use this complete mock baseline as a starting point if you need to establish tar
 
 **These metrics and frameworks are validated as follows:**
 
-- **DORA Metrics (Section 3):** Based on [Google's DORA research](https://dora.dev), validated across 35,000+ organizations and multiple peer-reviewed studies. Industry gold standard.
+- **DORA Metrics (Section 3):** Based on DORA research. See [DORA](https://dora.dev) for the current research programme and guidance.
 - **Flow Efficiency Metrics (Section 4):** Aligned with flow-based software delivery principles documented in *Accelerate* by Nicole Forsgren et al.
 - **Guardrails (Sections 5 to 6):** Follow industry best practices from NIST, OWASP, and GitHub security documentation.
 - **Adoption Metrics (Section 7):** Based on standard software adoption measurement frameworks and Copilot telemetry capabilities.
 - **DX Survey Questions (Section 8):** Derived from NASA Task Load Index (TLX) and validated productivity perception research.
 
-**Fictional baselines (Section 9)** are illustrative and should be replaced with your organization's actual pre-adoption data.
+**Fictional baselines (Section 9)** are illustrative and should be replaced with your organisation's actual pre-adoption data.
 
 ---
 
 ## Next Steps
 
 1. **Establish your pre-adoption baseline** during the 8-week period before rollout
-2. **Define your cohorts** based on your organization's structure
+2. **Define your cohorts** based on your organisation's structure
 3. **Select your measurement sources** (GitHub, CI/CD system, incident tool, surveys)
 4. **Set targets** based on realistic expectations (typically 15 to 40% improvement in flow metrics)
 5. **Create a measurement dashboard** to track progress weekly
