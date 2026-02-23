@@ -1,14 +1,16 @@
-# Advanced Developer Workflow
+# Customisation in Practice
 
-**Duration:** 30-45 minutes  
+**Duration:** 45-60 minutes  
 **Format:** Presentation with demonstrations  
-**Objective:** Learn to leverage GitHub Copilot for documentation generation and refining suggestions for maintainable, production-ready code.
+**Objective:** See how the customisation tools from Session 1 (instruction files, prompt files, and custom agents) improve real developer workflows including documentation generation, code refinement, and debugging.
+
+In Session 1 you learned the three pillars of Copilot customisation. This session shows how those tools make everyday tasks, such as generating documentation, refining suggestions, and debugging, more consistent and effective. Throughout this session, look for the **Customisation Tip** callouts showing how instruction files, prompt files, or custom agents can automate or standardise each technique.
 
 ---
 
 ## Part 1: Documentation Generation with Copilot
 
-Documentation is essential for maintainable code, but often neglected due to time constraints. Copilot can significantly reduce the effort required to create comprehensive documentation.
+Documentation is essential for maintainable code, but often neglected due to time constraints. Copilot can significantly reduce the effort required to create comprehensive documentation. By combining Copilot with **instruction files** that define your documentation standards and **prompt files** that encode reusable documentation templates, you can generate consistent, team-aligned docs every time.
 
 ---
 
@@ -61,6 +63,8 @@ For existing undocumented code, use Ask mode:
 
 **Prompt:**
 > "Generate comprehensive JSDoc documentation for all functions in this file, including parameter types, return values, exceptions thrown, and usage examples."
+
+> **Customisation Tip:** Save this as a **prompt file** (`.github/prompts/generate-docs.prompt.md`) so the whole team can trigger it with `/generate-docs` instead of retyping the prompt each time.
 
 ---
 
@@ -173,11 +177,13 @@ For REST APIs, generate endpoint documentation:
         description: Invalid input or duplicate book
 ```
 
+> **Customisation Tip:** Create a **custom agent** (`.github/agents/docs-writer.agent.md`) with read-only tools (`codebase`, `search`) and instructions that enforce your documentation standards. This gives the team a one-click "Generate docs" persona that never modifies production code.
+
 ---
 
 ## Part 2: Refining Copilot Suggestions
 
-Not every suggestion from Copilot is production-ready. Learning to refine and improve suggestions is key to effective use.
+Not every suggestion from Copilot is production-ready. Learning to refine and improve suggestions is key to effective use. **Instruction files** help here by encoding your team's coding standards. When Copilot has access to an instruction file that specifies error handling patterns, naming conventions, and code style, its first suggestion is already closer to production quality, meaning fewer refinement cycles.
 
 ---
 
@@ -222,6 +228,8 @@ After receiving a suggestion, ask Copilot to improve it:
 > "Add input validation to handle null, undefined, and empty string searches"
 
 > "Refactor to follow our team's error handling pattern with try-catch and standardised error objects"
+
+> **Customisation Tip:** If your team always uses the same error handling pattern, add it to an **instruction file** (`.github/copilot-instructions.md`). Copilot will then apply it automatically, removing the need to state it in every prompt.
 
 #### 2. Request Alternatives
 
@@ -365,6 +373,8 @@ When Copilot generates large functions, ask it to break them down:
 
 When code doesn't work as expected, use Copilot to debug:
 
+> **Customisation Tip:** Create a **prompt file** (`.github/prompts/debug-analyse.prompt.md`) that includes your team's standard debugging checklist (log format, breakpoint strategy, common pitfalls). Invoke it with `/debug-analyse` to get consistent, thorough analysis every time.
+
 #### Identify Issues
 
 **Prompt:**
@@ -473,11 +483,12 @@ Generate tests and refine them:
 ## Key Takeaways
 
 1. **Copilot excels at documentation** - Use it to generate JSDoc, README files, and API docs
-2. **Review before accepting** - Every suggestion needs human verification
-3. **Iterate to improve** - Start simple, then refine progressively
-4. **Maintain single responsibility** - Ask Copilot to break down large functions
-5. **Test generated code** - Use Copilot to generate tests, then verify coverage
-6. **Debug with context** - Provide error messages and context for better debugging help
+2. **Instruction files reduce rework** - Encoding team standards means Copilot's first suggestion is closer to production quality
+3. **Prompt files standardise workflows** - Reusable templates give the whole team consistent documentation, review, and debugging processes
+4. **Custom agents scope the experience** - A docs-writer agent or review agent bundles the right tools and instructions for the task
+5. **Review before accepting** - Every suggestion needs human verification
+6. **Iterate to improve** - Start simple, then refine progressively
+7. **Debug with context** - Provide error messages and context for better debugging help
 
 ---
 
