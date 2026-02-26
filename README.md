@@ -30,7 +30,7 @@ A comprehensive 4-week curriculum designed to help developers master GitHub Copi
     - [1. Refactoring Large Codebases](#1-refactoring-large-codebases-30-45-minutes)
     - [2. Quality Refinements and Standards](#2-quality-refinements-and-standards-30-45-minutes)
     - [3. Ethical and Security Considerations](#3-ethical-and-security-considerations-30-45-minutes)
-    - [4. Hands-On Lab: Collaborative Refactoring](#4-hands-on-lab-collaborative-refactoring-90-120-minutes)
+    - [4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](#4-hands-on-lab-modernise-your-legacy-code-with-github-copilot-30-minutes)
     - [5. Week 4 Prompt Examples](#5-week-4-prompt-examples-reference-guide-self-study)
     - [Week 4 Feedback](#week-4-feedback)
 - [Additional Resources](#additional-resources)
@@ -264,14 +264,15 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 
 **Content:** [3. Ethical and Security Considerations](Workshops/Week4/3-Ethical-and-Security-Considerations.md)
 
-#### 4. Hands-On Lab: Collaborative Refactoring (90-120 minutes)
+#### 4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot (60 minutes)
 
-- Legacy code assessment and documentation
-- Incremental refactoring with test coverage
-- Quality standards enforcement
-- Pair refactoring and security audit exercises
+- Explain the current state of a legacy COBOL accounting system
+- Create a data flow diagram with Copilot assistance
+- Identify areas of legacy code that can be improved
+- Use GitHub Copilot to generate modern Node.js code snippets
+- Replace old code with the new snippets and test the changes
 
-**Content:** [4. Hands-On Lab: Collaborative Refactoring](Workshops/Week4/4-Week4-Lab.md)
+**Content:** [4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](Workshops/Week4/4-Week4-Lab.md)
 
 #### 5. Week 4 Prompt Examples (Reference Guide Self Study)
 

@@ -8,8 +8,8 @@ This folder contains reusable templates for creating new weekly curriculum mater
 2. **Rename** each file following the numbering convention: `{N}-{Topic-Name}.md`.
 3. **Replace** every `{{PLACEHOLDER}}` with the appropriate value for the new week.
 4. **Choose** the lab template that fits your delivery model:
-   - [LAB-SKILLS-TEMPLATE.md](LAB-SKILLS-TEMPLATE.md) for short, external GitHub Skills exercises (Weeks 1-3 pattern).
-   - [LAB-SELF-CONTAINED-TEMPLATE.md](LAB-SELF-CONTAINED-TEMPLATE.md) for longer, inline hands-on exercises (Week 4 pattern).
+   - [LAB-SKILLS-TEMPLATE.md](LAB-SKILLS-TEMPLATE.md) for short, external GitHub Skills exercises (Weeks 1-4 pattern, recommended).
+   - [LAB-SELF-CONTAINED-TEMPLATE.md](LAB-SELF-CONTAINED-TEMPLATE.md) for longer, inline hands-on exercises (use when no suitable GitHub Skills exercise exists).
 5. **Create** the matching issue template by copying [ISSUE-TEMPLATE.yml](ISSUE-TEMPLATE.yml) into `.github/ISSUE_TEMPLATE/` and updating the placeholders.
 6. **Update** the root `README.md` using the snippet in [README-SNIPPET.md](README-SNIPPET.md).
 
