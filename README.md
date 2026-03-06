@@ -1,6 +1,6 @@
 # GitHub Copilot Training Program
 
-**Last Updated:** 22/02/2026
+**Last Updated:** 06/03/2026
 
 A comprehensive 4-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, DevOps automation, and ethical AI practices.
 
@@ -28,10 +28,9 @@ A comprehensive 4-week curriculum designed to help developers master GitHub Copi
     - [Week 3 Feedback](#week-3-feedback)
   - [Week 4: Refactoring, Optimisation, and Ethical Practices](#week-4-refactoring-optimisation-and-ethical-practices)
     - [1. Refactoring Large Codebases](#1-refactoring-large-codebases-30-45-minutes)
-    - [2. Quality Refinements and Standards](#2-quality-refinements-and-standards-30-45-minutes)
-    - [3. Ethical and Security Considerations](#3-ethical-and-security-considerations-30-45-minutes)
-    - [4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](#4-hands-on-lab-modernise-your-legacy-code-with-github-copilot-30-minutes)
-    - [5. Week 4 Prompt Examples](#5-week-4-prompt-examples-reference-guide-self-study)
+    - [2. Ethical and Security Considerations](#2-ethical-and-security-considerations-30-45-minutes)
+    - [3. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](#3-hands-on-lab-modernise-your-legacy-code-with-github-copilot-30-minutes)
+    - [4. Week 4 Prompt Examples](#4-week-4-prompt-examples-reference-guide-self-study)
     - [Week 4 Feedback](#week-4-feedback)
 - [Additional Resources](#additional-resources)
 - [Contributing](#contributing)
@@ -172,7 +171,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 
 **Duration:** 2 to 2.5 hours (1 session)
 
-**Objective:** Equip participants to use Copilot — in the IDE and the CLI — for CI/CD automation and testing, with the Copilot CLI integrated into every topic rather than treated as a standalone tool.
+**Objective:** Equip participants to use Copilot, in the IDE and the CLI, for CI/CD automation and testing, with the Copilot CLI integrated into every topic rather than treated as a standalone tool.
 
 #### Reflection
 Before starting Week 3, please complete your Week 2 reflections if you haven't already: [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
@@ -229,7 +228,7 @@ Before starting Week 3, please complete your Week 2 reflections if you haven't a
 
 ### Week 4: Refactoring, Optimisation, and Ethical Practices
 
-**Duration:** 3 to 4.5 hours (1 session or 3 × 30-45 minutes)
+**Duration:** 2 to 3 hours (1 session or 2 × 30-45 minutes)
 
 **Objective:** Focus on enhancing code quality through refactoring, fostering ethical AI use, and reinforcing long-term Copilot adoption.
 
@@ -246,25 +245,16 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 
 **Content:** [1. Refactoring Large Codebases](Workshops/Week4/1-Refactoring-Large-Codebases.md)
 
-#### 2. Quality Refinements and Standards (30-45 minutes)
-
-- Enforcing coding standards through Copilot prompts
-- Using instruction files for project-wide standards
-- Automated code review and quality checks
-- Building quality gates into your workflow
-
-**Content:** [2. Quality Refinements and Standards](Workshops/Week4/2-Quality-Refinements-and-Standards.md)
-
-#### 3. Ethical and Security Considerations (30-45 minutes)
+#### 2. Ethical and Security Considerations (30-45 minutes)
 
 - Intellectual property concerns in AI-generated code
 - Security vulnerabilities and prevention strategies
 - Responsible AI usage and bias awareness
 - Organisational policies and compliance
 
-**Content:** [3. Ethical and Security Considerations](Workshops/Week4/3-Ethical-and-Security-Considerations.md)
+**Content:** [2. Ethical and Security Considerations](Workshops/Week4/2-Ethical-and-Security-Considerations.md)
 
-#### 4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot (60 minutes)
+#### 3. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot (30 minutes)
 
 - Explain the current state of a legacy COBOL accounting system
 - Create a data flow diagram with Copilot assistance
@@ -272,9 +262,9 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 - Use GitHub Copilot to generate modern Node.js code snippets
 - Replace old code with the new snippets and test the changes
 
-**Content:** [4. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](Workshops/Week4/4-Week4-Lab.md)
+**Content:** [3. Hands-On Lab: Modernise Your Legacy Code with GitHub Copilot](Workshops/Week4/3-Week4-Lab.md)
 
-#### 5. Week 4 Prompt Examples (Reference Guide Self Study)
+#### 4. Week 4 Prompt Examples (Reference Guide Self Study)
 
 - Refactoring prompts for legacy code analysis
 - Quality standards and compliance checking
@@ -283,7 +273,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 - Code review patterns and SOLID principles
 - Combination prompts for complete workflows
 
-**Content:** [5. Week 4 Prompt Examples](Workshops/Week4/5-Week4-Prompts.md)
+**Content:** [4. Week 4 Prompt Examples](Workshops/Week4/4-Week4-Prompts.md)
 
 #### Week 4 Feedback
 

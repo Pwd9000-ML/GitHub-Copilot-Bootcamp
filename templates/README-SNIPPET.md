@@ -55,7 +55,7 @@ Before starting Week {{WEEK_NUMBER}}, please complete your Week {{PREVIOUS_WEEK_
 
 ---
 
-<!-- TABLE OF CONTENTS ENTRIES — add these under the appropriate position in the ToC:
+<!-- TABLE OF CONTENTS ENTRIES - add these under the appropriate position in the ToC:
 
   - [Week {{WEEK_NUMBER}}: {{WEEK_TITLE}}](#week-{{WEEK_NUMBER}}-{{WEEK_TITLE_ANCHOR}})
     - [1. {{SESSION_1_TITLE}}](#1-{{SESSION_1_ANCHOR}}-{{SESSION_1_DURATION_ANCHOR}})

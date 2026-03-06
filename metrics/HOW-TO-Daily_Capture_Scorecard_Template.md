@@ -86,7 +86,7 @@ Rework Quality (85 percent x 20):  17.0 points
 Overall Score = 78 out of 100 (Good)
 ```
 
-### Customizing in Scorecard Tab
+### Customising in Scorecard Tab
 
 **Edit blue cells to adjust:**
 
@@ -203,7 +203,7 @@ Configure these in the **Lists tab** dropdown:
 
 ## Getting Started Checklist
 
-- [ ] Download and customize Excel template (blue cells)
+- [ ] Download and customise Excel template (blue cells)
 - [ ] Meet with Scrum Masters to review questions
 - [ ] Populate **Lists tab** with pain point categories
 - [ ] Run practice round on chosen day (Week 1)
