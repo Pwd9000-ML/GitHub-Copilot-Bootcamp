@@ -15,10 +15,9 @@ body:
       label: Tasks
       options:
         - label: Read `Workshops/Week4/1-Refactoring-Large-Codebases.md`
-        - label: Read `Workshops/Week4/2-Quality-Refinements-and-Standards.md`
-        - label: Read `Workshops/Week4/3-Ethical-and-Security-Considerations.md`
-        - label: Complete the hands-on lab in `Workshops/Week4/4-Week4-Lab.md`
-        - label: Review prompt examples in `Workshops/Week4/5-Week4-Prompts.md`
+        - label: Read `Workshops/Week4/2-Ethical-and-Security-Considerations.md`
+        - label: Complete the hands-on lab in `Workshops/Week4/3-Week4-Lab.md`
+        - label: Review prompt examples in `Workshops/Week4/4-Week4-Prompts.md`
     validations:
       required: true
 
@@ -35,19 +34,6 @@ body:
         - label: Remove code duplication
         - label: Simplify nested conditionals
         - label: Performance optimisation
-
-  - type: checkboxes
-    id: quality_topics
-    attributes:
-      label: Which quality standards topics did you practice?
-      options:
-        - label: Creating/using instruction files for standards
-        - label: Generating standards-compliant code
-        - label: ESLint/linting configuration
-        - label: Pre-commit hook setup
-        - label: Automated code review prompts
-        - label: Documentation generation (JSDoc, README)
-        - label: SOLID principles analysis
 
   - type: checkboxes
     id: security_topics

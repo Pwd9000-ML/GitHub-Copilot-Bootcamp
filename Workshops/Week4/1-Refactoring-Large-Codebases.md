@@ -671,8 +671,8 @@ Modernise this [language] code to use current best practices:
 
 ## Next Steps
 
-- Proceed to [Quality Refinements and Standards](2-Quality-Refinements-and-Standards.md) for enforcing coding standards
-- Complete the [Week 4 Lab](4-Week4-Lab.md) for hands-on refactoring practice
-- Review [Week 4 Prompts](5-Week4-Prompts.md) for additional refactoring prompt examples
+- Proceed to [Ethical and Security Considerations](2-Ethical-and-Security-Considerations.md) for responsible AI usage
+- Complete the [Week 4 Lab](3-Week4-Lab.md) for hands-on refactoring practice
+- Review [Week 4 Prompts](4-Week4-Prompts.md) for additional refactoring prompt examples
 
 ---

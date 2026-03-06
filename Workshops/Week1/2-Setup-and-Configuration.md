@@ -65,7 +65,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 1. After restart, you'll see a **"Sign in to use GitHub Copilot"** notification
 2. Click **"Sign in with GitHub"**
-3. Authorize the extension in your browser
+3. Authorise the extension in your browser
 4. Return to VS Code, you're ready to use Copilot!
 
 #### Basic Commands
@@ -174,7 +174,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 1. Accept the license agreement when prompted
 2. Click **Sign in with GitHub**
-3. Authorize in your browser
+3. Authorise in your browser
 4. Return to your IDE
 
 #### Basic Commands
@@ -230,7 +230,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 #### Sign In
 
 1. Open the **GitHub Copilot for Xcode** application
-2. Click **Login to GitHub** and follow the prompts to authorize
+2. Click **Login to GitHub** and follow the prompts to authorise
 
 #### Basic Commands
 
@@ -361,7 +361,7 @@ Eclipse is a popular IDE for Java development and is also used for SAP ABAP deve
 1. Locate the **Copilot icon** in the bottom-right corner of Eclipse
 2. Click the icon and select **"Sign In to GitHub"**
 3. Click **"Copy Code and Open"** to copy your device code
-4. Paste the code in your browser and authorize the GitHub Copilot Plugin
+4. Paste the code in your browser and authorise the GitHub Copilot Plugin
 5. Return to Eclipse and click **OK** to complete setup
 
 #### Basic Commands in Eclipse

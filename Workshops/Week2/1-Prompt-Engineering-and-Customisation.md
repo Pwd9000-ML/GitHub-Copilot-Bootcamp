@@ -454,7 +454,7 @@ For each issue found, provide:
 3. **Issue**: Clear description of the problem
 4. **Fix**: Concrete code example showing the remediation
 
-Never modify production code directly — only suggest changes.
+Never modify production code directly. Only suggest changes.
 ```
 
 ### Example 2: Test Specialist Agent (`.github/agents/test-specialist.agent.md`)
@@ -502,7 +502,7 @@ You are a technical planning specialist. Your responsibilities:
 - Document API designs, data models, and system interactions
 
 Structure plans with clear headings, task breakdowns, acceptance criteria, and testing considerations.
-Do NOT modify any files — only produce documentation and plans.
+Do NOT modify any files. Only produce documentation and plans.
 ```
 
 > **Tip:** When the planner finishes, the **Start Implementation** handoff button appears. Clicking it switches to the `implementation` agent with the plan context carried forward.

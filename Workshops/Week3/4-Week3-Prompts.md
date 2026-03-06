@@ -213,10 +213,10 @@ Create a complete Jest test suite for the UserService class that:
 - Tests error scenarios
 ```
 
-#### Parameterized Tests
+#### Parameterised Tests
 
 ```text
-Generate parameterized tests for the validateEmail function using Jest's test.each:
+Generate parameterised tests for the validateEmail function using Jest's test.each:
 - Test valid email formats (standard, with +, with subdomains)
 - Test invalid formats (missing @, missing domain, special chars)
 - Use descriptive test names for each case
