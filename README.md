@@ -1,8 +1,8 @@
 # GitHub Copilot Training Program
 
-**Last Updated:** 06/03/2026
+**Last Updated:** 29/04/2026
 
-A comprehensive 4-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, DevOps automation, and ethical AI practices.
+A comprehensive 4-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, agentic workflows, Copilot CLI, Copilot cloud agent, customisation, DevOps automation, testing, code review, governance, and ethical AI practices.
 
 ## Table of Contents
 
@@ -52,13 +52,14 @@ This training program is structured as a progressive learning journey, taking pa
 
 **Objective:** Establish a foundational understanding of GitHub Copilot and introduce core workflows for developers.
 
-> **Note:** Copilot features (Ask/Edit/Agent/Plan, shortcuts, and advanced capabilities) vary by IDE and version. Use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth.
+> **Note:** Copilot features (inline suggestions, Ask, inline chat, Plan, Agent, CLI, cloud agent, custom agents, and advanced capabilities) vary by IDE, version, plan, and organisation policy. Use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth.
 
 #### 1. Understanding GitHub Copilot (45-60 minutes)
 
 - Overview of its purpose, architecture, and AI-driven capabilities
 - Supported languages, frameworks, and environments
 - Copilot in real-world developer workflows
+- Plan-first and agentic workflows for multi-file tasks
 - Value proposition and use cases
 
 **Content:** [1. Understanding GitHub Copilot](Workshops/Week1/1-Understanding-GitHub-Copilot.md)
@@ -68,9 +69,10 @@ This training program is structured as a progressive learning journey, taking pa
 - Installation and setup in multiple IDEs (VS Code - Demo)
 - Configuring authentication and preferences
 - Basic commands and UI navigation
-- Understanding the four core modes: Ask, Edit, Agent, and Plan
-- When and how to use each mode effectively
+- Understanding core surfaces: inline suggestions, Ask, inline chat, Plan, Agent, Copilot CLI, and Copilot cloud agent
+- When and how to use each surface effectively
 - Custom Agents and Extensions overview
+- Access, usage limits, model selection, and organisation policy considerations
 - Troubleshooting common issues
 - Best practices for setup
 
@@ -89,9 +91,10 @@ This training program is structured as a progressive learning journey, taking pa
 
 - Inline code completions and function suggestions
 - Ask mode for code explanations and learning
-- Edit mode for controlled code modifications
+- Inline chat and targeted edits for controlled code modifications
 - Agent mode for multi-file changes
-- Plan mode for implementation planning
+- Plan agent for implementation planning
+- Context, review, and verification prompts using `#codebase`, `#changes`, `#problems`, `#terminalSelection`, and `#fetch`
 - Debugging assistance techniques
 - Documentation generation patterns
 
@@ -122,6 +125,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
   - **Instruction files** (`.instructions.md`) for project-wide conventions
   - **Prompt files** (`.prompt.md`) for reusable task templates
   - **Custom agent files** (`.agent.md`) for specialised personas with scoped tools and handoffs
+- Agent skills (`SKILL.md`), MCP tools, approval boundaries, model guidance, and customisation diagnostics
 - Incorporating pre-emptive security recommendations
 - Practical prompt exercises with examples (including custom agent creation)
 
@@ -135,6 +139,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 - Refining Copilot suggestions for scoped, maintainable code
 - Debugging with Copilot assistance
 - Progressive refinement techniques
+- Team customisation packs using instructions, prompt files, custom agents, skills, diagnostics, and plan-first workflows
 
 **Content:** [2. Customisation in Practice](Workshops/Week2/2-Customisation-in-Practice.md)
 
@@ -157,6 +162,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 - Code explanation and debugging prompts
 - Unit test generation techniques
 - SQL query generation patterns
+- Context, custom agent, skill, diagnostics, and governance prompts
 
 **Content:** [4. Week 2 Prompt Examples](Workshops/Week2/4-Week2-Prompts.md)
 
@@ -171,7 +177,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 
 **Duration:** 2 to 2.5 hours (1 session)
 
-**Objective:** Equip participants to use Copilot, in the IDE and the CLI, for CI/CD automation and testing, with the Copilot CLI integrated into every topic rather than treated as a standalone tool.
+**Objective:** Equip participants to use Copilot, in the IDE, the CLI, and GitHub workflows, for CI/CD automation, testing, review, and governed delivery.
 
 #### Reflection
 Before starting Week 3, please complete your Week 2 reflections if you haven't already: [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
@@ -184,6 +190,7 @@ Before starting Week 3, please complete your Week 2 reflections if you haven't a
 - Infrastructure as Code (Docker, Kubernetes, Terraform) with CLI generation
 - Incident response and log analysis from the terminal
 - Built-in agents (Explore, Task, Plan, Code-review) and context management
+- Copilot cloud agent, Copilot Code Review, and GitHub Actions governance patterns
 - Pre-review validation for deployment readiness (including CLI-powered checks)
 - Effective DevOps prompting patterns, security permissions, and `/delegate` workflow
 
@@ -195,6 +202,8 @@ Before starting Week 3, please complete your Week 2 reflections if you haven't a
 - Ensuring repeatable test coverage with CLI gap analysis
 - Test optimisation and parameterisation
 - Framework conversion (with full examples in Week 3 Prompts)
+- VS Code test workflows such as `/setupTests`, `/tests`, and `/fixTestFailure` where available
+- Quality gates, required checks, rulesets, merge queues, and Copilot Code Review as an assistive review layer
 - Quality assurance checklists and testing best practices
 
 **Content:** [2. Testing and Quality Assurance with Copilot CLI](Workshops/Week3/2-Testing-and-Quality-Assurance.md)
@@ -216,6 +225,7 @@ Before starting Week 3, please complete your Week 2 reflections if you haven't a
 - Test generation with coverage requirements and CLI gap analysis
 - Validation and security scanning prompts
 - Test optimisation and framework conversion with CLI bulk operations
+- Cloud agent planning, pull request review, secure workflow review, and quality gate prompts
 
 **Content:** [4. Week 3 Prompt Examples](Workshops/Week3/4-Week3-Prompts.md)
 
@@ -239,6 +249,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 
 - Understanding and navigating legacy code
 - Using semantic search to map and explore large codebases
+- Plan-first agentic refactoring with explicit context, approval boundaries, tests, and checkpoints
 - Incremental refactoring strategies (extract, rename, modernise)
 - Improving readability, maintainability, and performance
 - Prompting patterns for complex refactoring
@@ -251,6 +262,8 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 - Security vulnerabilities and prevention strategies
 - Responsible AI usage and bias awareness
 - Organisational policies and compliance
+- Enterprise controls for models, content exclusion, custom instructions, MCP tools, BYOK, and data residency
+- Secret scanning, push protection, CodeQL/code scanning, Copilot Autofix, and agent threat modelling
 
 **Content:** [2. Ethical and Security Considerations](Workshops/Week4/2-Ethical-and-Security-Considerations.md)
 
@@ -272,6 +285,7 @@ Before starting Week 4, please complete your Week 3 reflections if you haven't a
 - Ethical AI and bias detection prompts
 - Code review patterns and SOLID principles
 - Combination prompts for complete workflows
+- Governance, content exclusion, public-code reference, CodeQL, Autofix, and agent security prompts
 
 **Content:** [4. Week 4 Prompt Examples](Workshops/Week4/4-Week4-Prompts.md)
 

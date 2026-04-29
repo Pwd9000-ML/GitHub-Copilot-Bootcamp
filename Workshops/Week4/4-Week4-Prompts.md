@@ -16,6 +16,7 @@
 - [4. Ethical AI Prompts](#4-ethical-ai-prompts)
 - [5. Code Review Prompts](#5-code-review-prompts)
 - [6. Combination Prompts](#6-combination-prompts)
+- [7. Governance and Agent Security Prompts](#7-governance-and-agent-security-prompts)
 
 ---
 
@@ -40,6 +41,15 @@ Analyse this legacy code and provide:
 5. Recommended refactoring priority
 
 [paste legacy code]
+```
+
+### Plan-First Refactoring
+
+```text
+#codebase Plan a safe refactor of [feature/module].
+Identify affected files, current behaviour, missing characterisation tests, likely risks, and a sequence of small changes.
+Do not edit files yet.
+Include acceptance criteria and validation commands.
 ```
 
 ### Characterisation Test Generation
@@ -322,6 +332,36 @@ Package file:
 [paste package.json/requirements.txt/pom.xml]
 ```
 
+### CodeQL Alert Triage
+
+```text
+Explain this CodeQL code scanning alert:
+- Source and sink
+- Why the flow is risky
+- Whether it might be a false positive
+- Minimal safe fix
+- Tests or manual checks needed
+
+Do not apply an Autofix until you have explained the trade-offs.
+
+[paste alert details]
+```
+
+### Secret Remediation
+
+```text
+Help remediate this secret scanning or push protection alert.
+Explain whether the secret needs rotation, where it was introduced, how to remove it from the current change, and how to prevent recurrence.
+Use only safe placeholders in examples.
+```
+
+### Autofix Review
+
+```text
+Review this Copilot Autofix suggestion.
+Explain what vulnerability it addresses, why the proposed code is safe or unsafe, what edge cases remain, and which tests should be added before applying it.
+```
+
 ### Secure Code Transformation
 
 ```text
@@ -476,6 +516,14 @@ Feedback: [Specific comments with line refs]
 [paste code diff]
 ```
 
+### Copilot Code Review Custom Instructions
+
+```text
+Draft repository instructions for Copilot Code Review.
+Require comments for security issues, missing tests, unsafe workflow permissions, breaking changes, and unclear error handling.
+Tell Copilot to avoid approval language and to identify what a human reviewer must still check.
+```
+
 ---
 
 ## 6. Combination Prompts
@@ -527,6 +575,56 @@ Create a complete quality gate for CI/CD:
 5. Performance benchmarks
 
 Include GitHub Actions workflow YAML.
+```
+
+---
+
+## 7. Governance and Agent Security Prompts
+
+Governance prompts help teams use Copilot safely across IDE, CLI, cloud agent, and pull request workflows.
+
+### Content Exclusion Verification
+
+```text
+Review our use of content exclusion for this repository.
+Identify which Copilot surfaces are covered, which are not, and what additional process controls are needed for CLI, cloud agent, Agent mode, MCP tools, and external fetches.
+Use the current GitHub Docs as the source of truth.
+```
+
+### Public Code Reference Check
+
+```text
+Review this generated code for public-code match concerns.
+If code references are available, explain what they show, whether attribution or replacement is needed, and what a reviewer should verify before merge.
+```
+
+### Agent Threat Model
+
+```text
+Threat model this agentic workflow:
+- Prompt injection from repository or web content
+- Sensitive data exposure
+- Unsafe terminal commands
+- MCP server trust and tool scope
+- Cloud-agent runner and firewall controls
+- Human approval checkpoints
+
+Return risks, mitigations, and a go/no-go recommendation.
+```
+
+### Organisation Policy Rollout
+
+```text
+Create an organisation rollout checklist for GitHub Copilot.
+Include feature policies, model access, data residency or BYOK decisions, custom instructions, code review automation, content exclusion limits, MCP governance, usage metrics, training, and escalation paths.
+```
+
+### Metrics and Adoption Review
+
+```text
+Summarise Copilot adoption metrics for leadership.
+Separate active usage, passive code review usage, training completion, quality outcomes, security findings, and open risks.
+Suggest follow-up actions for teams with low adoption or high review findings.
 ```
 
 ---

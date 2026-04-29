@@ -392,7 +392,43 @@ When code doesn't work as expected, use Copilot to debug:
 
 ---
 
-## Part 3: Practical Exercises
+## Part 3: Team Customisation Workflow
+
+For a team, customisation works best as a small, version-controlled pack rather than a one-off prompt. The goal is to make Copilot understand team conventions, keep agentic work reviewable, and make common workflows repeatable.
+
+### Recommended Customisation Pack
+
+| Item | Purpose | Example |
+|------|---------|---------|
+| Repository instructions | Always-on standards for the project | `.github/copilot-instructions.md` |
+| File-scoped instructions | Rules for tests, APIs, docs, or infrastructure files | `.github/instructions/tests.instructions.md` |
+| Prompt files | Repeatable tasks invoked with `/` | `.github/prompts/security-review.prompt.md` |
+| Custom agents | Role-specific behaviour and tool access | `.github/agents/planner.agent.md` |
+| Agent skills | Packaged domain workflow guidance | `skills/release-notes/SKILL.md` |
+| Diagnostics habit | Verify what customisations applied | `/troubleshoot`, Agent Debug, or customisation diagnostics |
+
+### Plan-First Workflow
+
+Use this workflow for changes that touch multiple files or carry risk:
+
+1. Run `/init` or review existing instructions so Copilot understands the repository.
+2. Ask the Plan agent to analyse the request, identify likely files, list risks, and define acceptance criteria.
+3. Review the plan with the learner or team before allowing edits.
+4. Hand the approved plan to Agent mode or Copilot CLI with clear permission boundaries.
+5. Run tests, linters, or manual checks, then ask Copilot to summarise changes and residual risks.
+6. Use `/troubleshoot` or Agent Debug if Copilot ignored a customisation or selected unexpected tools.
+
+**Prompt:**
+> "Plan how to add CSV export for the inventory report. Use repository instructions and `#codebase`. Identify files likely to change, risks, tests to add or run, and manual verification steps. Do not edit files yet."
+
+**Follow-up Prompt:**
+> "Implement the approved plan. Ask before running package installation, external network calls, or commands that change deployment state. After edits, run the relevant tests or explain why they cannot run."
+
+> **Customisation Tip:** Keep planning and review agents read-only where possible. Give implementation agents only the tools they need for the workflow.
+
+---
+
+## Part 4: Practical Exercises
 
 ### Exercise 1: Documentation Challenge
 
@@ -455,6 +491,25 @@ Generate tests and refine them:
 3. **Refinement:**
    > "Generate additional test cases for edge scenarios, like searching with an empty query or adding books with missing fields."
 
+### Exercise 5: Customisation Pack Review
+
+Create or inspect a small customisation pack:
+
+1. **Repository Instructions:**
+  > "Review `.github/copilot-instructions.md` and identify any missing project conventions that would improve generated code."
+
+2. **Prompt File:**
+  > "Create a reusable prompt file for reviewing generated tests. Include checks for weak assertions, over-mocking, missing edge cases, and test names."
+
+3. **Custom Agent:**
+  > "Create a read-only planning agent that produces implementation plans, acceptance criteria, and validation steps without editing files."
+
+4. **Skill:**
+  > "Draft a `SKILL.md` for a release-note writing workflow. Include when to use it, required context, output format, and validation checks."
+
+5. **Diagnostics:**
+  > "Troubleshoot why the repository instructions were not applied to the last response. List which customisations were used and what to adjust."
+
 ---
 
 ## Best Practices Summary
@@ -486,14 +541,16 @@ Generate tests and refine them:
 2. **Instruction files reduce rework** - Encoding team standards means Copilot's first suggestion is closer to production quality
 3. **Prompt files standardise workflows** - Reusable templates give the whole team consistent documentation, review, and debugging processes
 4. **Custom agents scope the experience** - A docs-writer agent or review agent bundles the right tools and instructions for the task
-5. **Review before accepting** - Every suggestion needs human verification
-6. **Iterate to improve** - Start simple, then refine progressively
-7. **Debug with context** - Provide error messages and context for better debugging help
+5. **Agent skills package domain workflows** - Use skills when a team repeats the same multi-step guidance often
+6. **Diagnostics reduce guesswork** - Use `/troubleshoot`, Agent Debug, or customisation diagnostics to understand what Copilot used
+7. **Review before accepting** - Every suggestion needs human verification
+8. **Iterate to improve** - Start simple, then refine progressively
+9. **Debug with context** - Provide error messages and context for better debugging help
 
 ---
 
 ## Next Steps
 
-- Complete the [Week 2 Lab](3-Week2-Lab.md) to practice customising your Copilot experience with instructions and custom agents
+- Complete the [Week 2 Lab](3-Week2-Lab.md) to practice customising your Copilot experience with instructions, prompt files, custom agents, and skills
 - Review [Week 2 Prompts](4-Week2-Prompts.md) for additional prompt examples and exercises
 - Apply these techniques in your daily development workflow

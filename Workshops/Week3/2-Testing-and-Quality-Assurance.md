@@ -16,6 +16,8 @@ Testing is a critical part of software development where Copilot excels. From ge
 - Optimise tests with parameterisation and data-driven approaches
 - Convert tests between different frameworks
 - Run, debug, and iterate on tests using Copilot CLI headless mode
+- Use VS Code testing commands such as `/setupTests`, `/tests`, and `/fixTestFailure` where available
+- Connect tests to pull request quality gates, Copilot Code Review, and required checks
 
 ---
 
@@ -24,6 +26,23 @@ Testing is a critical part of software development where Copilot excels. From ge
 Rather than treating the CLI as a separate topic, each section below shows how to accomplish testing tasks from both the IDE and the terminal. Look for the **“From the CLI”** sub-sections throughout.
 
 > **Quick reference:** Install with `npm install -g @github/copilot` (Node.js 22+). Run interactively with `copilot` or headlessly with `copilot --allow-all-tools -p "prompt"`. See [Copilot CLI Quick Start](1-DevOps-Automation.md#copilot-cli-quick-start) for full setup details.
+
+---
+
+## Modern Copilot Testing Workflow
+
+Use the editor, Test Explorer, Agent mode, and the CLI together rather than treating test generation as a single prompt.
+
+| Workflow step | Copilot support | Example prompt or command |
+|---------------|-----------------|---------------------------|
+| Set up a test framework | VS Code Chat command where available | `/setupTests Configure the project to run unit tests with the existing package manager.` |
+| Generate focused tests | Chat, inline chat, or Agent mode | `/tests Generate tests for this function, including edge cases and error paths.` |
+| Run tests | Test Explorer, terminal, or Copilot CLI | `Run the unit tests and explain any failures.` |
+| Fix failures | Agent mode or CLI | `/fixTestFailure Explain this failing test and propose the smallest fix.` |
+| Review test quality | Ask, Code Review, or custom reviewer agent | `Review these tests for weak assertions, over-mocking, and missing edge cases.` |
+| Gate merges | GitHub Actions, rulesets, required checks | `Recommend required checks and coverage gates for this repository.` |
+
+Generated tests need the same review as generated production code. Watch for tests that mirror the implementation without asserting behaviour, mocks that hide bugs, brittle snapshots, and tests that pass without exercising the risky branch.
 
 ---
 
@@ -711,6 +730,23 @@ copilot --allow-all-tools -p "Refactor all Jest test files in tests/ to use test
 
 ---
 
+## Quality Gates and Copilot Code Review
+
+Testing becomes more useful when it feeds into governed pull request checks.
+
+| Gate | Purpose | Copilot prompt |
+|------|---------|----------------|
+| Required status checks | Prevent merges when tests or scans fail | "Recommend the required GitHub Actions checks for this repo and explain which should block merge." |
+| Rulesets | Apply branch or repository-level protection consistently | "Draft a ruleset policy requiring tests, code owners, and security scans before merge." |
+| CODEOWNERS and review requirements | Route specialised changes to the right reviewers | "Suggest CODEOWNERS entries for source, tests, workflows, and infrastructure files." |
+| Merge queue | Keep main stable under high PR volume | "Explain whether merge queue would help this repository and what checks it should require." |
+| Code scanning and dependency review | Catch vulnerabilities and risky dependency changes | "Review this PR for code scanning, dependency review, and test coverage risks." |
+| Copilot Code Review | Add assistive review comments | "Request or prepare a Copilot code review, then list what still needs human review." |
+
+> **Note:** Copilot Code Review can comment and suggest changes. It does not approve a pull request, request changes, satisfy required human approvals, or replace repository ownership rules.
+
+---
+
 ## Quality Assurance Checklist
 
 Before merging test code, verify:
@@ -725,6 +761,9 @@ Before merging test code, verify:
 - [ ] **Assertions** - Each test has meaningful assertions
 - [ ] **Speed** - Tests run quickly (unit tests < 100ms each)
 - [ ] **Coverage** - New code has corresponding tests
+- [ ] **Failure signal** - Tests fail for the right reason before the implementation is fixed when using TDD
+- [ ] **Reviewability** - Generated tests are understandable enough for maintainers to trust
+- [ ] **CI integration** - Tests run in required checks or another documented quality gate
 
 ---
 
@@ -737,8 +776,10 @@ Before merging test code, verify:
 5. **Maintain framework knowledge** - Copilot knows testing framework conventions
 6. **Review generated tests** - Ensure they actually test the right things
 7. **Use CLI for test workflows** - Generate, run, and fix tests without leaving the terminal
-8. **Automate with headless mode** - Embed test generation in CI pipelines with `copilot --allow-all-tools -p`
+8. **Automate with headless mode** - Embed test generation in CI pipelines with `copilot -p` and granular tool approvals where commands are required
 9. **Iterate with the CLI** - Let Copilot run tests, read failures, and fix them in a single conversation
+10. **Use VS Code test commands** - `/setupTests`, `/tests`, and `/fixTestFailure` help structure common testing tasks where available
+11. **Connect tests to gates** - Required checks, rulesets, code scanning, dependency review, and Copilot Code Review make quality visible before merge
 
 ---
 

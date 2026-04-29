@@ -44,9 +44,9 @@ body:
       options:
         - label: Inline suggestions (code completions as you type)
         - label: Ask Mode (Copilot Chat for questions/explanations)
-        - label: Edit Mode (targeted code modifications)
+        - label: Inline chat or targeted edits (focused code modifications)
         - label: Agent Mode (autonomous multi-file changes)
-        - label: Plan Mode (generating implementation plans)
+        - label: Plan agent (generating implementation plans before editing)
 
   - type: checkboxes
     id: activities

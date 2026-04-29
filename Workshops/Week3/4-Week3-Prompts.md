@@ -15,6 +15,7 @@
 - [3. Test Generation](#3-test-generation)
 - [4. Validation and Security Scanning](#4-validation-and-security-scanning)
 - [5. Test Optimisation](#5-test-optimisation)
+- [6. Cloud Agent, Review, and Quality Gates](#6-cloud-agent-review-and-quality-gates)
 
 > **Note:** CLI prompts are integrated into each section below rather than listed separately. All prompts work in VS Code Chat and Copilot CLI. Try both to find your preferred workflow.
 
@@ -34,11 +35,12 @@ CI/CD pipeline generation creates automated workflows for build, test, and deplo
 #### Basic CI Pipeline
 
 ```text
-Create a GitHub Actions workflow for a Node.js 20 application that:
+Create a GitHub Actions workflow for a Node.js 22 application that:
 - Triggers on push to main and pull requests
 - Runs on ubuntu-latest
 - Includes steps for: checkout, setup Node.js with caching, install dependencies, run linter, run tests with coverage, and build
-- Uploads test coverage as an artifact
+- Uses least-privilege `permissions`, concurrency, and maintained actions
+- Uploads test coverage with the current artifact action version
 ```
 
 #### Multi-Stage Pipeline with Deployment
@@ -83,7 +85,7 @@ Create a GitLab CI pipeline for a Python application that:
 
 ```bash
 # Generate and save a pipeline directly
-copilot --allow-all-tools -p "Create a GitHub Actions workflow for a Node.js 20 app with build, test, lint, coverage, and artifact upload" > .github/workflows/ci.yml
+copilot -p "Create a GitHub Actions workflow for a Node.js 22 app with least-privilege permissions, build, test, lint, coverage, concurrency, and artifact upload v4 or later" > .github/workflows/ci.yml
 
 # Generate and create a PR in one flow
 copilot
@@ -418,6 +420,21 @@ Add to my GitHub Actions workflow:
 - Fail the build if high severity issues found
 ```
 
+#### Secure Workflow Review
+
+```text
+Review this GitHub Actions workflow for:
+- Overly broad `GITHUB_TOKEN` permissions
+- Unsafe use of pull request input in shell commands
+- Unpinned or stale third-party actions
+- Missing concurrency controls
+- Missing protected environments for deployment
+- Long-lived cloud secrets that could use OIDC instead
+- Artifact actions older than v4
+
+Provide severity, impact, and a concrete fix for each issue.
+```
+
 #### Configuration Linting
 
 ```text
@@ -614,8 +631,59 @@ copilot
 > /delegate
 
 # Bulk parameterisation
-copilot --allow-all-tools -p "Refactor all Jest test files in tests/ to use test.each for any test group with 3+ similar test cases"
+copilot -p "Refactor all Jest test files in tests/ to use test.each for any test group with 3+ similar test cases. Ask before modifying files."
 ```
+
+---
+
+## 6. Cloud Agent, Review, and Quality Gates
+
+These prompts help connect generated DevOps and testing work to pull requests, review, and governed delivery.
+
+### Copilot Cloud Agent Planning
+
+```text
+Research this issue and produce an implementation plan before writing code.
+Include affected files, risks, tests to run, required GitHub Actions checks, and whether a protected environment or manual approval is needed.
+Do not open a pull request until asked.
+```
+
+### Pull Request Preparation
+
+```text
+Prepare a pull request summary for these changes:
+- What changed
+- Why it changed
+- Tests and checks run
+- Security or deployment risks
+- Manual verification required
+- Follow-up work
+```
+
+### Copilot Code Review Prompt
+
+```text
+Review this pull request for logic errors, insecure workflow permissions, missing tests, dependency risks, and deployment safety.
+Leave findings as comments with severity and concrete remediation.
+Do not treat this as approval. Identify what a human reviewer still needs to check.
+```
+
+### Ruleset and Required Checks
+
+```text
+Recommend a GitHub repository ruleset for this project.
+Include required status checks, required reviews, CODEOWNERS, merge queue considerations, deployment environment approvals, code scanning, dependency review, and artifact attestation requirements.
+Explain which checks should block merge and why.
+```
+
+### CI Failure Triage
+
+```text
+Analyse this failed workflow run.
+Identify the failing job, likely root cause, whether the failure is flaky or deterministic, the smallest fix to try first, and the command I should run locally to verify it.
+```
+
+> **Tip:** Cloud agent and code review workflows are assistive. Keep human review, required checks, environment approvals, and ownership rules as the source of truth for merging and deployment.
 
 ---
 
