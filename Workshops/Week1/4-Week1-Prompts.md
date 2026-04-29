@@ -122,7 +122,7 @@ Is there a more modern JavaScript syntax for this code?
 
 ## 3. Inline Chat and Targeted Edits
 
-> **April 2026 note:** Older VS Code material may call this workflow **Edit mode**. VS Code Edit mode is deprecated, so use inline chat for focused local edits and Agent mode for multi-file changes. Check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+> **April 2026 note:** Older VS Code material may call this workflow **Edit mode**. Newer VS Code and Copilot documentation may describe similar workflows differently, so use inline chat for focused local edits and Agent mode for multi-file changes. Check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
 Inline chat and targeted edits enable controlled modifications to selected code, the current file, or an explicitly provided context set.
 

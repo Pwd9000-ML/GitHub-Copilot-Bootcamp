@@ -496,19 +496,19 @@ Generate tests and refine them:
 Create or inspect a small customisation pack:
 
 1. **Repository Instructions:**
-  > "Review `.github/copilot-instructions.md` and identify any missing project conventions that would improve generated code."
+   > "Review `.github/copilot-instructions.md` and identify any missing project conventions that would improve generated code."
 
 2. **Prompt File:**
-  > "Create a reusable prompt file for reviewing generated tests. Include checks for weak assertions, over-mocking, missing edge cases, and test names."
+   > "Create a reusable prompt file for reviewing generated tests. Include checks for weak assertions, over-mocking, missing edge cases, and test names."
 
 3. **Custom Agent:**
-  > "Create a read-only planning agent that produces implementation plans, acceptance criteria, and validation steps without editing files."
+   > "Create a read-only planning agent that produces implementation plans, acceptance criteria, and validation steps without editing files."
 
 4. **Skill:**
-  > "Draft a `SKILL.md` for a release-note writing workflow. Include when to use it, required context, output format, and validation checks."
+   > "Draft a `SKILL.md` for a release-note writing workflow. Include when to use it, required context, output format, and validation checks."
 
 5. **Diagnostics:**
-  > "Troubleshoot why the repository instructions were not applied to the last response. List which customisations were used and what to adjust."
+   > "Troubleshoot why the repository instructions were not applied to the last response. List which customisations were used and what to adjust."
 
 ---
 

@@ -32,7 +32,7 @@
 - GitHub Copilot access through Copilot Free, a paid individual plan, or a managed Business/Enterprise organisation
 - IDE installed on your machine
 
-> **April 2026 note:** Copilot Free can be enough for introductory exercises, but request limits, model access, and feature availability vary by plan and organisation policy. GitHub also announced usage-based billing with GitHub AI Credits from 1 June 2026, and some new self-serve sign-ups were paused in April 2026. Always verify access and billing details on the [GitHub Copilot plans page](https://github.com/features/copilot/plans) before delivering a live workshop.
+> **April 2026 note:** Copilot Free can be enough for introductory exercises, but request limits, model access, feature availability, billing, and sign-up availability can vary by plan and organisation policy, and may change over time. Always verify current access and plan details on the official [GitHub Copilot plans page](https://github.com/features/copilot/plans) before delivering a live workshop.
 
 ---
 
@@ -470,7 +470,7 @@ If your subscription provides multiple model options:
 
 GitHub Copilot offers several interaction surfaces designed for different stages of the development lifecycle: **Ask**, **inline suggestions**, **inline chat and targeted edits**, **Plan**, **Agent**, **Copilot CLI**, and **Copilot cloud agent**. Understanding when to use each one helps you keep Copilot productive, reviewable, and aligned with organisation policy.
 
-> **April 2026 note:** VS Code Edit mode is deprecated as a standalone mode. Current training should emphasise Agent mode for multi-file changes, inline chat for focused edits, and Plan for review-before-implementation workflows. Always use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth for your specific IDE/version.
+> **April 2026 note:** Older materials may refer to VS Code Edit mode as a standalone mode. Current VS Code workflows emphasise Agent mode for multi-file changes, inline chat for focused edits, and Plan for review-before-implementation workflows. Always use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth for your specific IDE/version.
 
 ### Quick Comparison
 

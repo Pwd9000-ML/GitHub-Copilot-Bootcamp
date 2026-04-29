@@ -85,7 +85,7 @@ GitHub Copilot offers several surfaces and modes, each suited to different devel
 | **Copilot Cloud Agent** | Works asynchronously from GitHub issues, branches, or pull requests where enabled | Background research, planned changes, PR preparation |
 | **Next Edit Suggestions** | Predicts where you will edit next and suggests completions | Iterative editing, code reviews |
 
-> **April 2026 note:** VS Code Edit mode is deprecated. Teach Agent mode and inline chat for current multi-file and targeted editing workflows, and treat older Edit mode references as legacy terminology.
+> **April 2026 note:** Some older materials may refer to VS Code Edit mode. For current teaching, focus on Agent mode and inline chat for multi-file and targeted editing workflows, and treat Edit mode references as older terminology unless they are backed by current official documentation.
 
 ---
 
