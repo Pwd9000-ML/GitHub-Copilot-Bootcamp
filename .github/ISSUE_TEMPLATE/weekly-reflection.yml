@@ -24,6 +24,10 @@ body:
         - label: DevOps / CI-CD
         - label: Debugging
         - label: Code review / explanation
+        - label: Planning with Plan agent
+        - label: Agent mode or Copilot CLI workflows
+        - label: Custom instructions, prompt files, agents, or skills
+        - label: Security, governance, or quality gates
 
   - type: input
     id: time_impact

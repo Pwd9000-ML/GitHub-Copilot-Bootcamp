@@ -13,7 +13,7 @@ _Learn to use GitHub Copilot CLI, a standalone terminal application, for issue m
   - Familiarity with basic command line (CLI) operations
   - Basic knowledge of GitHub repositories
   - Node.js version 22 or later (for Copilot CLI installation)
-  - A GitHub Copilot subscription (Pro, Pro+, Business, or Enterprise)
+  - GitHub Copilot access through an approved individual or managed organisation plan
 
 - **How long**: This exercise takes less than 60 minutes to complete.
 
@@ -28,7 +28,7 @@ In this exercise, you will:
 GitHub Copilot CLI is a standalone terminal application with exciting features:
 - **Latest AI models**: Access the newest models from OpenAI and Google
 - **Custom agents**: Create specialised agent personas for your workflows using `.github/agents/`
-- **`/delegate` command**: Delegate tasks to Copilot coding agent which works autonomously
+- **`/delegate` command**: Delegate tasks to Copilot cloud agent or an enabled background agent workflow
 - **`/share` command**: Save chat sessions as Markdown files or GitHub gists
 - **Better image support**: Add images via paste and drag-and-drop
 - **MCP server support**: Integrate with Model Context Protocol tools

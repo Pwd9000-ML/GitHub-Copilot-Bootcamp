@@ -18,6 +18,7 @@
 - [6. Debugging & Research](#6-debugging--research)
 - [7. Unit Test Generation](#7-unit-test-generation)
 - [8. SQL Query Generation](#8-sql-query-generation)
+- [9. Context, Agents, and Governance](#9-context-agents-and-governance)
 
 ---
 
@@ -366,6 +367,103 @@ Write a SQL query to get the top 5 highest-paid employees ordered by salary in d
 ```
 
 > **Tip:** Include table names, column names, and specific conditions for accurate query generation.
+
+---
+
+## 9. Context, Agents, and Governance
+
+Modern prompt engineering includes context selection, customisation files, tool permissions, and validation expectations.
+
+- Use context variables to make the request specific
+- Use Plan before Agent for broad changes
+- Use custom agents and skills for repeatable workflows
+- Ask for diagnostics when instructions are ignored
+- Include security and approval boundaries in the prompt
+
+### Example Prompts
+
+#### Initialise Repository Instructions
+
+```text
+/init
+Create or update repository instructions for this project.
+Include language conventions, test commands, documentation style, security expectations, and how to run validation locally.
+```
+
+#### Plan Before Implementing
+
+```text
+/plan Add an audit log for inventory changes.
+Use `#codebase` to identify relevant files.
+Return a plan with files likely to change, risks, tests to add, and manual verification steps.
+Do not edit files yet.
+```
+
+#### Codebase Context
+
+```text
+#codebase Find all places where inventory items are added, updated, or deleted.
+Group findings by feature area and identify where validation rules should be centralised.
+```
+
+#### Change Review
+
+```text
+#changes Review the current changes for logic bugs, security issues, missing tests, and inconsistent style.
+Lead with findings and include concrete fixes.
+```
+
+#### Problems and Failing Commands
+
+```text
+#problems Explain the current diagnostics and suggest the smallest safe fix.
+Do not change files until you have described the likely root cause.
+```
+
+```text
+#terminalSelection Analyse this failing test output.
+Identify the failing assertion, likely source of the bug, and the next verification command to run.
+```
+
+#### External Source Validation
+
+```text
+#fetch https://code.visualstudio.com/docs/copilot/customization/custom-agents
+Summarise the current custom agent file format and list the frontmatter fields relevant to a read-only planning agent.
+Only use the fetched source and include the URL in the answer.
+```
+
+#### Custom Agent Creation
+
+```text
+/create-agent Create a read-only planning agent for this repository.
+It should use codebase, search, fetch, and usages tools only.
+It must produce implementation plans, acceptance criteria, risks, and tests without editing files.
+```
+
+#### Skill Creation
+
+```text
+/create-skill Create a skill for release-note drafting.
+Include when to use it, required inputs, steps, output format, validation checks, and examples.
+```
+
+#### Troubleshooting Customisations
+
+```text
+/troubleshoot The last response ignored our test naming convention.
+Show which instructions, prompt files, agents, tools, and skills were applied.
+Suggest the smallest change to make the convention more reliable.
+```
+
+#### Permission Boundary
+
+```text
+Implement the approved plan, but ask before installing packages, running network calls, changing deployment state, or modifying files outside `src` and `tests`.
+After edits, summarise changed files, tests run, and any risks left for human review.
+```
+
+> **Tip:** The best prompts make the workflow inspectable. Ask Copilot to explain what context it used, what it changed, how it validated the work, and what a human should still review.
 
 ---
 

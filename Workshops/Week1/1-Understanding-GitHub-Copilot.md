@@ -25,14 +25,15 @@
 
 ### What is GitHub Copilot?
 
-GitHub Copilot is an AI-powered coding assistant developed by GitHub in collaboration with AI vendors such as OpenAI. It integrates directly into your development environment to provide intelligent code suggestions, completions, and assistance in real time.
+GitHub Copilot is an AI-powered coding assistant and agentic development platform developed by GitHub in collaboration with AI model providers. It integrates into your IDE, GitHub.com, and the terminal to provide code suggestions, chat assistance, implementation planning, file edits, approved command execution, and review support.
 
 **Key characteristics:**
 
 - Acts as a pair programmer that understands context
-- Generates code suggestions based on comments, function names, and surrounding code
-- Supports multiple interaction modes: inline completions, chat, edits, and autonomous agent capabilities
-- Learns from your codebase context to provide relevant suggestions
+- Generates code suggestions based on comments, function names, surrounding code, and selected files
+- Supports inline completions, chat, plan-first workflows, agent mode, Copilot CLI, and Copilot cloud agent workflows
+- Uses workspace, repository, and selected context to provide relevant suggestions
+- Requires developer review, testing, and policy awareness before generated work is accepted
 
 ### Purpose and Value Proposition
 
@@ -65,22 +66,26 @@ GitHub Copilot is powered by Large Language Models (LLMs), with a wide variety o
 2. **Open tabs:** other files you have open in your editor
 3. **Project structure:** folder names, file names, and imports
 4. **Comments and docstrings:** natural language descriptions you provide
-5. **Repository context:** when using features like Copilot Spaces
+5. **Explicit context:** selected files, folders, symbols, `#codebase`, `#file`, `#changes`, `#problems`, terminal output, screenshots, and web references through supported tools such as `#fetch`
+6. **Repository and GitHub context:** repository search, issues, pull requests, and documentation when connected through supported GitHub tools or agents
 
 **Important:** Copilot generates suggestions based on the context you provide. Data handling, retention, and usage controls depend on your Copilot plan and settings. See the [GitHub Copilot Trust Center FAQ](https://copilot.github.trust.page/faq) for details.
 
 ### AI-Driven Capabilities
 
-GitHub Copilot offers several interaction modes, each suited to different development tasks:
+GitHub Copilot offers several surfaces and modes, each suited to different development tasks:
 
 | Mode | Description | Best For |
 |------|-------------|----------|
 | **Inline Suggestions** | Real-time code completions as you type | Writing new code, boilerplate, repetitive patterns |
 | **Ask Mode** | Conversational interface for questions and explanations | Learning, debugging, exploring options |
-| **Edit Mode** | Apply changes across multiple files from a single prompt | Refactoring, bulk modifications |
-| **Agent Mode** | Autonomous code generation with terminal access | Complex tasks, scaffolding, multi-step operations |
-| **Plan Mode** | Creates a step-by-step implementation plan before generating code | Complex implementations, architecture planning |
+| **Inline Chat and Targeted Edits** | Apply focused changes to the current file or selected code | Small refactors, comments, local fixes |
+| **Agent Mode** | Iterative code generation with file edits and approved terminal access | Complex tasks, scaffolding, multi-step operations |
+| **Plan Agent** | Creates a step-by-step implementation plan before generating code | Complex implementations, architecture planning |
+| **Copilot Cloud Agent** | Works asynchronously from GitHub issues, branches, or pull requests where enabled | Background research, planned changes, PR preparation |
 | **Next Edit Suggestions** | Predicts where you will edit next and suggests completions | Iterative editing, code reviews |
+
+> **April 2026 note:** Some older materials may refer to VS Code Edit mode. For current teaching, focus on Agent mode and inline chat for multi-file and targeted editing workflows, and treat Edit mode references as older terminology unless they are backed by current official documentation.
 
 ---
 
@@ -88,35 +93,14 @@ GitHub Copilot offers several interaction modes, each suited to different develo
 
 ### Language Support
 
-GitHub Copilot supports many programming languages, with particularly strong performance in widely used languages due to the volume of training data available.
+GitHub Copilot supports many programming languages. Suggestion quality varies by the amount of public examples available, language server support, project context, and how clearly you describe the task.
 
-**Tier 1, Excellent Support:**
-
-| Language | Strengths |
-|----------|-----------|
-| Python | Data science, web frameworks, scripting, automation |
-| JavaScript/TypeScript | Web development, React, Node.js, frameworks |
-| Java | Enterprise applications, Spring, Android |
-| C# | .NET development, Unity, enterprise systems |
-| Go | Cloud infrastructure, microservices, CLI tools |
-| Ruby | Rails applications, scripting |
-| PHP | Web development, WordPress, Laravel |
-
-**Tier 2, Good Support:**
-
-- C/C++
-- Rust
-- Swift
-- Kotlin
-- Scala
-- SQL
-- Shell scripting (Bash, PowerShell)
-
-**Tier 3, Basic Support:**
-
-- Less common languages (COBOL, Fortran, Haskell, etc.)
-- Domain-specific languages
-- Markup languages (HTML, CSS, Markdown, YAML, JSON)
+| Language or ecosystem | Typical strengths | Notes |
+|------------------------|-------------------|-------|
+| Python, JavaScript, TypeScript, Java, C#, Go | Common application patterns, tests, APIs, scripts, and cloud tooling | Usually strongest when the workspace includes clear types, tests, and conventions |
+| C, C++, Rust, Swift, Kotlin, SQL, Bash, PowerShell | Refactoring, explanation, test generation, and common libraries | Validate generated syntax with compiler, linter, or database tooling |
+| COBOL, ABAP, Fortran, domain-specific languages | Explanation, documentation, translation, and boilerplate assistance | Domain-specific APIs and proprietary platform objects need extra human validation |
+| HTML, CSS, Markdown, YAML, JSON | Documentation, configuration, pipeline files, and structured content | Always validate generated configuration before applying it |
 
 ### Framework and Library Support
 
@@ -142,7 +126,7 @@ GitHub Copilot integrates with a wide range of IDEs and platforms:
 | **JetBrains IDEs** | Full | IntelliJ IDEA, PyCharm, WebStorm, Rider, and others |
 | **Eclipse** | Good | Supports Copilot integration for editing and chat. Specific feature availability varies by version. See Copilot feature matrix. |
 | **Xcode** | Good | Supports Copilot integration for code suggestions. Specific feature availability varies by version. See Copilot feature matrix. |
-| **Neovim/Vim** | Basic | Inline code completions only (Chat, Agent mode, and Edit mode are not supported) |
+| **Neovim/Vim** | Basic | Primarily inline code completions. Chat, agentic workflows, and customisation features are more limited than full IDE integrations. |
 | **GitHub.com** | Chat | Browser-based Copilot Chat for repositories |
 | **GitHub Mobile** | Chat | Ask questions about repositories on mobile |
 | **GitHub Copilot CLI** | CLI | Terminal-based Copilot assistance |
@@ -178,6 +162,15 @@ Using Copilot Chat:
 
 Copilot provides a natural language explanation, making it easier to understand complex or poorly documented code.
 
+#### Plan-First and Agentic Workflows
+
+**Scenario:** Implementing a feature that touches several files
+
+Using the Plan agent:
+> "Plan how to add user profile editing to this app. Identify the files likely to change, risks, tests, and acceptance criteria. Do not edit files yet."
+
+After reviewing the plan, you can hand it to Agent mode or Copilot CLI to implement the change with explicit approval for file edits and terminal commands.
+
 #### Debugging Assistance
 
 **Scenario:** Investigating an error message
@@ -205,6 +198,7 @@ Copilot generates comprehensive documentation including parameter descriptions, 
 - Use Copilot to explain changes in a pull request
 - Generate review comments or suggestions
 - Request Copilot Code Review for automated feedback before human reviewers
+- Remember that Copilot Code Review leaves comments and suggestions. It does not replace required human approval or ownership checks
 
 #### Onboarding New Team Members
 
@@ -227,7 +221,7 @@ Copilot generates comprehensive documentation including parameter descriptions, 
 # with caching and parallel test execution
 ```
 
-Copilot can scaffold complete pipeline configurations based on your project structure using comments as show above.
+Copilot can scaffold complete pipeline configurations based on your project structure using comments as shown above.
 
 #### Infrastructure as Code
 
@@ -277,6 +271,8 @@ Copilot analyses the code under test and generates comprehensive test cases.
 - **Test generated code** thoroughly
 - **Understand what the code does**, do not blindly accept suggestions
 - **Check for security implications**, especially with user input handling
+- **Use plans, diffs, and checkpoints** to keep changes reviewable and reversible
+- **Confirm policy boundaries** for model choice, agent permissions, content exclusion, and external tools in managed organisations
 
 ### When Copilot Works Best
 
@@ -298,7 +294,7 @@ Copilot analyses the code under test and generates comprehensive test cases.
 
 1. **GitHub Copilot is an AI-powered coding assistant** that integrates into your IDE to provide real-time suggestions and support.
 
-2. **Multiple interaction modes** (inline, chat, edits, agent) suit different development tasks and workflows which will be covered in detail in the following sessions.
+2. **Multiple interaction modes and surfaces** (inline suggestions, Ask, inline chat, Plan, Agent, CLI, and cloud agent) suit different development tasks and workflows which will be covered in detail in the following sessions.
 
 3. **Broad language and framework support** makes Copilot useful across most technology stacks, with particularly strong support for popular languages.
 
@@ -315,6 +311,16 @@ Copilot analyses the code under test and generates comprehensive test cases.
 1. What development tasks do you spend the most time on that Copilot might help with?
 2. How might AI-assisted coding change the way your team collaborates?
 3. What concerns do you have about using AI-generated code, and how might those be addressed?
+
+---
+
+## Additional Resources
+
+- [GitHub Copilot overview](https://docs.github.com/en/copilot/about-github-copilot/what-is-github-copilot)
+- [VS Code Copilot overview](https://code.visualstudio.com/docs/copilot/overview)
+- [VS Code Copilot agents overview](https://code.visualstudio.com/docs/copilot/agents/overview)
+- [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix)
+- [GitHub Copilot Trust Center FAQ](https://copilot.github.trust.page/faq)
 
 ---
 

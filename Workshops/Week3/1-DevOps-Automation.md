@@ -18,7 +18,8 @@ DevOps automation is one of Copilot's strongest use cases. The repetitive nature
 - Perform incident response and log analysis from the terminal
 - Build pre-deployment validation scripts
 - Use headless mode to embed Copilot in scripts and pipelines
-- Delegate generated work to pull requests with `/delegate`
+- Delegate generated work to branches or pull requests with `/delegate` where enabled
+- Distinguish VS Code Agent mode, Copilot CLI, Copilot cloud agent, and Copilot Code Review
 
 ---
 
@@ -28,7 +29,7 @@ The standalone Copilot CLI brings agentic AI to your terminal, where DevOps work
 
 > **Note:** The standalone GitHub Copilot CLI replaces the retired `gh copilot` extension. It is a separate application, not a GitHub CLI extension. See [GitHub Copilot CLI documentation](https://docs.github.com/en/copilot/github-copilot-in-the-cli) for details.
 
-**Prerequisites:** An active GitHub Copilot subscription (Pro, Pro+, Business, or Enterprise). Node.js 22+ is required for the npm installation method.
+**Prerequisites:** GitHub Copilot access through an individual or managed organisation plan. Node.js 22+ is required for the npm installation method. Feature availability for CLI, cloud agent, models, and tool permissions can vary by plan and organisation policy.
 
 ```bash
 # Option 1: Windows (WinGet)
@@ -115,6 +116,17 @@ copilot --allow-url 'https://api.github.com/*' -p "Fetch the latest release for 
 
 > **Tip:** In production CI pipelines, prefer granular `--allow-tool` flags over `--allow-all-tools` to follow the principle of least privilege.
 
+### Modern Copilot Surfaces for DevOps
+
+| Surface | Best fit | Watch-outs |
+|---------|----------|------------|
+| VS Code Agent mode | Editing workflow files, Dockerfiles, scripts, and tests in the local workspace | Review diffs and approve terminal commands deliberately |
+| Copilot CLI | Terminal-heavy workflows, Git operations, test runs, log analysis, and scripting | Use granular tool approvals and avoid broad shell access in shared environments |
+| Copilot cloud agent | Asynchronous GitHub work from issues, branches, or pull requests where enabled | Requires organisation controls for runners, firewalls, signed commits, and policies |
+| Copilot Code Review | Assistive PR feedback before or during human review | It comments and suggests changes. It does not approve, request changes, or replace required reviewers |
+
+Use this distinction when teaching DevOps. Learners should know whether Copilot is working locally, in a terminal, or asynchronously on GitHub-hosted infrastructure.
+
 ---
 
 ## 1. CI/CD Pipeline Generation
@@ -162,16 +174,26 @@ on:
   pull_request:
     branches: [ main ]
 
+# Keep token permissions least-privilege by default.
+permissions:
+  contents: read
+
+# Cancel older runs for the same branch to save CI time.
+concurrency:
+  group: node-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x, 22.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -264,7 +286,7 @@ Generate pipelines directly from the terminal, no IDE required:
 **Interactive mode:**
 ```bash
 copilot
-> Create a GitHub Actions workflow for a Node.js 20 app that builds, tests with coverage, lints, and deploys to Azure App Service on main branch. Include caching and matrix strategy for Node 18 and 20.
+> Create a GitHub Actions workflow for a Node.js 22 app that builds, tests with coverage, lints, and deploys to Azure App Service on main branch. Include caching and matrix strategy for Node 20 and 22.
 ```
 
 **Headless mode (scriptable):**
@@ -321,6 +343,27 @@ Create a Jenkinsfile for a Java Maven project with:
 | **Security scanning** | "Add a security vulnerability scan step using npm audit" |
 | **Conditional execution** | "Only run deployment when changes are in the src/ directory" |
 | **Environment variables** | "Add environment-specific configuration using GitHub secrets" |
+
+### GitHub Actions Security and Quality Gates
+
+Modern GitHub Actions workflows should include governance and supply-chain controls, especially when Copilot helps generate them.
+
+| Control | What to ask Copilot for |
+|---------|-------------------------|
+| Least-privilege token permissions | `permissions: contents: read` by default, with job-specific expansion only when needed |
+| Secure events | Avoid unsafe use of untrusted pull request input in shell scripts |
+| Pinned third-party actions | Pin external actions to a full commit SHA where your policy requires it |
+| Maintained action versions | Use current major versions such as `actions/checkout@v4`, `actions/setup-node@v4`, and artifact actions v4 or later |
+| OIDC for cloud auth | Prefer short-lived federated credentials over long-lived cloud secrets |
+| Environments and approvals | Use protected environments for staging and production deployments |
+| Concurrency | Cancel stale runs for the same branch or deployment target |
+| Rulesets and required checks | Make tests, scans, and deployments visible as required merge gates |
+| Artifact attestations | Add provenance for build artifacts where supply-chain assurance is required |
+
+**Prompt:**
+```text
+Review this GitHub Actions workflow for least-privilege permissions, unsafe shell interpolation, stale action versions, missing concurrency, missing environment approvals, secret exposure, and opportunities to use OIDC instead of long-lived cloud secrets.
+```
 
 ---
 
@@ -520,18 +563,23 @@ copilot --allow-all-tools -p "Check all Dockerfiles in this repo for security is
 jobs:
   ai-review:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository for review context
+        uses: actions/checkout@v4
       
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
       
       - name: AI-Powered Config Review
         run: |
-          copilot --allow-all-tools -p "Review the Kubernetes manifests in k8s/ for security best practices and report any issues"
+          copilot -p "Review the Kubernetes manifests in k8s/ for security best practices and report any issues. Do not modify files."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+> **Note:** Treat AI-powered CI review as advisory unless your organisation has formally approved the workflow. Required checks, code owners, rulesets, human review, and deployment approvals remain the authoritative quality gates.
 
 ---
 
@@ -612,6 +660,8 @@ copilot
 10. **Leverage built-in agents** - Use `Explore`, `Task`, `Plan`, and `Code-review` for specialised workflows
 11. **Manage context** - Use `/usage`, `/context`, and `/compact` to stay within token limits
 12. **Resume sessions** - Use `--continue` and `--resume` to maintain context across terminal restarts
+13. **Distinguish local, CLI, and cloud workflows** - Know where Copilot is running and which policies apply
+14. **Use quality gates** - Rulesets, required checks, environments, merge queues, code scanning, dependency review, and artifact attestations turn generated automation into governed delivery
 
 ---
 

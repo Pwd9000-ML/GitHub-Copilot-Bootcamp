@@ -16,6 +16,8 @@ AI coding assistants like GitHub Copilot are powerful tools, but they come with 
 - Responsible AI usage and bias awareness
 - Organisational policies and compliance
 - Best practices for safe AI-assisted development
+- Enterprise controls for models, policies, custom instructions, content exclusion, and data residency
+- Agent-specific risks such as prompt injection, data exfiltration, tool permissions, and MCP server trust
 
 ---
 
@@ -52,7 +54,34 @@ In Visual Studio Code you can also view code references for accepted suggestions
 
 ---
 
-## 2. Security Vulnerabilities
+## 2. Data Protection and Enterprise Governance
+
+Copilot features are governed by plan, policy, IDE, and organisation settings. The safest curriculum stance is to teach learners to verify the current policy before using advanced agents, external tools, or sensitive code.
+
+### Governance Controls to Know
+
+| Control | Why it matters | Learner action |
+|---------|----------------|----------------|
+| Feature policies | Organisations can enable or disable features such as agents, models, code review, and preview capabilities | Check policy before assuming a feature is available |
+| Model controls | Available models, premium request costs, and data residency options can vary | Use approved models and avoid hardcoded model names in shared guidance |
+| Content exclusion | Repositories or paths can be excluded from some Copilot features | Confirm the exact surfaces where exclusion applies before relying on it |
+| Organisation custom instructions | Shared instructions can enforce standards across repositories | Review inherited instructions when Copilot behaviour seems unexpected |
+| MCP and external tools | Tools can expose data or take actions outside the IDE | Use trusted servers only and scope permissions carefully |
+| BYOK and data residency | Some organisations control model providers or regional processing | Follow enterprise guidance for regulated workloads |
+
+> **Important:** Content exclusion does not apply uniformly to every Copilot surface. GitHub Docs state that Copilot CLI, Copilot cloud agent, and Agent mode in Copilot Chat in IDEs do not support content exclusion. Verify the current [content exclusion documentation](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot) before using sensitive repositories or paths.
+
+### Governance Prompt
+
+```text
+Review our planned Copilot rollout for governance gaps.
+Cover feature policies, model access, content exclusion limits, custom instructions, MCP tools, code review automation, usage metrics, and human approval requirements.
+Return risks, recommended controls, and owner actions.
+```
+
+---
+
+## 3. Security Vulnerabilities
 
 ### Common Security Risks in AI-Generated Code
 
@@ -204,9 +233,26 @@ Create a pre-commit hook that scans for:
 Fail commit if any issues found.
 ```
 
+### GitHub Security Features to Pair with Copilot
+
+| Feature | Purpose | Copilot-assisted workflow |
+|---------|---------|---------------------------|
+| Secret scanning and push protection | Prevent secrets from entering repositories | Ask Copilot to explain a blocked push and help rotate or remove the secret safely |
+| Code scanning with CodeQL | Find vulnerabilities in code and pull requests | Ask Copilot to triage an alert, explain the data flow, and propose a minimal fix |
+| Copilot Autofix | Suggest remediations for supported code scanning alerts | Ask Copilot to justify why the Autofix is safe before applying it |
+| Dependency review | Flag risky dependency changes in pull requests | Ask Copilot to summarise package risk, alternatives, and required updates |
+| Security and quality tab | Centralise security and code quality findings on GitHub | Ask Copilot to group findings by owner, severity, and remediation effort |
+
+**Prompt for alert triage:**
+```text
+Explain this CodeQL alert in plain language.
+Identify the source, sink, exploitability, likely false-positive reasons, safest fix, and tests that should prove the fix.
+Do not apply an Autofix until you have explained the trade-offs.
+```
+
 ---
 
-## 3. Responsible AI Usage
+## 4. Responsible AI Usage
 
 ### Bias in AI-Generated Code
 
@@ -284,7 +330,7 @@ def complex_algorithm():
 
 ---
 
-## 4. Organisational Policies
+## 5. Organisational Policies
 
 ### Developing an AI Coding Policy
 
@@ -294,7 +340,7 @@ def complex_algorithm():
 # AI-Assisted Coding Policy
 
 ## Approved Tools
-- GitHub Copilot (Business tier only)
+- GitHub Copilot through approved individual or managed organisation access
 - [List other approved tools]
 
 ## Prohibited Uses
@@ -314,11 +360,14 @@ def complex_algorithm():
 - No client data in prompts
 - No proprietary algorithms as context
 - Follow data classification guidelines
+- Confirm whether content exclusion, model policy, and data residency controls apply to the Copilot surface being used
+- Use trusted MCP servers only and record approved tool scopes
 
 ## Review Requirements
 - AI-generated code requires standard code review
 - Security-sensitive code requires additional security review
 - Novel algorithms require architecture review
+- Agent-generated changes require diff review, tests, and tool activity review before merge
 ```
 
 ### Team Guidelines Prompt
@@ -334,7 +383,7 @@ Create a team code review checklist specifically for AI-generated code:
 
 ---
 
-## 5. Practical Security Checklist
+## 6. Practical Security Checklist
 
 ### Before Accepting AI Suggestions
 
@@ -355,10 +404,34 @@ Create a team code review checklist specifically for AI-generated code:
 - [ ] **Test coverage** - Are tests comprehensive and meaningful?
 - [ ] **Documentation** - Is the code properly documented?
 - [ ] **Standards compliance** - Does it follow team conventions?
+- [ ] **Tool activity** - Did an agent run commands, fetch external content, or call MCP tools that need review?
+- [ ] **Policy alignment** - Did the workflow respect content exclusion, model, data residency, and approval requirements?
 
 ---
 
-## 6. Scenario Exercises
+## 7. Agent Threat Model
+
+Agentic workflows introduce risks beyond code completion because agents can use tools, read broader context, and run commands where approved.
+
+| Risk | Example | Mitigation |
+|------|---------|------------|
+| Prompt injection | A README or web page tells the agent to ignore project rules | Treat external and repository text as untrusted instructions, and ask Copilot to identify conflicting instructions |
+| Data exfiltration | An agent sends sensitive context to an external tool or URL | Restrict tools, avoid sensitive files, and review network access approvals |
+| Over-broad terminal permissions | An agent runs destructive commands or modifies deployment state | Require approval, use granular permissions, and use disposable environments for training |
+| Untrusted MCP servers | A server exposes unexpected data or performs unexpected actions | Use approved MCP servers only, document permissions, and disable unused tools |
+| Cloud-agent runner risk | Background work runs in organisation-controlled infrastructure | Configure runner controls, firewall settings, signed commits, and audit logs |
+| False confidence | Copilot comments on a PR and reviewers assume it approved the change | Teach that Copilot Code Review is advisory and human approval remains required |
+
+**Prompt:**
+```text
+Threat model this agentic workflow.
+Identify prompt injection risks, sensitive data exposure, unsafe tools, MCP server risks, terminal command risks, and human approval checkpoints.
+Recommend controls before we let an agent implement the task.
+```
+
+---
+
+## 8. Scenario Exercises
 
 ### Scenario 1: Suspicious Suggestion
 
@@ -416,7 +489,10 @@ const employees = [
 4. **Be inclusive** - Actively prompt for unbiased, accessible code
 5. **Know your policies** - Understand your organisation's AI guidelines
 6. **Document appropriately** - Track AI assistance for transparency
-7. **Stay informed** - AI capabilities and risks evolve rapidly
+7. **Govern agents deliberately** - Review tool permissions, MCP servers, model policies, and approval boundaries
+8. **Understand content exclusion limits** - Do not assume one policy applies to every Copilot surface
+9. **Use security platforms together** - Pair Copilot with secret scanning, push protection, code scanning, dependency review, and human review
+10. **Stay informed** - AI capabilities and risks evolve rapidly
 
 ---
 

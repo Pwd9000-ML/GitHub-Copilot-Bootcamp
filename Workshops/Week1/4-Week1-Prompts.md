@@ -12,11 +12,12 @@
 
 - [1. Inline Code Completions](#1-inline-code-completions)
 - [2. Ask Mode - Code Explanations](#2-ask-mode---code-explanations)
-- [3. Edit Mode - Code Modifications](#3-edit-mode---code-modifications)
+- [3. Inline Chat and Targeted Edits](#3-inline-chat-and-targeted-edits)
 - [4. Agent Mode - Multi-File Changes](#4-agent-mode---multi-file-changes)
-- [5. Plan Mode - Implementation Planning](#5-plan-mode---implementation-planning)
+- [5. Plan Agent - Implementation Planning](#5-plan-agent---implementation-planning)
 - [6. Debugging Assistance](#6-debugging-assistance)
 - [7. Documentation Generation](#7-documentation-generation)
+- [8. Review, Context, and Verification](#8-review-context-and-verification)
 
 ---
 
@@ -119,14 +120,14 @@ Is there a more modern JavaScript syntax for this code?
 
 ---
 
-## 3. Edit Mode - Code Modifications
+## 3. Inline Chat and Targeted Edits
 
-> **Note:** Edit mode is not available in every IDE. If you don’t see **Edit** in your Copilot Chat agents dropdown, check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
+> **April 2026 note:** Older VS Code material may call this workflow **Edit mode**. Newer VS Code and Copilot documentation may describe similar workflows differently, so use inline chat for focused local edits and Agent mode for multi-file changes. Check your IDE/version against the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
-Edit mode enables controlled modifications to specific files in your working set.
+Inline chat and targeted edits enable controlled modifications to selected code, the current file, or an explicitly provided context set.
 
-- Select Edit from the agents dropdown in Copilot Chat
-- Add files to your working set before prompting
+- Select the code or file you want to change
+- Provide specific instructions and constraints
 - Make targeted changes to a defined set of files
 - Review and accept or discard individual edits
 
@@ -174,7 +175,7 @@ Correct the logic in this conditional statement
 Fix the memory leak in this event listener
 ```
 
-> **Tip:** Add relevant files to your working set before submitting your prompt. Review and Accept or Discard edits for each file.
+> **Tip:** Add relevant files, selections, or symbols before submitting your prompt. Review and accept or discard edits for each file.
 
 ---
 
@@ -218,17 +219,26 @@ Reorganise the authentication code:
 - Update all imports across the project
 ```
 
+#### Context-Rich Agent Prompt
+
+```text
+#codebase Add server-side validation for the checkout flow.
+First identify the files that handle cart totals, payment submission, and order creation.
+Then make the smallest set of changes, add tests, run the relevant test command, and summarise what changed.
+Ask before running commands that modify dependencies or external services.
+```
+
 > **Tip:** In Agent mode, Copilot autonomously determines which files need changes. Confirm or reject suggested terminal commands as Copilot iterates to complete your task.
 
 ---
 
-## 5. Plan Mode - Implementation Planning
+## 5. Plan Agent - Implementation Planning
 
-> **Note:** Plan mode is not listed as a separate feature in the official [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix). It is available as an option within the Copilot Chat panel in VS Code and may be integrated into Agent mode workflows in other environments. Availability and behaviour may change as features evolve.
+> **Note:** The Plan agent is intended for review-before-implementation workflows. Availability and behaviour vary by IDE and policy, so confirm in the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix).
 
-Plan mode helps you think through tasks before executing by creating detailed implementation plans.
+The Plan agent helps you think through tasks before executing by creating detailed implementation plans.
 
-- Select Plan from the agents dropdown in Copilot Chat
+- Select Plan from the agents dropdown in Copilot Chat, or use `/plan` where available
 - Copilot researches your codebase to understand context
 - Creates a detailed implementation plan for review
 - Waits for your approval before making any changes
@@ -254,6 +264,14 @@ Plan how to migrate this codebase from JavaScript to TypeScript
 
 ```text
 Outline the steps to refactor this monolithic function into smaller modules
+```
+
+#### Verification Planning
+
+```text
+Create an implementation plan for this change.
+Include acceptance criteria, files likely to change, tests to add or run, security risks, and manual verification steps.
+Do not edit files yet.
 ```
 
 > **Tip:** After reviewing the plan, click "Start Implementation" to hand off to Agent mode, or "Open in Editor" to save the plan as Markdown for later.
@@ -373,6 +391,57 @@ Explain what this code block does for future maintainers
 ```
 
 > **Tip:** Good documentation makes your code more maintainable. Use Copilot to quickly add professional documentation.
+
+---
+
+## 8. Review, Context, and Verification
+
+Modern Copilot workflows work best when you provide explicit context and ask for verification steps.
+
+- Use `#codebase` to search the workspace semantically
+- Use `#file` or attached files for exact context
+- Use `#changes` to review current Git changes
+- Use `#problems` to analyse editor diagnostics
+- Use `#terminalSelection` or pasted terminal output for failing commands
+- Use `#fetch` only for trusted external documentation and ask Copilot to cite the source URL in its answer
+
+### Example Prompts
+
+#### Codebase Context
+
+```text
+#codebase Explain how authentication works in this project.
+List the key files, data flow, and any obvious risks or missing tests.
+```
+
+#### Change Review
+
+```text
+#changes Review these edits for bugs, security issues, missing tests, and unclear documentation.
+Give findings first, ordered by severity, then provide a short summary.
+```
+
+#### Problems and Terminal Output
+
+```text
+#problems Explain these diagnostics and propose the smallest safe fix.
+Do not change files until you have described the root cause.
+```
+
+```text
+#terminalSelection Explain this failing test output.
+Identify whether the failure is in the test, implementation, or setup, and recommend the next command to run.
+```
+
+#### Source Validation
+
+```text
+#fetch https://code.visualstudio.com/docs/copilot/overview
+Summarise the current Copilot surfaces relevant to a beginner developer.
+Only use information from the fetched source and include the URL in the answer.
+```
+
+> **Tip:** Ask Copilot to summarise changes, tests, and residual risks before you keep or commit generated work.
 
 ---
 

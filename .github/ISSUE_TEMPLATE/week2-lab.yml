@@ -45,6 +45,10 @@ body:
         - label: Refining Copilot suggestions iteratively
         - label: Setting up custom instructions (.github/copilot-instructions.md)
         - label: Creating reusable prompt templates
+        - label: Creating or using custom agents (.agent.md)
+        - label: Creating or using agent skills (SKILL.md)
+        - label: Plan-first workflow before implementation
+        - label: Troubleshooting customisations with diagnostics
         - label: Security-focused prompts
         - label: SQL query generation
 
@@ -109,8 +113,8 @@ body:
   - type: textarea
     id: custom_instructions
     attributes:
-      label: Custom instructions created (optional)
-      description: If you created a copilot-instructions.md file, paste its contents or key sections
+      label: Customisations created (optional)
+      description: If you created instructions, prompt files, custom agents, or skills, paste key sections or summarise them
       placeholder: |
         # Copilot Instructions
         - Use TypeScript for all new files

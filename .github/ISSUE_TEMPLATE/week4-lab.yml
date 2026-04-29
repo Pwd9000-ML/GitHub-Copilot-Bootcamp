@@ -47,6 +47,11 @@ body:
         - label: IP/licensing considerations
         - label: Bias detection in code
         - label: Responsible AI practices
+        - label: Enterprise governance policies and model controls
+        - label: Content exclusion limits across Copilot surfaces
+        - label: Secret scanning, push protection, or CodeQL alert triage
+        - label: Copilot Autofix review
+        - label: Agent threat modelling and MCP/tool permission review
 
   - type: textarea
     id: refactoring_example
@@ -160,6 +165,7 @@ body:
       placeholder: |
         - Mandatory security review for AI-generated code
         - Documentation requirements
+        - Model, content exclusion, MCP, and tool approval rules
         - Approved use cases...
 
   - type: textarea

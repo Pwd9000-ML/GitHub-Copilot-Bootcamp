@@ -15,6 +15,8 @@ Refactoring is the process of restructuring existing code without changing its e
 - Patterns for incremental refactoring with Copilot
 - Strategies for improving readability and maintainability
 - Performance optimisation approaches
+- Plan-first agentic refactoring with explicit context, approval boundaries, tests, and checkpoints
+- Using Copilot Code Review or a custom review agent before human review
 
 ---
 
@@ -29,6 +31,33 @@ Refactoring is the process of restructuring existing code without changing its e
 | Outdated patterns | Suggests modern equivalents |
 | Missing tests | Generates test coverage for existing code |
 | Tight coupling | Identifies opportunities for modularisation |
+
+### Agentic Refactoring Workflow
+
+Large refactors are safest when Copilot plans before editing and each change remains reviewable.
+
+```
+1. Map context -> 2. Plan -> 3. Add characterisation tests -> 4. Refactor in small slices -> 5. Verify -> 6. Review -> 7. Document
+```
+
+| Step | Copilot workflow | Human checkpoint |
+|------|------------------|------------------|
+| Map context | Use `#codebase`, semantic search, symbol references, and selected files | Confirm Copilot found the right boundaries |
+| Plan | Ask Plan agent for files, risks, tests, and acceptance criteria | Approve or revise the plan before edits |
+| Protect behaviour | Generate characterisation tests for current behaviour | Verify tests fail or pass for meaningful reasons |
+| Refactor | Use Agent mode or Copilot CLI for one slice at a time | Review diffs and command approvals |
+| Verify | Run tests, linters, type checks, and manual checks | Confirm behaviour remains unchanged |
+| Review | Request Copilot Code Review or a custom review agent | Human reviewers still own approval decisions |
+| Document | Update README, ADRs, comments, or migration notes | Check accuracy against the final code |
+
+**Prompt:**
+```text
+#codebase Plan a safe refactor of the order processing flow.
+Identify related files, current behaviour, missing characterisation tests, likely risks, and a sequence of small refactoring steps.
+Do not edit files yet.
+```
+
+> **Tip:** For high-risk work, create a read-only planning agent and a separate implementation agent. This makes the approval boundary visible to learners.
 
 ### Code Analysis Prompts
 
@@ -661,11 +690,13 @@ Modernise this [language] code to use current best practices:
 
 1. **Understand before refactoring** - Use Copilot to explain complex code first
 2. **Use semantic search to map the codebase** - Run `semantic_search` in Agent mode (or use `#codebase`) to find all related code before making changes
-3. **Refactor incrementally** - Small, testable changes are safer than big rewrites
-4. **Maintain tests** - Generate tests before refactoring to ensure behaviour is preserved
-5. **Document decisions** - Have Copilot generate comments explaining why code was changed
-6. **Review suggestions critically** - Copilot suggestions may not always be optimal for your context
-7. **Measure improvements** - Use metrics to verify refactoring actually improved the code
+3. **Plan before editing** - Use Plan agent for files, risks, tests, and acceptance criteria before Agent mode changes code
+4. **Refactor incrementally** - Small, testable changes are safer than big rewrites
+5. **Maintain tests** - Generate tests before refactoring to ensure behaviour is preserved
+6. **Use checkpoints and diffs** - Keep every generated change reviewable and reversible
+7. **Document decisions** - Have Copilot generate comments explaining why code was changed
+8. **Review suggestions critically** - Copilot suggestions may not always be optimal for your context
+9. **Measure improvements** - Use metrics to verify refactoring actually improved the code
 
 ---
 

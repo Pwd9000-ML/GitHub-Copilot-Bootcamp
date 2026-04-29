@@ -29,8 +29,10 @@
 ## Prerequisites
 
 - Active GitHub account
-- GitHub Copilot subscription/license (Pro, Business, or Enterprise plan)
+- GitHub Copilot access through Copilot Free, a paid individual plan, or a managed Business/Enterprise organisation
 - IDE installed on your machine
+
+> **April 2026 note:** Copilot Free can be enough for introductory exercises, but request limits, model access, feature availability, billing, and sign-up availability can vary by plan and organisation policy, and may change over time. Always verify current access and plan details on the official [GitHub Copilot plans page](https://github.com/features/copilot/plans) before delivering a live workshop.
 
 ---
 
@@ -42,6 +44,7 @@
    **Note:** If you're part of an enterprise organisation, your GitHub URL may differ. Check with your GitHub representative or Champion for details.
 2. Check your subscription status under **Settings → Billing and Plans**
 3. Ensure your plan includes GitHub Copilot access
+4. If your organisation manages Copilot, confirm which IDEs, models, agents, MCP servers, and preview features are enabled by policy
 
 ### Step 2: Install the GitHub Copilot Extension
 
@@ -56,17 +59,17 @@ The installation process varies by IDE. Follow the relevant section below for yo
 #### Installation
 
 1. **Open VS Code**
-2. **Go to Extensions** (`Ctrl+Shift+X` or `Cmd+Shift+X`)
-3. **Search for "GitHub Copilot"**
-4. **Click Install** on the official GitHub extension
-5. **Restart VS Code**
+2. **Open the Copilot menu** from the title bar, status bar, or Accounts menu
+3. **Sign in or get Copilot access** when prompted. VS Code can guide new users through Copilot Free if they do not already have access
+4. **Install or update the official GitHub Copilot extension** if VS Code prompts you to do so
+5. **Reload VS Code** if prompted so the chat, inline suggestions, and agent tools are available
 
 #### Sign In
 
-1. After restart, you'll see a **"Sign in to use GitHub Copilot"** notification
-2. Click **"Sign in with GitHub"**
-3. Authorise the extension in your browser
-4. Return to VS Code, you're ready to use Copilot!
+1. Click **Sign in with GitHub** from the Copilot menu or Accounts menu
+2. Authorise VS Code in your browser
+3. Return to VS Code and confirm the Copilot status indicator is active
+4. Open Copilot Chat and run `/init` in your project to create or refresh repository instructions when appropriate
 
 #### Basic Commands
 
@@ -196,7 +199,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 - **No .NET Upgrade Agent:** Automated .NET version migration assistance not available
 - **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
-- **No Custom chat modes:** Unable to define custom slash commands or chat behaviours
+- **Custom agents and reusable prompt files:** Availability and behaviour can differ from VS Code. Check the feature matrix before teaching these workflows in JetBrains
 - **No Workspace indexing:** Local codebase indexing for improved context is not available
 - **No Java Upgrade Agent:** Automated Java version migration assistance not supported
 - **Next edit suggestions:** Availability varies by IDE/version (check the feature matrix)
@@ -244,7 +247,7 @@ The installation process varies by IDE. Follow the relevant section below for yo
 
 #### Known Limitations
 
-- **No Edit mode:** Edit mode isn't available in Xcode. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
+- **No VS Code Edit mode:** The older VS Code Edit mode workflow is not available in Xcode. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
 - **Extensions:** Not supported
 - **MCP:** Supported (see feature matrix; availability may vary by version/policy)
 - **No Code referencing:** Cannot view public code matches for suggestions
@@ -314,7 +317,7 @@ The Copilot Neovim/Vim plugin focuses on inline code suggestions. Compared to ri
 
 - **Code completion only:** Only inline code suggestions are supported
 - **No Copilot Chat or Agent mode:** No interactive chat or autonomous task execution
-- **No Edit mode (Copilot Edits):** Multi-file editing capabilities are not available
+- **No VS Code Edit or Agent mode:** Multi-file editing and autonomous task execution capabilities are not available
 - **No Extensions or MCP support:** Cannot use third-party integrations
 - **No Code referencing:** Cannot view public code matches for suggestions
 - **No Custom instructions or Prompt files:** Cannot customise Copilot behaviour
@@ -377,7 +380,7 @@ Eclipse is a popular IDE for Java development and is also used for SAP ABAP deve
 
 - **No Checkpoints support:** Cannot create or restore checkpoints during agent sessions
 - **No Copilot code review:** Automated code review features not supported
-- **No Edit mode:** Edit mode isn't available in Eclipse. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
+- **No VS Code Edit mode:** The older VS Code Edit mode workflow is not available in Eclipse. If agent mode is available in your IDE/version, Copilot may still be able to work across multiple files. Use the feature matrix as the source of truth.
 - **Extensions:** Not supported
 - **MCP:** Supported (see feature matrix; availability may vary by version/policy)
 - **No Prompt files:** Prompt files are not supported in Eclipse (see feature matrix). Note that `.github/copilot-instructions.md` is a repository custom instructions file (a different feature), and its support can vary by environment.
@@ -423,7 +426,7 @@ If your subscription provides multiple model options:
 2. Use the **model picker** in the chat input field (if available for your plan/policy)
 3. Select from available models (varies by subscription, see [Supported AI models](https://docs.github.com/en/copilot/using-github-copilot/ai-models/supported-ai-models-in-copilot))
 
-> **Note:** Different models have different premium request multipliers, which can affect your monthly usage allowance. Copilot Business users may need their organisation to enable model switching.
+> **Note:** Different models have different request costs, capabilities, and policy controls. Avoid hardcoding model lists in curriculum material because GitHub adds, removes, and changes model availability frequently. Copilot Business and Enterprise users may need their organisation to enable model switching.
 
 ---
 
@@ -465,18 +468,21 @@ If your subscription provides multiple model options:
 
 ## Part 5: GitHub Copilot Interaction Modes
 
-GitHub Copilot offers four distinct interaction modes designed for different stages of the development lifecycle: **Ask**, **Edit**, **Agent**, and **Plan**. Each mode serves a specific purpose and understanding when to use each one will help you get the most out of GitHub Copilot.
+GitHub Copilot offers several interaction surfaces designed for different stages of the development lifecycle: **Ask**, **inline suggestions**, **inline chat and targeted edits**, **Plan**, **Agent**, **Copilot CLI**, and **Copilot cloud agent**. Understanding when to use each one helps you keep Copilot productive, reviewable, and aligned with organisation policy.
 
-> **Note:** Feature availability varies by IDE and version. For example, **Edit mode is currently available in Visual Studio Code, JetBrains IDEs, and Visual Studio**, but not in Eclipse, Xcode, or Neovim/Vim. Always use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth for your specific IDE/version.
+> **April 2026 note:** Older materials may refer to VS Code Edit mode as a standalone mode. Current VS Code workflows emphasise Agent mode for multi-file changes, inline chat for focused edits, and Plan for review-before-implementation workflows. Always use the [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix) as the source of truth for your specific IDE/version.
 
 ### Quick Comparison
 
-| Mode | Best For | Key Capability | Example Use Case |
-|------|----------|----------------|------------------|
-| **Ask** | Learning and Debugging | Conversational Q&A without modifying code | *"What does this function do?"* or *"Explain this error."* |
-| **Edit** | Refactoring and Fixes | Precise, user-controlled changes to specific files | *"Rename this variable to `isUserLoggedIn`"* or *"Refactor this into a new method."* |
-| **Agent** | Autonomous Building | Iterative coding, running terminal commands, and multi-file changes | *"Create a new React component with tests and add it to the router."* |
-| **Plan** | Architecture and Strategy | Generates a step-by-step blueprint before coding | *"How should we structure a new user authentication module?"* |
+| Surface or mode | Best For | Key Capability | Example Use Case |
+|-----------------|----------|----------------|------------------|
+| **Inline Suggestions** | Fast coding flow | Predicts code as you type | *"Complete this validation function."* |
+| **Ask** | Learning and debugging | Conversational Q&A without modifying code | *"What does this function do?"* or *"Explain this error."* |
+| **Inline Chat and Targeted Edits** | Small, local changes | Applies focused edits to selected code or the current file | *"Rename this variable to `isUserLoggedIn`."* |
+| **Plan** | Architecture and strategy | Generates a step-by-step blueprint before coding | *"Plan a user authentication module, including risks and tests."* |
+| **Agent** | Autonomous building | Iterative coding, approved terminal commands, and multi-file changes | *"Create a React component with tests and add it to the router."* |
+| **Copilot CLI** | Terminal workflows | Uses Copilot from a shell for scripts, tests, Git, and DevOps tasks | *"Run the test suite, explain failures, and propose the smallest fix."* |
+| **Copilot Cloud Agent** | Asynchronous GitHub work | Researches, plans, and prepares changes on a branch or pull request where enabled | *"Research this issue and prepare an implementation plan."* |
 
 ### Detailed Breakdown
 
@@ -492,9 +498,9 @@ GitHub Copilot offers four distinct interaction modes designed for different sta
 **Example:**
 > *"You are exploring a new codebase and want to understand how the `AuthService` works without risking accidental deletions."*
 
-#### Edit Mode (Inline)
+#### Inline Chat and Targeted Edits
 
-> **Function:** A "do what I say" mode for targeted execution. You highlight code (or select files) and give a specific instruction. Copilot applies the changes directly to the editor for your review in a Diff View.
+> **Function:** A focused editing workflow for selected code or the current file. You highlight code or place the cursor in context, then give a specific instruction. Copilot applies changes for your review in the editor or diff view.
 
 **When to use:**
 - Making precise, controlled changes
@@ -503,6 +509,18 @@ GitHub Copilot offers four distinct interaction modes designed for different sta
 
 **Example:**
 > *"You have a 50-line function and want to refactor it to use `async/await` instead of callbacks, or add comments to a class."*
+
+#### Plan Agent (Think Before Editing)
+
+> **Function:** The plan-first workflow. Instead of writing code immediately, Copilot analyses your request and codebase to generate a structured implementation plan. You review and refine this plan before handing it to Agent mode or implementing it manually.
+
+**When to use:**
+- Planning complex features
+- Understanding the scope of changes needed
+- Creating acceptance criteria, test plans, and risk lists before code changes
+
+**Example:**
+> *"Plan how to add dark mode support. Identify the files that likely need changing, tests to add, risks, and manual verification steps. Do not edit files yet."*
 
 #### Agent Mode (Autonomous Developer)
 
@@ -516,32 +534,35 @@ GitHub Copilot offers four distinct interaction modes designed for different sta
 **Example:**
 > *"Scaffold a new Next.js project with Tailwind CSS." The Agent will create folders, install dependencies, and write the initial pages while you watch.*
 
-#### Plan Mode (Architect)
+#### Copilot CLI and Copilot Cloud Agent
 
-> **Function:** The "think before you act" mode. Instead of writing code immediately, it analyses your request and codebase to generate a structured implementation plan (often in Markdown). You review and refine this plan before handing it off to Agent Mode to execute.
-
-> **Note:** Plan mode is not listed as a separate feature in the official [Copilot feature matrix](https://docs.github.com/en/copilot/reference/copilot-feature-matrix). It is available as an option within the Copilot Chat panel in VS Code and may be integrated into Agent mode workflows in other environments. Availability and behaviour may change as features evolve.
+> **Function:** The CLI brings agentic Copilot workflows to the terminal. Copilot cloud agent works asynchronously through GitHub where enabled, commonly from issues, branches, and pull requests.
 
 **When to use:**
-- Planning complex features
-- Understanding the scope of changes needed
-- Ensuring nothing is missed in a large implementation
+- Running tests, linters, Git commands, and DevOps tasks from the terminal
+- Delegating well-scoped GitHub work to a branch or pull request
+- Asking Copilot to research an issue and produce a plan before code is written
 
 **Example:**
-> *"You need to implement a complex feature like adding Dark Mode support. Plan Mode lists every file that needs changing (CSS, components, user settings) so you don't miss anything."*
+> *"Research this failing workflow, identify the likely root cause, propose the smallest fix, and wait for approval before changing files."*
 
 ### Custom Agents (Extensions)
 
-GitHub Copilot supports **custom agents** that provide specialised capabilities. Custom agents allow repositories or organisations to define specialised AI assistants tailored to specific rules, documentation, or external services. You define them using Markdown files called **agent profiles**, which can specify prompts, tools, and MCP servers.
+GitHub Copilot supports **custom agents** that provide specialised capabilities. Custom agents allow repositories or organisations to define specialised AI assistants tailored to specific rules, documentation, or external services. You define them using `.agent.md` files, which can specify prompts, tools, subagents, handoffs, and MCP servers.
+
+MCP servers can expose external tools and data to Copilot. Enable only trusted MCP servers, scope their permissions carefully, and confirm that your organisation policy allows them before using them in a workshop.
 
 > **Tip:** Custom agents are covered in detail in **Week 2, Session 1** ([Prompt Engineering and Customisation](../Week2/1-Prompt-Engineering-and-Customisation.md)), where you will learn how to create and configure your own agents.
 
 ### Choosing the Right Mode
 
-- **Need answers?** → Use **Ask Mode**
-- **Need targeted changes?** → Use **Edit Mode**
-- **Need autonomous help?** → Use **Agent Mode**
-- **Need a roadmap?** → Use **Plan Mode**
+- **Need fast completions?** Use **Inline Suggestions**
+- **Need answers?** Use **Ask Mode**
+- **Need a focused local edit?** Use **Inline Chat and Targeted Edits**
+- **Need a roadmap?** Use **Plan**
+- **Need multi-file implementation?** Use **Agent Mode**
+- **Need terminal or DevOps help?** Use **Copilot CLI**
+- **Need asynchronous GitHub work where enabled?** Use **Copilot Cloud Agent**
 
 ---
 
@@ -593,6 +614,8 @@ GitHub Copilot supports **custom agents** that provide specialised capabilities.
 3. **Use keyboard shortcuts** to speed up workflow, refer back to this guide as needed
 4. **Disable Copilot for sensitive files** if working with proprietary or security critical code
 5. **Customise your shortcuts** to match your existing workflow
+6. **Run `/init`** in VS Code to create project instructions before starting a team exercise
+7. **Confirm approvals and permissions** for agents, terminal commands, MCP servers, and external network access
 
 ---
 

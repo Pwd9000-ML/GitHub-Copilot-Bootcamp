@@ -34,6 +34,23 @@ Use this mnemonic to structure your prompts for optimal results:
 
 ---
 
+## Agentic Prompting in 2026
+
+Prompt engineering now includes choosing the right Copilot surface, not just writing better comments. A strong agentic prompt describes the goal, context, constraints, approval boundary, expected validation, and what the assistant should do before editing files.
+
+| Prompt element | Why it matters | Example |
+|----------------|----------------|---------|
+| Goal | Keeps the task focused | *"Add CSV export for the orders table."* |
+| Context | Directs Copilot to the right files or sources | *"Use `#codebase` and the selected API route."* |
+| Constraints | Prevents broad or risky changes | *"Do not change the database schema."* |
+| Approval boundary | Controls tools and edits | *"Create a plan first and ask before running commands."* |
+| Validation | Makes quality measurable | *"Run the existing unit tests or explain why they cannot run."* |
+| Summary | Supports review | *"Summarise changed files, tests, and residual risks."* |
+
+Use **Ask** for explanation, **Plan** for review-before-implementation, **Agent** for multi-file work, and **Copilot CLI** for terminal-heavy tasks. In managed organisations, model choice, agent permissions, MCP servers, and preview features can be restricted by policy.
+
+---
+
 ## Prompt Types and When to Use Them
 
 ### 1. Comment-Driven Prompts (Inline)
@@ -255,7 +272,7 @@ Create reusable prompt templates for common tasks in `.github/prompts/`. Prompt 
 | `description` | A short description of the prompt | Free text |
 | `name` | The name of the prompt, used after typing `/` in chat (defaults to the file name) | Free text |
 | `argument-hint` | Optional hint text shown in the chat input field to guide users | Free text |
-| `agent` | The agent used for running the prompt: `ask`, `edit`, `agent`, or the name of a custom agent (defaults to the current agent) | `ask`, `edit`, `agent`, or custom agent name |
+| `agent` | The agent used for running the prompt, such as `ask`, `agent`, `plan`, or the name of a custom agent (defaults to the current agent where supported) | Built-in agent or custom agent name |
 | `model` | The language model used when running the prompt (defaults to the currently selected model in the model picker) | Model identifier (string) |
 | `tools` | A list of tool or tool set names available for this prompt. Can include built-in tools, tool sets, MCP tools, or extension-contributed tools. To include all tools from an MCP server, use `<server name>/*`. | Array of tool or tool-set names |
 
@@ -297,7 +314,20 @@ Provide feedback as:
 Include specific line references and concrete fix suggestions.
 ```
 
-> **Note:** Replace `<model-id>` with a model available in your environment, and replace `myMcpServer` with the name of an installed MCP server (or remove that entry if you are not using MCP).
+> **Note:** Replace `<model-id>` with a model available in your environment, and replace `myMcpServer` with the name of an installed MCP server (or remove that entry if you are not using MCP). Avoid hardcoding model names in shared curriculum because model availability, request cost, and policy controls change frequently.
+
+#### Model Selection Guidance
+
+Use the default model for most beginner and intermediate exercises. Consider changing models only when the task genuinely benefits from it:
+
+| Need | Model selection guidance |
+|------|--------------------------|
+| Fast explanation, small edits, documentation | Use the default or fastest available model |
+| Complex planning, security review, large refactoring | Choose a stronger reasoning model if your plan and policy allow it |
+| Cost or request conservation | Use the standard model and keep prompts scoped |
+| Regulated or enterprise work | Follow organisation-approved model policies and data residency requirements |
+
+> **Tip:** Ask learners to note which model they used only when it affects the outcome. The workflow, context, and verification steps are usually more important than the model name.
 
 #### Example 2: Security Review (`.github/prompts/security-review.prompt.md`)
 
@@ -333,11 +363,11 @@ Reference OWASP Top 10 categories where applicable.
 
 #### Example 3: README Update (`.github/prompts/readme-update.prompt.md`)
 
-Uses `edit` mode for direct file modifications:
+Uses `agent` mode for direct file modifications, with instructions that keep the task scoped to documentation:
 
 ```markdown
 ---
-agent: 'edit'
+agent: 'agent'
 name: 'readme-update'
 description: 'Update README with current project structure and usage instructions'
 argument-hint: 'audience=<devs|ops|users>'
@@ -409,7 +439,7 @@ Agent files are Markdown with optional YAML frontmatter:
 | `agents` | List of agents available as subagents. Use `*` for all, `[]` for none. | Array of agent names |
 | `model` | AI model to use. Can be a single string or prioritised array (first available is used). | Model identifier or array |
 | `target` | Restrict to a specific environment | `vscode` or `github-copilot` |
-| `user-invokable` | Show in agents dropdown (default: `true`). Set `false` for subagent-only agents. | Boolean |
+| `user-invocable` | Show in agents dropdown (default: `true`). Set `false` for subagent-only agents. | Boolean |
 | `disable-model-invocation` | Prevent other agents from invoking this agent as a subagent (default: `false`) | Boolean |
 | `mcp-servers` | MCP server configurations (for org/enterprise agents on GitHub) | JSON |
 | `handoffs` | Suggested next actions to transition between agents | Array (see below) |
@@ -527,6 +557,30 @@ Together, instruction files, prompt files, and custom agents form a complete cus
 
 > **Note:** Instructions are always-on context, prompts are on-demand tasks you invoke with `/`, and agents are full persona switches with their own tool sets and behaviours.
 
+### Beyond the Three Pillars: Skills, Tools, and Diagnostics
+
+VS Code also supports **agent skills** for reusable, task-specific domain knowledge. A skill usually lives in a folder with a `SKILL.md` file and is useful when a team wants a repeatable workflow, such as release-note writing, codebase review, API migration, or cloud deployment checks.
+
+| Capability | When to use it | Example |
+|------------|----------------|---------|
+| **Instruction files** | Always-on standards | Coding conventions for all TypeScript files |
+| **Prompt files** | Repeatable tasks | `/security-review` or `/generate-docs` |
+| **Custom agents** | Role-specific behaviour and tool scope | Planner, reviewer, test specialist |
+| **Agent skills** | Packaged domain workflow guidance | A migration skill with steps, checks, and examples |
+| **MCP tools** | External systems or specialised tooling | Query issue trackers, cloud resources, documentation, or internal APIs |
+
+When customisations do not behave as expected, use built-in diagnostics such as `/troubleshoot`, Agent Debug, or customisation diagnostics where available. Ask Copilot which instructions, prompts, tools, agents, and skills were applied so learners can debug the workflow rather than guessing.
+
+### Approval and Permission Boundaries
+
+Agentic customisation is powerful because it can combine instructions with tools. Treat permissions as part of the design:
+
+- Give planning and review agents read-only tools where possible
+- Require approval before running terminal commands, installing packages, calling external services, or editing sensitive files
+- Avoid `--allow-all-tools` or approval bypass settings in training unless the environment is trusted and disposable
+- Explain that organisation policy can disable models, tools, MCP servers, cloud agent features, or preview capabilities
+- Record validation expectations in the agent or prompt file, such as tests to run and summaries to provide
+
 ---
 
 ## Incorporating Security Recommendations
@@ -635,7 +689,13 @@ Practice creating custom agents for your team:
 3. **Agent with Handoffs:**
    Extend your planning agent to include a handoff to an implementation agent. Test the workflow by starting in the planner, generating a plan, then clicking the handoff button.
 
-4. **Organisation Sharing:**
+4. **Agent Skill:**
+   Create a small skill folder with a `SKILL.md` file for one repeatable workflow, such as reviewing pull requests, creating release notes, or migrating a dependency. Include when to use the skill, steps to follow, and validation checks.
+
+5. **Customisation Diagnostics:**
+   Use `/troubleshoot` or Agent Debug where available to inspect which instructions, prompts, agents, tools, or skills were used. Note one thing you changed after reviewing the diagnostics.
+
+6. **Organisation Sharing:**
    Discuss with your team which agents would benefit from being shared at the organisation level via a `.github-private` repository.
 
 ---
@@ -650,6 +710,8 @@ Practice creating custom agents for your team:
 | **Single attempt** | Settling for suboptimal results | Iterate and refine your prompts |
 | **No security mention** | Potentially vulnerable code | Always include security requirements |
 | **No custom agents** | Manually switching tools and context each time | Create agents for recurring roles (reviewer, planner, tester) |
+| **Too many permissions** | Agents can run broad tools or commands unnecessarily | Scope tools to the job and require approval for risky actions |
+| **Untested customisations** | Instructions or skills may not be applied as expected | Use diagnostics, `/troubleshoot`, and small test prompts |
 
 ---
 
@@ -661,9 +723,11 @@ Practice creating custom agents for your team:
 4. **Use instruction files** (`.instructions.md`) for team-wide consistency
 5. **Use prompt files** (`.prompt.md`) for reusable task templates
 6. **Use custom agents** (`.agent.md`) to bundle instructions + tools into switchable personas
-7. **Include security** from the start
-8. **Iterate** - refine prompts based on output
-9. **Review everything** - Copilot assists, you decide
+7. **Use skills** (`SKILL.md`) for repeatable domain workflows
+8. **Scope tools and approvals** so agentic workflows stay reviewable
+9. **Include security** from the start
+10. **Iterate** - refine prompts based on output
+11. **Review everything** - Copilot assists, you decide
 
 ---
 

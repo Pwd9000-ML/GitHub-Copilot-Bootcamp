@@ -53,13 +53,13 @@ body:
   - type: checkboxes
     id: modes_practiced
     attributes:
-      label: Which Copilot interaction modes did you practice?
+      label: Which Copilot interaction modes did you practise?
       options:
         - label: Inline suggestions (code completions as you type)
         - label: Ask Mode (Copilot Chat for questions/explanations)
-        - label: Edit Mode (targeted code modifications)
+        - label: Inline chat or targeted edits (focused code modifications)
         - label: Agent Mode (autonomous multi-file changes)
-        - label: Plan Mode (generating implementation plans)
+        - label: Plan agent (generating implementation plans before editing)
 
   - type: checkboxes
     id: activities
@@ -70,7 +70,8 @@ body:
         - label: Generated code using inline suggestions
         - label: Asked Copilot to explain code
         - label: Used Copilot to debug or fix issues
-        - label: Had Copilot summarize changes
+        - label: Had Copilot summarise changes
+        - label: Reviewed current changes, diagnostics, or terminal output with Copilot
         - label: Used Copilot for PR review
 
   - type: textarea

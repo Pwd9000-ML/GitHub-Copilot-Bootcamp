@@ -33,6 +33,10 @@ body:
         - label: Docker Compose configuration
         - label: Pre-deployment validation scripts
         - label: Environment-specific configurations
+        - label: Copilot CLI for terminal workflows
+        - label: Copilot cloud agent or `/delegate` workflow
+        - label: Copilot Code Review or PR summary support
+        - label: GitHub Actions quality gates, rulesets, or required checks
 
   - type: checkboxes
     id: testing_topics
@@ -46,6 +50,8 @@ body:
         - label: Test framework conversion (e.g., Selenium → Cypress)
         - label: Integration test creation
         - label: Edge case and boundary testing
+        - label: VS Code test commands such as /setupTests, /tests, or /fixTestFailure
+        - label: Reviewing generated tests for weak assertions or over-mocking
 
   - type: textarea
     id: pipeline_example
@@ -158,6 +164,7 @@ body:
         - Added npm audit step
         - Included SAST scanning
         - Added Dockerfile linting...
+        - Added least-privilege permissions, OIDC, required checks, or artifact attestations...
 
   - type: textarea
     id: pr_link
