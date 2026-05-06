@@ -13,3 +13,4 @@ applyTo: "**/*.md,**/.github/ISSUE_TEMPLATE/*.yaml"
 - When the curriculum is updated, update the `**Last Updated:** DD/MM/YYYY` line near the top of README.md to reflect today's date in DD/MM/YYYY format.
 - For issue templates, ensure that the template is clear and concise, with specific sections for the user to fill out (e.g., "Description of the issue", "Steps to reproduce", "Expected behavior", "Actual behavior", etc.).
 - When content is updated also ensure that the issue templates are reviewed and updated if necessary to reflect any changes in the curriculum.
+- When adding a brand new week of content, prefer the `weekly-curriculum` skill in `.github/skills/weekly-curriculum/SKILL.md`. It enforces the folder layout, placeholder fill-in, styling rules, and root README updates automatically.
