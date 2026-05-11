@@ -5,7 +5,7 @@ Run through every item before reporting the new week as done. Fix any failure be
 ## Folder and files
 
 - [ ] `Workshops/Week{{WEEK_NUMBER}}/` exists and contains exactly four markdown files.
-- [ ] File names follow the pattern `1-Title.md`, `2-Title.md`, `3-Week{{N}}-Lab.md`, `4-Week{{N}}-Prompts.md`.
+- [ ] File names follow the pattern `1-Title.md`, `2-Title.md`, `3-Week{{WEEK_NUMBER}}-Lab.md`, `4-Week{{WEEK_NUMBER}}-Prompts.md`.
 - [ ] No `{{PLACEHOLDER}}` markers remain in any generated file.
 - [ ] All relative links between the four files resolve.
 
@@ -20,7 +20,7 @@ Run through every item before reporting the new week as done. Fix any failure be
 
 - [ ] A new `### Week {{WEEK_NUMBER}}: {{WEEK_TITLE}}` section has been added under `## Curriculum`, in numerical order.
 - [ ] Four bullets per session, lab, and prompts list (no empty bullets, no placeholders).
-- [ ] Two feedback links present: `week{{N}}-lab.yml` and `weekly-reflection.yml`.
+- [ ] Two feedback links present: `week{{WEEK_NUMBER}}-lab.yml` and `weekly-reflection.yml`.
 - [ ] Table of Contents at the top of `README.md` has matching entries with valid anchor slugs.
 - [ ] `**Last Updated:** DD/MM/YYYY` line reflects today's date in DD/MM/YYYY format.
 
@@ -49,4 +49,4 @@ Run through every item before reporting the new week as done. Fix any failure be
 
 - [ ] Summary of created files and changed files.
 - [ ] List of any human decisions still required.
-- [ ] Suggested git commit message of the form `Add Week {{N}}: {{WEEK_TITLE}}`.
+- [ ] Suggested git commit message of the form `Add Week {{WEEK_NUMBER}}: {{WEEK_TITLE}}`.
