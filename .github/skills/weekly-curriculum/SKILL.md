@@ -157,7 +157,7 @@ Expected behaviour:
 
 - **Lab style is `skills` but no real GitHub Skills exercise exists.** Fall back to `self-contained` and warn the user. Do not invent a `github.com/skills/<repo>` URL.
 - **The user provides only a topic with no session titles.** Propose two session titles and confirm with the user before generating.
-- **`README.md` TOC anchors collide** because two weeks share session titles. Append the week number to the anchor, for example `#1-introduction-week-5`.
+- **`README.md` TOC anchors collide** because two weeks share session titles. Make the headings unique, for example by including `Week {{WEEK_NUMBER}}` in the heading text, so the generated GitHub anchor is unique. If duplicate headings must remain, use GitHub's deduplicated anchor format with `-1`, `-2`, and so on.
 - **The user wants more or fewer than two sessions.** The current convention is exactly two sessions, one lab, one prompts page. If the user wants a different shape, confirm explicitly and update file numbers accordingly (`{{LAB_FILE_NUMBER}}` and `{{PROMPTS_FILE_NUMBER}}`).
 - **The user already started the new week manually.** Ask whether to overwrite, merge, or abort.
 
