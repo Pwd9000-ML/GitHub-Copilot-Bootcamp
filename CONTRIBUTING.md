@@ -25,7 +25,7 @@ Thank you for helping improve this training curriculum! Here's how to contribute
 
 ## Adding a New Week
 
-The fastest way to add a new week is to use the **weekly-curriculum** Copilot skill in `.github/skills/weekly-curriculum/`. Ask GitHub Copilot something like "add a new week covering <topic>" and it will scaffold the `Workshops/WeekN/` folder, the lab issue template, and the root `README.md` updates from the canonical templates in `templates/`.
+The fastest way to add a new week is to use the **weekly-curriculum** Copilot skill in `.github/skills/weekly-curriculum/`. Ask GitHub Copilot something like `add a new week covering <topic>` and it will scaffold the `Workshops/WeekN/` folder, the lab issue template, and the root `README.md` updates from the canonical templates in `templates/`.
 
 If you prefer to scaffold by hand, copy the files in `templates/` and follow the placeholder reference in `templates/README.md`.
 
