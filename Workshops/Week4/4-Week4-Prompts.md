@@ -1,674 +1,703 @@
-# Week 4 Prompts: Refactoring, Quality, and Security
+# GitHub Copilot Prompt Examples - Week 3: DevOps & Testing
 
 ## Session Overview
 
-**Purpose:** Reference guide for refactoring, quality, and security prompts  
+**Purpose:** Reference guide for DevOps and testing prompts  
 **Format:** Example prompts with explanations and tips  
-**Objective:** Provide prompts for legacy code refactoring, quality standards enforcement, and ethical/security considerations.
+**Objective:** Provide prompting techniques for CI/CD pipelines, Infrastructure as Code (IaC), test generation, and DevOps automation.
 
 ---
 
 ## Contents
 
-- [1. Refactoring Prompts](#1-refactoring-prompts)
-- [2. Quality Standards Prompts](#2-quality-standards-prompts)
-- [3. Security Audit Prompts](#3-security-audit-prompts)
-- [4. Ethical AI Prompts](#4-ethical-ai-prompts)
-- [5. Code Review Prompts](#5-code-review-prompts)
-- [6. Combination Prompts](#6-combination-prompts)
-- [7. Governance and Agent Security Prompts](#7-governance-and-agent-security-prompts)
+- [1. CI/CD Pipeline Generation](#1-cicd-pipeline-generation)
+- [2. Infrastructure as Code (IaC)](#2-infrastructure-as-code-iac)
+- [3. Test Generation](#3-test-generation)
+- [4. Validation and Security Scanning](#4-validation-and-security-scanning)
+- [5. Test Optimisation](#5-test-optimisation)
+- [6. Cloud Agent, Review, and Quality Gates](#6-cloud-agent-review-and-quality-gates)
+
+> **Note:** CLI prompts are integrated into each section below rather than listed separately. All prompts work in VS Code Chat and Copilot CLI. Try both to find your preferred workflow.
 
 ---
 
-## 1. Refactoring Prompts
+## 1. CI/CD Pipeline Generation
 
-Refactoring prompts help analyse, understand, and improve legacy code through incremental changes.
+CI/CD pipeline generation creates automated workflows for build, test, and deployment processes.
 
-- Analyse legacy code to identify code smells and technical debt
-- Generate characterisation tests to capture current behaviour
-- Extract methods and rename for clarity
-- Modernise syntax to current language standards
-- Remove duplication and simplify conditionals
+- Use structured prompts with specific requirements for pipeline steps
+- Define triggers, job dependencies, and artifacts
+- Create multi-stage pipelines with deployment environments
+- Include validation jobs and parallel execution strategies
 
-### Legacy Code Analysis
+### Example Prompts
+
+#### Basic CI Pipeline
 
 ```text
-Analyse this legacy code and provide:
-1. A summary of what it does
-2. Identified code smells (list each with line numbers)
-3. Technical debt assessment
-4. Dependencies and coupling issues
-5. Recommended refactoring priority
-
-[paste legacy code]
+Create a GitHub Actions workflow for a Node.js 22 application that:
+- Triggers on push to main and pull requests
+- Runs on ubuntu-latest
+- Includes steps for: checkout, setup Node.js with caching, install dependencies, run linter, run tests with coverage, and build
+- Uses least-privilege `permissions`, concurrency, and maintained actions
+- Uploads test coverage with the current artifact action version
 ```
 
-### Plan-First Refactoring
+#### Multi-Stage Pipeline with Deployment
 
 ```text
-#codebase Plan a safe refactor of [feature/module].
-Identify affected files, current behaviour, missing characterisation tests, likely risks, and a sequence of small changes.
-Do not edit files yet.
-Include acceptance criteria and validation commands.
+Generate a GitHub Actions workflow with:
+- A build job that compiles the application and runs tests
+- A staging deployment job that runs only on main branch after tests pass
+- Uses environment: staging with required approval
+- Deploys to Azure App Service
+- Sends a Slack notification on completion that summarises the build and deploy results using `needs.<job_id>.result`
 ```
 
-### Characterisation Test Generation
+#### Validation Job with Dependencies
 
 ```text
-Generate characterisation tests for this legacy function:
-- Capture current behaviour (even if buggy)
-- Cover happy path and edge cases
-- Document observed behaviour in test names
+Add a validation job to my GitHub Actions workflow that runs first and includes:
+- YAML linting with yamllint
+- Security scanning with npm audit
+- Dockerfile linting with hadolint
+- Secret detection with trufflehog
+The other jobs should depend on this validation passing.
+
+If needed, install yamllint in the job using `python3 -m pip install yamllint`.
+```
+
+#### Platform-Specific Pipelines
+
+```text
+Create a GitLab CI pipeline for a Python application that:
+- Runs tests in parallel across Python 3.9, 3.10, and 3.11
+- Generates coverage reports
+- Deploys to staging on merge to main
+- Uses Docker images for consistency
+```
+
+> **Tip:** Be specific about trigger conditions, job dependencies, and artifacts to ensure proper workflow orchestration. These prompts work in VS Code Chat and Copilot CLI. Try both to find your preferred workflow.
+
+---
+
+#### From the CLI
+
+```bash
+# Generate and save a pipeline directly
+copilot -p "Create a GitHub Actions workflow for a Node.js 22 app with least-privilege permissions, build, test, lint, coverage, concurrency, and artifact upload v4 or later" > .github/workflows/ci.yml
+
+# Generate and create a PR in one flow
+copilot
+> Create a GitHub Actions CI/CD pipeline for this repo with build, test, and deploy stages
+> /delegate
+```
+
+---
+
+## 2. Infrastructure as Code (IaC)
+
+Infrastructure as Code prompts create Docker configurations, Kubernetes manifests, and cloud templates.
+
+- Specify infrastructure requirements with security best practices
+- Include environment configuration and resource optimisation
+- Create multi-stage Docker builds for production
+- Generate Kubernetes manifests with health checks and autoscaling
+- Build Terraform/CloudFormation templates with proper security groups
+
+### Example Prompts
+
+#### Optimised Dockerfile
+
+```text
+Create a production Dockerfile for a Node.js Express application that:
+- Uses multi-stage build for smaller image size
+- Runs as non-root user for security
+- Only copies production dependencies
+- Installs dependencies with `npm ci --omit=dev`
+- Includes health check
+- Uses node:20-alpine as base
+- Application runs on port 3000
+```
+
+#### Docker Compose for Development
+
+```text
+Create a docker-compose.yml for local development with:
+- Node.js application service with hot reload (volume mounts)
+- PostgreSQL database with persistent volume
+- Redis for caching
+- Proper environment variables
+- Network configuration for service communication
+```
+
+#### Kubernetes Deployment
+
+```text
+Generate Kubernetes manifests for a Node.js microservice including:
+- Deployment with 3 replicas and health checks
+- Service for load balancing
+- ConfigMap for environment variables
+- Horizontal Pod Autoscaler (HPA) based on CPU
+- Resource limits and requests
+```
+
+#### Terraform Infrastructure
+
+```text
+Create a Terraform configuration for AWS that provisions:
+- VPC with public and private subnets across 2 availability zones
+- Application Load Balancer
+- ECS cluster with Fargate for containerised applications
+- RDS PostgreSQL database in private subnet
+- Security groups with least-privilege access
+```
+
+#### Environment-Specific Configuration
+
+```text
+Generate a Helm values file for production deployment with:
+- High availability (5 replicas)
+- Resource limits: CPU 1000m, Memory 2Gi
+- Production database connection string
+- Horizontal autoscaling configuration
+- Rolling update strategy
+```
+
+> **Tip:** Always include security considerations (non-root users, resource limits, health checks) in IaC prompts.
+
+---
+
+#### From the CLI
+
+```bash
+copilot
+> /cwd ./infrastructure
+> /add-dir ./src
+> Create a production Dockerfile, docker-compose.yml for local dev,
+>   K8s deployment with HPA, and Terraform module for Azure App Service.
+>   Ensure all configs reference port 3000 and are consistent.
+> /delegate
+```
+
+---
+
+## 3. Test Generation
+
+Test generation creates comprehensive test suites with proper coverage and edge case handling.
+
+- Specify test framework and coverage requirements
+- Include edge cases and boundary conditions
+- Generate unit tests, integration tests, and parameterised tests
+- Use proper mocking for external dependencies
+- Test async functions and error scenarios
+
+### Example Prompts
+
+#### Unit Tests for Existing Code
+
+```text
+Generate comprehensive unit tests for this calculateTotal function using Jest. Include:
+- Happy path with valid items
+- Edge cases (empty array, null, undefined)
+- Boundary conditions (zero prices, large numbers)
 - Mock external dependencies
-- Use [Jest/pytest/JUnit] framework
-
-Purpose: Enable safe refactoring by detecting behaviour changes.
-
-[paste function code]
 ```
 
-### Incremental Refactoring - Extract Method
+#### Test Suite with High Coverage
 
 ```text
-Extract a method from this code section:
-- Create a well-named function for [specific logic]
-- Use meaningful parameter names
-- Add JSDoc/docstring documentation
-- Ensure no side effects in extracted method
-- Keep original function calls intact
-
-[paste code with highlighted section]
+Create a complete Jest test suite for the UserService class that:
+- Tests all public methods
+- Achieves >90% code coverage
+- Uses proper mocking for database calls
+- Includes setup and teardown
+- Tests error scenarios
 ```
 
-### Rename for Clarity
+#### Parameterised Tests
 
 ```text
-Improve variable and function names in this code:
-- Replace single-letter variables with descriptive names
-- Use domain terminology
-- Follow [camelCase/snake_case] convention
-- Add comments explaining any non-obvious names
-- Provide a mapping of old → new names
-
-[paste code]
+Generate parameterised tests for the validateEmail function using Jest's test.each:
+- Test valid email formats (standard, with +, with subdomains)
+- Test invalid formats (missing @, missing domain, special chars)
+- Use descriptive test names for each case
+- Use `%p` placeholders in the test name to handle non-integer inputs
 ```
 
-### Modernise Syntax
+#### Integration Tests
 
 ```text
-Modernise this [JavaScript/Python/Java] code to current standards:
-- Replace deprecated patterns
-- Use modern language features from the current stable version of the language (for example, features from ES2022, Python 3.11, Java 17, or newer, as appropriate)
-- Apply destructuring where beneficial
-- Use appropriate iteration methods (map, filter, reduce)
-- Maintain identical functionality
-
-[paste legacy code]
+Create integration tests for the API endpoint /api/users using supertest and Jest:
+- Test successful user creation (POST)
+- Test retrieving users (GET)
+- Test authentication requirements
+- Test validation errors
+- Setup test database and cleanup
 ```
 
-### Remove Code Duplication
+#### Async Function Tests
 
 ```text
-Identify and eliminate duplication in this code:
-1. Find repeated patterns (list each)
-2. Extract common logic into reusable functions
-3. Use abstraction to handle variations
-4. Ensure tests still pass after changes
-
-[paste code]
+Write Jest tests for this async fetchUserData function that:
+- Tests successful data retrieval
+- Tests network errors
+- Tests timeout scenarios
+- Uses async/await syntax
+- Mocks the fetch API
 ```
 
-### Simplify Conditionals
+> **Tip:** Specify the test framework and what should be mocked to get tests that match your project structure.
 
-```text
-Refactor these nested conditionals:
-- Reduce nesting depth to maximum 2 levels
-- Use early returns for guard clauses
-- Apply polymorphism if appropriate
-- Improve readability without changing logic
+---
 
-Current nesting depth: [X levels]
-Target: Maximum 2 levels
+#### From the CLI
 
-[paste nested conditional code]
+```bash
+# Generate tests for a specific file
+copilot --allow-all-tools -p "Read src/utils/calculator.js and generate comprehensive Jest tests with >90% branch coverage" > tests/calculator.test.js
+
+# Run tests and fix failures in one pass
+copilot --allow-all-tools -p "Run npm test, analyse any failures, fix the code, and run tests again until they pass"
 ```
 
 ---
 
-## 2. Quality Standards Prompts
+## 4. Validation and Security Scanning
 
-Quality standards prompts help enforce coding standards, generate documentation, and analyse code metrics.
+Validation and security scanning creates pre-deployment checks to catch issues early in the pipeline.
 
-- Generate coding standards documents for your project
-- Check code compliance against defined standards
-- Create linting and pre-commit hook configurations
-- Generate comprehensive module documentation
-- Analyse code quality metrics against targets
+- Create validation scripts for environment variables and connections
+- Integrate security scanning tools (npm audit, Trivy, CodeQL)
+- Add configuration linting for YAML, Dockerfile, and Terraform
+- Implement secret detection in CI pipelines
+- Fail builds early when issues are detected
 
-### Generate Coding Standards
+### Example Prompts
+
+#### YAML File Validation
 
 ```text
-Create a coding standards document for [TypeScript/Python/Java]:
-- Naming conventions (variables, functions, classes, files)
-- Code formatting rules
-- Documentation requirements
-- Error handling patterns
-- Testing requirements
-- Accessibility guidelines
-
-Format as markdown suitable for .github/copilot-instructions.md
+Write a shell script to validate all YAML files in a directory and report any syntax errors.
 ```
 
-### Standards Compliance Check
+**Expected Output:**
+```bash
+#!/bin/bash
 
-```text
-Check this code against our project standards:
-1. Naming conventions: [camelCase for functions, PascalCase for classes]
-2. Documentation: [All public APIs must have JSDoc]
-3. Error handling: [No empty catch blocks]
-4. Line length: [Max 100 characters]
-5. Complexity: [Max cyclomatic complexity 10]
+# YAML Validation Script
+# Validates all YAML files in the specified directory
 
-Report violations with line numbers and fixes.
+DIRECTORY="${1:-.}"
+ERRORS=0
 
-[paste code]
+echo "Validating YAML files in: $DIRECTORY"
+echo "=================================="
+
+# Use process substitution to avoid subshell so ERRORS persists
+while IFS= read -r -d '' file; do
+    echo -n "Checking $file... "
+    
+    # Use a fixed Python command and pass the filename as an argument to avoid code injection through file names
+    if python3 -c 'import sys, yaml; yaml.safe_load(open(sys.argv[1]))' "$file" 2>/dev/null; then
+        echo "✓ Valid"
+    else
+        echo "✗ Invalid"
+        python3 -c 'import sys, yaml; yaml.safe_load(open(sys.argv[1]))' "$file" 2>&1 || true
+        ERRORS=$((ERRORS + 1))
+    fi
+done < <(find "$DIRECTORY" \( -name "*.yaml" -o -name "*.yml" \) -print0)
+
+echo "=================================="
+echo "Validation complete. Errors found: $ERRORS"
+
+exit $ERRORS
 ```
 
-### Generate ESLint/Linting Configuration
+#### Environment Variable Check
 
 ```text
-Generate a [ESLint/Pylint/Checkstyle] configuration that enforces:
-- [List your rules]
-- No unused variables
-- Consistent formatting
-- Required documentation
-- Security-focused rules
-
-Include explanation comments for each rule.
+Create a script that verifies all required environment variables are set before deployment.
 ```
 
-### Pre-Commit Hook Setup
+**Expected Output:**
+```bash
+#!/bin/bash
 
-```text
-Create a pre-commit hook configuration that:
-1. Runs linting and fails on errors
-2. Auto-formats code with Prettier/Black
-3. Runs type checking
-4. Scans for secrets and credentials
-5. Validates commit message format
-6. Runs tests for changed files
+# Environment Variable Validation Script
 
-Use [husky/pre-commit/Git hooks] setup.
+REQUIRED_VARS=(
+    "DATABASE_URL"
+    "API_KEY"
+    "NODE_ENV"
+    "PORT"
+)
+
+MISSING=0
+
+echo "Checking required environment variables..."
+echo "=========================================="
+
+for var in "${REQUIRED_VARS[@]}"; do
+    if [ -z "${!var}" ]; then
+        echo "✗ Missing: $var"
+        MISSING=$((MISSING + 1))
+    else
+        echo "✓ Set: $var"
+    fi
+done
+
+echo "=========================================="
+
+if [ $MISSING -gt 0 ]; then
+    echo "Error: $MISSING required variable(s) not set"
+    exit 1
+else
+    echo "All required variables are set"
+    exit 0
+fi
 ```
 
-### Documentation Generation
+#### CI Pipeline Validation Steps
 
 ```text
-Generate comprehensive documentation for this module:
-- Module overview (what it does, when to use it)
-- Installation/setup instructions
-- Public API reference with examples
-- Error handling guidance
-- Configuration options table
-
-[paste module code]
+Add validation steps to a GitHub Actions workflow that check YAML syntax, Dockerfile best practices, and security vulnerabilities.
 ```
 
-### Code Metrics Analysis
+**Expected Output:**
+```yaml
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate YAML files
+        run: |
+          python3 -m pip install yamllint
+          yamllint -d relaxed .
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+      - name: Check for secrets in code
+        uses: trufflesecurity/trufflehog@7c0734f987ad0bb30ee8da210773b800ee2016d3 # v3.93.4
+        with:
+          path: ./
+          extra_args: --only-verified
+
+      - name: Security audit - npm
+        run: npm audit --audit-level=high
+
+      - name: Validate Kubernetes manifests
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          ./kubectl apply --dry-run=client -f k8s/ -R
+```
+
+#### Pre-Deployment Validation Script
 
 ```text
-Analyse these quality metrics for the given code:
-- Cyclomatic complexity (target: <10 per function)
-- Cognitive complexity (target: <15)
-- Lines per function (target: <30)
-- Nesting depth (target: <4)
-- Test coverage percentage
+Create a Node.js validation script that checks:
+- All required environment variables are set
+- Database connection is successful
+- External API dependencies are reachable
+- Configuration files are valid JSON/YAML
+- Returns exit code 0 on success, 1 on failure
+```
 
-Flag any metrics exceeding targets with specific recommendations.
+#### Security Scanning Integration
 
-[paste code]
+```text
+Add to my GitHub Actions workflow:
+- npm audit for dependency vulnerabilities
+- Trivy for container image scanning
+- SAST scanning with CodeQL
+- License compliance checking
+- Fail the build if high severity issues found
+```
+
+#### Secure Workflow Review
+
+```text
+Review this GitHub Actions workflow for:
+- Overly broad `GITHUB_TOKEN` permissions
+- Unsafe use of pull request input in shell commands
+- Unpinned or stale third-party actions
+- Missing concurrency controls
+- Missing protected environments for deployment
+- Long-lived cloud secrets that could use OIDC instead
+- Artifact actions older than v4
+
+Provide severity, impact, and a concrete fix for each issue.
+```
+
+#### Configuration Linting
+
+```text
+Create a validation job that lints:
+- YAML files with yamllint
+- Dockerfile with hadolint
+- Terraform with terraform fmt and validate
+- Display errors and fail if any issues found
+```
+
+#### Secret Detection
+
+```text
+Add secret scanning to my CI pipeline using:
+- trufflehog to scan git history
+- Custom regex patterns for API keys
+- Fail the build if secrets detected
+- Report findings as GitHub Security alert
+```
+
+> **Tip:** Integrate validation early in the pipeline to fail fast and save compute resources.
+
+---
+
+#### From the CLI
+
+```bash
+copilot
+> /add-dir .github/workflows
+> /add-dir k8s
+> Review all infrastructure configs for security issues, missing best practices,
+>   and YAML syntax errors. Report findings as a checklist with severity levels.
 ```
 
 ---
 
-## 3. Security Audit Prompts
+## 5. Test Optimisation
 
-Security audit prompts help identify vulnerabilities and ensure secure coding practices.
+Test optimisation refactors and improves existing tests for better maintainability and performance.
 
-- Perform comprehensive security reviews of code
-- Detect and prevent SQL injection vulnerabilities
-- Scan for exposed secrets and credentials
-- Generate input validation for APIs and functions
-- Create security test cases and dependency checks
+- Convert tests between frameworks (Selenium to Cypress)
+- Extract common setup into reusable utilities
+- Create test fixtures and reusable test data
+- Enable parallel test execution for faster feedback
+- Identify and fix slow test operations
 
-### Comprehensive Security Review
+### Example Prompts
+
+#### Convert Test Framework
 
 ```text
-Perform a security audit on this code checking for:
-1. Injection vulnerabilities (SQL, command, XSS, LDAP)
-2. Authentication/authorisation flaws
-3. Cryptographic weaknesses
-4. Sensitive data exposure
-5. Input validation gaps
-6. Error handling issues
-7. Insecure dependencies
-8. Configuration vulnerabilities
-
-Severity ratings: CRITICAL / HIGH / MEDIUM / LOW
-Provide remediation for each finding.
-
-[paste code]
+Convert these Selenium tests to Cypress:
+[paste Selenium test code]
+- Maintain the same test coverage
+- Use Cypress best practices
+- Update assertions to Cypress syntax
+- Simplify wait conditions
 ```
 
-### SQL Injection Prevention
+#### Convert JUnit to pytest
 
+**Prompt:**
 ```text
-Review this database code for SQL injection:
-- Identify injection points
-- Show example attack payloads
-- Provide parameterised query alternatives
-- Add input validation
+Convert these JUnit tests to pytest with appropriate fixtures and assertions:
 
-Current code:
-[paste database query code]
+@Test
+public void testAddition() {
+    Calculator calc = new Calculator();
+    assertEquals(5, calc.add(2, 3));
+}
+
+@Test
+public void testDivisionByZero() {
+    Calculator calc = new Calculator();
+    assertThrows(ArithmeticException.class, () -> calc.divide(10, 0));
+}
 ```
 
-### Secret Detection
+**Expected Output:**
+```python
+import pytest
+from calculator import Calculator
 
-```text
-Scan this code for exposed secrets:
-- API keys and tokens
-- Database credentials
-- Private keys
-- Configuration passwords
-- OAuth secrets
-- AWS/Azure/GCP credentials
+# Fixture to create a Calculator instance, shared across tests
+@pytest.fixture
+def calculator():
+    """Fixture to create a Calculator instance."""
+    return Calculator()
 
-Provide regex patterns for automated detection.
+class TestCalculator:
+    def test_addition(self, calculator):
+        assert calculator.add(2, 3) == 5
 
-[paste code]
+    def test_division_by_zero(self, calculator):
+        # Python raises ZeroDivisionError (not ArithmeticException)
+        with pytest.raises(ZeroDivisionError):
+            calculator.divide(10, 0)
+
+    # Parameterised tests for broader coverage
+    @pytest.mark.parametrize("a,b,expected", [
+        (2, 3, 5),
+        (0, 0, 0),
+        (-1, 1, 0),
+    ])
+    def test_addition_parametrized(self, calculator, a, b, expected):
+        assert calculator.add(a, b) == expected
 ```
 
-### Input Validation Generator
+> **Note:** Java exception types do not map 1:1 to Python. For division by zero, Python raises `ZeroDivisionError`.
 
+#### Convert Mocha/Chai to Jest
+
+**Prompt:**
 ```text
-Generate input validation for this [API endpoint/function]:
-- Validate all user inputs
-- Sanitise for XSS prevention
-- Check data types and ranges
-- Validate file uploads if applicable
-- Return clear error messages
+Convert this Mocha/Chai test suite to Jest:
 
-Endpoint/Function:
-[paste code]
+const { expect } = require('chai');
+
+describe('Array', function() {
+    describe('#indexOf()', function() {
+        it('should return -1 when value is not present', function() {
+            expect([1, 2, 3].indexOf(4)).to.equal(-1);
+        });
+    });
+});
 ```
 
-### Security Test Generation
-
-```text
-Generate security test cases for this [API/function]:
-- SQL injection attempts
-- XSS payloads
-- Invalid/malformed inputs
-- Boundary value attacks
-- Authentication bypass attempts
-- Rate limiting tests
-
-Use [Jest/pytest/JUnit] with security testing library.
-
-[paste code]
+**Expected Output:**
+```javascript
+// Jest uses built-in expect() with .toBe() instead of Chai's .to.equal()
+describe('Array', () => {
+    describe('#indexOf()', () => {
+        test('should return -1 when value is not present', () => {
+            expect([1, 2, 3].indexOf(4)).toBe(-1);
+        });
+    });
+});
 ```
 
-### Dependency Security Check
+#### Extract Test Utilities
 
 ```text
-Review these dependencies for security:
-1. Check for known vulnerabilities
-2. Identify outdated packages
-3. Flag abandoned/unmaintained packages
-4. Recommend secure alternatives
-
-Package file:
-[paste package.json/requirements.txt/pom.xml]
+Refactor these Jest tests to reduce duplication:
+[paste test code]
+- Extract common setup into beforeEach
+- Create helper functions for repeated assertions
+- Use describe blocks to organise tests
+- Improve test names for clarity
 ```
 
-### CodeQL Alert Triage
+#### Add Test Fixtures
 
 ```text
-Explain this CodeQL code scanning alert:
-- Source and sink
-- Why the flow is risky
-- Whether it might be a false positive
-- Minimal safe fix
-- Tests or manual checks needed
-
-Do not apply an Autofix until you have explained the trade-offs.
-
-[paste alert details]
+Create test fixtures for the User model tests:
+- Valid user data (multiple personas)
+- Invalid data for validation testing
+- Edge case data
+- Export as reusable test data
 ```
 
-### Secret Remediation
+#### Parallel Test Execution
 
 ```text
-Help remediate this secret scanning or push protection alert.
-Explain whether the secret needs rotation, where it was introduced, how to remove it from the current change, and how to prevent recurrence.
-Use only safe placeholders in examples.
+Modify this Jest configuration to:
+- Run tests in parallel using maxWorkers
+- Split slow tests into separate files
+- Use test.concurrent for independent tests
+- Optimise test database setup
 ```
 
-### Autofix Review
+#### Improve Test Performance
 
 ```text
-Review this Copilot Autofix suggestion.
-Explain what vulnerability it addresses, why the proposed code is safe or unsafe, what edge cases remain, and which tests should be added before applying it.
+Optimise these integration tests that are taking too long:
+[paste test code]
+- Identify slow operations
+- Use transaction rollback instead of database cleanup
+- Mock slow external APIs
+- Reduce unnecessary test data creation
 ```
 
-### Secure Code Transformation
+> **Tip:** When converting frameworks, ask Copilot to explain key differences to understand the changes better.
 
-```text
-Transform this code to be secure:
-Original (insecure):
-[paste insecure code]
+---
 
-Requirements:
-- Fix all identified vulnerabilities
-- Add input validation
-- Use secure coding patterns
-- Include security comments explaining changes
+
+#### From the CLI
+
+```bash
+# Convert all Mocha tests to Jest in one pass
+copilot
+> /add-dir ./tests
+> Convert all Mocha/Chai test files to Jest syntax. Maintain same coverage and structure.
+> /delegate
+
+# Bulk parameterisation
+copilot -p "Refactor all Jest test files in tests/ to use test.each for any test group with 3+ similar test cases. Ask before modifying files."
 ```
 
 ---
 
-## 4. Ethical AI Prompts
+## 6. Cloud Agent, Review, and Quality Gates
 
-Ethical AI prompts help ensure responsible and inclusive AI-assisted development.
+These prompts help connect generated DevOps and testing work to pull requests, review, and governed delivery.
 
-- Detect potential bias in code and algorithms
-- Generate inclusive code for diverse users
-- Document AI-assisted code appropriately
-- Create responsible AI development checklists
-- Ensure accessibility and cultural neutrality
-
-### Bias Detection in Code
+### Copilot Cloud Agent Planning
 
 ```text
-Review this code for potential bias:
-- Gender assumptions
-- Cultural/regional assumptions
-- Accessibility barriers
-- Language/naming stereotypes
-- Default values that exclude groups
-
-Suggest inclusive alternatives for each issue.
-
-[paste code]
+Research this issue and produce an implementation plan before writing code.
+Include affected files, risks, tests to run, required GitHub Actions checks, and whether a protected environment or manual approval is needed.
+Do not open a pull request until asked.
 ```
 
-### Inclusive Code Generation
+### Pull Request Preparation
 
 ```text
-Generate code for [feature] that is:
-- Gender-inclusive (no binary assumptions)
-- Culturally neutral (international name/date formats)
-- Accessible (ARIA labels, keyboard navigation)
-- Language-agnostic (supports RTL, multiple character sets)
-- Localisation-ready
+Prepare a pull request summary for these changes:
+- What changed
+- Why it changed
+- Tests and checks run
+- Security or deployment risks
+- Manual verification required
+- Follow-up work
 ```
 
-### AI Usage Documentation
+### Copilot Code Review Prompt
 
 ```text
-Create an AI-assisted code documentation template:
-- AI tool used
-- Prompts that generated the code
-- Human modifications made
-- Security review status
-- Test coverage verification
+Review this pull request for logic errors, insecure workflow permissions, missing tests, dependency risks, and deployment safety.
+Leave findings as comments with severity and concrete remediation.
+Do not treat this as approval. Identify what a human reviewer still needs to check.
 ```
 
-### Responsible AI Checklist
+### Ruleset and Required Checks
 
 ```text
-Generate a checklist for responsible AI-assisted development:
-- Pre-acceptance verification steps
-- Security review requirements
-- Bias checking procedures
-- Documentation requirements
-- Disclosure guidelines
+Recommend a GitHub repository ruleset for this project.
+Include required status checks, required reviews, CODEOWNERS, merge queue considerations, deployment environment approvals, code scanning, dependency review, and artifact attestation requirements.
+Explain which checks should block merge and why.
 ```
+
+### CI Failure Triage
+
+```text
+Analyse this failed workflow run.
+Identify the failing job, likely root cause, whether the failure is flaky or deterministic, the smallest fix to try first, and the command I should run locally to verify it.
+```
+
+> **Tip:** Cloud agent and code review workflows are assistive. Keep human review, required checks, environment approvals, and ownership rules as the source of truth for merging and deployment.
 
 ---
 
-## 5. Code Review Prompts
+## Week 3 Feedback
 
-Code review prompts help perform thorough reviews following best practices and principles.
+Please complete the following reflections after completing Week 3 activities:
 
-- Conduct senior developer-level code reviews
-- Analyse code against SOLID principles
-- Review against Clean Code principles
-- Generate pull request review templates
-- Provide specific feedback with line references
-
-### Senior Developer Review
-
-```text
-Perform a senior developer code review:
-1. Logic correctness - Does it do what it should?
-2. Edge cases - What could break it?
-3. Performance - Any inefficiencies?
-4. Security - Any vulnerabilities?
-5. Maintainability - Will it be easy to modify?
-6. Testing - Is coverage adequate?
-7. Documentation - Is it clear?
-
-Be critical. Provide specific line references and fixes.
-
-[paste code]
-```
-
-### SOLID Principles Check
-
-```text
-Analyse this code against SOLID principles:
-- Single Responsibility: One reason to change?
-- Open/Closed: Extendable without modification?
-- Liskov Substitution: Subtypes substitutable?
-- Interface Segregation: Focused interfaces?
-- Dependency Inversion: Depends on abstractions?
-
-Identify violations and provide refactoring suggestions.
-
-[paste code]
-```
-
-### Clean Code Review
-
-```text
-Review this code against Clean Code principles:
-- Meaningful names
-- Small functions (one thing)
-- No side effects
-- DRY (Don't Repeat Yourself)
-- Error handling
-- Comments (explain why, not what)
-- Formatting consistency
-
-Score each principle 1-5 with justification.
-
-[paste code]
-```
-
-### Pull Request Review Template
-
-```text
-Generate a PR review for this code change:
-
-Checklist:
-- [ ] Logic is correct
-- [ ] Tests are adequate
-- [ ] No security issues
-- [ ] Documentation updated
-- [ ] No breaking changes
-- [ ] Performance acceptable
-
-Summary: [Approve/Request Changes/Comment]
-Feedback: [Specific comments with line refs]
-
-[paste code diff]
-```
-
-### Copilot Code Review Custom Instructions
-
-```text
-Draft repository instructions for Copilot Code Review.
-Require comments for security issues, missing tests, unsafe workflow permissions, breaking changes, and unclear error handling.
-Tell Copilot to avoid approval language and to identify what a human reviewer must still check.
-```
-
----
-
-## 6. Combination Prompts
-
-Combination prompts bring together multiple techniques for comprehensive workflows.
-
-- Plan complete refactoring workflows with multiple phases
-- Create quality gates for CI/CD pipelines
-- Combine testing, security, and modernisation steps
-- Build comprehensive code improvement strategies
-
-### Full Refactoring Workflow
-
-```text
-Plan a complete refactoring for this legacy code:
-
-Phase 1 - Prepare
-- Add characterisation tests
-- Document current behaviour
-
-Phase 2 - Secure
-- Remove hardcoded secrets
-- Fix injection vulnerabilities
-- Add input validation
-
-Phase 3 - Modernise
-- Update syntax to modern standards
-- Apply SOLID principles
-- Improve naming
-
-Phase 4 - Optimise
-- Address performance issues
-- Remove duplication
-- Simplify complexity
-
-Provide specific prompts for each phase step.
-
-[paste legacy code]
-```
-
-### Quality Gate Implementation
-
-```text
-Create a complete quality gate for CI/CD:
-1. Linting configuration
-2. Security scanning setup
-3. Test coverage requirements
-4. Documentation checks
-5. Performance benchmarks
-
-Include GitHub Actions workflow YAML.
-```
-
----
-
-## 7. Governance and Agent Security Prompts
-
-Governance prompts help teams use Copilot safely across IDE, CLI, cloud agent, and pull request workflows.
-
-### Content Exclusion Verification
-
-```text
-Review our use of content exclusion for this repository.
-Identify which Copilot surfaces are covered, which are not, and what additional process controls are needed for CLI, cloud agent, Agent mode, MCP tools, and external fetches.
-Use the current GitHub Docs as the source of truth.
-```
-
-### Public Code Reference Check
-
-```text
-Review this generated code for public-code match concerns.
-If code references are available, explain what they show, whether attribution or replacement is needed, and what a reviewer should verify before merge.
-```
-
-### Agent Threat Model
-
-```text
-Threat model this agentic workflow:
-- Prompt injection from repository or web content
-- Sensitive data exposure
-- Unsafe terminal commands
-- MCP server trust and tool scope
-- Cloud-agent runner and firewall controls
-- Human approval checkpoints
-
-Return risks, mitigations, and a go/no-go recommendation.
-```
-
-### Organisation Policy Rollout
-
-```text
-Create an organisation rollout checklist for GitHub Copilot.
-Include feature policies, model access, data residency or BYOK decisions, custom instructions, code review automation, content exclusion limits, MCP governance, usage metrics, training, and escalation paths.
-```
-
-### Metrics and Adoption Review
-
-```text
-Summarise Copilot adoption metrics for leadership.
-Separate active usage, passive code review usage, training completion, quality outcomes, security findings, and open risks.
-Suggest follow-up actions for teams with low adoption or high review findings.
-```
-
----
-
-## Quick Reference Commands
-
-```text
-# Analyse legacy code
-"Analyse this code for refactoring opportunities"
-
-# Security audit
-"Perform a security audit and prioritise findings"
-
-# Generate tests
-"Generate tests to capture current behaviour before refactoring"
-
-# Apply standards
-"Refactor to follow [standard name] conventions"
-
-# Document code
-"Generate comprehensive documentation with usage examples"
-
-# Review code
-"Review as a senior developer - be critical and specific"
-```
-
----
-
-## Week 4 Feedback
-
-Please complete the following reflections after completing Week 4 activities:
-
-- [Submit Week 4 Lab Reflection](../../issues/new?template=week4-lab.yml)
+- [Submit Week 3 Lab Reflection](../../issues/new?template=week3-lab.yml)
 - [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
 ---
 
 ## Next Steps
 
-Congratulations on completing the GitHub Copilot Training Program! You have now mastered foundational concepts, prompt engineering, DevOps automation, testing, refactoring, and ethical AI practices.
+After mastering DevOps automation, testing, and GitHub Copilot CLI workflows in Week 3, we will explore refactoring, quality standards, and ethical AI practices in Week 4.
 
-**Continue your learning:**
-- Apply these techniques to your daily development workflow
-- Share your knowledge with your team
-- Explore the additional resources in the main README
-
-**[← Back to Main README](../../README.md)**
+**[← Back to Main README](../../README.md)** | **[Continue to Week 4 →](../Week4/1-Refactoring-Large-Codebases.md)**

@@ -1,33 +1,45 @@
-# Week 4 - Modernise Your Legacy Code with GitHub Copilot
+# Week 3 - Create Applications with the Copilot CLI Hands-On Lab
 
-Please follow the instructions below to complete the hands-on lab for Week 4.
+Please follow the instructions below to complete the hands-on lab for Week 3.
 
-_Leverage GitHub Copilot to refactor and modernise a school's legacy COBOL accounting system into modern Node.js._
+_Learn to use GitHub Copilot CLI, a standalone terminal application, for issue management and building a Node.js calculator application._
 
 ## Welcome
 
-- **Who is this for**: Developers looking to update and improve their legacy codebases
-- **What you'll learn**: How to leverage GitHub Copilot to refactor and modernise existing code
-- **What you'll build**: A set of improved code snippets that demonstrate modern coding practices, migrating a legacy COBOL accounting system to Node.js
+- **Who is this for**: Developers who want to learn how to use the standalone GitHub Copilot CLI to streamline their development workflow
+- **What you'll learn**: How to install and use GitHub Copilot CLI as a standalone terminal tool for creating issues, generating code, and collaborating interactively from the command line
+- **What you'll build**: A Node.js calculator app using Copilot CLI for project setup, issue management, and collaborative development
 - **Prerequisites**:
-  - Skills exercise: [Getting Started with GitHub Copilot](https://github.com/skills/getting-started-with-github-copilot)
-  - Familiarity with [VS Code](https://code.visualstudio.com/)
-  - Basic coding principles
-- **How long**: This exercise takes less than 30 minutes to complete.
+  - Familiarity with basic command line (CLI) operations
+  - Basic knowledge of GitHub repositories
+  - Node.js version 22 or later (for Copilot CLI installation)
+  - GitHub Copilot access through an approved individual or managed organisation plan
+
+- **How long**: This exercise takes less than 60 minutes to complete.
 
 In this exercise, you will:
 
-1. Explain the current state of your legacy code.
-1. Create a diagram of the data flow in your code.
-1. Identify areas of your legacy code that can be improved.
-1. Use GitHub Copilot to generate modern code snippets.
-1. Replace the old code with the new snippets and test the changes.
+1. Learn to install the standalone Copilot CLI and use an issue template
+1. Use Copilot CLI to create an issue for a Node.js calculator app from an existing template
+1. Practice iterative development by working together with Copilot on the command line
+
+### What's New in Copilot CLI
+
+GitHub Copilot CLI is a standalone terminal application with exciting features:
+- **Latest AI models**: Access the newest models from OpenAI and Google
+- **Custom agents**: Create specialised agent personas for your workflows using `.github/agents/`
+- **`/delegate` command**: Delegate tasks to Copilot cloud agent or an enabled background agent workflow
+- **`/share` command**: Save chat sessions as Markdown files or GitHub gists
+- **Better image support**: Add images via paste and drag-and-drop
+- **MCP server support**: Integrate with Model Context Protocol tools
+- **Improved reliability**: Better handling of long-running commands and enhanced automation with headless `-p` mode
+
 
 ### How to start this exercise
 
 Simply copy the exercise to your account, then give your favourite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
 
-[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=modernize-your-legacy-code-with-github-copilot&owner=%40me&name=skills-modernize-your-legacy-code-with-github-copilot&description=Exercise:+Modernize+Your+Legacy+Code+with+GitHub+Copilot&visibility=public)
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=create-applications-with-the-copilot-cli&owner=%40me&name=skills-create-applications-with-the-copilot-cli&description=Exercise:+Create+Applications+with+the+Copilot+CLI&visibility=public)
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
@@ -48,11 +60,12 @@ If the exercise isn't ready in 20 seconds, please check the [Actions](../../acti
 
 ---
 
-Attribution: This lab is based on the GitHub Skills template **Modernize Your Legacy Code with GitHub Copilot**.
-Upstream source: https://github.com/skills/modernize-your-legacy-code-with-github-copilot
+Attribution: This lab is based on the GitHub Skills template **Create applications with the Copilot CLI**.
+Upstream source: https://github.com/skills/create-applications-with-the-copilot-cli
 
 ---
 
 ## Next Steps
 
-- **Week 4 Prompt Examples:** After completing this hands-on lab, take a look at [Week 4 Prompt Examples](4-Week4-Prompts.md) to see how to craft effective prompts for GitHub Copilot.
+- **Week 3 Prompt Examples:** After completing this hands-on lab, take a look at [Week 3 Prompt Examples](4-Week3-Prompts.md) to see how to craft effective prompts for GitHub Copilot CLI and DevOps workflows.
+
