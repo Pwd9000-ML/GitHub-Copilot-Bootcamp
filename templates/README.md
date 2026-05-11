@@ -2,7 +2,11 @@
 
 This folder contains reusable templates for creating new weekly curriculum material. Each template mirrors the file and folder structure used in `Workshops/Week1/` through `Workshops/Week4/`.
 
-## How to Use
+## Recommended: Use the Weekly Curriculum Skill
+
+The `.github/skills/weekly-curriculum/` skill automates the steps below. Ask GitHub Copilot to "add a new week" and it will read these templates, fill the placeholders, create the issue template, and update the root `README.md`. See [`.github/skills/weekly-curriculum/SKILL.md`](../.github/skills/weekly-curriculum/SKILL.md).
+
+## How to Use (manual)
 
 1. **Copy** the templates into a new folder, e.g. `Workshops/Week5/`.
 2. **Rename** each file following the numbering convention: `{N}-{Topic-Name}.md`.
