@@ -1,6 +1,6 @@
-# Week 4 - Modernise Your Legacy Code with GitHub Copilot
+# Week 5 - Modernise Your Legacy Code with GitHub Copilot
 
-Please follow the instructions below to complete the hands-on lab for Week 4.
+Please follow the instructions below to complete the hands-on lab for Week 5.
 
 _Leverage GitHub Copilot to refactor and modernise a school's legacy COBOL accounting system into modern Node.js._
 
@@ -55,4 +55,4 @@ Upstream source: https://github.com/skills/modernize-your-legacy-code-with-githu
 
 ## Next Steps
 
-- **Week 4 Prompt Examples:** After completing this hands-on lab, take a look at [Week 4 Prompt Examples](4-Week4-Prompts.md) to see how to craft effective prompts for GitHub Copilot.
+- **Week 5 Prompt Examples:** After completing this hands-on lab, take a look at [Week 5 Prompt Examples](4-Week5-Prompts.md) to see how to craft effective prompts for GitHub Copilot.

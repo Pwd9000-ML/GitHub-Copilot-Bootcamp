@@ -1,4 +1,4 @@
-# Week 4 Prompts: Refactoring, Quality, and Security
+# Week 5 Prompts: Refactoring, Quality, and Security
 
 ## Session Overview
 
@@ -653,11 +653,11 @@ Suggest follow-up actions for teams with low adoption or high review findings.
 
 ---
 
-## Week 4 Feedback
+## Week 5 Feedback
 
-Please complete the following reflections after completing Week 4 activities:
+Please complete the following reflections after completing Week 5 activities:
 
-- [Submit Week 4 Lab Reflection](../../issues/new?template=week4-lab.yml)
+- [Submit Week 5 Lab Reflection](../../issues/new?template=week5-lab.yml)
 - [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
 ---

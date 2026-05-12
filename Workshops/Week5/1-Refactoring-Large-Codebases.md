@@ -703,7 +703,7 @@ Modernise this [language] code to use current best practices:
 ## Next Steps
 
 - Proceed to [Ethical and Security Considerations](2-Ethical-and-Security-Considerations.md) for responsible AI usage
-- Complete the [Week 4 Lab](3-Week4-Lab.md) for hands-on refactoring practice
-- Review [Week 4 Prompts](4-Week4-Prompts.md) for additional refactoring prompt examples
+- Complete the [Week 5 Lab](3-Week5-Lab.md) for hands-on refactoring practice
+- Review [Week 5 Prompts](4-Week5-Prompts.md) for additional refactoring prompt examples
 
 ---

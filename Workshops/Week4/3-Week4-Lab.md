@@ -1,6 +1,6 @@
-# Week 3 - Create Applications with the Copilot CLI Hands-On Lab
+# Week 4 - Create Applications with the Copilot CLI Hands-On Lab
 
-Please follow the instructions below to complete the hands-on lab for Week 3.
+Please follow the instructions below to complete the hands-on lab for Week 4.
 
 _Learn to use GitHub Copilot CLI, a standalone terminal application, for issue management and building a Node.js calculator application._
 
@@ -67,5 +67,5 @@ Upstream source: https://github.com/skills/create-applications-with-the-copilot-
 
 ## Next Steps
 
-- **Week 3 Prompt Examples:** After completing this hands-on lab, take a look at [Week 3 Prompt Examples](4-Week3-Prompts.md) to see how to craft effective prompts for GitHub Copilot CLI and DevOps workflows.
+- **Week 4 Prompt Examples:** After completing this hands-on lab, take a look at [Week 4 Prompt Examples](4-Week4-Prompts.md) to see how to craft effective prompts for GitHub Copilot CLI and DevOps workflows.
 

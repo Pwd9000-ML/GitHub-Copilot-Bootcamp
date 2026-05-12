@@ -1,7 +1,7 @@
-name: Week 4 Lab - Refactoring, Quality, and Ethics
-description: Hands-on Copilot lab for Week 4 covering legacy code refactoring, quality standards, and ethical AI practices
-title: "Week 4 Lab: Refactoring & Ethics - <Your Name>"
-labels: ["lab", "week-4"]
+name: Week 5 Lab - Refactoring, Quality, and Ethics
+description: Hands-on Copilot lab for Week 5 covering legacy code refactoring, quality standards, and ethical AI practices
+title: "Week 5 Lab: Refactoring & Ethics - <Your Name>"
+labels: ["lab", "week-5"]
 body:
   - type: markdown
     attributes:
@@ -14,10 +14,10 @@ body:
     attributes:
       label: Tasks
       options:
-        - label: Read `Workshops/Week4/1-Refactoring-Large-Codebases.md`
-        - label: Read `Workshops/Week4/2-Ethical-and-Security-Considerations.md`
-        - label: Complete the hands-on lab in `Workshops/Week4/3-Week4-Lab.md`
-        - label: Review prompt examples in `Workshops/Week4/4-Week4-Prompts.md`
+        - label: Read `Workshops/Week5/1-Refactoring-Large-Codebases.md`
+        - label: Read `Workshops/Week5/2-Ethical-and-Security-Considerations.md`
+        - label: Complete the hands-on lab in `Workshops/Week5/3-Week5-Lab.md`
+        - label: Review prompt examples in `Workshops/Week5/4-Week5-Prompts.md`
     validations:
       required: true
 
@@ -184,8 +184,8 @@ body:
   - type: textarea
     id: key_takeaways
     attributes:
-      label: Key takeaways from the 4-week program
-      description: What are the most important things you've learned across all 4 weeks?
+      label: Key takeaways from the 5-week program
+      description: What are the most important things you've learned across all 5 weeks?
     validations:
       required: true
 

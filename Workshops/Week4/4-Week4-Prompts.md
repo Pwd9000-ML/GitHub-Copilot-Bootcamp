@@ -1,4 +1,4 @@
-# GitHub Copilot Prompt Examples - Week 3: DevOps & Testing
+# GitHub Copilot Prompt Examples - Week 4: DevOps & Testing
 
 ## Session Overview
 
@@ -687,17 +687,17 @@ Identify the failing job, likely root cause, whether the failure is flaky or det
 
 ---
 
-## Week 3 Feedback
+## Week 4 Feedback
 
-Please complete the following reflections after completing Week 3 activities:
+Please complete the following reflections after completing Week 4 activities:
 
-- [Submit Week 3 Lab Reflection](../../issues/new?template=week3-lab.yml)
+- [Submit Week 4 Lab Reflection](../../issues/new?template=week4-lab.yml)
 - [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
 
 ---
 
 ## Next Steps
 
-After mastering DevOps automation, testing, and GitHub Copilot CLI workflows in Week 3, we will explore refactoring, quality standards, and ethical AI practices in Week 4.
+After mastering DevOps automation, testing, and GitHub Copilot CLI workflows in Week 4, we will explore refactoring, quality standards, and ethical AI practices in Week 5.
 
-**[← Back to Main README](../../README.md)** | **[Continue to Week 4 →](../Week4/1-Refactoring-Large-Codebases.md)**
+**[← Back to Main README](../../README.md)** | **[Continue to Week 5 →](../Week5/1-Refactoring-Large-Codebases.md)**
