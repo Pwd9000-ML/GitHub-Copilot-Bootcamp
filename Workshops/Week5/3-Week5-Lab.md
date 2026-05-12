@@ -30,7 +30,7 @@ Simply copy the exercise to your account, then give your favourite Octocat (Mona
 [![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=modernize-your-legacy-code-with-github-copilot&owner=%40me&name=skills-modernize-your-legacy-code-with-github-copilot&description=Exercise:+Modernize+Your+Legacy+Code+with+GitHub+Copilot&visibility=public)
 
 <details>
-<summary>Having trouble? 🤷</summary><br/>
+<summary>Having trouble?</summary><br/>
 
 When copying the exercise, we recommend the following settings:
 
@@ -42,7 +42,7 @@ If the exercise isn't ready in 20 seconds, please check the [Actions](../../acti
 
 - Check to see if a job is running. Sometimes it simply takes a bit longer.
 
-- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+- If the page shows a failed job, please submit an issue. Nice, you found a bug.
 
 </details>
 
