@@ -1,6 +1,6 @@
 # GitHub Copilot Training Program
 
-**Last Updated:** 11/05/2026
+**Last Updated:** 12/05/2026
 
 A comprehensive 5-week curriculum designed to help developers master GitHub Copilot, from foundational concepts to advanced techniques including prompt engineering, agentic workflows, Copilot CLI, Copilot cloud agent, customisation, DevOps automation, testing, code review, governance, and ethical AI practices.
 
