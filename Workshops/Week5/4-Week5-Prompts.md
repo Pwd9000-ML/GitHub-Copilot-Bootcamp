@@ -1,4 +1,4 @@
-# Week 5 Prompts: Refactoring, Quality, and Security
+# GitHub Copilot Prompt Examples - Week 5
 
 ## Session Overview
 
