@@ -186,7 +186,7 @@ Before starting Week 2, please complete your Week 1 reflections if you haven't a
 **Objective:** Understand the Model Context Protocol, connect MCP servers to GitHub Copilot in VS Code and the CLI, and use MCP tools in Agent Mode to manage GitHub workflows end-to-end.
 
 #### Reflection
-Before starting Week 3, please complete your Week 2 reflections if you haven't already: [Submit Weekly Reflection](../../issues/new?template=weekly-reflection.yml)
+Before starting Week 3, please complete your Week 2 reflections if you haven't already: [Submit Weekly Reflection](issues/new?template=weekly-reflection.yml)
 
 #### 1. MCP Foundations: Connecting GitHub Copilot to the World (45-60 minutes)
 
