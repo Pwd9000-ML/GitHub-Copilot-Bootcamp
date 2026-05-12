@@ -6,7 +6,7 @@ license: MIT
 
 # Weekly Curriculum Scaffolder
 
-Use this skill to add a brand new week of content to the GitHub Copilot Bootcamp curriculum. It enforces the existing folder layout, file naming, placeholder fill-in, styling rules, and root README updates so a new week is consistent with Weeks 1 to 4.
+Use this skill to add a brand new week of content to the GitHub Copilot Bootcamp curriculum. It enforces the existing folder layout, file naming, placeholder fill-in, styling rules, and root README updates so a new week is consistent with Weeks 1 to 5.
 
 ## When to use this skill
 
@@ -32,8 +32,8 @@ Before generating any files, confirm the following with the user. Ask them as on
 | Week total duration | No | `2-3 hours` | Default `2-3 hours`. |
 | Session 1 title | Yes | `Introduction to the Model Context Protocol` | |
 | Session 2 title | Yes | `Using and Building MCP Servers with Copilot` | |
-| Lab style | Yes | `skills` or `self-contained` | `skills` links to an external `github.com/skills/...` repo. `self-contained` embeds full exercises inline. |
-| External GitHub Skills repo | Conditional | `skills/integrate-mcp-with-copilot` | Required when lab style is `skills`. |
+| Lab style | Yes | `skills` | All labs in this curriculum link to an external `github.com/skills/...` exercise. Do not compose inline lab exercises. |
+| External GitHub Skills repo | Yes | `skills/integrate-mcp-with-copilot` | The `github.com/skills/<repo>` exercise this lab points to. Do not invent a URL; if none exists yet, ask the user to provide one. |
 | Lab title | Yes | `Hands-On with MCP Servers` | |
 | Lab duration | No | `60-90 minutes` | Default `60-90 minutes`. |
 | Four lab activities | Yes | Short labels for the issue template checkboxes | Used as `{{ACTIVITY_1}}` to `{{ACTIVITY_4}}`. |
@@ -56,8 +56,7 @@ Follow these steps in order. Read each referenced file from the repository befor
 Read these files from the repo before authoring anything. They are the source of truth for structure and placeholders, do not invent your own layout:
 
 - `templates/SESSION-TEMPLATE.md`
-- `templates/LAB-SKILLS-TEMPLATE.md` (if `lab style` is `skills`)
-- `templates/LAB-SELF-CONTAINED-TEMPLATE.md` (if `lab style` is `self-contained`)
+- `templates/LAB-SKILLS-TEMPLATE.md`
 - `templates/PROMPTS-TEMPLATE.md`
 - `templates/ISSUE-TEMPLATE.yml`
 - `templates/README-SNIPPET.md`
@@ -138,10 +137,10 @@ These are pulled from `.github/instructions/Currriculum-Styling.instructions.md`
 
 Expected behaviour:
 
-1. Confirm Week 5 is free.
+1. Confirm Week 6 is free.
 2. Ask the user (one batched question) for: session 1 and 2 titles, lab style, four lab activities, five to eight prompt categories. Suggest sensible defaults for the topic.
-3. Generate `Workshops/Week5/1-...md`, `2-...md`, `3-Week5-Lab.md`, `4-Week5-Prompts.md`.
-4. Generate `.github/ISSUE_TEMPLATE/week5-lab.yml`.
+3. Generate `Workshops/Week6/1-...md`, `2-...md`, `3-Week6-Lab.md`, `4-Week6-Prompts.md`.
+4. Generate `.github/ISSUE_TEMPLATE/week6-lab.yml`.
 5. Update `README.md` curriculum section, TOC, and Last Updated date.
 6. Run the checklist.
 7. Report changes and suggest a commit message.
@@ -155,7 +154,7 @@ Expected behaviour:
 
 ## Edge cases
 
-- **Lab style is `skills` but no real GitHub Skills exercise exists.** Fall back to `self-contained` and warn the user. Do not invent a `github.com/skills/<repo>` URL.
+- **No real GitHub Skills exercise exists for the topic.** Ask the user to supply or wait for a real `github.com/skills/<repo>` URL. Do not invent a URL.
 - **The user provides only a topic with no session titles.** Propose two session titles and confirm with the user before generating.
 - **`README.md` TOC anchors collide** because two weeks share session titles. Make the headings unique, for example by including `Week {{WEEK_NUMBER}}` in the heading text, so the generated GitHub anchor is unique. If duplicate headings must remain, use GitHub's deduplicated anchor format with `-1`, `-2`, and so on.
 - **The user wants more or fewer than two sessions.** The current convention is exactly two sessions, one lab, one prompts page. If the user wants a different shape, confirm explicitly and update file numbers accordingly (`{{LAB_FILE_NUMBER}}` and `{{PROMPTS_FILE_NUMBER}}`).
