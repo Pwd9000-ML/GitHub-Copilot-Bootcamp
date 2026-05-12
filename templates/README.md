@@ -1,6 +1,6 @@
 # Weekly Curriculum Templates
 
-This folder contains reusable templates for creating new weekly curriculum material. Each template mirrors the file and folder structure used in `Workshops/Week1/` through `Workshops/Week4/`.
+This folder contains reusable templates for creating new weekly curriculum material. Each template mirrors the file and folder structure used in `Workshops/Week1/` through `Workshops/Week5/`.
 
 ## Recommended: Use the Weekly Curriculum Skill
 
@@ -11,9 +11,8 @@ The `.github/skills/weekly-curriculum/` skill automates the steps below. Ask Git
 1. **Copy** the templates into a new folder, e.g. `Workshops/Week5/`.
 2. **Rename** each file following the numbering convention: `{N}-{Topic-Name}.md`.
 3. **Replace** every `{{PLACEHOLDER}}` with the appropriate value for the new week.
-4. **Choose** the lab template that fits your delivery model:
-   - [LAB-SKILLS-TEMPLATE.md](LAB-SKILLS-TEMPLATE.md) for short, external GitHub Skills exercises (Weeks 1-4 pattern, recommended).
-   - [LAB-SELF-CONTAINED-TEMPLATE.md](LAB-SELF-CONTAINED-TEMPLATE.md) for longer, inline hands-on exercises (use when no suitable GitHub Skills exercise exists).
+4. **Use** the lab template for the lab page:
+   - [LAB-SKILLS-TEMPLATE.md](LAB-SKILLS-TEMPLATE.md) — all labs in this curriculum link to an external GitHub Skills exercise at `github.com/skills/`. Do not compose inline lab exercises.
 5. **Create** the matching issue template by copying [ISSUE-TEMPLATE.yml](ISSUE-TEMPLATE.yml) into `.github/ISSUE_TEMPLATE/` and updating the placeholders.
 6. **Update** the root `README.md` using the snippet in [README-SNIPPET.md](README-SNIPPET.md).
 
@@ -23,7 +22,7 @@ The `.github/skills/weekly-curriculum/` skill automates the steps below. Ask Git
 Workshops/Week{{WEEK_NUMBER}}/
 ├── 1-{{SESSION_1_TOPIC}}.md          ← from SESSION-TEMPLATE.md
 ├── 2-{{SESSION_2_TOPIC}}.md          ← from SESSION-TEMPLATE.md (duplicate for additional sessions)
-├── {{LAB_FILE_NUMBER}}-Week{{WEEK_NUMBER}}-Lab.md  ← from LAB-SKILLS-TEMPLATE.md or LAB-SELF-CONTAINED-TEMPLATE.md
+├── {{LAB_FILE_NUMBER}}-Week{{WEEK_NUMBER}}-Lab.md  ← from LAB-SKILLS-TEMPLATE.md
 └── {{PROMPTS_FILE_NUMBER}}-Week{{WEEK_NUMBER}}-Prompts.md ← from PROMPTS-TEMPLATE.md
 ```
 

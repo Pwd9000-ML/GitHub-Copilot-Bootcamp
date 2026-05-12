@@ -1,109 +1,108 @@
-name: Week 4 Lab - Refactoring, Quality, and Ethics
-description: Hands-on Copilot lab for Week 4 covering legacy code refactoring, quality standards, and ethical AI practices
-title: "Week 4 Lab: Refactoring & Ethics - <Your Name>"
+name: Week 4 Lab - DevOps and Testing with Copilot
+description: Hands-on Copilot lab for Week 4 covering CI/CD automation, infrastructure as code, and test generation
+title: "Week 4 Lab: DevOps & Testing - <Your Name>"
 labels: ["lab", "week-4"]
 body:
   - type: markdown
     attributes:
       value: |
         ## Goal
-        Master techniques for refactoring legacy code, enforcing quality standards, and understanding ethical considerations when using AI-assisted development tools.
+        Learn to use GitHub Copilot for DevOps automation and testing to streamline software delivery and improve code reliability.
 
   - type: checkboxes
     id: tasks
     attributes:
       label: Tasks
       options:
-        - label: Read `Workshops/Week4/1-Refactoring-Large-Codebases.md`
-        - label: Read `Workshops/Week4/2-Ethical-and-Security-Considerations.md`
+        - label: Read `Workshops/Week4/1-DevOps-Automation.md`
+        - label: Read `Workshops/Week4/2-Testing-and-Quality-Assurance.md`
         - label: Complete the hands-on lab in `Workshops/Week4/3-Week4-Lab.md`
         - label: Review prompt examples in `Workshops/Week4/4-Week4-Prompts.md`
     validations:
       required: true
 
   - type: checkboxes
-    id: refactoring_topics
+    id: devops_topics
     attributes:
-      label: Which refactoring techniques did you practice?
+      label: Which DevOps topics did you practice?
       options:
-        - label: Legacy code analysis and documentation
-        - label: Characterisation test generation (before refactoring)
-        - label: Extract method/function refactoring
-        - label: Rename for clarity (variables, functions, classes)
-        - label: Modernise syntax (var→const/let, async/await, etc.)
-        - label: Remove code duplication
-        - label: Simplify nested conditionals
-        - label: Performance optimisation
+        - label: CI/CD pipeline generation (GitHub Actions)
+        - label: Dockerfile creation and optimisation
+        - label: Kubernetes manifests (Deployment, Service, ConfigMap)
+        - label: Terraform/Infrastructure as Code
+        - label: Docker Compose configuration
+        - label: Pre-deployment validation scripts
+        - label: Environment-specific configurations
+        - label: Copilot CLI for terminal workflows
+        - label: Copilot cloud agent or `/delegate` workflow
+        - label: Copilot Code Review or PR summary support
+        - label: GitHub Actions quality gates, rulesets, or required checks
 
   - type: checkboxes
-    id: security_topics
+    id: testing_topics
     attributes:
-      label: Which security/ethics topics did you explore?
+      label: Which testing topics did you practice?
       options:
-        - label: Identifying security vulnerabilities in generated code
-        - label: SQL injection prevention
-        - label: Removing hardcoded secrets
-        - label: Input validation and sanitisation
-        - label: IP/licensing considerations
-        - label: Bias detection in code
-        - label: Responsible AI practices
-        - label: Enterprise governance policies and model controls
-        - label: Content exclusion limits across Copilot surfaces
-        - label: Secret scanning, push protection, or CodeQL alert triage
-        - label: Copilot Autofix review
-        - label: Agent threat modelling and MCP/tool permission review
+        - label: Unit test generation for existing code
+        - label: Test coverage improvement
+        - label: Parameterised/data-driven tests
+        - label: Mock and stub generation
+        - label: Test framework conversion (e.g., Selenium → Cypress)
+        - label: Integration test creation
+        - label: Edge case and boundary testing
+        - label: VS Code test commands such as /setupTests, /tests, or /fixTestFailure
+        - label: Reviewing generated tests for weak assertions or over-mocking
 
   - type: textarea
-    id: refactoring_example
+    id: pipeline_example
     attributes:
-      label: Refactoring example (before and after)
-      description: Show a before/after example of code you refactored with Copilot's help
+      label: CI/CD pipeline or IaC you created
+      description: Paste an example of a pipeline, Dockerfile, or infrastructure config Copilot helped generate
       placeholder: |
-        BEFORE:
-        function calc(o) {
-          var t = 0;
-          for (var i = 0; i < o.length; i++) { t = t + o[i].p * o[i].q; }
-          return t;
-        }
-
-        AFTER:
-        function calculateTotal(items) {
-          return items.reduce((total, item) => total + item.price * item.quantity, 0);
-        }
+        name: CI Pipeline
+        on: [push, pull_request]
+        jobs:
+          build:
+            runs-on: ubuntu-latest
+            steps:
+              - uses: actions/checkout@v4
+              ...
     validations:
       required: true
 
   - type: textarea
-    id: security_finding
+    id: test_example
     attributes:
-      label: Security issue you identified or fixed
-      description: Describe a security vulnerability you found or fixed during the lab
+      label: Test code Copilot generated
+      description: Paste an example of test code that Copilot generated well
       placeholder: |
-        Issue: SQL injection in getUser function
-        Fix: Changed string concatenation to parameterised query
-        Prompt used: "Refactor this function to prevent SQL injection..."
+        describe('calculateTotal', () => {
+          it('should return sum of items', () => {
+            // Test generated by Copilot...
+          });
+        });
 
   - type: dropdown
-    id: security_awareness
+    id: devops_confidence
     attributes:
-      label: Did this week increase your awareness of AI-generated code security risks?
+      label: How confident are you using Copilot for DevOps tasks?
       options:
-        - "Yes - significantly more aware now"
-        - "Yes - somewhat more aware"
-        - "Already was aware of these risks"
-        - "Not particularly"
+        - "Very confident - ready to use for real pipelines"
+        - "Fairly confident - can create basic configurations"
+        - "Somewhat confident - need more practice"
+        - "Not confident - still learning the concepts"
     validations:
       required: true
 
   - type: dropdown
-    id: ethics_understanding
+    id: testing_confidence
     attributes:
-      label: How would you rate your understanding of ethical AI coding practices?
+      label: How confident are you using Copilot for test generation?
       options:
-        - "Strong - understand IP, bias, and responsible use well"
-        - "Good - grasp the key concepts"
-        - "Basic - understand some concerns"
-        - "Limited - need more exploration"
+        - "Very confident - significantly improves my test coverage"
+        - "Fairly confident - helpful for standard test cases"
+        - "Somewhat confident - useful but requires editing"
+        - "Not confident - tests often need major rework"
     validations:
       required: true
 
@@ -111,21 +110,21 @@ body:
     id: best_prompt
     attributes:
       label: Best prompt you used (paste it here)
-      description: Share a refactoring, quality, or security prompt that worked well
+      description: Share a DevOps or testing prompt that worked particularly well
       placeholder: |
-        Example: "Perform a security audit on this code checking for injection vulnerabilities, hardcoded secrets, and input validation gaps. Provide severity ratings and remediation steps."
+        Example: "Generate a GitHub Actions workflow that builds a Node.js app, runs tests with coverage, and deploys to Azure App Service on main branch pushes"
     validations:
       required: true
 
   - type: dropdown
     id: time_impact
     attributes:
-      label: Time impact for refactoring tasks
+      label: Time impact compared to writing configs/tests manually
       options:
-        - "Much faster - Copilot accelerated refactoring significantly"
-        - "Somewhat faster - helpful for repetitive changes"
+        - "Saved significant time (30+ minutes)"
+        - "Saved some time (10-30 minutes)"
         - "About the same"
-        - "Slower - needed to verify suggestions carefully"
+        - "Took longer (learning curve)"
     validations:
       required: true
 
@@ -133,7 +132,7 @@ body:
     id: worked
     attributes:
       label: What worked well?
-      placeholder: "Which refactoring or quality tasks did Copilot handle particularly well?"
+      placeholder: "Which DevOps or testing tasks did Copilot handle particularly well?"
     validations:
       required: true
 
@@ -141,39 +140,31 @@ body:
     id: challenges
     attributes:
       label: What was challenging?
-      placeholder: "Where did Copilot's suggestions introduce issues or require careful review?"
+      placeholder: "Where did Copilot's suggestions need significant modification? Any incorrect configurations?"
     validations:
       required: true
 
   - type: dropdown
-    id: would_trust
+    id: coverage_improvement
     attributes:
-      label: After this week, how much do you trust AI-generated code?
+      label: Did Copilot help improve your test coverage?
       options:
-        - "Trust with verification - always review but confident in the process"
-        - "Trust for routine tasks - careful review for complex/security code"
-        - "Cautious - useful but requires significant validation"
-        - "Sceptical - prefer to write critical code manually"
-    validations:
-      required: true
+        - "Yes - significantly (added 20%+ coverage)"
+        - "Yes - moderately (added 10-20% coverage)"
+        - "Yes - slightly (added <10% coverage)"
+        - "No - didn't focus on coverage this week"
+        - "Not applicable"
 
   - type: textarea
-    id: policy_thoughts
+    id: security_validation
     attributes:
-      label: Organisational policy thoughts (optional)
-      description: Do you think your organisation should have specific guidelines for AI-assisted coding? What would you include?
+      label: Security or validation improvements (optional)
+      description: Did you add any security scanning, validation steps, or quality gates to your pipeline?
       placeholder: |
-        - Mandatory security review for AI-generated code
-        - Documentation requirements
-        - Model, content exclusion, MCP, and tool approval rules
-        - Approved use cases...
-
-  - type: textarea
-    id: collaboration
-    attributes:
-      label: Collaboration experience (optional)
-      description: If you did the pair refactoring exercise, how did collaboration work with Copilot?
-      placeholder: "Describe your pair programming experience with Copilot..."
+        - Added npm audit step
+        - Included SAST scanning
+        - Added Dockerfile linting...
+        - Added least-privilege permissions, OIDC, required checks, or artifact attestations...
 
   - type: textarea
     id: pr_link
@@ -182,17 +173,7 @@ body:
       placeholder: "Paste the PR URL here"
 
   - type: textarea
-    id: key_takeaways
+    id: next_steps
     attributes:
-      label: Key takeaways from the 4-week program
-      description: What are the most important things you've learned across all 4 weeks?
-    validations:
-      required: true
-
-  - type: textarea
-    id: future_application
-    attributes:
-      label: How will you use Copilot going forward?
-      description: What practices will you adopt in your daily development work?
-    validations:
-      required: true
+      label: What will you apply in your daily work?
+      description: Which DevOps or testing techniques from Week 4 will you start using regularly?

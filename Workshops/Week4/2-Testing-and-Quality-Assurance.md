@@ -692,7 +692,7 @@ describe('Login', () => {
 
 ---
 
-> **Tip:** For additional framework conversion examples (JUnit to pytest, Mocha to Jest), see the [Week 3 Prompts](4-Week3-Prompts.md#5-test-optimisation) reference guide.
+> **Tip:** For additional framework conversion examples (JUnit to pytest, Mocha to Jest), see the [Week 4 Prompts](4-Week4-Prompts.md#5-test-optimisation) reference guide.
 
 ---
 
@@ -785,8 +785,8 @@ Before merging test code, verify:
 
 ## Next Steps
 
-- Complete the [Week 3 Lab](3-Week3-Lab.md) for hands-on practice
-- Review [Week 3 Prompts](4-Week3-Prompts.md) for testing prompt examples
-- Explore [Week 4](../Week4/) for refactoring and code quality topics
+- Complete the [Week 4 Lab](3-Week4-Lab.md) for hands-on practice
+- Review [Week 4 Prompts](4-Week4-Prompts.md) for testing prompt examples
+- Explore [Week 5](../Week5/) for refactoring and code quality topics
 
 ---

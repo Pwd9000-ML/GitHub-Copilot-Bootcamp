@@ -1,689 +1,328 @@
-# GitHub Copilot Prompt Examples - Week 3: DevOps & Testing
+# GitHub Copilot Prompt Examples - Week 3: MCP and GitHub Copilot
 
 ## Session Overview
 
-**Purpose:** Reference guide for DevOps and testing prompts  
+**Purpose:** Reference guide for practical MCP prompts  
 **Format:** Example prompts with explanations and tips  
-**Objective:** Provide prompting techniques for CI/CD pipelines, Infrastructure as Code (IaC), test generation, and DevOps automation.
+**Objective:** Provide ready-to-use prompts that demonstrate how to configure MCP servers, invoke tools in Agent Mode, manage GitHub workflows via the GitHub MCP server, and apply security and governance controls across all MCP surfaces.
 
 ---
 
 ## Contents
 
-- [1. CI/CD Pipeline Generation](#1-cicd-pipeline-generation)
-- [2. Infrastructure as Code (IaC)](#2-infrastructure-as-code-iac)
-- [3. Test Generation](#3-test-generation)
-- [4. Validation and Security Scanning](#4-validation-and-security-scanning)
-- [5. Test Optimisation](#5-test-optimisation)
-- [6. Cloud Agent, Review, and Quality Gates](#6-cloud-agent-review-and-quality-gates)
-
-> **Note:** CLI prompts are integrated into each section below rather than listed separately. All prompts work in VS Code Chat and Copilot CLI. Try both to find your preferred workflow.
+- [1. Server Discovery and Setup](#1-server-discovery-and-setup)
+- [2. Agent Mode Tool Use](#2-agent-mode-tool-use)
+- [3. GitHub Issue and PR Workflows](#3-github-issue-and-pr-workflows)
+- [4. Research and Code Exploration](#4-research-and-code-exploration)
+- [5. Security and Access Control](#5-security-and-access-control)
+- [6. Governance and Enterprise Management](#6-governance-and-enterprise-management)
+- [7. Troubleshooting](#7-troubleshooting)
+- [Week 3 Feedback](#week-3-feedback)
+- [Next Steps](#next-steps)
 
 ---
 
-## 1. CI/CD Pipeline Generation
+## 1. Server Discovery and Setup
 
-CI/CD pipeline generation creates automated workflows for build, test, and deployment processes.
-
-- Use structured prompts with specific requirements for pipeline steps
-- Define triggers, job dependencies, and artifacts
-- Create multi-stage pipelines with deployment environments
-- Include validation jobs and parallel execution strategies
+Prompts in this category help you find, understand, and configure MCP servers in VS Code, the Copilot CLI, or the Copilot coding agent. Use them when onboarding a new team to MCP or when adding a server to an existing project.
 
 ### Example Prompts
 
-#### Basic CI Pipeline
+#### Finding Available MCP Servers
 
 ```text
-Create a GitHub Actions workflow for a Node.js 22 application that:
-- Triggers on push to main and pull requests
-- Runs on ubuntu-latest
-- Includes steps for: checkout, setup Node.js with caching, install dependencies, run linter, run tests with coverage, and build
-- Uses least-privilege `permissions`, concurrency, and maintained actions
-- Uploads test coverage with the current artifact action version
+// Ask Copilot to recommend MCP servers for a specific use case
+I am building a Python web application that reads data from Azure Blob Storage and
+exposes a REST API. Which MCP servers would be most useful for GitHub Copilot to
+help me with this project? Include the configuration snippet for each server.
 ```
-
-#### Multi-Stage Pipeline with Deployment
 
 ```text
-Generate a GitHub Actions workflow with:
-- A build job that compiles the application and runs tests
-- A staging deployment job that runs only on main branch after tests pass
-- Uses environment: staging with required approval
-- Deploys to Azure App Service
-- Sends a Slack notification on completion that summarises the build and deploy results using `needs.<job_id>.result`
+// Discover what servers are available in the GitHub MCP Registry
+Search the GitHub MCP Registry for servers related to cloud infrastructure.
+List the server name, publisher, and a brief description for each result.
 ```
 
-#### Validation Job with Dependencies
+#### Generating a `.vscode/mcp.json` Configuration
 
 ```text
-Add a validation job to my GitHub Actions workflow that runs first and includes:
-- YAML linting with yamllint
-- Security scanning with npm audit
-- Dockerfile linting with hadolint
-- Secret detection with trufflehog
-The other jobs should depend on this validation passing.
-
-If needed, install yamllint in the job using `python3 -m pip install yamllint`.
+// Ask Copilot to generate a workspace MCP configuration for a team project
+Generate a .vscode/mcp.json file that configures:
+1. The remote GitHub MCP server using Streamable HTTP transport.
+2. The Playwright MCP server as a local subprocess via npx.
+3. A local filesystem server restricted to the "data" subdirectory.
+Ensure that any sensitive values use input variables rather than literal strings.
 ```
 
-#### Platform-Specific Pipelines
+#### Adding a Server to the Copilot CLI
 
 ```text
-Create a GitLab CI pipeline for a Python application that:
-- Runs tests in parallel across Python 3.9, 3.10, and 3.11
-- Generates coverage reports
-- Deploys to staging on merge to main
-- Uses Docker images for consistency
+// Configure a new MCP server in the Copilot CLI
+I want to add the Context7 MCP server to my Copilot CLI configuration.
+The server URL is https://mcp.context7.com/mcp and it requires an API key in a
+"CONTEXT7_API_KEY" header. Show me the JSON block to add to
+~/.copilot/mcp-config.json and explain each field.
 ```
 
-> **Tip:** Be specific about trigger conditions, job dependencies, and artifacts to ensure proper workflow orchestration. These prompts work in VS Code Chat and Copilot CLI. Try both to find your preferred workflow.
+> **Tip:** Always specify transport type, authentication method, and the scope (workspace vs user profile vs CLI) when asking Copilot to generate MCP configuration. The more precise the prompt, the more accurate the output.
 
 ---
 
-#### From the CLI
+## 2. Agent Mode Tool Use
 
-```bash
-# Generate and save a pipeline directly
-copilot -p "Create a GitHub Actions workflow for a Node.js 22 app with least-privilege permissions, build, test, lint, coverage, concurrency, and artifact upload v4 or later" > .github/workflows/ci.yml
-
-# Generate and create a PR in one flow
-copilot
-> Create a GitHub Actions CI/CD pipeline for this repo with build, test, and deploy stages
-> /delegate
-```
-
----
-
-## 2. Infrastructure as Code (IaC)
-
-Infrastructure as Code prompts create Docker configurations, Kubernetes manifests, and cloud templates.
-
-- Specify infrastructure requirements with security best practices
-- Include environment configuration and resource optimisation
-- Create multi-stage Docker builds for production
-- Generate Kubernetes manifests with health checks and autoscaling
-- Build Terraform/CloudFormation templates with proper security groups
+These prompts demonstrate how to invoke MCP tools in Copilot Agent Mode, both implicitly (natural language) and explicitly using `#tool_name` references. Use them after the MCP server is running and tools are visible in the tool picker.
 
 ### Example Prompts
 
-#### Optimised Dockerfile
+#### Listing Available Tools
 
 ```text
-Create a production Dockerfile for a Node.js Express application that:
-- Uses multi-stage build for smaller image size
-- Runs as non-root user for security
-- Only copies production dependencies
-- Installs dependencies with `npm ci --omit=dev`
-- Includes health check
-- Uses node:20-alpine as base
-- Application runs on port 3000
+// Ask Copilot to describe the tools available from a running MCP server
+What tools does the GitHub MCP server currently expose? List each tool by name
+and provide a one-sentence description of what it does.
 ```
 
-#### Docker Compose for Development
+#### Implicit Tool Invocation
 
 ```text
-Create a docker-compose.yml for local development with:
-- Node.js application service with hot reload (volume mounts)
-- PostgreSQL database with persistent volume
-- Redis for caching
-- Proper environment variables
-- Network configuration for service communication
+// Let Copilot choose which tool to use based on natural language intent
+List all open pull requests in this repository that have been open for more than
+seven days and have no reviewer assigned. For each one, suggest a reviewer from
+the list of recent contributors.
 ```
 
-#### Kubernetes Deployment
+#### Explicit Tool Invocation Using a Reference
 
 ```text
-Generate Kubernetes manifests for a Node.js microservice including:
-- Deployment with 3 replicas and health checks
-- Service for load balancing
-- ConfigMap for environment variables
-- Horizontal Pod Autoscaler (HPA) based on CPU
-- Resource limits and requests
+// Explicitly reference a specific tool to guide Copilot's choice
+#list_issues List all open issues labelled "enhancement" in this repository.
+Group them by estimated complexity (low, medium, high) based on the issue body.
 ```
-
-#### Terraform Infrastructure
 
 ```text
-Create a Terraform configuration for AWS that provisions:
-- VPC with public and private subnets across 2 availability zones
-- Application Load Balancer
-- ECS cluster with Fargate for containerised applications
-- RDS PostgreSQL database in private subnet
-- Security groups with least-privilege access
+// Chain tool calls explicitly for a multi-step workflow
+#search_repositories Find the top three Python repositories on GitHub related to
+"school management systems". Then #get_repository_details on each one and
+summarise their README in two sentences.
 ```
 
-#### Environment-Specific Configuration
-
-```text
-Generate a Helm values file for production deployment with:
-- High availability (5 replicas)
-- Resource limits: CPU 1000m, Memory 2Gi
-- Production database connection string
-- Horizontal autoscaling configuration
-- Rolling update strategy
-```
-
-> **Tip:** Always include security considerations (non-root users, resource limits, health checks) in IaC prompts.
+> **Tip:** Use `#tool_name` references when you know exactly which tool you need and want to prevent Copilot from choosing a different one. For exploratory tasks, natural language intent often produces better results because Copilot can chain multiple tools autonomously.
 
 ---
 
-#### From the CLI
+## 3. GitHub Issue and PR Workflows
 
-```bash
-copilot
-> /cwd ./infrastructure
-> /add-dir ./src
-> Create a production Dockerfile, docker-compose.yml for local dev,
->   K8s deployment with HPA, and Terraform module for Azure App Service.
->   Ensure all configs reference port 3000 and are consistent.
-> /delegate
-```
-
----
-
-## 3. Test Generation
-
-Test generation creates comprehensive test suites with proper coverage and edge case handling.
-
-- Specify test framework and coverage requirements
-- Include edge cases and boundary conditions
-- Generate unit tests, integration tests, and parameterised tests
-- Use proper mocking for external dependencies
-- Test async functions and error scenarios
+These prompts leverage the GitHub MCP server's issue and pull request toolsets to manage development work directly from Copilot Agent Mode. They are particularly useful for teams that want to reduce context-switching between the IDE and GitHub.com.
 
 ### Example Prompts
 
-#### Unit Tests for Existing Code
+#### Creating Issues from Code Analysis
 
 ```text
-Generate comprehensive unit tests for this calculateTotal function using Jest. Include:
-- Happy path with valid items
-- Edge cases (empty array, null, undefined)
-- Boundary conditions (zero prices, large numbers)
-- Mock external dependencies
+// Analyse the codebase and create issues for identified technical debt
+#codebase Identify the top five areas of technical debt in this codebase.
+For each area, create a GitHub issue with a title, a description explaining the
+problem and its impact, and an acceptance criteria section describing what "done"
+looks like.
 ```
 
-#### Test Suite with High Coverage
+#### Implementing an Issue End-to-End
 
 ```text
-Create a complete Jest test suite for the UserService class that:
-- Tests all public methods
-- Achieves >90% code coverage
-- Uses proper mocking for database calls
-- Includes setup and teardown
-- Tests error scenarios
+// Delegate a complete feature implementation to Copilot via MCP
+The issue #23 describes a request to add a search filter to the activities page.
+Check out a new branch named "feature/search-filter", implement the feature,
+write a unit test for the new functionality, push the branch, and open a pull
+request targeting "main". Reference issue #23 in the PR body.
 ```
 
-#### Parameterised Tests
+#### Pull Request Review and Merge
 
 ```text
-Generate parameterised tests for the validateEmail function using Jest's test.each:
-- Test valid email formats (standard, with +, with subdomains)
-- Test invalid formats (missing @, missing domain, special chars)
-- Use descriptive test names for each case
-- Use `%p` placeholders in the test name to handle non-integer inputs
+// Ask Copilot to summarise a pull request before you review it
+Summarise pull request #17 for me. Include: the problem it solves, the files
+changed, any tests added, and whether there are obvious risks or missing pieces
+I should check before merging.
 ```
-
-#### Integration Tests
 
 ```text
-Create integration tests for the API endpoint /api/users using supertest and Jest:
-- Test successful user creation (POST)
-- Test retrieving users (GET)
-- Test authentication requirements
-- Test validation errors
-- Setup test database and cleanup
+// Post a structured closing comment on a merged issue
+Issue #23 has been resolved by the merged pull request. Post a closing comment
+that thanks the contributor, summarises the change in one sentence, and notes
+the version or branch where the fix will be available.
 ```
 
-#### Async Function Tests
-
-```text
-Write Jest tests for this async fetchUserData function that:
-- Tests successful data retrieval
-- Tests network errors
-- Tests timeout scenarios
-- Uses async/await syntax
-- Mocks the fetch API
-```
-
-> **Tip:** Specify the test framework and what should be mocked to get tests that match your project structure.
+> **Tip:** When delegating implementation to Copilot via MCP, always start a fresh chat to clear previous context. A clean context reduces the risk of Copilot carrying over incorrect assumptions from earlier in the session.
 
 ---
 
-#### From the CLI
+## 4. Research and Code Exploration
 
-```bash
-# Generate tests for a specific file
-copilot --allow-all-tools -p "Read src/utils/calculator.js and generate comprehensive Jest tests with >90% branch coverage" > tests/calculator.test.js
-
-# Run tests and fix failures in one pass
-copilot --allow-all-tools -p "Run npm test, analyse any failures, fix the code, and run tests again until they pass"
-```
-
----
-
-## 4. Validation and Security Scanning
-
-Validation and security scanning creates pre-deployment checks to catch issues early in the pipeline.
-
-- Create validation scripts for environment variables and connections
-- Integrate security scanning tools (npm audit, Trivy, CodeQL)
-- Add configuration linting for YAML, Dockerfile, and Terraform
-- Implement secret detection in CI pipelines
-- Fail builds early when issues are detected
+These prompts direct Copilot to use MCP tools to search GitHub, compare codebases, explore repository structure, or analyse commit history. They are useful for onboarding, competitive analysis, and understanding unfamiliar projects.
 
 ### Example Prompts
 
-#### YAML File Validation
+#### Searching for Similar Projects
 
 ```text
-Write a shell script to validate all YAML files in a directory and report any syntax errors.
+// Search GitHub for open-source projects similar to the current codebase
+Search GitHub for JavaScript repositories that implement a task management
+application with user authentication. Return the top five results by star count,
+including the repository URL, star count, last updated date, and a one-sentence
+description.
 ```
 
-**Expected Output:**
-```bash
-#!/bin/bash
-
-# YAML Validation Script
-# Validates all YAML files in the specified directory
-
-DIRECTORY="${1:-.}"
-ERRORS=0
-
-echo "Validating YAML files in: $DIRECTORY"
-echo "=================================="
-
-# Use process substitution to avoid subshell so ERRORS persists
-while IFS= read -r -d '' file; do
-    echo -n "Checking $file... "
-    
-    # Use a fixed Python command and pass the filename as an argument to avoid code injection through file names
-    if python3 -c 'import sys, yaml; yaml.safe_load(open(sys.argv[1]))' "$file" 2>/dev/null; then
-        echo "✓ Valid"
-    else
-        echo "✗ Invalid"
-        python3 -c 'import sys, yaml; yaml.safe_load(open(sys.argv[1]))' "$file" 2>&1 || true
-        ERRORS=$((ERRORS + 1))
-    fi
-done < <(find "$DIRECTORY" \( -name "*.yaml" -o -name "*.yml" \) -print0)
-
-echo "=================================="
-echo "Validation complete. Errors found: $ERRORS"
-
-exit $ERRORS
-```
-
-#### Environment Variable Check
+#### Comparing Features Across Repositories
 
 ```text
-Create a script that verifies all required environment variables are set before deployment.
+// Compare the features of two repositories to identify gaps
+Compare the feature set of "owner/repo-a" with "owner/repo-b". Identify three
+features that repo-b has which repo-a is missing, and suggest how each could be
+added to repo-a.
 ```
 
-**Expected Output:**
-```bash
-#!/bin/bash
-
-# Environment Variable Validation Script
-
-REQUIRED_VARS=(
-    "DATABASE_URL"
-    "API_KEY"
-    "NODE_ENV"
-    "PORT"
-)
-
-MISSING=0
-
-echo "Checking required environment variables..."
-echo "=========================================="
-
-for var in "${REQUIRED_VARS[@]}"; do
-    if [ -z "${!var}" ]; then
-        echo "✗ Missing: $var"
-        MISSING=$((MISSING + 1))
-    else
-        echo "✓ Set: $var"
-    fi
-done
-
-echo "=========================================="
-
-if [ $MISSING -gt 0 ]; then
-    echo "Error: $MISSING required variable(s) not set"
-    exit 1
-else
-    echo "All required variables are set"
-    exit 0
-fi
-```
-
-#### CI Pipeline Validation Steps
+#### Analysing Commit History
 
 ```text
-Add validation steps to a GitHub Actions workflow that check YAML syntax, Dockerfile best practices, and security vulnerabilities.
+// Summarise recent changes in a repository
+Show me the last ten commits to the "main" branch of this repository. Group them
+by type (feature, bug fix, refactor, documentation) and identify which contributor
+has been most active in the past 30 days.
 ```
 
-**Expected Output:**
-```yaml
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Validate YAML files
-        run: |
-          python3 -m pip install yamllint
-          yamllint -d relaxed .
-
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # v3.1.0
-        with:
-          dockerfile: Dockerfile
-
-      - name: Check for secrets in code
-        uses: trufflesecurity/trufflehog@7c0734f987ad0bb30ee8da210773b800ee2016d3 # v3.93.4
-        with:
-          path: ./
-          extra_args: --only-verified
-
-      - name: Security audit - npm
-        run: npm audit --audit-level=high
-
-      - name: Validate Kubernetes manifests
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          ./kubectl apply --dry-run=client -f k8s/ -R
-```
-
-#### Pre-Deployment Validation Script
-
-```text
-Create a Node.js validation script that checks:
-- All required environment variables are set
-- Database connection is successful
-- External API dependencies are reachable
-- Configuration files are valid JSON/YAML
-- Returns exit code 0 on success, 1 on failure
-```
-
-#### Security Scanning Integration
-
-```text
-Add to my GitHub Actions workflow:
-- npm audit for dependency vulnerabilities
-- Trivy for container image scanning
-- SAST scanning with CodeQL
-- License compliance checking
-- Fail the build if high severity issues found
-```
-
-#### Secure Workflow Review
-
-```text
-Review this GitHub Actions workflow for:
-- Overly broad `GITHUB_TOKEN` permissions
-- Unsafe use of pull request input in shell commands
-- Unpinned or stale third-party actions
-- Missing concurrency controls
-- Missing protected environments for deployment
-- Long-lived cloud secrets that could use OIDC instead
-- Artifact actions older than v4
-
-Provide severity, impact, and a concrete fix for each issue.
-```
-
-#### Configuration Linting
-
-```text
-Create a validation job that lints:
-- YAML files with yamllint
-- Dockerfile with hadolint
-- Terraform with terraform fmt and validate
-- Display errors and fail if any issues found
-```
-
-#### Secret Detection
-
-```text
-Add secret scanning to my CI pipeline using:
-- trufflehog to scan git history
-- Custom regex patterns for API keys
-- Fail the build if secrets detected
-- Report findings as GitHub Security alert
-```
-
-> **Tip:** Integrate validation early in the pipeline to fail fast and save compute resources.
+> **Tip:** For research tasks, start your prompts with a clearly stated goal ("I want to understand...", "Find repositories that...", "Summarise the changes...") rather than specifying tool names. Copilot will select and chain the appropriate GitHub MCP tools automatically.
 
 ---
 
-#### From the CLI
+## 5. Security and Access Control
 
-```bash
-copilot
-> /add-dir .github/workflows
-> /add-dir k8s
-> Review all infrastructure configs for security issues, missing best practices,
->   and YAML syntax errors. Report findings as a checklist with severity levels.
-```
-
----
-
-## 5. Test Optimisation
-
-Test optimisation refactors and improves existing tests for better maintainability and performance.
-
-- Convert tests between frameworks (Selenium to Cypress)
-- Extract common setup into reusable utilities
-- Create test fixtures and reusable test data
-- Enable parallel test execution for faster feedback
-- Identify and fix slow test operations
+These prompts help you configure minimum-scope credentials, enable sandboxing, set tool allowlists, review MCP logs, and understand the trust model. Use them when hardening an MCP configuration or preparing a security review.
 
 ### Example Prompts
 
-#### Convert Test Framework
+#### Auditing an MCP Configuration
 
 ```text
-Convert these Selenium tests to Cypress:
-[paste Selenium test code]
-- Maintain the same test coverage
-- Use Cypress best practices
-- Update assertions to Cypress syntax
-- Simplify wait conditions
+// Review a .vscode/mcp.json file for security issues
+Review the .vscode/mcp.json file in this workspace for security risks. Check for:
+hard-coded secrets or tokens, overly broad tool allowlists, servers using the
+deprecated SSE transport, missing input variables for sensitive values, and
+any server commands that execute code from untrusted sources.
 ```
 
-#### Convert JUnit to pytest
-
-**Prompt:**
-```text
-Convert these JUnit tests to pytest with appropriate fixtures and assertions:
-
-@Test
-public void testAddition() {
-    Calculator calc = new Calculator();
-    assertEquals(5, calc.add(2, 3));
-}
-
-@Test
-public void testDivisionByZero() {
-    Calculator calc = new Calculator();
-    assertThrows(ArithmeticException.class, () -> calc.divide(10, 0));
-}
-```
-
-**Expected Output:**
-```python
-import pytest
-from calculator import Calculator
-
-# Fixture to create a Calculator instance, shared across tests
-@pytest.fixture
-def calculator():
-    """Fixture to create a Calculator instance."""
-    return Calculator()
-
-class TestCalculator:
-    def test_addition(self, calculator):
-        assert calculator.add(2, 3) == 5
-
-    def test_division_by_zero(self, calculator):
-        # Python raises ZeroDivisionError (not ArithmeticException)
-        with pytest.raises(ZeroDivisionError):
-            calculator.divide(10, 0)
-
-    # Parameterised tests for broader coverage
-    @pytest.mark.parametrize("a,b,expected", [
-        (2, 3, 5),
-        (0, 0, 0),
-        (-1, 1, 0),
-    ])
-    def test_addition_parametrized(self, calculator, a, b, expected):
-        assert calculator.add(a, b) == expected
-```
-
-> **Note:** Java exception types do not map 1:1 to Python. For division by zero, Python raises `ZeroDivisionError`.
-
-#### Convert Mocha/Chai to Jest
-
-**Prompt:**
-```text
-Convert this Mocha/Chai test suite to Jest:
-
-const { expect } = require('chai');
-
-describe('Array', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when value is not present', function() {
-            expect([1, 2, 3].indexOf(4)).to.equal(-1);
-        });
-    });
-});
-```
-
-**Expected Output:**
-```javascript
-// Jest uses built-in expect() with .toBe() instead of Chai's .to.equal()
-describe('Array', () => {
-    describe('#indexOf()', () => {
-        test('should return -1 when value is not present', () => {
-            expect([1, 2, 3].indexOf(4)).toBe(-1);
-        });
-    });
-});
-```
-
-#### Extract Test Utilities
+#### Generating a Minimum-Scope PAT Scope List
 
 ```text
-Refactor these Jest tests to reduce duplication:
-[paste test code]
-- Extract common setup into beforeEach
-- Create helper functions for repeated assertions
-- Use describe blocks to organise tests
-- Improve test names for clarity
+// Determine the minimum PAT scopes required for a set of GitHub MCP toolsets
+I want to use the GitHub MCP server with the "repos", "issues", and "pull_requests"
+toolsets in read-only mode. What is the minimum set of Personal Access Token scopes
+I need to grant? Explain why each scope is required.
 ```
 
-#### Add Test Fixtures
+#### Reviewing the MCP Output Log
 
 ```text
-Create test fixtures for the User model tests:
-- Valid user data (multiple personas)
-- Invalid data for validation testing
-- Edge case data
-- Export as reusable test data
+// Interpret an MCP output log for unexpected activity
+I have pasted the contents of my MCP output log below. Identify any tool calls
+that appear unexpected or potentially harmful, and explain what each suspicious
+call was attempting to do.
+
+[paste log contents here]
 ```
 
-#### Parallel Test Execution
-
-```text
-Modify this Jest configuration to:
-- Run tests in parallel using maxWorkers
-- Split slow tests into separate files
-- Use test.concurrent for independent tests
-- Optimise test database setup
-```
-
-#### Improve Test Performance
-
-```text
-Optimise these integration tests that are taking too long:
-[paste test code]
-- Identify slow operations
-- Use transaction rollback instead of database cleanup
-- Mock slow external APIs
-- Reduce unnecessary test data creation
-```
-
-> **Tip:** When converting frameworks, ask Copilot to explain key differences to understand the changes better.
+> **Tip:** Use the `--read-only` flag for the GitHub MCP server in environments where you only need to read data. This prevents any accidental write operations even if a prompt injection attack attempts to trigger a mutating tool.
 
 ---
 
+## 6. Governance and Enterprise Management
 
-#### From the CLI
+These prompts are aimed at administrators and team leads who need to enable MCP for an organisation, configure VS Code enterprise policies, or set up a private MCP registry. Use them when rolling out MCP across a team or enterprise.
 
-```bash
-# Convert all Mocha tests to Jest in one pass
-copilot
-> /add-dir ./tests
-> Convert all Mocha/Chai test files to Jest syntax. Maintain same coverage and structure.
-> /delegate
+### Example Prompts
 
-# Bulk parameterisation
-copilot -p "Refactor all Jest test files in tests/ to use test.each for any test group with 3+ similar test cases. Ask before modifying files."
+#### Enabling MCP in a GitHub Organisation
+
+```text
+// Guide an administrator through enabling the MCP policy
+I am an organisation administrator on GitHub and I want to enable MCP server
+support for all members using Copilot Business. Walk me through the steps to
+enable the "MCP servers in Copilot" policy, and explain what happens to users
+who are on Copilot Free or Pro plans.
 ```
+
+#### Configuring VS Code Policies via Intune
+
+```text
+// Generate an Intune policy JSON for VS Code MCP governance
+Generate a VS Code policy configuration for Intune that:
+1. Restricts MCP usage to approved servers from our private registry at
+   https://mcp-registry.internal.example.com.
+2. Prevents users from enabling global auto-approval of tool calls.
+3. Disables Agent Mode for all users on the Finance team device group.
+Include the policy key names and valid values for each setting.
+```
+
+#### Documenting MCP Governance for a Team
+
+```text
+// Draft a team MCP governance guide
+Draft a one-page MCP governance guide for our development team. It should cover:
+which MCP servers are approved for use, how to request approval for a new server,
+the minimum PAT scope requirements, how to report a suspected prompt injection
+incident, and who to contact for policy questions.
+```
+
+> **Tip:** When writing governance documentation, ask Copilot to include references to specific policy setting names (`ChatMCP`, `McpGalleryServiceUrl`) and the official GitHub Docs and VS Code enterprise documentation pages so that the guidance stays auditable and up to date.
 
 ---
 
-## 6. Cloud Agent, Review, and Quality Gates
+## 7. Troubleshooting
 
-These prompts help connect generated DevOps and testing work to pull requests, review, and governed delivery.
+These prompts address common problems encountered when working with MCP servers: servers that do not start, tools that do not appear in Agent Mode, authentication failures, and network policy blocks.
 
-### Copilot Cloud Agent Planning
+### Example Prompts
 
-```text
-Research this issue and produce an implementation plan before writing code.
-Include affected files, risks, tests to run, required GitHub Actions checks, and whether a protected environment or manual approval is needed.
-Do not open a pull request until asked.
-```
-
-### Pull Request Preparation
+#### MCP Server Not Starting
 
 ```text
-Prepare a pull request summary for these changes:
-- What changed
-- Why it changed
-- Tests and checks run
-- Security or deployment risks
-- Manual verification required
-- Follow-up work
+// Diagnose why an MCP server is not starting in VS Code
+My MCP server named "playwright" is configured in .vscode/mcp.json but it does
+not appear as running in the MCP: List Servers output. The server command is
+"npx @playwright/mcp@latest". What are the most common reasons a stdio MCP server
+fails to start in VS Code, and how do I diagnose each one?
 ```
 
-### Copilot Code Review Prompt
+#### Tools Not Appearing in Agent Mode
 
 ```text
-Review this pull request for logic errors, insecure workflow permissions, missing tests, dependency risks, and deployment safety.
-Leave findings as comments with severity and concrete remediation.
-Do not treat this as approval. Identify what a human reviewer still needs to check.
+// Troubleshoot missing tools in the Agent Mode tool picker
+I have configured the GitHub MCP server in .vscode/mcp.json and the server shows
+as running in MCP: List Servers, but no GitHub tools appear in the Copilot Agent
+Mode tool picker. What are the possible causes and how do I fix each one?
 ```
 
-### Ruleset and Required Checks
+#### Docker Path Quoting on Windows
 
 ```text
-Recommend a GitHub repository ruleset for this project.
-Include required status checks, required reviews, CODEOWNERS, merge queue considerations, deployment environment approvals, code scanning, dependency review, and artifact attestation requirements.
-Explain which checks should block merge and why.
+// Resolve Docker command path issues on Windows
+I am on Windows and my Docker-based MCP server command in mcp.json is failing
+with a path-not-found error. The command is:
+"docker run -i --rm ghcr.io/github/github-mcp-server"
+How should I format the command and args array in mcp.json to avoid path
+quoting issues on Windows?
 ```
 
-### CI Failure Triage
+#### Authentication Failures
 
 ```text
-Analyse this failed workflow run.
-Identify the failing job, likely root cause, whether the failure is flaky or deterministic, the smallest fix to try first, and the command I should run locally to verify it.
+// Debug an OAuth or PAT authentication failure for the GitHub MCP server
+The GitHub MCP server is returning a 401 Unauthorized error. I am using the
+remote server at https://api.githubcopilot.com/mcp/ and I have a GitHub
+Copilot subscription. Walk me through the steps to diagnose and resolve the
+authentication failure, including how to reset the OAuth sign-in if needed.
 ```
 
-> **Tip:** Cloud agent and code review workflows are assistive. Keep human review, required checks, environment approvals, and ownership rules as the source of truth for merging and deployment.
+> **Tip:** For most MCP issues, start by running **MCP: List Servers** in the VS Code Command Palette and selecting **Show Output** for the affected server. The output log contains the raw JSON-RPC messages and any error responses, which usually identify the root cause within the first few lines.
 
 ---
 
@@ -698,6 +337,6 @@ Please complete the following reflections after completing Week 3 activities:
 
 ## Next Steps
 
-After mastering DevOps automation, testing, and GitHub Copilot CLI workflows in Week 3, we will explore refactoring, quality standards, and ethical AI practices in Week 4.
+After mastering MCP integration with GitHub Copilot in Week 3, we will explore DevOps automation, testing strategies, and GitHub Copilot CLI workflows in Week 4 to streamline software delivery.
 
-**[← Back to Main README](../../README.md)** | **[Continue to Week 4 →](../Week4/1-Refactoring-Large-Codebases.md)**
+**[← Back to Main README](../../README.md)** | **[Continue to Week 4 →](../Week4/1-DevOps-Automation.md)**

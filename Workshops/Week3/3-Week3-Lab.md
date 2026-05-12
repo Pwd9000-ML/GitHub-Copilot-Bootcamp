@@ -1,48 +1,32 @@
-# Week 3 - Create Applications with the Copilot CLI Hands-On Lab
+# Week 3 - Integrate MCP with GitHub Copilot Hands-On Lab
 
 Please follow the instructions below to complete the hands-on lab for Week 3.
 
-_Learn to use GitHub Copilot CLI, a standalone terminal application, for issue management and building a Node.js calculator application._
+_Connect the GitHub MCP server to Copilot Agent Mode and use it to research, plan, and implement a feature end-to-end in under two hours._
 
-## Welcome
-
-- **Who is this for**: Developers who want to learn how to use the standalone GitHub Copilot CLI to streamline their development workflow
-- **What you'll learn**: How to install and use GitHub Copilot CLI as a standalone terminal tool for creating issues, generating code, and collaborating interactively from the command line
-- **What you'll build**: A Node.js calculator app using Copilot CLI for project setup, issue management, and collaborative development
+- **Who is this for**: Developers and GitHub Copilot users who have completed Weeks 1 and 2 and want hands-on experience connecting Copilot to external tools via MCP.
+- **What you'll learn**: How to configure the GitHub MCP server in a Codespace, use Copilot Agent Mode to invoke MCP tools for research and issue creation, and delegate a complete feature implementation (branch, code changes, pull request) to Copilot.
+- **What you'll build**: You will guide Copilot to update the Mergington High School extracurricular activities website using the GitHub MCP server tools, resulting in a merged pull request and a closed issue with a Copilot-generated closing comment.
 - **Prerequisites**:
-  - Familiarity with basic command line (CLI) operations
-  - Basic knowledge of GitHub repositories
-  - Node.js version 22 or later (for Copilot CLI installation)
-  - GitHub Copilot access through an approved individual or managed organisation plan
-
-- **How long**: This exercise takes less than 60 minutes to complete.
+  - Skills exercise: [Customise your GitHub Copilot experience](https://github.com/skills/customize-your-github-copilot-experience)
+  - Familiarity with [VS Code](https://code.visualstudio.com/)
+  - A GitHub account with an active GitHub Copilot subscription (Free, Pro, or higher)
+- **How long**: This exercise takes approximately 60-90 minutes to complete.
 
 In this exercise, you will:
 
-1. Learn to install the standalone Copilot CLI and use an issue template
-1. Use Copilot CLI to create an issue for a Node.js calculator app from an existing template
-1. Practice iterative development by working together with Copilot on the command line
-
-### What's New in Copilot CLI
-
-GitHub Copilot CLI is a standalone terminal application with exciting features:
-- **Latest AI models**: Access the newest models from OpenAI and Google
-- **Custom agents**: Create specialised agent personas for your workflows using `.github/agents/`
-- **`/delegate` command**: Delegate tasks to Copilot cloud agent or an enabled background agent workflow
-- **`/share` command**: Save chat sessions as Markdown files or GitHub gists
-- **Better image support**: Add images via paste and drag-and-drop
-- **MCP server support**: Integrate with Model Context Protocol tools
-- **Improved reliability**: Better handling of long-running commands and enhanced automation with headless `-p` mode
-
+1. Configure the GitHub MCP server in a Codespace and verify that GitHub tools appear in Copilot Agent Mode.
+1. Use Agent Mode with natural language prompts to invoke GitHub MCP tools: research similar repositories and create enhancement issues.
+1. Delegate a full feature implementation to Copilot Agent Mode, then review, merge the pull request, and close the issue.
 
 ### How to start this exercise
 
 Simply copy the exercise to your account, then give your favourite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
 
-[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=create-applications-with-the-copilot-cli&owner=%40me&name=skills-create-applications-with-the-copilot-cli&description=Exercise:+Create+Applications+with+the+Copilot+CLI&visibility=public)
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=integrate-mcp-with-copilot&owner=%40me&name=skills-integrate-mcp-with-copilot&description=Exercise:+Integrate+MCP+with+GitHub+Copilot&visibility=public)
 
 <details>
-<summary>Having trouble? 🤷</summary><br/>
+<summary>Having trouble?</summary><br/>
 
 When copying the exercise, we recommend the following settings:
 
@@ -54,18 +38,17 @@ If the exercise isn't ready in 20 seconds, please check the [Actions](../../acti
 
 - Check to see if a job is running. Sometimes it simply takes a bit longer.
 
-- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+- If the page shows a failed job, please submit an issue. You found a bug!
 
 </details>
 
 ---
 
-Attribution: This lab is based on the GitHub Skills template **Create applications with the Copilot CLI**.
-Upstream source: https://github.com/skills/create-applications-with-the-copilot-cli
+Attribution: This lab is based on the GitHub Skills template **Integrate MCP with Copilot**.
+Upstream source: https://github.com/skills/integrate-mcp-with-copilot
 
 ---
 
 ## Next Steps
 
-- **Week 3 Prompt Examples:** After completing this hands-on lab, take a look at [Week 3 Prompt Examples](4-Week3-Prompts.md) to see how to craft effective prompts for GitHub Copilot CLI and DevOps workflows.
-
+- **Week 3 Prompt Examples:** After completing this hands-on lab, take a look at [Week 3 Prompt Examples](4-Week3-Prompts.md) to see how to craft effective prompts for MCP-powered GitHub Copilot workflows.
