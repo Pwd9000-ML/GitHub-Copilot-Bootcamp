@@ -397,7 +397,7 @@ Organisations can host a curated allowlist of approved MCP servers in a private 
 
 ## Next Steps
 
-- **Hands-On Lab:** In the next session ['Week 3 - Integrate MCP with GitHub Copilot Hands-On Lab'](3-Week3-Lab.md), you will apply the concepts from both sessions by working through the GitHub Skills exercise: setting up the GitHub MCP server in a Codespace, using Agent Mode to research and create issues, and delegating an end-to-end feature implementation to Copilot.
+- **Hands-On Lab:** In the next session [Week 3 - Integrate MCP with GitHub Copilot Hands-On Lab](3-Week3-Lab.md), you will apply the concepts from both sessions by working through the GitHub Skills exercise: setting up the GitHub MCP server in a Codespace, using Agent Mode to research and create issues, and delegating an end-to-end feature implementation to Copilot.
 
 ---
 
